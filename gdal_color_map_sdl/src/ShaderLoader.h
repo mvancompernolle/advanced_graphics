@@ -1,21 +1,20 @@
+#ifndef SHADER_LOADER_H
+#define SHADER_LOADER_H
 
-#include <fstream>
-#include <iostream>
-#include <string>
 #include <GL/glew.h>
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <streambuf>
 
-
-class ShaderLoader {
-
-	public:
-		ShaderLoader(GLenum);
-		bool loadShader(const char*);
-		GLuint getShader() const;
- 
-		
-	private:
-		GLenum shaderType;
-		GLuint shader;
-
-
+class ShaderLoader{
+public:
+	ShaderLoader(GLenum shaderType);
+	bool loadShaderFromFile(const char* fileName);
+	GLint getShader();
+private:
+	GLenum typeOfShader;
+	GLint shader;
 };
+
+#endif // SHADER_LOADER_H

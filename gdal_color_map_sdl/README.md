@@ -1,29 +1,7 @@
-Terrain
-========================================
+# CS 480 Computer Graphics Assignment 01
 
-*Uses FreeImagePlus and Bullet*
+This progam displays a cube orbitting around a fixed point in the center of the screen. 
 
-*To run*
->$ From the bin: ./terrain "String - file name" "float - height scalar" "Optional: float - terrain scalar"
-**
+The cube rotates around its y-axis a certain number of times per second based on the value of dt (deltaTime).
 
-*Lights that were implemented*
->$ Ambientlight   (Toggle ON/OFF by KEY: 5)
-**
->$ Distantlight   (Toggle ON/OFF by KEY: 6)
-**
->$ Pointlight     (Toggle ON/OFF by KEY: 7)
-**
->$ Spotlight      (Toggle ON/OFF by KEY: 8)
-**
-
-*Camera Zoom Functions:*
->$ UP ARROW: zoom in
-**
->$ DOWN ARROW: zoom out
-**
->$ LEFT ARROW: move camera left (limitied)
-**
->$ RIGHT ARROW: move camera right (limited)
-**
-------------------------------
+The vertex shaders and fragment shaders have been placed into their own files and are loaded with a new ShaderLoader class.

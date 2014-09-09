@@ -2,11 +2,12 @@
 #include <iostream>
 
 Terrain::Terrain(){
-
 }
 
 bool Terrain::loadHeightMap(const char* fileName, float scale){
 	// get terrain texture
+    min = 0.0f;
+    max = 0.0f;
 	numTriangles = 0;
 	this->scale = scale;
 	heightMapImage = new Texture(GL_TEXTURE_2D, fileName);
@@ -36,11 +37,16 @@ bool Terrain::generateMesh(){
 	height = gdalImage->GetRasterYSize();
 	Vertex vert;
 	int xOffset, yOffset;
-	vert.position[1] = 0;
 
 	GDALRasterBand  *poBand;
 	poBand = gdalImage->GetRasterBand(1);
 	int bandXSize = poBand->GetXSize();
+
+	// get min and max height of terrain
+    int bGotMin, bGotMax;
+	this->min = poBand->GetMinimum( &bGotMin );
+	this->max = poBand->GetMaximum( &bGotMax );
+
 	float* poScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
 	float* poScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
 
@@ -58,43 +64,29 @@ bool Terrain::generateMesh(){
 				// push top row of triangles
 				vert.position[0] = x*scale;
 				vert.position[1] = poScanLine[x+xOffset]/255;
-				/*if(x + xOffset == 30)
-				std::cout << vert.position[1] << std::endl;*/
 				vert.position[2] = y*scale;
-				//vert.texture[0] = (x+xOffset)/width;
-				//vert.texture[1] = (y+yOffset)/height;
 				planeVertices.push_back(vert);
 				vert.position[0] = (x+1)*scale;
 				vert.position[1] = poScanLine[x+xOffset+1]/255;
 				vert.position[2] = y*scale;
-				//vert.texture[0] = (x+xOffset+1)/width;
-				//vert.texture[1] = (y+yOffset)/height;
 				planeVertices.push_back(vert);
 				vert.position[0] = x*scale;
 				vert.position[1] = poScanLine2[x+xOffset]/255;
 				vert.position[2] = (y+1)*scale;
-				//vert.texture[0] = (x+xOffset)/width;
-				//vert.texture[1] = (y+yOffset+1)/height;
 				planeVertices.push_back(vert);
 
 				// push bottom row of triangles
 				vert.position[0] = x*scale;
 				vert.position[1] = poScanLine2[x+xOffset]/255;
 				vert.position[2] = (y+1)*scale;
-				//vert.texture[0] = (x+xOffset)/width;
-				//vert.texture[1] = (y+yOffset+1)/height;
 				planeVertices.push_back(vert);
 				vert.position[0] = (x+1)*scale;
 				vert.position[1] = poScanLine2[x+1+xOffset]/255;
 				vert.position[2] = (y+1)*scale;
-				//vert.texture[0] = (x+xOffset+1)/width;
-				//vert.texture[1] = (y+yOffset+1)/height;
 				planeVertices.push_back(vert);
 				vert.position[0] = (x+1)*scale;
 				vert.position[1] = poScanLine[x+xOffset+1]/255;
 				vert.position[2] = y*scale;
-				//vert.texture[0] = (x+xOffset+1)/width;
-				//vert.texture[1] = (y+yOffset)/height;
 				planeVertices.push_back(vert);		
 				numTriangles += 2;	
 		}
@@ -107,10 +99,8 @@ bool Terrain::generateMesh(){
 	return true;
 }
 
-void Terrain::render(GLint loc_position, GLint loc_normal, GLint loc_texture){
+void Terrain::render(GLint loc_position){
     glEnableVertexAttribArray(loc_position);
-    //glEnableVertexAttribArray(loc_texture);
-    glEnableVertexAttribArray(loc_normal);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
 
@@ -121,25 +111,8 @@ void Terrain::render(GLint loc_position, GLint loc_normal, GLint loc_texture){
 	                       sizeof(Vertex),//stride
 	                       0);//offset
 
-	/*glVertexAttribPointer( loc_texture,//location of attribute
-	                       2,//number of elements
-	                       GL_FLOAT,//type
-	                       GL_FALSE,//normalized?
-	                       sizeof(Vertex),//stride
-	                       (void*)offsetof(Vertex, texture));//offset*/
-
-	glVertexAttribPointer( loc_normal,
-	                       3,
-	                       GL_FLOAT,
-	                       GL_FALSE,
-	                       sizeof(Vertex),
-	                       (void*)offsetof(Vertex,normal));
-
     glDrawArrays(GL_TRIANGLES, 0, numTriangles * 3);
     
 
     glDisableVertexAttribArray(loc_position);
-    //glDisableVertexAttribArray(loc_texture);
-    glDisableVertexAttribArray(loc_normal);
-
 }

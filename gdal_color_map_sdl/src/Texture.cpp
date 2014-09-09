@@ -44,7 +44,22 @@ bool Texture::load()
     else{
         return false;
     }
-	
+
+    /*if(m_textureTarget == GL_TEXTURE_1D){
+     // get the heighmap image for the terrain
+    RGBQUAD pixel;
+
+    // loop through the image and get each pixel value
+    std::cout << m_image.getWidth() << " " << m_image.getHeight() << std::endl;
+    for(int x=0; x<m_image.getWidth(); x++){
+        for(int y=m_image.getHeight()-1; y>=0; y--){
+            m_image.getPixelColor(x, y, &pixel);
+            std::cout << "Shade: " << (int)pixel.rgbRed << " " << (int)pixel.rgbBlue << " " <<(int)pixel.rgbGreen << " " << (int)pixel.rgbReserved << std::endl;
+        }
+    }       
+    }*/
+
+    
     return true;
 }
 
@@ -67,12 +82,10 @@ bool Texture::create(){
         if(m_textureTarget == GL_TEXTURE_2D){
             glTexImage2D(m_textureTarget, 0, GL_RGBA, m_image.getWidth(), m_image.getHeight(),
             0, GL_RGBA, GL_UNSIGNED_BYTE, (void*) m_image.accessPixels());
-            std::cout << "blah blah" << std::endl;
         }
         else if(m_textureTarget == GL_TEXTURE_1D){
-            glTexImage1D(m_textureTarget, 0, GL_RGBA, m_image.getWidth(), 0,
+            glTexImage1D(m_textureTarget, 0, GL_RGBA, m_image.getWidth() , 0,
             GL_RGBA, GL_UNSIGNED_BYTE, (void*) m_image.accessPixels());
-            std::cout << "blah" << std::endl;
         }
 
     }
@@ -85,8 +98,8 @@ bool Texture::create(){
 
 void Texture::bind(GLenum TextureUnit)
 {
-	
+    
     glActiveTexture(TextureUnit);
     glBindTexture(m_textureTarget, m_textureObj);
-	
+    
 }
