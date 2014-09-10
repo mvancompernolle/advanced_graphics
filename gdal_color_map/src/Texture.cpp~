@@ -67,10 +67,12 @@ bool Texture::create(){
         if(m_textureTarget == GL_TEXTURE_2D){
             glTexImage2D(m_textureTarget, 0, GL_RGBA, m_image.getWidth(), m_image.getHeight(),
             0, GL_RGBA, GL_UNSIGNED_BYTE, (void*) m_image.accessPixels());
+            std::cout << "blah blah" << std::endl;
         }
         else if(m_textureTarget == GL_TEXTURE_1D){
             glTexImage1D(m_textureTarget, 0, GL_RGBA, m_image.getWidth(), 0,
             GL_RGBA, GL_UNSIGNED_BYTE, (void*) m_image.accessPixels());
+            std::cout << "blah" << std::endl;
         }
 
     }

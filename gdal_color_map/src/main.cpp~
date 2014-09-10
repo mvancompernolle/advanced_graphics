@@ -77,14 +77,14 @@ int w = 0, h = 0;// Window size
 GLuint program;// The GLSL program handle
 GLuint vbo_geometry;// VBO handle for our geometry
 Terrain *terrain;
+Texture *colorMap;
 Mesh  *floorMesh, *sphereMesh, *puckMesh, *paddleMesh1, *paddleMesh2;
-float zoomScale = -.01, cameraX = 0, cameraY = 50, resetCounter = 0.0f;
+float zoomScale = 50.0f, cameraX = 0, cameraY = 60, resetCounter = 0.0f, drawDistance = 2000.0f;;
 char *filename;
 float scaleFactor = 1.0f, terrainScale = 1.0f;
 
 //uniform locations
 GLint loc_mvpmat;// Location of the modelviewprojection matrix in the shader
-GLint loc_planeWidth, loc_planeHeight;
 
 // setup lights
 bool ambLightOn = true, dirLightOn = false, pointLightOn = false, spotLightOn = false;
@@ -125,7 +125,6 @@ GLint loc_normal;
 GLint loc_texture;
 GLint loc_world;
 GLint loc_vertScalar;
-GLint loc_terrainScalar;
 GLint gSampler;
 
 //transform matrices
@@ -206,6 +205,9 @@ int main(int argc, char **argv)
 	glutKeyboardUpFunc(keyboardUp);
 	glutSpecialFunc(arrowKeyboard);
 
+	// setup gdal
+	GDALAllRegister();
+
     // Initialize all of our resources(shaders, geometry)
     bool init = initialize();
     if(init)
@@ -240,9 +242,6 @@ void render()
     glUniformMatrix4fv(loc_mvpmat, 1, GL_FALSE, glm::value_ptr(mvp));
 	glUniformMatrix4fv(loc_world, 1, GL_FALSE, glm::value_ptr(floorModel));
     glUniform1i(gSampler, 0);
-	glUniform1i(loc_planeWidth, terrain->getWidth());
-	glUniform1i(loc_planeHeight, terrain->getHeight());
-	glUniform1f(loc_terrainScalar, terrainScale);
 	glUniform1f(loc_vertScalar, scaleFactor);
 
 	//upload lights to the shader
@@ -281,8 +280,7 @@ void render()
 	glUniform1f(spotLightExpLoc, spotLightExp);
 			
 	// render meshes
-	//floorMesh->renderMesh(loc_position, loc_normal, loc_texture);
-	terrain->render(loc_position, loc_normal);
+	terrain->render(loc_position, loc_normal, loc_texture);
            
     //swap the buffers
     glutSwapBuffers();
@@ -308,7 +306,7 @@ void reshape(int n_w, int n_h)
     glViewport( 0, 0, w, h);
     //Update the projection matrix as well
     //See the init function for an explaination
-    projection = glm::perspective(45.0f, float(w)/float(h), 0.01f, 100.0f);
+    projection = glm::perspective(45.0f, float(w)/float(h), 0.01f, drawDistance);
 
 }
 
@@ -387,44 +385,29 @@ void arrowKeyboard(int key, int x, int y)
 	{
 		
 		case GLUT_KEY_LEFT: // left arrow
-			if(cameraX < 10 && zoomScale != -0.01){
-				if(zoomScale > -30){
-					zoomScale = -30;
-				}
-					cameraX += 2;
-					view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
-					            glm::vec3(0.0, 0.0, 0.0), //Focus point
-					            glm::vec3(0.0, 1.0, 0.0));
-			}
+			cameraX -= 2;
+			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
+			            glm::vec3(0.0, 0.0, 0.0), //Focus point
+			            glm::vec3(0.0, 1.0, 0.0));
+			
 			break;
 		case GLUT_KEY_RIGHT: // right arrow
-			if(cameraX > -10 && zoomScale != -0.01){
-				if(zoomScale > -30){
-					zoomScale = -30;
-				}
-				cameraX -= 2;
-				view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
-			                glm::vec3(0.0, 0.0, 0.0), //Focus point
-			                glm::vec3(0.0, 1.0, 0.0));
-			}
+			cameraX += 2;
+			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
+		                glm::vec3(0.0, 0.0, 0.0), //Focus point
+		                glm::vec3(0.0, 1.0, 0.0));
+			
 
 			break;
 	
 		case GLUT_KEY_UP:
-			zoomScale+=3;
-			if(zoomScale >= 0){
-				zoomScale = -.01;
-				cameraX = 0;
-			}
+			zoomScale-=3;
 			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
 		                glm::vec3(0.0, 0.0, 0.0), //Focus point
 		                glm::vec3(0.0, 1.0, 0.0));
 			break;
 		case GLUT_KEY_DOWN:
-			zoomScale-= 3;
-			if(zoomScale < -50){
-				zoomScale = -50;
-			}
+			zoomScale+= 3;
 			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
 	                    glm::vec3(0.0, 0.0, 0.0), //Focus point
 	                    glm::vec3(0.0, 1.0, 0.0));
@@ -441,6 +424,10 @@ bool initialize()
 	terrain = new Terrain();
 	terrain->loadHeightMap(filename, terrainScale);
 
+	// get color map texture for terrain
+	colorMap = new Texture(GL_TEXTURE_1D, "colorMap.png");
+	colorMap->create();
+
     //--Geometry done
 
     ShaderLoader vertShader(GL_VERTEX_SHADER);
@@ -451,8 +438,8 @@ bool initialize()
     // Note the added uniform!
     
 
-	if(!vertShader.loadShader("../bin/shaders/vertShader.txt") || !
-	fragShader.loadShader("../bin/shaders/fragShader.txt")){
+	if(!vertShader.loadShader("../bin/shaders/vertShader.vs") || !
+	fragShader.loadShader("../bin/shaders/fragShader.fs")){
 		std::cout<<"ERROR: Load Shader Issue" << std::endl;
 		return false;
 	}
@@ -490,14 +477,6 @@ bool initialize()
         return false;
     }
 
-    loc_terrainScalar = glGetUniformLocation(program,
-                    const_cast<const char*>("terrainDimenScale"));
-    if(loc_terrainScalar == -1)
-    {
-        /*std::cerr << "[F] TERRAIN SCALAR NOT FOUND" << std::endl;
-        return false;*/
-    }
-
     loc_vertScalar = glGetUniformLocation(program,
                     const_cast<const char*>("verticalScalar"));
     if(loc_vertScalar == -1)
@@ -508,7 +487,7 @@ bool initialize()
 
 
     /*loc_texture = glGetAttribLocation(program,
-                    const_cast<const char*>("texCoord"));
+                    const_cast<const char*>("v_texture"));
     if(loc_texture == -1)
     {
         std::cerr << "[F] TEXTURE NOT FOUND" << std::endl;
@@ -521,22 +500,6 @@ bool initialize()
     if(loc_mvpmat == -1)
     {
         std::cerr << "[F] MVPMATRIX NOT FOUND" << std::endl;
-        return false;
-    }
-
-    loc_planeWidth = glGetUniformLocation(program,
-                    const_cast<const char*>("width"));
-    if(loc_planeWidth == -1)
-    {
-        std::cerr << "[F] PLANE WIDTH NOT FOUND" << std::endl;
-        return false;
-    }
-
-    loc_planeHeight = glGetUniformLocation(program,
-                    const_cast<const char*>("height"));
-    if(loc_planeHeight == -1)
-    {
-        std::cerr << "[F] PLANE HEIGHT NOT FOUND" << std::endl;
         return false;
     }
 
@@ -743,14 +706,14 @@ bool initialize()
     projection = glm::perspective( 45.0f, //the FoV typically 90 degrees is good which is what this is set to
                                    float(w)/float(h), //Aspect Ratio, so Circles stay Circular
                                    0.01f, //Distance to the near plane, normally a small value like this
-                                   300.0f); //Distance to the far plane, 
+                                   drawDistance); //Distance to the far plane,
 
     //enable depth testing
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
     // render in wire frame mode
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	// initialize bullet
 	InitBulletPhysics();
@@ -845,3 +808,5 @@ void renderString(const char *text)
 
 
 }
+
+

@@ -79,7 +79,7 @@ GLuint vbo_geometry;// VBO handle for our geometry
 Terrain *terrain;
 Texture *colorMap;
 Mesh  *floorMesh, *sphereMesh, *puckMesh, *paddleMesh1, *paddleMesh2;
-float zoomScale = -.01, cameraX = 0, cameraY = 40, resetCounter = 0.0f, drawDistance = 500.0f;;
+float zoomScale = 50.0f, cameraX = 0, cameraY = 60, resetCounter = 0.0f, drawDistance = 2000.0f;;
 char *filename;
 float scaleFactor = 1.0f, terrainScale = 1.0f;
 
@@ -385,44 +385,29 @@ void arrowKeyboard(int key, int x, int y)
 	{
 		
 		case GLUT_KEY_LEFT: // left arrow
-			if(cameraX < 10 && zoomScale != -0.01){
-				if(zoomScale > -30){
-					zoomScale = -30;
-				}
-					cameraX += 2;
-					view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
-					            glm::vec3(0.0, 0.0, 0.0), //Focus point
-					            glm::vec3(0.0, 1.0, 0.0));
-			}
+			cameraX -= 2;
+			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
+			            glm::vec3(0.0, 0.0, 0.0), //Focus point
+			            glm::vec3(0.0, 1.0, 0.0));
+			
 			break;
 		case GLUT_KEY_RIGHT: // right arrow
-			if(cameraX > -10 && zoomScale != -0.01){
-				if(zoomScale > -30){
-					zoomScale = -30;
-				}
-				cameraX -= 2;
-				view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
-			                glm::vec3(0.0, 0.0, 0.0), //Focus point
-			                glm::vec3(0.0, 1.0, 0.0));
-			}
+			cameraX += 2;
+			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
+		                glm::vec3(0.0, 0.0, 0.0), //Focus point
+		                glm::vec3(0.0, 1.0, 0.0));
+			
 
 			break;
 	
 		case GLUT_KEY_UP:
-			zoomScale+=3;
-			if(zoomScale >= 0){
-				zoomScale = -.01;
-				cameraX = 0;
-			}
+			zoomScale-=3;
 			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
 		                glm::vec3(0.0, 0.0, 0.0), //Focus point
 		                glm::vec3(0.0, 1.0, 0.0));
 			break;
 		case GLUT_KEY_DOWN:
-			zoomScale-= 3;
-			if(zoomScale < -100){
-				zoomScale = -100;
-			}
+			zoomScale+= 3;
 			view = glm::lookAt( glm::vec3(cameraX, cameraY, zoomScale), //Eye Position
 	                    glm::vec3(0.0, 0.0, 0.0), //Focus point
 	                    glm::vec3(0.0, 1.0, 0.0));
@@ -722,10 +707,6 @@ bool initialize()
                                    float(w)/float(h), //Aspect Ratio, so Circles stay Circular
                                    0.01f, //Distance to the near plane, normally a small value like this
                                    drawDistance); //Distance to the far plane,
-
-    for(int i=0; i<4; i++)
-    	for(int j=0; j<4; j++)
-    		std::cout << projection[i][j] << std::endl;
 
     //enable depth testing
     glEnable(GL_DEPTH_TEST);

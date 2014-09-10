@@ -750,7 +750,7 @@ bool initialize()
     glDepthFunc(GL_LESS);
 
     // render in wire frame mode
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
 	// initialize bullet
 	InitBulletPhysics();

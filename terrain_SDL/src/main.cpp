@@ -78,7 +78,7 @@ GLuint program;// The GLSL program handle
 GLuint vbo_geometry;// VBO handle for our geometry
 Terrain *terrain;
 Mesh  *floorMesh, *sphereMesh, *puckMesh, *paddleMesh1, *paddleMesh2;
-float zoomScale = -.01, cameraX = -80, cameraY = 80, resetCounter = 0.0f;
+float zoomScale = -50, cameraX = 0, cameraY = 50, resetCounter = 0.0f;
 char *filename;
 float scaleFactor = 1.0f, terrainScale = 1.0f;
 
@@ -231,7 +231,7 @@ void createWindow(int width, int height)
 {
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 1);
-    SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
+    //SDL_GL_SetAttribute( SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE );
 
     window = SDL_CreateWindow("CS 480/680 - Terrain HeighMap", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
                         width, height, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN);
@@ -245,7 +245,7 @@ void createWindow(int width, int height)
     }
 
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-    SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
+    //SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
     SDL_GL_SetSwapInterval(1);
 
     gl_context = SDL_GL_CreateContext(window);
