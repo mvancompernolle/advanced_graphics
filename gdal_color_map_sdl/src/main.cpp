@@ -188,6 +188,10 @@ void pollEvents()
 				// Get the type of key that was pressed
                 switch( event.key.keysym.sym ){
                     case SDLK_LEFT:
+            			camX -= 2;
+						view = glm::lookAt( glm::vec3(camX, camY, camZ), //Eye Position
+						            glm::vec3(0.0, 0.0, 0.0), //Focus point
+						            glm::vec3(0.0, 1.0, 0.0));
                         break;
                     case SDLK_RIGHT:
                         break;
