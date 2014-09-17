@@ -7,6 +7,8 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> //Makes passing matrices to shaders easier
+#include <ogr_spatialref.h>
+#include "ogr_srs_api.h"
 
 // REFERENCE: ogldev.atspace.co.uk/www/tutorial22/tutorial22.html
 
@@ -25,9 +27,11 @@ public:
 	void showPrevDataBand();
 	bool loadHeightMap(const char* fileName, float heightScale, float scale);
 	bool generateMesh();
+	void geoTransform(GDALDataset* projDataSet);
 	void renderDataZone(glm::mat4 projection, glm::mat4 view);
 	void render(glm::mat4 projection, glm::mat4 view);
 	void buttonPressed();
+	GDALDataset* getGdalDataset();
 
 private:
 	void registerForEvents();

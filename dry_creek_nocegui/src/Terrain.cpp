@@ -158,8 +158,6 @@ bool Terrain::setDataZoneData(const char* fileName, bool persistantBand){
 bool Terrain::setDataZoneBand(int num){
 	if(gdalDataZone != NULL){
 
-		std::cout << currentTime << ' ' << currentDataBand << ' ' << numDataBands << std::endl;
-
 		// make sure the passed in band is within range	
 		if(num < 1 || num > numDataBands){
 			return false;
@@ -488,6 +486,31 @@ bool Terrain::checkDataZone(float v1, float v2, float v3){
 		return false;
 }
 
+void Terrain::geoTransform(GDALDataset* projDataSet){
+	std::string proj;
+	proj = std::string(projDataSet->GetProjectionRef());
+
+	OGRSpatialReference sr;
+
+	char* test = &proj[0];
+	sr.importFromWkt(&test);
+
+	proj = std::string(getGdalDataset()->GetProjectionRef());
+
+	OGRSpatialReference sr2;
+	test = &proj[0];
+	sr2.importFromWkt(&test);
+
+	OGRCoordinateTransformation* poTransform = OGRCreateCoordinateTransformation(&sr, &sr2);
+	double* geot = new double[6];
+	projDataSet->GetGeoTransform(geot);
+	double x = geot[0];
+	double y = geot[3];
+ printf( "x=%.3fd, y=%.3f\n", x, y );
+	poTransform->Transform(1, &x, &y);
+ printf( "x=%.3fd, y=%.3f\n", x, y );
+}
+
 void Terrain::buttonPressed(){
 	exit(1);
 }
@@ -566,4 +589,8 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
     if(gdalDataZone != NULL){
     	renderDataZone(projection, view);
     }
+}
+
+GDALDataset* Terrain::getGdalDataset(){
+	return heightMapImage->getGDALImage();
 }

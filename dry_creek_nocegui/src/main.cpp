@@ -294,7 +294,7 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
         return false;
     }
 
-    // create gray scale shader
+    // create gray scale shader-
     fragShaderGrayscale = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fragShaderGrayscale.fs");
     vertShaderGrayscale = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vertShaderGrayscale.vs");
 
@@ -318,9 +318,9 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     terrain->loadHeightMap(fileName, scaleFactor, terrainScale);
     terrain->setDataZoneData("isnobaloutput/em.1000.tif", false);
 
-    //terrain2 = new Terrain(program);
-    //terrain2->loadHeightMap(fileName, scaleFactor, terrainScale);
-
+    terrain2 = new Terrain(grayscaleProgram);
+    terrain2->loadHeightMap("DCEWsqrExtent.tif", scaleFactor, terrainScale);
+    terrain->geoTransform(terrain2->getGdalDataset());
     colorMap = new Texture(GL_TEXTURE_1D, "colorMap.png");
     colorMap->create();
 
@@ -360,7 +360,7 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     //and its done
     return true;

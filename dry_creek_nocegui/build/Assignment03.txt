@@ -1,0 +1,52 @@
+Alcain
+- no Assignment03
+
+Blakenburg
+- compiled and ran fine
+
+Boren
+- compiled and ran fine
+- extra credit
+
+Brown
+- compiled and ran fine
+- extra credit
+
+Burfield
+- compiled and ran fine
+- Not sure if it was just my computer, but the planit orbited very slowly to the point where it almost wasn't noticable. It would have been bad if I didn't notice =) so speed it up
+
+Capello
+- no Assignment03
+
+Coulton
+- code did not compile on linux, had to include library for sleep function. Next time #include <unistd.h> before pushing
+- Cube jumps on left click
+- did not use arrow keys, which was part of the assignment
+
+Dalbey
+- your scale function was causing a compiler error so I commented it out to run your code
+
+Dewitt
+- compile and ran fine
+
+Echargui
+- did not use arrow keys, which was part of the assignment
+
+Falconi
+- compile and ran fine
+- Need to put read me in each assignment. Should be at the same level as your src/bin/build folders
+
+Forkner
+- compiled and ran fine
+
+Gabay
+- compiled and ran fine
+- extra credit planet data
+
+Garcia
+- extra credit text
+- shaders failed to compile, I hard coded the shaders so that I could test your program
+- did not use arrow keys, which was part of the assignment
+
+
