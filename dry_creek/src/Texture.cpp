@@ -10,6 +10,10 @@ Texture::Texture(GLenum TextureTarget, const char* fileName)
     m_image = NULL;
 }
 
+Texture::~Texture(){
+    GDALClose( (GDALDatasetH) poDataset );    
+}
+
 fipImage Texture::getImage(){
     return m_image;
 }
@@ -20,14 +24,6 @@ GDALDataset* Texture::getGDALImage(){
 
 bool Texture::load()
 {
-    // create gdal variable
-    poDataset = (GDALDataset *) GDALOpen( m_fileName, GA_ReadOnly );
-    if( poDataset == NULL )
-    {
-        std::cout << "Texture failed to open!" << std::endl;
-        return false;
-    }
-
     // if texture found, load it
     if(m_image.load(m_fileName)) {
 
@@ -42,6 +38,14 @@ bool Texture::load()
         m_image.flipHorizontal();
     }
     else{
+        return false;
+    }
+
+    // create gdal variable
+    poDataset = (GDALDataset *) GDALOpen( m_fileName, GA_ReadOnly );
+    if( poDataset == NULL )
+    {
+        std::cout << "Texture failed to open!" << std::endl;
         return false;
     }
 

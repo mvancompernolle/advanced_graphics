@@ -255,6 +255,24 @@ void injectInput (bool & running)
             case SDL_KEYDOWN:
                 // Get the type of key that was pressed
                 switch( e.key.keysym.sym ){
+                    case SDLK_w:
+                        terrain->showNextDataBand();
+                        break;
+                    case SDLK_s:
+                        terrain->showPrevDataBand();
+                        break;
+                    case SDLK_a:
+                        terrain->showPrevDataTime();
+                        break;
+                    case SDLK_d:
+                        terrain->showNextDataTime();
+                        break;
+                    case SDLK_1:
+                        terrain->setDataZoneData("isnobaloutput/em.1000.tif", false);
+                        break;
+                    case SDLK_2:
+                        terrain->setDataZoneData("isnobaloutput/snow.1000.tif", false);
+                        break;
                     case SDLK_LEFT:
                         camX -= 2;
                         view = glm::lookAt( glm::vec3(camX, camY, camZ), //Eye Position
@@ -555,7 +573,7 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     terrain = new Terrain(grayscaleProgram);
     terrain->setDataZone("tl2p5mask.ipw.tif", program);
     terrain->loadHeightMap(fileName, scaleFactor, terrainScale);
-    terrain->setDataZoneData("isnobaloutput/snow.1006.tif");
+    terrain->setDataZoneData("isnobaloutput/em.1000.tif", false);
 
     //terrain2 = new Terrain(program);
     //terrain2->loadHeightMap(fileName, scaleFactor, terrainScale);
@@ -626,6 +644,10 @@ bool getShaderLoc(GLint var, const char* shaderName, ShaderVariable type, bool e
 void cleanup()
 {
     // Clean up, Clean up
+    delete terrain;
+    delete terrain2;
+    delete colorMap;
+
     glDeleteProgram(program);
     glDeleteBuffers(1, &vbo_geometry);
     //GDALClose( (GDALDatasetH) poDataset );

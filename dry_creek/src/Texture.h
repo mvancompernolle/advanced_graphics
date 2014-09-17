@@ -13,6 +13,7 @@ class Texture
 {
 public:
     Texture(GLenum TextureTarget, const char* fileName);
+    ~Texture();
 	bool create();
     bool load();
  	fipImage getImage();

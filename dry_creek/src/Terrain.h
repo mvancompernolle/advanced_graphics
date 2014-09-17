@@ -13,10 +13,16 @@
 class Terrain{
 public:
 	Terrain(GLint program);
+	~Terrain();
 	int getWidth();
 	int getHeight();
 	void setDataZone(const char* fileName, GLint program);
-	void setDataZoneData(const char* fileName);
+	bool setDataZoneData(const char* fileName, bool persistantBand);
+	bool setDataZoneBand(int num);
+	void showNextDataTime();
+	void showPrevDataTime();
+	void showNextDataBand();
+	void showPrevDataBand();
 	bool loadHeightMap(const char* fileName, float heightScale, float scale);
 	bool generateMesh();
 	void renderDataZone(glm::mat4 projection, glm::mat4 view);
@@ -26,14 +32,16 @@ public:
 private:
 	void registerForEvents();
 	bool checkDataZone(float, float, float);
+	void parseDataFileName(const char* fileName);
 
 	//CEGUI::Window *buttonWindow;
-	Texture* heightMapImage;
+	Texture* heightMapImage, *dataZoneDataImage;
 	GDALDataset* gdalDataZone;
 	GDALRasterBand  *poBandDataZone;
 	std::vector<Vertex> planeVertices;
 	std::vector<VertexColor> dataZoneVertices;
-	int width, height;
+	int width, height, numDataBands, currentDataBand, bandXSize, currentTime;
+	std::string directoryAndName, extension;
 	float scale, heightScale;
 	glm::mat4 model;
 	GLint program, loc_position, loc_scalar, loc_sampler, loc_mvpmat;
