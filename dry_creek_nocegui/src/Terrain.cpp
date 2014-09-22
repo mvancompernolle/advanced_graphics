@@ -1,10 +1,14 @@
 #include "Terrain.h"
 #include <iostream>
 
-Terrain::Terrain(GLint program){
+Terrain::Terrain(GLint program, const char* fileName){
 	this->program = program;
 	gdalDataZone = NULL;
 	dataZoneDataImage = NULL;
+	gdalImage = NULL;
+	geot = NULL;
+	scale = 1;
+	heightScale = 1;
 	currentTime = 0;
 
     loc_position = glGetAttribLocation(program,
@@ -38,6 +42,55 @@ Terrain::Terrain(GLint program){
         std::cerr << "[F] MVP NOT FOUND" << std::endl;
         //return false;
     }
+
+    // load terrain image / gdal data set
+    heightMapImage = new Texture(GL_TEXTURE_2D, fileName);
+	loaded = heightMapImage->load();
+
+    int nBlockXSize, nBlockYSize;
+    int bGotMin, bGotMax;
+    double adfMinMax[2];
+
+	// get height and width of text from dgal
+	gdalImage = heightMapImage->getGDALImage();
+
+	// get geo transform for dem
+	// 0 = xpos, 1 = x meters, 2 = x rotation, 3 = yypos (negative), 4 = y rotation, 5 = y meters
+	geot = new double[6];
+	gdalImage->GetGeoTransform(geot);
+	for(int i=0; i<6; i++){
+		 printf( "goi%i=%.3fd\n", i, geot[i] );
+	}
+
+	// get data from the raster
+    poBand = gdalImage->GetRasterBand( 1 );
+	bandXSize = poBand->GetXSize();
+
+    poBand->GetBlockSize( &nBlockXSize, &nBlockYSize );
+    printf( "Block=%dx%d Type=%s, ColorInterp=%s\n",
+            nBlockXSize, nBlockYSize,
+            GDALGetDataTypeName(poBand->GetRasterDataType()),
+            GDALGetColorInterpretationName(
+                poBand->GetColorInterpretation()) );
+
+    adfMinMax[0] = poBand->GetMinimum( &bGotMin );
+    adfMinMax[1] = poBand->GetMaximum( &bGotMax );
+    if( ! (bGotMin && bGotMax) )
+        GDALComputeRasterMinMax((GDALRasterBandH)poBand, TRUE, adfMinMax);
+
+    printf( "Min=%.3fd, Max=%.3f\n", adfMinMax[0], adfMinMax[1] );
+    
+    if( poBand->GetOverviewCount() > 0 )
+        printf( "Band has %d overviews.\n", poBand->GetOverviewCount() );
+
+    if( poBand->GetColorTable() != NULL )
+        printf( "Band has a color table with %d entries.\n", 
+                 poBand->GetColorTable()->GetColorEntryCount() );
+
+	// get min and max height of terrain
+	min = adfMinMax[0];
+	max = adfMinMax[1];
+	range = max - min;
 }
 
 Terrain::~Terrain(){
@@ -49,19 +102,9 @@ Terrain::~Terrain(){
     GDALClose( (GDALDatasetH) gdalDataZone );  
 }
 
-bool Terrain::loadHeightMap(const char* fileName, float heightScale, float scale){
-	// get terrain texture
+void Terrain::setScale(float heightScale, float scale){
 	this->scale = scale;
-	this->heightScale = heightScale;
-	heightMapImage = new Texture(GL_TEXTURE_2D, fileName);
-
-	if(heightMapImage->load()){
-		generateMesh();
-		return true;
-	}
-	else{
-		return false;
-	}
+	this->heightScale = heightScale;	
 }
 
 int Terrain::getWidth(){
@@ -163,7 +206,6 @@ bool Terrain::setDataZoneBand(int num){
 			return false;
 		}
 		// load and set data
-		GDALRasterBand  *poBand;
 		GDALDataset* dataset;
 	    int bGotMin, bGotMax;
 	    double adfMinMax[2], range;
@@ -172,12 +214,12 @@ bool Terrain::setDataZoneBand(int num){
 
 		dataset = dataZoneDataImage->getGDALImage();
 
-	    poBand = dataset->GetRasterBand( num );
+	    GDALRasterBand* poDataBand = dataset->GetRasterBand( num );
 
-	    adfMinMax[0] = poBand->GetMinimum( &bGotMin );
-	    adfMinMax[1] = poBand->GetMaximum( &bGotMax );
+	    adfMinMax[0] = poDataBand->GetMinimum( &bGotMin );
+	    adfMinMax[1] = poDataBand->GetMaximum( &bGotMax );
 	    if( ! (bGotMin && bGotMax) )
-	        GDALComputeRasterMinMax((GDALRasterBandH)poBand, TRUE, adfMinMax);
+	        GDALComputeRasterMinMax((GDALRasterBandH)poDataBand, TRUE, adfMinMax);
 	    range = adfMinMax[1] - adfMinMax[0];
 
 		float* poScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
@@ -187,8 +229,8 @@ bool Terrain::setDataZoneBand(int num){
 
 		for(int y=0; y<height-1; y++){
 			// get to rows of pixel values
-			poBand->RasterIO(GF_Read, 0, y, bandXSize, 1, poScanLine, bandXSize, 1, GDT_Float32, 0, 0);
-			poBand->RasterIO(GF_Read, 0, y+1, bandXSize, 1, poScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
+			poDataBand->RasterIO(GF_Read, 0, y, bandXSize, 1, poScanLine, bandXSize, 1, GDT_Float32, 0, 0);
+			poDataBand->RasterIO(GF_Read, 0, y+1, bandXSize, 1, poScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
 
 			poBandDataZone->RasterIO(GF_Read, 0, y, bandXSize, 1, dataScanLine, bandXSize, 1, GDT_Float32, 0, 0);
 			poBandDataZone->RasterIO(GF_Read, 0, y+1, bandXSize, 1, dataScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
@@ -303,180 +345,177 @@ void Terrain::showPrevDataBand(){
 }
 
 bool Terrain::generateMesh(){
-	// get height and width of text from dgal
-	GDALDataset* gdalImage = heightMapImage->getGDALImage();
+	if(loaded){
+		width = gdalImage->GetRasterXSize();
+		height = gdalImage->GetRasterYSize();
+		Vertex vert;
+    	int bGotMin, bGotMax;
+		VertexColor vertColor;
+		int xOffset, yOffset;
 
-	width = gdalImage->GetRasterXSize();
-	height = gdalImage->GetRasterYSize();
-	Vertex vert;
-	VertexColor vertColor;
-	int xOffset, yOffset;
+		float* poScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
+		float* poScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
+		std::cout << "xsize" << width << std::endl;
 
-	// get data from the raster
-	GDALRasterBand  *poBand;
-    poBand = gdalImage->GetRasterBand( 1 );
-	//int rasterCount = gdalImage->GetRasterCount();
-	bandXSize = poBand->GetXSize();
-    int nBlockXSize, nBlockYSize;
-    int bGotMin, bGotMax;
-    double adfMinMax[2];
-    
-    poBand->GetBlockSize( &nBlockXSize, &nBlockYSize );
-    printf( "Block=%dx%d Type=%s, ColorInterp=%s\n",
-            nBlockXSize, nBlockYSize,
-            GDALGetDataTypeName(poBand->GetRasterDataType()),
-            GDALGetColorInterpretationName(
-                poBand->GetColorInterpretation()) );
+		// generate a planar triangle mesh that corresponds with the texture
+		xOffset = width/2;
+		yOffset = height/2;
 
-    adfMinMax[0] = poBand->GetMinimum( &bGotMin );
-    adfMinMax[1] = poBand->GetMaximum( &bGotMax );
-    if( ! (bGotMin && bGotMax) )
-        GDALComputeRasterMinMax((GDALRasterBandH)poBand, TRUE, adfMinMax);
-
-    printf( "Min=%.3fd, Max=%.3f\n", adfMinMax[0], adfMinMax[1] );
-    
-    if( poBand->GetOverviewCount() > 0 )
-        printf( "Band has %d overviews.\n", poBand->GetOverviewCount() );
-
-    if( poBand->GetColorTable() != NULL )
-        printf( "Band has a color table with %d entries.\n", 
-                 poBand->GetColorTable()->GetColorEntryCount() );
-
-	// get min and max height of terrain
-	int min = adfMinMax[0];
-	int max = adfMinMax[1];
-	int range = max - min;
-
-	float* poScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
-	float* poScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
-
-	// generate a planar triangle mesh that corresponds with the texture
-	xOffset = width/2;
-	yOffset = height/2;
-
-	// setup datazone if one is set
-	float* dataScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
-	float* dataScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
-	float dzMin, dzMax, dzRange;
-	if(gdalDataZone != NULL){
-		poBandDataZone = gdalDataZone->GetRasterBand(1);
-		dataScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
-		dataScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
-
-		double dzAdfMinMax[2];
-	    dzAdfMinMax[0] = poBand->GetMinimum( &bGotMin );
-	    dzAdfMinMax[1] = poBand->GetMaximum( &bGotMax );
-	    if( ! (bGotMin && bGotMax) )
-	        GDALComputeRasterMinMax((GDALRasterBandH)poBandDataZone, TRUE, dzAdfMinMax);
-
-	    printf( "Min=%.3fd, Max=%.3f\n", dzAdfMinMax[0], dzAdfMinMax[1] );
-	    dzMin = dzAdfMinMax[0];
-	    dzMax = dzAdfMinMax[1];
-	    dzRange = dzMax - dzMin;
-	}
-
-	for(int y=-yOffset; y<height-yOffset-1; y++){
-		// get to rows of pixel values
-		poBand->RasterIO(GF_Read, 0, y+yOffset, bandXSize, 1, poScanLine, bandXSize, 1, GDT_Float32, 0, 0);
-		poBand->RasterIO(GF_Read, 0, y+yOffset+1, bandXSize, 1, poScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
-
+		// setup datazone if one is set
+		float* dataScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
+		float* dataScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
+		float dzMin, dzMax, dzRange;
 		if(gdalDataZone != NULL){
-			poBandDataZone->RasterIO(GF_Read, 0, y+yOffset, bandXSize, 1, dataScanLine, bandXSize, 1, GDT_Float32, 0, 0);
-			poBandDataZone->RasterIO(GF_Read, 0, y+yOffset+1, bandXSize, 1, dataScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
+			poBandDataZone = gdalDataZone->GetRasterBand(1);
+			dataScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
+			dataScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
+
+			double dzAdfMinMax[2];
+		    dzAdfMinMax[0] = poBand->GetMinimum( &bGotMin );
+		    dzAdfMinMax[1] = poBand->GetMaximum( &bGotMax );
+		    if( ! (bGotMin && bGotMax) )
+		        GDALComputeRasterMinMax((GDALRasterBandH)poBandDataZone, TRUE, dzAdfMinMax);
+
+		    printf( "Min=%.3fd, Max=%.3f\n", dzAdfMinMax[0], dzAdfMinMax[1] );
+		    dzMin = dzAdfMinMax[0];
+		    dzMax = dzAdfMinMax[1];
+		    dzRange = dzMax - dzMin;
 		}
 
-		for(int x=-xOffset; x<width-xOffset-1; x++){
-				// check to see if triangle is in datazone
-				if(gdalDataZone == NULL || !checkDataZone(dataScanLine[x+xOffset], dataScanLine[x+xOffset+1], dataScanLine2[x+xOffset])){
-					// push top row of triangles
-					vert.position[0] = x*scale;
-					vert.position[1] = (poScanLine[x+xOffset]-min)/range;
-					vert.position[2] = y*scale;
-					planeVertices.push_back(vert);
-					vert.position[0] = (x+1)*scale;
-					vert.position[1] = (poScanLine[x+xOffset+1]-min)/range;
-					vert.position[2] = y*scale;
-					planeVertices.push_back(vert);
-					vert.position[0] = x*scale;
-					vert.position[1] = (poScanLine2[x+xOffset]-min)/range;
-					vert.position[2] = (y+1)*scale;	
-					planeVertices.push_back(vert);
-				}
-				else{
-					vertColor.position[0] = x*scale;
-					vertColor.position[1] = (poScanLine[x+xOffset]-min)/range;
-					vertColor.position[2] = y*scale;
-					vertColor.samplePos = (dataScanLine[x+xOffset]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-					vertColor.position[0] = (x+1)*scale;
-					vertColor.position[1] = (poScanLine[x+xOffset+1]-min)/range;
-					vertColor.position[2] = y*scale;
-					vertColor.samplePos = (dataScanLine[x+xOffset+1]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-					vertColor.position[0] = x*scale;
-					vertColor.position[1] = (poScanLine2[x+xOffset]-min)/range;
-					vertColor.position[2] = (y+1)*scale;
-					vertColor.samplePos = (dataScanLine2[x+xOffset]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-				}
+		for(int y=-yOffset; y<height-yOffset-1; y++){
+			// get to rows of pixel values
+			poBand->RasterIO(GF_Read, 0, y+yOffset, bandXSize, 1, poScanLine, bandXSize, 1, GDT_Float32, 0, 0);
+			poBand->RasterIO(GF_Read, 0, y+yOffset+1, bandXSize, 1, poScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
 
-				// check to see if triangle is in datazone
-				if(gdalDataZone == NULL || !checkDataZone(dataScanLine2[x+xOffset], dataScanLine2[x+xOffset+1], dataScanLine[x+xOffset+1])){
-					// push vertices of first triangle
-					vert.position[0] = x*scale;
-					vert.position[1] = (poScanLine2[x+xOffset]-min)/range;
-					vert.position[2] = (y+1)*scale;
-					planeVertices.push_back(vert);
-					vert.position[0] = (x+1)*scale;
-					vert.position[1] = (poScanLine2[x+1+xOffset]-min)/range;
-					vert.position[2] = (y+1)*scale;
-					planeVertices.push_back(vert);
-					vert.position[0] = (x+1)*scale;
-					vert.position[1] = (poScanLine[x+xOffset+1]-min)/range;
-					vert.position[2] = y*scale;
-					planeVertices.push_back(vert);
-				}
-				else{
-					// push vertices of first triangle
-					vertColor.position[0] = x*scale;
-					vertColor.position[1] = (poScanLine2[x+xOffset]-min)/range;
-					vertColor.position[2] = (y+1)*scale;
-					vertColor.samplePos = (dataScanLine2[x+xOffset]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-					vertColor.position[0] = (x+1)*scale;
-					vertColor.position[1] = (poScanLine2[x+1+xOffset]-min)/range;
-					vertColor.position[2] = (y+1)*scale;
-					vertColor.samplePos = (dataScanLine2[x+xOffset+1]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-					vertColor.position[0] = (x+1)*scale;
-					vertColor.position[1] = (poScanLine[x+xOffset+1]-min)/range;
-					vertColor.position[2] = y*scale;
-					vertColor.samplePos = (dataScanLine[x+xOffset+1]-dzMin)/dzRange;
-					dataZoneVertices.push_back(vertColor);
-				}
-	
+			if(gdalDataZone != NULL){
+				poBandDataZone->RasterIO(GF_Read, 0, y+yOffset, bandXSize, 1, dataScanLine, bandXSize, 1, GDT_Float32, 0, 0);
+				poBandDataZone->RasterIO(GF_Read, 0, y+yOffset+1, bandXSize, 1, dataScanLine2, bandXSize, 1, GDT_Float32, 0, 0);
+			}
+
+			for(int x=-xOffset; x<width-xOffset-1; x++){
+					// check to see if triangle is in datazone
+					if(gdalDataZone == NULL || !checkDataZone(dataScanLine[x+xOffset], dataScanLine[x+xOffset+1], dataScanLine2[x+xOffset])){
+						// push top row of triangles
+						vert.position[0] = x*scale;
+						vert.position[1] = (poScanLine[x+xOffset]-min)/range;
+						vert.position[2] = y*scale;
+						planeVertices.push_back(vert);
+						vert.position[0] = (x+1)*scale;
+						vert.position[1] = (poScanLine[x+xOffset+1]-min)/range;
+						vert.position[2] = y*scale;
+						planeVertices.push_back(vert);
+						vert.position[0] = x*scale;
+						vert.position[1] = (poScanLine2[x+xOffset]-min)/range;
+						vert.position[2] = (y+1)*scale;	
+						planeVertices.push_back(vert);
+					}
+					else{
+						vertColor.position[0] = x*scale;
+						vertColor.position[1] = (poScanLine[x+xOffset]-min)/range;
+						vertColor.position[2] = y*scale;
+						vertColor.samplePos = (dataScanLine[x+xOffset]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+						vertColor.position[0] = (x+1)*scale;
+						vertColor.position[1] = (poScanLine[x+xOffset+1]-min)/range;
+						vertColor.position[2] = y*scale;
+						vertColor.samplePos = (dataScanLine[x+xOffset+1]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+						vertColor.position[0] = x*scale;
+						vertColor.position[1] = (poScanLine2[x+xOffset]-min)/range;
+						vertColor.position[2] = (y+1)*scale;
+						vertColor.samplePos = (dataScanLine2[x+xOffset]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+					}
+
+					// check to see if triangle is in datazone
+					if(gdalDataZone == NULL || !checkDataZone(dataScanLine2[x+xOffset], dataScanLine2[x+xOffset+1], dataScanLine[x+xOffset+1])){
+						// push vertices of first triangle
+						vert.position[0] = x*scale;
+						vert.position[1] = (poScanLine2[x+xOffset]-min)/range;
+						vert.position[2] = (y+1)*scale;
+						planeVertices.push_back(vert);
+						vert.position[0] = (x+1)*scale;
+						vert.position[1] = (poScanLine2[x+1+xOffset]-min)/range;
+						vert.position[2] = (y+1)*scale;
+						planeVertices.push_back(vert);
+						vert.position[0] = (x+1)*scale;
+						vert.position[1] = (poScanLine[x+xOffset+1]-min)/range;
+						vert.position[2] = y*scale;
+						planeVertices.push_back(vert);
+					}
+					else{
+						// push vertices of first triangle
+						vertColor.position[0] = x*scale;
+						vertColor.position[1] = (poScanLine2[x+xOffset]-min)/range;
+						vertColor.position[2] = (y+1)*scale;
+						vertColor.samplePos = (dataScanLine2[x+xOffset]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+						vertColor.position[0] = (x+1)*scale;
+						vertColor.position[1] = (poScanLine2[x+1+xOffset]-min)/range;
+						vertColor.position[2] = (y+1)*scale;
+						vertColor.samplePos = (dataScanLine2[x+xOffset+1]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+						vertColor.position[0] = (x+1)*scale;
+						vertColor.position[1] = (poScanLine[x+xOffset+1]-min)/range;
+						vertColor.position[2] = y*scale;
+						vertColor.samplePos = (dataScanLine[x+xOffset+1]-dzMin)/dzRange;
+						dataZoneVertices.push_back(vertColor);
+					}
+		
+			}
+		}
+
+		// create vbo for terrain
+	    glGenBuffers(1, &VBO);
+	    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * planeVertices.size(), &planeVertices[0], GL_STATIC_DRAW);
+
+	    // create vbo for data zone
+		if(gdalDataZone != NULL){
+		    glGenBuffers(1, &dzVBO);
+		    glBindBuffer(GL_ARRAY_BUFFER, dzVBO);
+		    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexColor) * dataZoneVertices.size(), &dataZoneVertices[0], GL_STATIC_DRAW);
+		}
+
+		// clean up
+		CPLFree(poScanLine);
+		CPLFree(poScanLine2);
+		CPLFree(dataScanLine);
+		CPLFree(dataScanLine2);
+
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
+void Terrain::cutSquareHole(float startX, float startZ, float xSize, float zSize){
+	// loop through mesh and cut a hole in it
+	Vertex vert1, vert2, vert3;
+	vert1 = planeVertices[0];
+	std::cout << vert1.position[0] << ' ' << vert1.position[2] << std::endl;
+	std::cout << "sx: " << startX << " sy: " << startZ << " xs: " << xSize << " ys: " << zSize << std::endl;
+			std::cout << "total " << planeVertices.size() << std::endl;
+	// loop through plane vertices
+	float endX = startX + xSize, endZ = startZ + zSize;
+	int removed = 0;
+	for(int i=0; i<planeVertices.size(); i+=3){
+		// grab 3 vertices at a time and remove them if in the square
+		vert1 = planeVertices[i];
+		vert2 = planeVertices[i+1];
+		vert3 = planeVertices[i+2];
+		if((vert1.position[0] > startX && vert1.position[0] < endX) && (vert1.position[2] > startZ && vert1.position[2] < endZ) &&
+			(vert2.position[0] > startX && vert2.position[0] < endX) && (vert2.position[2] > startZ && vert2.position[2] < endZ) &&
+			(vert3.position[0] > startX && vert3.position[0] < endX) && (vert3.position[2] > startZ && vert3.position[2] < endZ)){
+			removed+=3;
+			planeVertices.erase(planeVertices.begin()+i, planeVertices.begin()+i+2);
 		}
 	}
+			std::cout << "removed " << removed << std::endl;
 
-	// create vbo for terrain
-    glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
     glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * planeVertices.size(), &planeVertices[0], GL_STATIC_DRAW);
-
-    // create vbo for data zone
-	if(gdalDataZone != NULL){
-	    glGenBuffers(1, &dzVBO);
-	    glBindBuffer(GL_ARRAY_BUFFER, dzVBO);
-	    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexColor) * dataZoneVertices.size(), &dataZoneVertices[0], GL_STATIC_DRAW);
-	}
-
-	// clean up
-	CPLFree(poScanLine);
-	CPLFree(poScanLine2);
-	CPLFree(dataScanLine);
-	CPLFree(dataScanLine2);
-
-	return true;
 }
 
 bool Terrain::checkDataZone(float v1, float v2, float v3){
@@ -486,7 +525,7 @@ bool Terrain::checkDataZone(float v1, float v2, float v3){
 		return false;
 }
 
-void Terrain::geoTransform(GDALDataset* projDataSet){
+void Terrain::geoTransform(GDALDataset* projDataSet, double& x, double& y){
 	std::string proj;
 	proj = std::string(projDataSet->GetProjectionRef());
 
@@ -504,11 +543,11 @@ void Terrain::geoTransform(GDALDataset* projDataSet){
 	OGRCoordinateTransformation* poTransform = OGRCreateCoordinateTransformation(&sr, &sr2);
 	double* geot = new double[6];
 	projDataSet->GetGeoTransform(geot);
-	double x = geot[0];
-	double y = geot[3];
- printf( "x=%.3fd, y=%.3f\n", x, y );
-	poTransform->Transform(1, &x, &y);
- printf( "x=%.3fd, y=%.3f\n", x, y );
+	double oldX = geot[0];
+	double oldY = geot[3];
+	poTransform->Transform(1, &oldX, &oldY);
+	x = oldX;
+	y = oldY;
 }
 
 void Terrain::buttonPressed(){
@@ -558,6 +597,7 @@ void Terrain::renderDataZone(glm::mat4 projection, glm::mat4 view){
 }
 
 void Terrain::render(glm::mat4 projection, glm::mat4 view){
+	//model = glm::translate( glm::mat4(1.0f), glm::vec3(0, 50, 0));
     //premultiply the matrix for this example
     glm::mat4 mvp = projection * view * model;
 
@@ -589,8 +629,53 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
     if(gdalDataZone != NULL){
     	renderDataZone(projection, view);
     }
+
+    renderShapes(projection, view);
+}
+
+void Terrain::renderShapes(glm::mat4 projection, glm::mat4 view){
+	for(Shape* shape: shapes){
+		shape->render(projection, view);
+	}
 }
 
 GDALDataset* Terrain::getGdalDataset(){
 	return heightMapImage->getGDALImage();
+}
+
+double* Terrain::getGeot(){
+	return geot;
+}
+
+std::vector<Vertex> Terrain::getVertices(){
+	return planeVertices;
+}
+
+void Terrain::relativeTranslate(glm::vec3 vec3){
+	model = glm::translate( model, vec3);
+}
+
+void Terrain::setMinMax(float min, float max){
+	this->min = min;
+	this->max = max;
+	this->range = max - min;
+}
+
+float Terrain::getMin(){
+	return min;
+}
+
+float Terrain::getMax(){
+	return max;
+}
+
+void Terrain::addShape(const char* fileName, GLint prog, glm::vec3 color){
+   	Shape* shape = new Shape();
+    shape->setOrigin(geot[0] + (width/2)*geot[1], geot[3] - (height/2)*geot[1]);
+    shape->setScale(1/geot[1] * scale);
+    std::cout << getWidth() << " w : h " << getHeight();
+    shape->setProgram(prog);
+    shape->setColor(color);
+    shape->init("streamDCEW/streamDCEW.shp");	
+    shapes.push_back(shape);
 }

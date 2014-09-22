@@ -4,6 +4,7 @@
 #include <vector>
 #include "Texture.h"
 #include "Vertex.h"
+#include "Shape.h"
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> //Makes passing matrices to shaders easier
@@ -14,7 +15,7 @@
 
 class Terrain{
 public:
-	Terrain(GLint program);
+	Terrain(GLint program, const char* fileName);
 	~Terrain();
 	int getWidth();
 	int getHeight();
@@ -25,13 +26,22 @@ public:
 	void showPrevDataTime();
 	void showNextDataBand();
 	void showPrevDataBand();
-	bool loadHeightMap(const char* fileName, float heightScale, float scale);
+	void setScale(float heightScale, float scale);
 	bool generateMesh();
-	void geoTransform(GDALDataset* projDataSet);
+	void cutSquareHole(float startX, float startZ, float xSize, float zSize);
+	void geoTransform(GDALDataset* projDataSet, double& x, double& y);
 	void renderDataZone(glm::mat4 projection, glm::mat4 view);
 	void render(glm::mat4 projection, glm::mat4 view);
 	void buttonPressed();
+	double* getGeot();
+	std::vector<Vertex> getVertices();
 	GDALDataset* getGdalDataset();
+	void relativeTranslate(glm::vec3 vec3);
+	void setMinMax(float min, float max);
+	float getMin();
+	float getMax();
+	void addShape(const char* fileName, GLint program, glm::vec3 color);
+	void renderShapes(glm::mat4 projection, glm::mat4 view);
 
 private:
 	void registerForEvents();
@@ -39,14 +49,17 @@ private:
 	void parseDataFileName(const char* fileName);
 
 	//CEGUI::Window *buttonWindow;
+	std::vector<Shape*> shapes;
+	bool loaded;
 	Texture* heightMapImage, *dataZoneDataImage;
-	GDALDataset* gdalDataZone;
-	GDALRasterBand  *poBandDataZone;
+	GDALDataset* gdalDataZone, *gdalImage;
+	GDALRasterBand  *poBandDataZone, *poBand;
 	std::vector<Vertex> planeVertices;
 	std::vector<VertexColor> dataZoneVertices;
+	double* geot;
 	int width, height, numDataBands, currentDataBand, bandXSize, currentTime;
 	std::string directoryAndName, extension;
-	float scale, heightScale;
+	float scale, heightScale, min, max, range;
 	glm::mat4 model;
 	GLint program, loc_position, loc_scalar, loc_sampler, loc_mvpmat;
 	GLint dataZoneProgram, dz_loc_position, dz_loc_scalar, dz_loc_sampler, dz_loc_mvpmat, dz_loc_samplepos;
