@@ -8,9 +8,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> //Makes passing matrices to shaders easier
 #include "ShaderLoader.h"
-#include "Terrain.h"
-#include "Shape.h"
-#include <ogrsf_frmts.h>
+#include "Water.h"
 
 //--Data types
 //This object will define the attributes of a vertex(position, color, etc...)
@@ -23,9 +21,9 @@ SDL_GLContext gl_context;
 int windowWidth = 1000, windowHeight = 1000;// Window size
 float camY = 150.0f, camX = 0.0f, camZ = 0.01f;
 float drawDistance = 1500.0f;
-GLuint program, grayscaleProgram, shapeProgram;// The GLSL program handle
+GLuint program;// The GLSL program handle
 GLuint vbo_geometry;// VBO handle for our geometry
-std::vector<Terrain*> terrain;
+Water* water;
 
 //uniform locations
 GLint loc_mvpmat;// Location of the modelviewprojection matrix in the shader
@@ -34,7 +32,6 @@ GLint loc_mvpmat;// Location of the modelviewprojection matrix in the shader
 GLint loc_position;
 GLint loc_scalar;
 GLint loc_sampler;
-Texture *colorMap;
 
 //transform matrices
 glm::mat4 model;//obj->world each object should have its own model matrix
@@ -44,13 +41,13 @@ glm::mat4 mvp;//premultiplied modelviewprojections
 
 // SDL related functions
 void createWindow(int width, int height);
-void SDLMainLoop(float scaleFactor);
+void SDLMainLoop();
 void update();
-void render(float scaleFactor);
+void render();
 
 // Resource Management
 void cleanup();
-bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float terrainScale);
+bool initialize(bool errorChecks);
 bool getShaderLoc(GLint var, const char* shaderName, ShaderVariable type, bool errorCheck);
 
 //--Random time things
@@ -81,22 +78,16 @@ void injectInput (bool & running)
                 // Get the type of key that was pressed
                 switch( e.key.keysym.sym ){
                     case SDLK_UP:
-                        terrain[0]->showNextDataBand();
                         break;
                     case SDLK_DOWN:
-                        terrain[0]->showPrevDataBand();
                         break;
                     case SDLK_LEFT:
-                        terrain[0]->showPrevDataTime();
                         break;
                     case SDLK_RIGHT:
-                        terrain[0]->showNextDataTime();
                         break;
                     case SDLK_1:
-                        terrain[0]->setDataZoneData("isnobaloutput/em.1000.tif", false);
                         break;
                     case SDLK_2:
-                        terrain[0]->setDataZoneData("isnobaloutput/snow.1000.tif", false);
                         break;
                     case SDLK_a:
                         camX -= 2;
@@ -171,21 +162,6 @@ void injectInput (bool & running)
 
 int main(int argc, char **argv) 
 {
-    char* fileName;
-    float scaleFactor = 1.0f, terrainScale = 1.0f;
-    if(argc > 2){
-        // read in scaling factor for terrain and file name
-        fileName = argv[1];
-        scaleFactor = atof(argv[2]);
-        if(argc > 3){
-            terrainScale = atof(argv[3]);
-        }
-    }
-    else{
-        std::cout << "You must pass in a file name for a first argument and a scale factor for the terrain height as a second argument." << std::endl;
-        exit(1);
-    }
-
 	// Intitialize SDL
     if(SDL_Init(SDL_INIT_VIDEO) < 0) 
 	  {
@@ -206,15 +182,11 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    // setup gdal
-    GDALAllRegister();
-    OGRRegisterAll();
-
     // Initialize all of our resources(shaders, geometry)
-    bool init = initialize(false, fileName, scaleFactor, terrainScale);
+    bool init = initialize(false);
     if(init)
     {
-        SDLMainLoop(scaleFactor);
+        SDLMainLoop();
     }
 }
 
@@ -240,7 +212,7 @@ void createWindow(int width, int height)
     SDL_GL_SetSwapInterval(1);
 }
 
-void SDLMainLoop(float scaleFactor)
+void SDLMainLoop()
 {
 	// While program is running check for events and render
     bool running = true;
@@ -248,7 +220,7 @@ void SDLMainLoop(float scaleFactor)
     while(running) {
     injectInput(running);
 		update();
-		render(scaleFactor);
+		render();
     }
 }
 
@@ -256,44 +228,32 @@ void update(){
 
 }
 
-void render(float scaleFactor){
+void render(){
     // --Render the scene
     // clear the screen
-    glClearColor(0.0, 0.0, 0.2, 1.0);
+    glClearColor(0.6, 0.6, 0.6, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     //premultiply the matrix for this example
     mvp = projection * view * model;
 
-    // enable the shader program
-    glUseProgram(grayscaleProgram);
-
-    //upload the matrix to the shader
-    glUniformMatrix4fv(loc_mvpmat, 1, GL_FALSE, glm::value_ptr(mvp));
-    glUniform1i(loc_sampler, 0);
-    glUniform1f(loc_scalar, scaleFactor);
-
-    for(Terrain* t : terrain){
-        t->render(projection, view);
-    }
-
-    glUseProgram(0);
+    water->render(projection * view);
 
     // swap the render buffers
     SDL_GL_SwapWindow(window);
                            
 }
 
-bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float terrainScale)
+bool initialize(bool errorChecks)
 {
     //--Geometry done
 
     //Shader Sources
     // Load vertex and fragment shaders
     ShaderLoader shaderLoader;
-    GLint frag, vert, fragShaderGrayscale, vertShaderGrayscale, vertShape, fragShape;
-    frag = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fragShader.fs");
-    vert = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vertShader.vs");
+    GLint frag, vert;
+    frag = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fragShaderGrayscale.fs");
+    vert = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vertShaderGrayscale.vs");
 
     // create colored program
     program = glCreateProgram();
@@ -310,111 +270,8 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
         return false;
     }
 
-    // create gray scale shader-
-    fragShaderGrayscale = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fragShaderGrayscale.fs");
-    vertShaderGrayscale = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vertShaderGrayscale.vs");
-
-    grayscaleProgram = glCreateProgram();
-    glAttachShader(grayscaleProgram, vertShaderGrayscale);
-    glAttachShader(grayscaleProgram, fragShaderGrayscale);
-    glLinkProgram(grayscaleProgram);
-
-    //check if everything linked ok
-    glGetProgramiv(grayscaleProgram, GL_LINK_STATUS, &shader_status);
-    if(!shader_status)
-    {
-        std::cerr << "[F] THE SHADER PROGRAM GRAYSCALE FAILED TO LINK" << std::endl;
-        return false;
-    }
-
-    // create shape shader-
-    fragShape = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fsShape.fs");
-    vertShape = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vsShape.vs");
-
-    shapeProgram = glCreateProgram();
-    glAttachShader(shapeProgram, vertShape);
-    glAttachShader(shapeProgram, fragShape);
-    glLinkProgram(shapeProgram);
-
-    //check if everything linked ok
-    glGetProgramiv(shapeProgram, GL_LINK_STATUS, &shader_status);
-    if(!shader_status)
-    {
-        std::cerr << "[F] THE SHADER PROGRAM GRAYSCALE FAILED TO LINK" << std::endl;
-        return false;
-    }
-
-
-    // create terrain
-    terrain.push_back(new Terrain(grayscaleProgram, "tl2p5_dem.ipw.tif"));
-    terrain.push_back(new Terrain(grayscaleProgram, "DCEWsqrExtent.tif"));
-
-    // loop through densities and normalizes on largest
-    double maxDensity = 0;
-    for(Terrain* t: terrain){
-        if(t->getGeot()[1] > maxDensity)
-            maxDensity = t->getGeot()[1];
-    }
-
-    // smaller dem
-    terrain[0]->setDataZone("tl2p5mask.ipw.tif", program);
-    terrain[0]->setScale(scaleFactor, terrainScale * (terrain[0]->getGeot()[1]/maxDensity));
-    terrain[0]->setMinMax(terrain[1]->getMin(), terrain[1]->getMax());
-    terrain[0]->generateMesh();
-    terrain[0]->setDataZoneData("isnobaloutput/em.1000.tif", false);
-
-    // larger dem
-    terrain[1]->setScale(scaleFactor, terrainScale * (terrain[1]->getGeot()[1]/maxDensity));
-    terrain[1]->generateMesh();
-
-    // project smaller dem onto larger dem
-    double newX, newY, xOffset, yOffset, xOriginOffset, yOriginOffset;
-    terrain[1]->geoTransform(terrain[0]->getGdalDataset(), newX, newY);
-    xOffset = newX - terrain[1]->getGeot()[0];
-    yOffset = newY - terrain[1]->getGeot()[3];
-    //printf( "x=%.3fd, y=%.3f\n", xOffset, yOffset);
-
-    // correctly position smaller dem
-    // translate to origin
-    std::vector<Vertex> smallVerts = terrain[0]->getVertices();
-    std::vector<Vertex> largeVerts = terrain[1]->getVertices();
-    xOriginOffset = largeVerts[0].position[0] - smallVerts[0].position[0];
-    yOriginOffset = largeVerts[0].position[2] - smallVerts[0].position[2];
-    //printf( "xO=%.3fd, yO=%.3f\n", xOriginOffset, yOriginOffset);
-
-    // translate small dem from center to origin
-    terrain[0]->relativeTranslate(glm::vec3(xOriginOffset, 0.005*scaleFactor + .005, yOriginOffset));
-
-    // translate small dem from origin to correct position on large dem
-    terrain[0]->relativeTranslate(glm::vec3((xOffset*terrainScale)/maxDensity, 0, (-yOffset*terrainScale)/maxDensity));    
-
-    // color map
-    colorMap = new Texture(GL_TEXTURE_1D, "colorMap.png");
-    colorMap->create();
-
-    // setup shapes
-    terrain[1]->addShape("streamDCEW/streamDCEW.shp", shapeProgram, glm::vec3(0, .5, 1), false);
-    terrain[1]->addShape("boundDCEW/boundDCEW.shp", shapeProgram, glm::vec3(0, 1, .2), true);
-    terrain[1]->placeShapesOnSurface();
-
-    //Now we set the locations of the attributes and uniforms
-    //this allows us to access them easily while rendering
-    /*if(!getShaderLoc(loc_position, "v_position", Attribute, errorChecks)){
-        return false;
-    }
-
-    if(!getShaderLoc(loc_mvpmat, "mvpMatrix", Uniform, errorChecks)){
-        return false;
-    }
-
-    if(!getShaderLoc(loc_scalar, "verticalScalar", Uniform, errorChecks)){
-        return false;
-    }
-
-    if(!getShaderLoc(loc_sampler, "gSampler", Uniform, errorChecks)){
-        return false;
-    }
-    std::cout << loc_position << std::endl;*/
+    water = new Water(program);
+    water->createWaterMesh(200, 200, 3);
 
     //--Init the view and projection matrices
     //  if you will be having a moving camera the view matrix will need to more dynamic
@@ -433,9 +290,7 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
-    //glEnable(GL_BLEND);
-    //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     //and its done
     return true;
@@ -461,11 +316,6 @@ bool getShaderLoc(GLint var, const char* shaderName, ShaderVariable type, bool e
 
 void cleanup()
 {
-    // Clean up, Clean up
-    for(Terrain* t: terrain){
-        delete t;
-    }
-    delete colorMap;
 
     glDeleteProgram(program);
     glDeleteBuffers(1, &vbo_geometry);
