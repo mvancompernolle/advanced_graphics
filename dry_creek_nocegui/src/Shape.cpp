@@ -7,7 +7,7 @@ Shape::Shape(){
 	originY = 0;
 }
 
-bool Shape::init(const char* fileName){
+bool Shape::init(const char* fileName, bool isBoundary){
 	Vertex vert, vert2;
 	double x, x2, z, z2;
 	vert.position[1] = 0;
@@ -22,7 +22,7 @@ bool Shape::init(const char* fileName){
 	}
 
 	// Check how many layers there are.
-    std::cout << "Number of Layers " << ds->GetLayerCount() << std::endl;
+    //std::cout << "Number of Layers " << ds->GetLayerCount() << std::endl;
 
     // Now lets grab the first layer
     OGRLayer* layer = ds->GetLayer(0);
@@ -34,26 +34,15 @@ bool Shape::init(const char* fileName){
     layer->ResetReading();
     while( (poFeature = layer->GetNextFeature()) != NULL )
     {
-        OGRFeatureDefn *poFDefn = layer->GetLayerDefn();
-        int iField;
-
-        for( iField = 0; iField < poFDefn->GetFieldCount(); iField++ )
-        {
-            OGRFieldDefn *poFieldDefn = poFDefn->GetFieldDefn( iField );
-
-            /*if( poFieldDefn->GetType() == OFTInteger )
-                printf( "%d,", poFeature->GetFieldAsInteger( iField ) );
-            else if( poFieldDefn->GetType() == OFTReal )
-                printf( "%.3f,", poFeature->GetFieldAsDouble(iField) );
-            else if( poFieldDefn->GetType() == OFTString )
-                printf( "%s,", poFeature->GetFieldAsString(iField) );
-            else
-                printf( "%s,", poFeature->GetFieldAsString(iField) );*/
-        }
-
         OGRGeometry *poGeometry;
 
         poGeometry = poFeature->GetGeometryRef();
+
+        // check to see if shape is in the boundary
+        if(isBoundary){
+            poGeometry = poGeometry->Boundary();
+        }
+
         if( poGeometry != NULL 
             && wkbFlatten(poGeometry->getGeometryType()) == wkbPoint )
         {
@@ -81,7 +70,7 @@ bool Shape::init(const char* fileName){
             	vert2.position[0] = -x2 * scale;
             	vert2.position[2] = z2 * scale;
             	//printf( "%.3f,%.3f\n", vert.position[0], vert.position[2] );
-            	addLine(vert, vert2, scale*10);
+            	addLine(vert, vert2, scale*20);
 
             }
         }       
@@ -89,13 +78,8 @@ bool Shape::init(const char* fileName){
     }
 
     OGRDataSource::DestroyDataSource( ds );
-    std::cout << shapeVertices.size() << std::endl;
-    
-    /*for(int i=0; i < shapeVertices.size()-1; i++){
-    	//addLine(shapeVertices[i], shapeVertices[i+1], .1);
-    }*/
 
-    std::cout << shapeTriangles.size() << std::endl;
+    //std::cout << shapeTriangles.size() << std::endl;
 	// create vbo for shape
     glGenBuffers(1, &VBO);
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -109,9 +93,14 @@ void Shape::setOrigin(double x, double y){
 	originY = y;
 }
 
-void Shape::setScale(double scale){
-	std::cout << "scale " << scale << std::endl;
+void Shape::setScale(double scale, float heightScale){
+	//std::cout << "scale " << scale << std::endl;
 	this->scale = scale;
+    this->heightScale = heightScale;
+}
+
+double Shape::getScale(){
+    return scale;
 }
 
 void Shape::addLine(Vertex p1, Vertex p2, float thickness){
@@ -169,7 +158,7 @@ void Shape::render(glm::mat4 projection, glm::mat4 view){
     //upload the matrix to the shader
     glUniformMatrix4fv(loc_mvpmat, 1, GL_FALSE, glm::value_ptr(mvp));
     glUniform3fv(loc_color, 1, glm::value_ptr(color));
-    glUniform1f(loc_scalar, 5);
+    glUniform1f(loc_scalar, heightScale);
 
 	glVertexAttribPointer( loc_position,//location of attribute
 	                       3,//number of elements
@@ -222,4 +211,14 @@ void Shape::setProgram(GLint prog){
 
 void Shape::setColor(glm::vec3 color){
 	this->color = color;
+}
+
+std::vector<Vertex> Shape::getShapeVertices(){
+    return shapeTriangles;
+}
+
+void Shape::setShapeVertices(std::vector<Vertex> verts){
+    shapeTriangles = verts;
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(Vertex) * shapeTriangles.size(), &shapeTriangles[0], GL_STATIC_DRAW);
 }

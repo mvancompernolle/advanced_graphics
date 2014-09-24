@@ -19,13 +19,16 @@ class Shape
 {
 public:
     Shape();
-    bool init(const char* fileName);
+    bool init(const char* fileName, bool isBoundary);
     void setOrigin(double x, double y);
-    void setScale(double scale);
+    void setScale(double scale, float heightScale);
+    double getScale();
     void render(glm::mat4 projection, glm::mat4 view);
     void addLine(Vertex point1, Vertex point2, float thickness);
     void setProgram(GLint program);
     void setColor(glm::vec3 color);
+    void setShapeVertices(std::vector<Vertex> verts);
+    std::vector<Vertex> getShapeVertices();
 
 private:
     fipImage textureImage;
@@ -34,7 +37,8 @@ private:
     GLint program, loc_position, loc_scalar, loc_mvpmat, loc_color;
     glm::vec3 color;
     double originX, originY, scale;
-    std::vector<Vertex> shapeVertices, shapeTriangles;
+    float heightScale;
+    std::vector<Vertex> shapeTriangles;
     GLuint VBO;
 };
 

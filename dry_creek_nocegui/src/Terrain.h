@@ -40,7 +40,8 @@ public:
 	void setMinMax(float min, float max);
 	float getMin();
 	float getMax();
-	void addShape(const char* fileName, GLint program, glm::vec3 color);
+	void addShape(const char* fileName, GLint program, glm::vec3 color, float isBoundary);
+	void placeShapesOnSurface();
 	void renderShapes(glm::mat4 projection, glm::mat4 view);
 
 private:

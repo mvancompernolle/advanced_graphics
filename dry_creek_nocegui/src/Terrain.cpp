@@ -59,7 +59,7 @@ Terrain::Terrain(GLint program, const char* fileName){
 	geot = new double[6];
 	gdalImage->GetGeoTransform(geot);
 	for(int i=0; i<6; i++){
-		 printf( "goi%i=%.3fd\n", i, geot[i] );
+		 //printf( "goi%i=%.3fd\n", i, geot[i] );
 	}
 
 	// get data from the raster
@@ -67,11 +67,11 @@ Terrain::Terrain(GLint program, const char* fileName){
 	bandXSize = poBand->GetXSize();
 
     poBand->GetBlockSize( &nBlockXSize, &nBlockYSize );
-    printf( "Block=%dx%d Type=%s, ColorInterp=%s\n",
+    /*printf( "Block=%dx%d Type=%s, ColorInterp=%s\n",
             nBlockXSize, nBlockYSize,
             GDALGetDataTypeName(poBand->GetRasterDataType()),
             GDALGetColorInterpretationName(
-                poBand->GetColorInterpretation()) );
+                poBand->GetColorInterpretation()) );*/
 
     adfMinMax[0] = poBand->GetMinimum( &bGotMin );
     adfMinMax[1] = poBand->GetMaximum( &bGotMax );
@@ -355,7 +355,7 @@ bool Terrain::generateMesh(){
 
 		float* poScanLine = (float *) CPLMalloc(sizeof(float)*bandXSize);
 		float* poScanLine2 = (float *) CPLMalloc(sizeof(float)*bandXSize);
-		std::cout << "xsize" << width << std::endl;
+		//std::cout << "xsize" << width << std::endl;
 
 		// generate a planar triangle mesh that corresponds with the texture
 		xOffset = width/2;
@@ -376,7 +376,7 @@ bool Terrain::generateMesh(){
 		    if( ! (bGotMin && bGotMax) )
 		        GDALComputeRasterMinMax((GDALRasterBandH)poBandDataZone, TRUE, dzAdfMinMax);
 
-		    printf( "Min=%.3fd, Max=%.3f\n", dzAdfMinMax[0], dzAdfMinMax[1] );
+		    //printf( "Min=%.3fd, Max=%.3f\n", dzAdfMinMax[0], dzAdfMinMax[1] );
 		    dzMin = dzAdfMinMax[0];
 		    dzMax = dzAdfMinMax[1];
 		    dzRange = dzMax - dzMin;
@@ -494,9 +494,9 @@ void Terrain::cutSquareHole(float startX, float startZ, float xSize, float zSize
 	// loop through mesh and cut a hole in it
 	Vertex vert1, vert2, vert3;
 	vert1 = planeVertices[0];
-	std::cout << vert1.position[0] << ' ' << vert1.position[2] << std::endl;
-	std::cout << "sx: " << startX << " sy: " << startZ << " xs: " << xSize << " ys: " << zSize << std::endl;
-			std::cout << "total " << planeVertices.size() << std::endl;
+	//std::cout << vert1.position[0] << ' ' << vert1.position[2] << std::endl;
+	//std::cout << "sx: " << startX << " sy: " << startZ << " xs: " << xSize << " ys: " << zSize << std::endl;
+			//std::cout << "total " << planeVertices.size() << std::endl;
 	// loop through plane vertices
 	float endX = startX + xSize, endZ = startZ + zSize;
 	int removed = 0;
@@ -669,13 +669,50 @@ float Terrain::getMax(){
 	return max;
 }
 
-void Terrain::addShape(const char* fileName, GLint prog, glm::vec3 color){
+void Terrain::addShape(const char* fileName, GLint prog, glm::vec3 color, float isBoundary){
    	Shape* shape = new Shape();
     shape->setOrigin(geot[0] + (width/2)*geot[1], geot[3] - (height/2)*geot[1]);
-    shape->setScale(1/geot[1] * scale);
-    std::cout << getWidth() << " w : h " << getHeight();
+    shape->setScale(1/geot[1] * scale, (float) heightScale);
+    //std::cout << getWidth() << " w : h " << getHeight();
     shape->setProgram(prog);
     shape->setColor(color);
-    shape->init("streamDCEW/streamDCEW.shp");	
+    shape->init(fileName, isBoundary);	
     shapes.push_back(shape);
+}
+
+void Terrain::placeShapesOnSurface(){
+	float** data = new float*[height];
+	float heightOffset = .08f * scale;
+	double xOrigin = planeVertices[0].position[0], yOrigin = planeVertices[0].position[2];
+	int x,y;
+
+	for(int i=0; i<height; i++){
+		data[i] = new float[width];
+	}
+	GDALRasterBand* poDataBand = gdalImage->GetRasterBand( 1 );
+
+	// load all of the images height values into the data array
+	for(int i=0; i<height; i++){
+		poDataBand->RasterIO(GF_Read, 0, i, bandXSize, 1, data[i], bandXSize, 1, GDT_Float32, 0, 0);
+	}
+
+	for(Shape* shape: shapes){
+		// loop through each vertex in the shape file and set its height to the corresponding terrain height
+		std::vector<Vertex> shapeVertices = shape->getShapeVertices();
+		double scale = shape->getScale();
+		for(int i=0; i<shapeVertices.size(); i++){
+			x = (shapeVertices[i].position[0] - xOrigin)/(scale*geot[1]);
+			y = (shapeVertices[i].position[2] - yOrigin)/(scale*geot[1]);
+			shapeVertices[i].position[1] = (data[y][x]-min)/range + heightOffset;
+		}
+
+		// set shape vertices to new data
+		shape->setShapeVertices(shapeVertices);		
+	}
+
+
+	// delete data
+	for(int i=0; i<height; i++)
+		delete data[i];
+	delete data;
 }

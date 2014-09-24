@@ -372,7 +372,7 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     terrain[1]->geoTransform(terrain[0]->getGdalDataset(), newX, newY);
     xOffset = newX - terrain[1]->getGeot()[0];
     yOffset = newY - terrain[1]->getGeot()[3];
-    printf( "x=%.3fd, y=%.3f\n", xOffset, yOffset);
+    //printf( "x=%.3fd, y=%.3f\n", xOffset, yOffset);
 
     // correctly position smaller dem
     // translate to origin
@@ -380,10 +380,10 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     std::vector<Vertex> largeVerts = terrain[1]->getVertices();
     xOriginOffset = largeVerts[0].position[0] - smallVerts[0].position[0];
     yOriginOffset = largeVerts[2].position[2] - smallVerts[2].position[2];
-    printf( "xO=%.3fd, yO=%.3f\n", xOriginOffset, yOriginOffset);
+    //printf( "xO=%.3fd, yO=%.3f\n", xOriginOffset, yOriginOffset);
 
     // translate small dem from center to origin
-    terrain[0]->relativeTranslate(glm::vec3(xOriginOffset, 0.05, yOriginOffset));
+    terrain[0]->relativeTranslate(glm::vec3(xOriginOffset, (float) 0.005*scaleFactor + .005, yOriginOffset));
 
     // translate small dem from origin to correct position on large dem
     terrain[0]->relativeTranslate(glm::vec3((xOffset*terrainScale)/maxDensity, 0, (-yOffset*terrainScale)/maxDensity));    
@@ -393,7 +393,9 @@ bool initialize(bool errorChecks, const char* fileName, float scaleFactor, float
     colorMap->create();
 
     // setup shapes
-    terrain[1]->addShape("streamDCEW/streamDCEW.shp", shapeProgram, glm::vec3(0, .5, 1));
+    terrain[1]->addShape("streamDCEW/streamDCEW.shp", shapeProgram, glm::vec3(0, .5, 1), false);
+    terrain[1]->addShape("boundDCEW/boundDCEW.shp", shapeProgram, glm::vec3(0, 1, .2), true);
+    terrain[1]->placeShapesOnSurface();
 
     //Now we set the locations of the attributes and uniforms
     //this allows us to access them easily while rendering
