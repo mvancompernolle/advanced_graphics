@@ -11,8 +11,62 @@
 #include "Water.h"
 
 //--Data types
-//This object will define the attributes of a vertex(position, color, etc...)
 enum ShaderVariable {Attribute, Uniform};
+
+struct BaseLight{
+    glm::vec3 color;
+    float ambientIntensity;
+    float diffuseIntensity;
+
+    BaseLight(glm::vec3 col, float ambIntensity, float diffIntensity){
+        color = col;
+        ambientIntensity = ambIntensity;
+        diffuseIntensity = diffIntensity;
+    }
+};
+
+struct DirectionalLight : public BaseLight{
+    public: 
+    glm::vec3 direction;
+
+    DirectionalLight(glm::vec3 col, glm::vec3 dir, float diffIntensity, float ambIntensity) : BaseLight(col, ambIntensity, diffIntensity){
+        direction = dir;
+    }
+};
+
+struct PointLight : public BaseLight{
+
+    public:
+    glm::vec3 pos;
+
+    struct{
+        float constant, linear, exp;
+    } Attenuation;
+
+
+    PointLight(glm::vec3 col, glm::vec3 pos, float diffIntensity, float ambIntensity) : BaseLight(col, ambIntensity, diffIntensity){
+        this->pos = pos;
+    }
+};
+
+GLint loc_specularStrength, loc_matSpecularIntensity;
+glm::vec3 ambientLightColor(1.0, 1.0, 1.0);
+float ambientLightIntensity = 0.2;
+GLint ambLightColorLoc, ambLightAmbientIntensityLoc; 
+BaseLight ambLight(ambientLightColor, ambientLightIntensity, 1.0f);
+
+glm::vec3 dirLightColor(1.0, 1.0, 1.0);
+float dirLightDifIntensity = 0.4, dirLightAmbIntensity = .2;
+GLint dirLightColorLoc, dirLightAmbientIntensityLoc, dirLightDirLoc, dirLightIntensityLoc;
+DirectionalLight dirLight(dirLightColor, glm::vec3(0, -1, 0), dirLightDifIntensity, dirLightAmbIntensity);
+
+GLint pointLightColorLoc, pointLightAmbientIntensityLoc, pointLightPosLoc, pointLightIntensityLoc, pointLightConstantLoc, pointLightLinearLoc, pointLightExpLoc;
+glm::vec3 pointLightPos(0.0, 2.0, 10.0);
+glm::vec3 pointLightColor(1.0, 1.0, 1.0);
+float pointLightConstant = 1.0, pointLightLinear = 0.1, pointLightExp = 0.0;
+float pointLightAmbIntensity = .1;
+float pointLightDifIntensity = .8;
+PointLight pointLight(pointLightColor, pointLightPos, pointLightDifIntensity, pointLightAmbIntensity);
 
 //--Evil Global variables
 //Just for this example!
@@ -234,10 +288,29 @@ void render(){
     glClearColor(0.6, 0.6, 0.6, 1.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-    //premultiply the matrix for this example
-    mvp = projection * view * model;
+    glUseProgram(program);
 
-    water->render(projection * view);
+    // ambient light
+    glUniform3f(ambLightColorLoc, ambLight.color[0], ambLight.color[1], ambLight.color[2]);
+    glUniform1f(ambLightAmbientIntensityLoc, ambLight.ambientIntensity);    
+
+    // directional light
+    glUniform3f(dirLightColorLoc, dirLight.color[0], dirLight.color[1], dirLight.color[2]);
+    glUniform1f(dirLightAmbientIntensityLoc, dirLight.ambientIntensity);    
+    glUniform3f(dirLightDirLoc, dirLight.direction[0], dirLight.direction[1], dirLight.direction[2]);
+    glUniform1f(dirLightIntensityLoc, dirLight.diffuseIntensity);   
+
+    // point light
+    glUniform3f(pointLightColorLoc, pointLight.color[0], pointLight.color[1], pointLight.color[2]);
+    glUniform1f(pointLightAmbientIntensityLoc, pointLight.ambientIntensity);    
+    glUniform3f(pointLightPosLoc, pointLight.pos[0], pointLight.pos[1], pointLight.pos[2]);
+    glUniform1f(pointLightIntensityLoc, pointLight.diffuseIntensity);
+
+    glUniform1f(pointLightConstantLoc, pointLightConstant);
+    glUniform1f(pointLightLinearLoc, pointLightLinear);
+    glUniform1f(pointLightExpLoc, pointLightExp);
+
+    water->render(projection, view);
 
     // swap the render buffers
     SDL_GL_SwapWindow(window);
@@ -252,8 +325,8 @@ bool initialize(bool errorChecks)
     // Load vertex and fragment shaders
     ShaderLoader shaderLoader;
     GLint frag, vert;
-    frag = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/fragShaderGrayscale.fs");
-    vert = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vertShaderGrayscale.vs");
+    frag = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/frag.fs");
+    vert = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/vert.vs");
 
     // create colored program
     program = glCreateProgram();
@@ -270,8 +343,95 @@ bool initialize(bool errorChecks)
         return false;
     }
 
+    // ambient light
+    ambLightColorLoc = glGetUniformLocation(program, const_cast<const char*>("ambientLight.color"));
+    if(ambLightColorLoc == -1)
+    {
+        std::cerr << "[F] AMB LIGHT COLOR NOT FOUND" << std::endl;
+    }
+
+    ambLightAmbientIntensityLoc = glGetUniformLocation(program, const_cast<const char*>("ambientLight.ambientIntensity"));
+    if(ambLightColorLoc == -1)
+    {
+        std::cerr << "[F] AMB INTENSITY NOT FOUND" << std::endl;
+    }
+
+    // directional light
+    dirLightColorLoc = glGetUniformLocation(program, const_cast<const char*>("directionalLight.base.color"));
+    if(dirLightColorLoc == -1)
+    {
+        std::cerr << "[F] DIR LIGHT COLOR NOT FOUND" << std::endl;
+    }
+
+    dirLightAmbientIntensityLoc = glGetUniformLocation(program, const_cast<const char*>("directionalLight.base.ambientIntensity"));
+    if(dirLightColorLoc == -1)
+    {
+        std::cerr << "[F] DIR AMB INTENSITY NOT FOUND" << std::endl;
+    }
+
+    dirLightDirLoc = glGetUniformLocation(program, const_cast<const char*>("directionalLight.direction"));
+    if(dirLightDirLoc == -1)
+    {
+        std::cerr << "[F] DIR DIRECTION COLOR NOT FOUND" << std::endl;
+    }
+
+    dirLightIntensityLoc = glGetUniformLocation(program, const_cast<const char*>("directionalLight.base.diffuseIntensity"));
+    if(dirLightIntensityLoc == -1)
+    {
+        std::cerr << "[F] DIR INTENSITY INTENSITY NOT FOUND" << std::endl;
+    }
+
+    // point light
+    pointLightColorLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.base.color"));
+    if(pointLightColorLoc == -1)
+    {
+        std::cerr << "[F] POINT LIGHT COLOR NOT FOUND" << std::endl;
+        return false;
+    }
+
+    pointLightAmbientIntensityLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.base.ambientIntensity"));
+    if(pointLightAmbientIntensityLoc == -1)
+    {
+        std::cerr << "[F] POINT AMB INTENSITY NOT FOUND" << std::endl;
+        return false;
+    }
+
+    pointLightPosLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.pos"));
+    if(pointLightPosLoc == -1)
+    {
+        std::cerr << "[F] POINT DIRECTION COLOR NOT FOUND" << std::endl;
+        return false;
+    }
+
+    pointLightIntensityLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.base.diffuseIntensity"));
+    if(pointLightIntensityLoc == -1)
+    {
+        std::cerr << "[F] POINT INTENSITY INTENSITY NOT FOUND" << std::endl;
+        return false;
+    }
+    pointLightConstantLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.atten.constant"));
+    if(pointLightConstantLoc == -1)
+    {
+        std::cerr << "[F] POINT CONST NOT FOUND" << std::endl;
+        return false;
+    }
+
+    pointLightLinearLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.atten.linear"));
+    if(pointLightLinearLoc == -1)
+    {
+        std::cerr << "[F] POINT LINEAR NOT FOUND" << std::endl;
+        return false;
+    }
+
+    pointLightExpLoc = glGetUniformLocation(program, const_cast<const char*>("pointLight.atten.exp"));
+    if(pointLightExpLoc == -1)
+    {
+        std::cerr << "[F] POINT EXP NOT FOUND" << std::endl;
+        return false;
+    }
+
     water = new Water(program);
-    water->createWaterMesh(200, 200, 3);
+    water->createWaterMesh(200, 200, .1);
 
     //--Init the view and projection matrices
     //  if you will be having a moving camera the view matrix will need to more dynamic
@@ -290,7 +450,7 @@ bool initialize(bool errorChecks)
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
 
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 
     //and its done
     return true;

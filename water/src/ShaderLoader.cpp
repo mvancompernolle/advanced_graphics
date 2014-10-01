@@ -1,5 +1,5 @@
 #include "ShaderLoader.h"
-
+#include <vector>
 ShaderLoader::ShaderLoader(){
 }
 
@@ -36,10 +36,12 @@ GLint ShaderLoader::loadShaderFromFile(GLenum typeOfShader, const char* fileName
 		glGetShaderiv(shader, GL_COMPILE_STATUS, &shader_status);
 		if(!shader_status)
 		{
-			if(typeOfShader == GL_VERTEX_SHADER)
-				std::cerr << "[F] FAILED TO COMPILE VERTEX SHADER!" << std::endl;
-			else
-				std::cerr << "[F] FAILED TO COMPILE FRAGMENT SHADER!" << std::endl;
+			GLint logSize = 0;
+			glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &logSize);
+
+			char msg[logSize];
+			glGetShaderInfoLog(shader, logSize, &logSize, msg);
+			std::cout << msg << std::endl;
 		    
 		    exit(1);
 		}

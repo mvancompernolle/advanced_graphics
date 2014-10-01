@@ -5,6 +5,7 @@
 struct Vertex
 {
     GLfloat pos[3];
+    GLfloat norm[3];
 };
 
 struct VertexColor : Vertex {
