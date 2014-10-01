@@ -1,0 +1,115 @@
+16/09/2014 22:45:07 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+16/09/2014 22:45:07 (Std) 	+                     Crazy Eddie's GUI System - Event log                    +
+16/09/2014 22:45:07 (Std) 	+                          (http://www.cegui.org.uk/)                         +
+16/09/2014 22:45:07 (Std) 	+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+16/09/2014 22:45:07 (Std) 	CEGUI::Logger singleton created. (0x250e9c0)
+16/09/2014 22:45:07 (Std) 	
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	* Important:                                                                   *
+16/09/2014 22:45:07 (Std) 	*     To get support at the CEGUI forums, you must post _at least_ the section *
+16/09/2014 22:45:07 (Std) 	*     of this log file indicated below.  Failure to do this will result in no  *
+16/09/2014 22:45:07 (Std) 	*     support being given; please do not waste our time.                       *
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	* -------- START OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM       -------- *
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	---- Version: 0.8.4 (Build: Sep 11 2014 GNU/Linux g++ 4.2.1 Compatible Ubuntu Clang 3.5 (trunk) 64 bit) ----
+16/09/2014 22:45:07 (Std) 	---- Renderer module is: CEGUI::OpenGL3Renderer - Official OpenGL 3.2 core based renderer module.  TextureTarget support enabled via FBO OGL 3.2 core implementation. ----
+16/09/2014 22:45:07 (Std) 	---- XML Parser module is: CEGUI::ExpatParser - Official expat based parser module for CEGUI ----
+16/09/2014 22:45:07 (Std) 	---- Image Codec module is: DevILImageCodec - Official DevIL based image codec ----
+16/09/2014 22:45:07 (Std) 	---- Scripting module is: None ----
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	* -------- END OF ESSENTIAL SECTION TO BE POSTED ON THE FORUM         -------- *
+16/09/2014 22:45:07 (Std) 	********************************************************************************
+16/09/2014 22:45:07 (Std) 	
+16/09/2014 22:45:07 (Std) 	---- Begining CEGUI System initialisation ----
+16/09/2014 22:45:07 (Std) 	[CEGUI::ImageManager] Singleton created (0x2642d40)
+16/09/2014 22:45:07 (Std) 	[CEGUI::ImageManager] Registered Image type: BasicImage
+16/09/2014 22:45:07 (Std) 	CEGUI::FontManager singleton created. (0x2518c10)
+16/09/2014 22:45:07 (Std) 	CEGUI::WindowFactoryManager singleton created
+16/09/2014 22:45:07 (Std) 	CEGUI::WindowManager singleton created (0x2518de0)
+16/09/2014 22:45:07 (Std) 	CEGUI::SchemeManager singleton created. (0x2518e70)
+16/09/2014 22:45:07 (Std) 	CEGUI::GlobalEventSet singleton created. (0x250a8d0)
+16/09/2014 22:45:07 (Std) 	CEGUI::AnimationManager singleton created (0x2518fa0)
+16/09/2014 22:45:07 (Std) 	CEGUI::WidgetLookManager singleton created. (0x250e010)
+16/09/2014 22:45:07 (Std) 	CEGUI::WindowRendererManager singleton created (0x2519e90)
+16/09/2014 22:45:07 (Std) 	CEGUI::RenderEffectManager singleton created (0x250b780)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'DefaultWindow' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'DefaultWindow' windows added. (0x251c620)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'DragContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'DragContainer' windows added. (0x251c8a0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'ScrolledContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'ScrolledContainer' windows added. (0x251ca40)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'ClippedContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'ClippedContainer' windows added. (0x251cc10)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/PushButton' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/PushButton' windows added. (0x251cdb0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/RadioButton' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/RadioButton' windows added. (0x251cf50)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Combobox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Combobox' windows added. (0x251d1e0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ComboDropList' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ComboDropList' windows added. (0x251d380)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Editbox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Editbox' windows added. (0x251d520)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/FrameWindow' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/FrameWindow' windows added. (0x251d6c0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ItemEntry' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ItemEntry' windows added. (0x251d860)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Listbox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Listbox' windows added. (0x251da00)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ListHeader' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ListHeader' windows added. (0x251dba0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ListHeaderSegment' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ListHeaderSegment' windows added. (0x251dd40)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Menubar' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Menubar' windows added. (0x251dee0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/PopupMenu' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/PopupMenu' windows added. (0x251e080)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/MenuItem' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/MenuItem' windows added. (0x251e220)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/MultiColumnList' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/MultiColumnList' windows added. (0x251e4d0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/MultiLineEditbox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/MultiLineEditbox' windows added. (0x251e670)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ProgressBar' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ProgressBar' windows added. (0x251e810)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ScrollablePane' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ScrollablePane' windows added. (0x251e9b0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Scrollbar' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Scrollbar' windows added. (0x251eb50)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Slider' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Slider' windows added. (0x251ecf0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Spinner' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Spinner' windows added. (0x251ee90)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/TabButton' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/TabButton' windows added. (0x251f030)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/TabControl' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/TabControl' windows added. (0x251f1d0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Thumb' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Thumb' windows added. (0x251f370)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Titlebar' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Titlebar' windows added. (0x251f510)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ToggleButton' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ToggleButton' windows added. (0x251f6b0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Tooltip' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Tooltip' windows added. (0x251f850)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/ItemListbox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/ItemListbox' windows added. (0x251f9f0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/GroupBox' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/GroupBox' windows added. (0x251fb90)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'CEGUI/Tree' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'CEGUI/Tree' windows added. (0x251fd30)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'LayoutCell' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'LayoutCell' windows added. (0x251e3c0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'HorizontalLayoutContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'HorizontalLayoutContainer' windows added. (0x25201c0)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'VerticalLayoutContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'VerticalLayoutContainer' windows added. (0x2520360)
+16/09/2014 22:45:07 (Std) 	Created WindowFactory for 'GridLayoutContainer' windows.
+16/09/2014 22:45:07 (Std) 	WindowFactory for 'GridLayoutContainer' windows added. (0x2520500)
+16/09/2014 22:45:07 (Std) 	CEGUI::System singleton created. (0x250da10)
+16/09/2014 22:45:07 (Std) 	---- CEGUI System initialisation completed ----
+16/09/2014 22:45:07 (Std) 	
+16/09/2014 22:45:07 (Error)	CEGUI::FileIOException in function 'virtual void CEGUI::DefaultResourceProvider::loadRawDataContainer(const CEGUI::String &, CEGUI::RawDataContainer &, const CEGUI::String &)' (/home/matthew/Desktop/cegui-0.8.4/cegui/src/DefaultResourceProvider.cpp:66) : ../datafiles/schemes/TaharezLook.scheme does not exist
