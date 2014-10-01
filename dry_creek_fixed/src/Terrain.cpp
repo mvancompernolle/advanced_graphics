@@ -766,6 +766,7 @@ void Terrain::useGrayScaleTexture(){
 	int baseRed = 50, baseGreen = 70, baseBlue = 15;
 	float stepRed = (float)(200 - baseRed)*.8, stepGreen = (float)(200 - baseGreen)*.8, stepBlue = (float)(200 - baseBlue)*.8;
 	float step;
+	
 	for(int i=0; i<height; i++){
 		data[i] = new float[width];
 	}

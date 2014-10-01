@@ -331,7 +331,7 @@ bool initialize(bool errorChecks, float scaleFactor, float terrainScale)
         return false;
     }
 
-    geoShader = shaderLoader.loadShaderFromFile(GL_GEOMETRY_SHADER, "../bin/shaders/geo.gs");
+    geoShader = shaderLoader.loadShaderFromFile(GL_GEOMETRY_SHADER, "../bin/shaders/geo2.gs");
     vertGrass = shaderLoader.loadShaderFromFile(GL_VERTEX_SHADER, "../bin/shaders/grass.vs");
     fragGrass = shaderLoader.loadShaderFromFile(GL_FRAGMENT_SHADER, "../bin/shaders/grass.fs");
 
