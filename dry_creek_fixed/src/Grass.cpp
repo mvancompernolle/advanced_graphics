@@ -85,14 +85,14 @@ void Grass::render(glm::mat4 pvMat){
                            GL_FLOAT,//type
                            GL_FALSE,//normalized?
                            sizeof(VertexGrass),//stride
-                           (void*) offsetof(VertexGrass, color));//offset
+                           (void*) (3*sizeof(float)));//offset
 
     glVertexAttribPointer( loc_offset,//location of attribute
                            1,//number of elements
                            GL_FLOAT,//type
                            GL_FALSE,//normalized?
                            sizeof(VertexGrass),//stride
-                           (void*) offsetof(VertexGrass, offset));//offset
+                           (void*) (6*sizeof(float)));//offset
 
     glDrawArrays(GL_POINTS, 0, vertices.size());
     

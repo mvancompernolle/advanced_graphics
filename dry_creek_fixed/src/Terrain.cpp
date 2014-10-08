@@ -612,7 +612,7 @@ void Terrain::renderDataZone(glm::mat4 projection, glm::mat4 view){
 	                       GL_FLOAT,//type
 	                       GL_FALSE,//normalized?
 	                       sizeof(VertexColor),//stride
-	                       (void*)offsetof(VertexColor,samplePos));//offset
+	                       (void*) (3*sizeof(float)));//offset
 
 	dataTexture->bind(GL_TEXTURE0);
 
@@ -653,7 +653,7 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
 	                       GL_FLOAT,//type
 	                       GL_FALSE,//normalized?
 	                       sizeof(VertexTexture),//stride
-	                       (void*)offsetof(VertexTexture,texture));//offset
+	                       (void*) (3*sizeof(float)));//offset
 
 	heightMapImage->bind(GL_TEXTURE0);
 
@@ -799,115 +799,58 @@ void Terrain::useGrayScaleTexture(){
 
 void Terrain::colorSurfaceWithShapes(){
 	int x,y;
-	//float minX, maxX, minY, maxY, angle, dist;
- 	//Vertex v1, v2, v3, v4;
+	float minX, maxX, minY, maxY, angle, dist;
+ 	Vertex v1, v2;
 	double xOrigin = planeVertices[0].position[0], yOrigin = planeVertices[0].position[2];
+
+	bool thick = true;
 
 	for(Shape* shape: shapes){
 		// loop through each vertex in the shape file and set its height to the corresponding terrain height
 		std::vector<Vertex> shapeVertices = shape->getShapeVertices();
+		std::vector<int> sizes = shape->getLineSizes();
+		int pos = 0;
 		double scale = shape->getScale();
 		glm::vec3 color = shape->getColor();
 		color[0] *= 255;
 		color[1] *= 255;
 		color[2] *= 255;
-		for(int i=0; i<shapeVertices.size(); i++){
-			x = (shapeVertices[i].position[0] - xOrigin)/(scale*geot[1]);
-			y = (shapeVertices[i].position[2] - yOrigin)/(scale*geot[1]);
-			heightMapImage->setPixelColor(x, y, color);
 
-			/*// get the 4 vertices of the rectangle
-			v1 = shapeVertices[i];
-			v2 = shapeVertices[i+1];
-			v3 = shapeVertices[i+2];
-			v4 = shapeVertices[i+5];
+		for(int s = 0; s < sizes.size(); s++){
+			//std::cout << sizes[s] << " s p " << pos << std::endl;
+			for(int i=0; i < sizes[s] -1; i++){
+				// get the 4 vertices of the rectangle
+				v1 = shapeVertices[pos];
+				v2 = shapeVertices[pos+1];
 
-			// get the min and max x and y values
-			minX = v1.position[0];
-			maxX = v1.position[0];
-			minY = v1.position[2];
-			maxY = v1.position[2];
+	    		angle = atan2(v2.position[2] - v1.position[2], v2.position[0] - v1.position[0]);
+	    		if(angle < 0){angle += 3.14*2; }
 
-			if(v2.position[0] < minX)
-				minX = v2.position[0];
-			if(v2.position[0] > maxX)
-				maxX = v2.position[0];
-			if(v2.position[2] < minY)
-				minY = v2.position[2];
-			if(v2.position[2] > maxY)
-				maxY = v2.position[2];
 
-			if(v3.position[0] < minX)
-				minX = v3.position[0];
-			if(v3.position[0] > maxX)
-				maxX = v3.position[0];
-			if(v3.position[2] < minY)
-				minY = v3.position[2];
-			if(v3.position[2] > maxY)
-				maxY = v3.position[2];
+	    		float x1 = (v1.position[0]- xOrigin)/(scale*geot[1]);
+	    		float y1 = (v1.position[2]- yOrigin)/(scale*geot[1]);
+	    		float x2 = (v2.position[0]- xOrigin)/(scale*geot[1]);
+	    		float y2 = (v2.position[2]- yOrigin)/(scale*geot[1]);
 
-			if(v4.position[0] < minX)
-				minX = v4.position[0];
-			if(v4.position[0] > maxX)
-				maxX = v4.position[0];
-			if(v4.position[2] < minY)
-				minY = v4.position[2];
-			if(v4.position[2] > maxY)
-				maxY = v4.position[2];
+	    		dist = sqrt(pow((x2 - x1),2) + pow((y2 - y1),2));
 
-			// convert values to actual sample coords
-			minX = (minX - xOrigin)/(scale*geot[1]);
-			maxX = (maxX - xOrigin)/(scale*geot[1]);
-			minY = (minY - yOrigin)/(scale*geot[1]);
-			maxY = (maxY - yOrigin)/(scale*geot[1]);
+	    		float dx = cos(angle);
+	    		float dy = sin(angle);
 
-    		angle = atan2(v2.position[2] - v1.position[2], v2.position[0] - v1.position[0]);
-    		dist = sqrt((v2.position[0] - v1.position[0])*(v2.position[0] - v1.position[0]) 
-    				+ (v2.position[2] - v1.position[2])*(v2.position[2] - v1.position[2]));
 
-			//std::cout << minX << " minx maxx " << maxX << "    " << minY << " minY maxY " << maxY  << "   angle: " << angle << " dist: " << dist << std::endl;
+				for(float x = x1, y = y1, d = 0; d < dist; x += dx, y+= dy, d++){
+					heightMapImage->setPixelColor((int)round(x), (int)round(y), color);
+					if(thick){
+						heightMapImage->setPixelColor((int)round(x)+1, (int)round(y), color);
+						heightMapImage->setPixelColor((int)round(x), (int)round(y)+1, color);
+					}
+				}	
 
-			// color vertices bettwen points
-			Vertex vert1, vert2, xDist;
-    		if(v1.position[0] > v2.position[0]){
-    			vert2 = v1;
-    			vert1 = v2;
-    			dist = -dist*cos(angle); 
-    		}
-    		else{
-    	    	vert1 = v1;
-    			vert2 = v2;
-    			dist = dist*cos(angle); 		
-    		}
-    		float xx = (vert1.position[0]- xOrigin)/(scale*geot[1]);
-    		float yy = (vert1.position[2]- yOrigin)/(scale*geot[1]);
-    		float incr = cos(angle);
-    		if(incr <= 0){ incr = -incr; }
-
-    		std::cout << xx << ' ' << xx + dist << ' ' << incr << std::endl;
-			for(float x = xx; x < xx + dist; x += incr){
-				heightMapImage->setPixelColor((int)x, (int)yy, color);
+				if(i == sizes[s] -2){
+					pos++;
+				}
+				pos++;
 			}
-
-			// color vertices bettwen points
-    		if(v3.position[0] > v4.position[0]){
-    			vert2 = v3;
-    			vert1 = v4;
-    			dist = -dist*cos(angle); 
-    		}
-    		else{
-    	    	vert1 = v3;
-    			vert2 = v4;
-    			dist = dist*cos(angle); 		
-    		}
-    		xx = (vert1.position[0]- xOrigin)/(scale*geot[1]);
-    		yy = (vert1.position[2]- yOrigin)/(scale*geot[1]);
-    		if(incr <= 0){ incr = -incr; }
-
-    		std::cout << xx << ' ' << xx + dist << ' ' << incr << std::endl;
-			for(float x = xx; x < xx + dist; x += incr){
-				heightMapImage->setPixelColor((int)x, (int)yy, color);
-			}*/
 		}
 	
 	}

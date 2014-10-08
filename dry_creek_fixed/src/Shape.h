@@ -30,7 +30,8 @@ public:
     void setColor(glm::vec3 color);
     glm::vec3 getColor();
     void setShapeVertices(std::vector<Vertex> verts);
-    std::vector<Vertex> getShapeVertices();
+    const std::vector<Vertex>& getShapeVertices();
+    const std::vector<int>& getLineSizes();
 
 private:
     fipImage textureImage;
@@ -41,6 +42,7 @@ private:
     double originX, originY, scale;
     float heightScale;
     std::vector<Vertex> shapeTriangles;
+    std::vector<int> lineSizes;
     GLuint VBO;
 };
 

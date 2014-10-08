@@ -55,23 +55,17 @@ bool Shape::init(const char* fileName, bool isBoundary){
         {
             //std::cout << "LINES!!!!" << std::endl;
             OGRLineString* ls= (OGRLineString*)poGeometry;
-            for(int i = 0; i < ls->getNumPoints()-1; i++ )
+            lineSizes.push_back(ls->getNumPoints());
+            for(int i = 0; i < ls->getNumPoints(); i++ )
             {
-            	OGRPoint p, p2;
+            	OGRPoint p;
             	ls->getPoint(i,&p);
-            	ls->getPoint(i+1,&p2);
 
             	x = originX -p.getX();
             	z = originY - p.getY();
-            	x2 = originX -p2.getX();
-            	z2 = originY - p2.getY();
             	vert.position[0] = -x * scale;
             	vert.position[2] = z * scale;
-            	vert2.position[0] = -x2 * scale;
-            	vert2.position[2] = z2 * scale;
-            	//printf( "%.3f,%.3f\n", vert.position[0], vert.position[2] );
-            	addLine(vert, vert2, scale*20);
-
+                shapeTriangles.push_back(vert);
             }
         }       
         OGRFeature::DestroyFeature( poFeature );
@@ -103,48 +97,6 @@ double Shape::getScale(){
     return scale;
 }
 
-void Shape::addLine(Vertex p1, Vertex p2, float thickness){
-	// http://stackoverflow.com/questions/101718/drawing-a-variable-width-line-in-opengl-no-gllinewidth
-	Vertex vert1, vert2, vert3, vert4;
-    float height = 1;
-    float angle = atan2(p2.position[2] - p1.position[2], p2.position[0] - p1.position[0]);
-    //std::cout << "angle " << angle << std::endl;
-    float yOffset = thickness / 2 * sin(angle);
-    float xOffset = thickness / 2 * cos(angle);
-    //std::cout << "sin " << yOffset << " cos " << xOffset << std::endl;
-
-    // create the 4 vertices
-    vert1.position[0] = p1.position[0] - yOffset;
-    vert1.position[1] = height;
-    vert1.position[2] = p1.position[2] + xOffset;
-
-    vert2.position[0] = p2.position[0] - yOffset;
-    vert2.position[1] = height;
-    vert2.position[2] = p2.position[2] + xOffset;
-
-    vert3.position[0] = p2.position[0] + yOffset;
-    vert3.position[1] = height;
-    vert3.position[2] = p2.position[2] - xOffset;
-
-    vert4.position[0] = p1.position[0] + yOffset;
-    vert4.position[1] = height;
-    vert4.position[2] = p1.position[2] - xOffset;
-
-    /*std::cout << "p1 x: " << p1.position[0] << " y: " << p1.position[2] << std::endl;
-    std::cout << "p2 x: " << p2.position[0] << " y: " << p2.position[2] << std::endl;
-    std::cout << "v1 x: " << vert1.position[0] << " y: " << vert1.position[2] << std::endl;
-    std::cout << "v2 x: " << vert2.position[0] << " y: " << vert2.position[2] << std::endl;
-    std::cout << "v3 x: " << vert3.position[0] << " y: " << vert3.position[2] << std::endl;
-    std::cout << "v4 x: " << vert4.position[0] << " y: " << vert4.position[2] << std::endl;*/
-
-    shapeTriangles.push_back(vert1);
-    shapeTriangles.push_back(vert2);
-    shapeTriangles.push_back(vert3);
-    shapeTriangles.push_back(vert1);
-    shapeTriangles.push_back(vert3);
-    shapeTriangles.push_back(vert4);
-}
-
 void Shape::render(glm::mat4 projection, glm::mat4 view){
     glm::mat4 mvp = projection * view * model;
 
@@ -167,7 +119,7 @@ void Shape::render(glm::mat4 projection, glm::mat4 view){
 	                       sizeof(Vertex),//stride
 	                       0);//offset
 
-    glDrawArrays(GL_TRIANGLES, 0, shapeTriangles.size());
+    glDrawArrays(GL_POINTS, 0, shapeTriangles.size());
     
     glDisableVertexAttribArray(loc_position);
     glUseProgram(0);
@@ -217,8 +169,12 @@ glm::vec3 Shape::getColor(){
     return color;
 }
 
-std::vector<Vertex> Shape::getShapeVertices(){
+const std::vector<Vertex>& Shape::getShapeVertices(){
     return shapeTriangles;
+}
+
+const std::vector<int>& Shape::getLineSizes(){
+    return lineSizes;
 }
 
 void Shape::setShapeVertices(std::vector<Vertex> verts){

@@ -398,12 +398,14 @@ bool initialize(bool errorChecks, float scaleFactor, float terrainScale)
     colorMap->create();
 
     // setup grass
-    grass = new Grass(grassProgram, .8, scaleFactor, terrainScale, glm::vec3(.1, .4, 0));
+    grass = new Grass(grassProgram, .1, scaleFactor, terrainScale, glm::vec3(.1, .4, 0));
     grass->sampleVertices(terrain[1]->getVertices());
 
     // setup shapes
     terrain[1]->addShape("streamDCEW/streamDCEW.shp", shapeProgram, glm::vec3(0, .5, 1), false);
     terrain[1]->addShape("boundDCEW/boundDCEW.shp", shapeProgram, glm::vec3(0, 0, 0), true);
+    terrain[1]->addShape("roadsAda/roadsAda.shp", shapeProgram, glm::vec3(.4, .3, .15), false);
+    terrain[1]->addShape("roadsBoise/roadsBoise.shp", shapeProgram, glm::vec3(.6, .5, .35), false);
     terrain[1]->placeShapesOnSurface();
     terrain[0]->setMaskTexture(colorMap);
     terrain[1]->useGrayScaleTexture();
@@ -437,6 +439,9 @@ bool initialize(bool errorChecks, float scaleFactor, float terrainScale)
     //enable depth testing
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+
+    glEnable(GL_PROGRAM_POINT_SIZE_EXT);
+    glPointSize(10);
 
     //glEnable(GL_BLEND);
     //glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
