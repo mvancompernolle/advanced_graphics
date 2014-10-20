@@ -251,18 +251,13 @@ void render(float scaleFactor){
 
     //premultiply the matrix for this example
     glm::mat4 view = camera->getView();
-    mvp = projection * view * model;
+    /*glm::mat4 view = glm::lookAt( glm::vec3(5, 5, zoomScale), //Eye Position
+                        glm::vec3(0.0, 0.0, 0.0), //Focus point
+                        glm::vec3(0.0, 1.0, 0.0)); //Positive Y is up*/
 
-    // enable the shader program
-    glUseProgram(grayscaleProgram);
-
-    //upload the matrix to the shader
-    glUniformMatrix4fv(loc_mvpmat, .2, GL_FALSE, glm::value_ptr(mvp));
-    glUniform1i(loc_sampler, 0);
-    glUniform1f(loc_scalar, scaleFactor);
 
     for(Terrain* t : terrain){
-        //t->render(projection, view);
+        t->render(projection, view);
     }
     grass->render(projection * view);
 
@@ -418,7 +413,7 @@ bool initialize(bool errorChecks, float scaleFactor, float terrainScale)
 
     // create sparkler
     sparkler = new Sparkler();
-    if(!sparkler->init(glm::vec3(0, -.5, 0)))
+    if(!sparkler->init(glm::vec3(0, 0, 0)))
         exit(1);
 
     //Now we set the locations of the attributes and uniforms

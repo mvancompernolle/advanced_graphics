@@ -15,12 +15,14 @@ public:
     void setCameraPos(const glm::vec3& Pos);
     void setColorTextureUnit(unsigned int textureUnit);
     void setBillboardSize(float billboardSize);
+    void setView(const glm::mat4 view);
     
  private:
     GLuint locMVP;
     GLuint locCameraPos;
     GLuint locColorMap;
     GLuint locSize;
+    GLuint locView;
 };
 
 

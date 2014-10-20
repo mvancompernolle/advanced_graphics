@@ -1,7 +1,7 @@
 #include "Sparkler.h"
 #include <iostream>
 
-#define MAX_PARTICLES 1000
+#define MAX_PARTICLES 5000
 
 #define PARTICLE_TYPE_LAUNCHER 0.0f
 #define PARTICLE_TYPE_SHELL 1.0f
@@ -52,8 +52,8 @@ bool Sparkler::init(const glm::vec3& pos){
 	updateProgram.enable();
 	updateProgram.setRandomTextureUnit(3);
 	updateProgram.setLauncherLifetime(100.0f);
-	updateProgram.setShellLifetime(1000.0f);
-	updateProgram.setSecondaryShellLifetime(1000.0f);
+	updateProgram.setShellLifetime(10000.0f);
+	updateProgram.setSecondaryShellLifetime(2000.0f);
 	randomTexture.initRandomTexture(1000);
 	randomTexture.bind(GL_TEXTURE3);
 
@@ -63,7 +63,7 @@ bool Sparkler::init(const glm::vec3& pos){
 
 	renderProgram.enable();
 	renderProgram.setColorTextureUnit(0);
-	renderProgram.setBillboardSize(0.02f);
+	renderProgram.setBillboardSize(1.0f);
 
 	texture = new Texture(GL_TEXTURE_2D, "fireworks_red.jpg");
 	if(!texture->create())
@@ -114,7 +114,7 @@ void Sparkler::updateParticles(int dt){
 
 void Sparkler::renderParticles(glm::mat4 proj, glm::mat4 view, glm::vec3 camPos){
 	renderProgram.enable();
-	renderProgram.setMVP(proj * view);
+	renderProgram.setMVP(proj * view * model);
 	renderProgram.setCameraPos(camPos);
 	texture->bind(GL_TEXTURE0);
 

@@ -22,6 +22,7 @@ bool SparklerRenderProgram::init(){
 
     locMVP = getUniformLocation("mvp");
     locCameraPos = getUniformLocation("cameraPos");
+    //locView = getUniformLocation("view");
     locColorMap = getUniformLocation("colorMap");
     locSize = getUniformLocation("size");
 
@@ -29,7 +30,7 @@ bool SparklerRenderProgram::init(){
 }
 
 void SparklerRenderProgram::setMVP(const glm::mat4 MVP){
-    glUniformMatrix4fv(locMVP, 1, GL_TRUE, glm::value_ptr(MVP));    
+    glUniformMatrix4fv(locMVP, 1, GL_FALSE, glm::value_ptr(MVP));    
 }
 
 void SparklerRenderProgram::setCameraPos(const glm::vec3& pos){
@@ -42,4 +43,8 @@ void SparklerRenderProgram::setColorTextureUnit(unsigned int textureUnit){
 
 void SparklerRenderProgram::setBillboardSize(float billboardSize){
     glUniform1f(locSize, billboardSize);
+}
+
+void SparklerRenderProgram::setView(const glm::mat4 view){
+   // glUniformMatrix4fv(locView, 1, GL_FALSE, glm::value_ptr(view));    
 }

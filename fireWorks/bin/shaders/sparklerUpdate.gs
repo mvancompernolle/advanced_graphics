@@ -42,7 +42,7 @@ void main()
             pos1 = pos0[0];                                               
             vec3 Dir = GetRandomDir(time/1000.0);                                  
             Dir.y = max(Dir.y, 0.5);                                                
-            vel1 = normalize(Dir);                                      
+            vel1 = normalize(Dir) * 10;                                      
             age1 = 0.0;                                                             
             EmitVertex();                                                           
             EndPrimitive();                                                         
@@ -77,7 +77,7 @@ void main()
                      type1 = PARTICLE_TYPE_SECONDARY_SHELL;                         
                      pos1 = pos0[0];                                      
                      vec3 Dir = GetRandomDir((time + i)/1000.0);                   
-                     vel1 = normalize(Dir) / 2.0;                             
+                     vel1 = normalize(Dir) * 10;                             
                      age1 = 0.0f;                                                   
                      EmitVertex();                                                  
                      EndPrimitive();                                                
