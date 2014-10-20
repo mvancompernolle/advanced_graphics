@@ -1,0 +1,26 @@
+# Linux
+CC=clang++
+LIBS= -lSDL2 -lGLEW -lGL -lfreeimageplus
+
+# Compiler flags
+CXXFLAGS= -g -Wall -std=c++0x
+
+OBJ= ShaderLoader.o Texture.o Sparkler.o
+
+all: ../bin/sparkler
+
+../bin/sparkler: ../src/main.cpp $(OBJ)
+	$(CC) $(CXXFLAGS) ../src/main.cpp ../bin/sparkler $(OBJ) $(LIBS)
+
+ShaderLoader.o: ../src/ShaderLoader.h ../src/ShaderLoader.cpp
+	$(CC) $(CXXFLAGS) -c ../src/ShaderLoader.cpp
+
+Texture.o: ../src/Texture.h ../src/Texture.cpp
+	$(CC) $(CXXFLAGS) -c ../src/Texture.cpp
+
+Sparkler.o: ../src/Sparkler.h ../src/Sparkler.cpp
+	$(CC) $(CXXFLAGS) -c ../src/Sparkler.cpp
+
+clean:
+	rm -f *.o ../bin/Sparkler $(RM)
+
