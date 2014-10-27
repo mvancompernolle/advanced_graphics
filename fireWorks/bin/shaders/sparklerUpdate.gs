@@ -2,7 +2,7 @@
                                                                                     
 layout(points) in;                                                                  
 layout(points) out;                                                                 
-layout(max_vertices = 500) out;                                                      
+layout(max_vertices = 120) out;                                                      
                                                                                     
 in float type0[];                                                                   
 in vec3 pos0[];                                                                
@@ -42,7 +42,7 @@ void main()
             pos1 = pos0[0];                                               
             vec3 Dir = GetRandomDir(time/1000.0);                                  
             Dir.y = max(Dir.y, 0.5);                                                
-            vel1 = normalize(Dir) * 10;                                      
+            vel1 = normalize(Dir) * 150;                                      
             age1 = 0.0;                                                             
             EmitVertex();                                                           
             EndPrimitive();                                                         
@@ -73,11 +73,11 @@ void main()
 	            EndPrimitive();                                                     
 	        }                                                                       
             else {                                                                  
-                for (int i = 0 ; i < 75 ; i++) {                                    
+                for (int i = 0 ; i < 120 ; i++) {                                    
                      type1 = PARTICLE_TYPE_SECONDARY_SHELL;                         
                      pos1 = pos0[0];                                      
                      vec3 Dir = GetRandomDir((time + i)/1000.0);                   
-                     vel1 = normalize(Dir) * 10;                             
+                     vel1 = normalize(Dir) * 50;                             
                      age1 = 0.0f;                                                   
                      EmitVertex();                                                  
                      EndPrimitive();                                                

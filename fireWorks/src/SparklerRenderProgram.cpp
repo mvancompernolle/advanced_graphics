@@ -22,7 +22,6 @@ bool SparklerRenderProgram::init(){
 
     locMVP = getUniformLocation("mvp");
     locCameraPos = getUniformLocation("cameraPos");
-    //locView = getUniformLocation("view");
     locColorMap = getUniformLocation("colorMap");
     locSize = getUniformLocation("size");
 

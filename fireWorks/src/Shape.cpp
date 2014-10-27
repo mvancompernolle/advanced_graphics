@@ -9,7 +9,7 @@ Shape::Shape(){
 
 bool Shape::init(const char* fileName, bool isBoundary){
 	Vertex vert, vert2;
-	double x, x2, z, z2;
+	double x, z;
 	vert.position[1] = 0;
 	vert2.position[1] = 0;
 	ds = OGRSFDriverRegistrar::Open( fileName, FALSE );

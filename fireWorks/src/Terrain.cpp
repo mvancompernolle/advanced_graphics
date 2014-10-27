@@ -798,8 +798,7 @@ void Terrain::useGrayScaleTexture(){
 }
 
 void Terrain::colorSurfaceWithShapes(){
-	int x,y;
-	float minX, maxX, minY, maxY, angle, dist;
+	float angle, dist;
  	Vertex v1, v2;
 	double xOrigin = planeVertices[0].position[0], yOrigin = planeVertices[0].position[2];
 

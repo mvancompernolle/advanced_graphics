@@ -22,7 +22,6 @@ public:
     GLuint locCameraPos;
     GLuint locColorMap;
     GLuint locSize;
-    GLuint locView;
 };
 
 
