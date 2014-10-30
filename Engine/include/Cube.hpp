@@ -15,12 +15,9 @@ class Cube : public Entity{
 public:
 	Cube();
 	~Cube();
+	bool init();
 	void tick(float dt);
 	void render(glm::mat4 projection, glm::mat4 view);
-
-protected:
-
-	bool init();
 
 private:
 

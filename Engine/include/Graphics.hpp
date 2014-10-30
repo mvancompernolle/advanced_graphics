@@ -39,6 +39,10 @@ public:
 	void getWindowSize(int &w, int &h) const;
 	void setClearColor(glm::vec3);
 
+	void increaseLightAngle();
+	void decreaseLightAngle();
+	glm::vec3 getLightDirection() const;
+
 	// public variables
 	glm::mat4 view, projection;
 	Camera *camera;
@@ -49,7 +53,8 @@ private:
 	Engine* engine;
 	SDL_Window *window;
 	SDL_GLContext gl_context;
-	Cube *cube;
+	float lightAngle;
+	glm::vec3 lightDir;
 };
 
 } // end Vancom namespace

@@ -9,7 +9,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> //Makes passing matrices to shaders easier
 #include <ogr_spatialref.h>
-#include "ogr_srs_api.h"
+#include <ogr_srs_api.h>
 #include <random>
 
 // REFERENCE: ogldev.atspace.co.uk/www/tutorial22/tutorial22.html

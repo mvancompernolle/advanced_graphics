@@ -1,12 +1,24 @@
 #include "Graphics.hpp"
-#include "Engine.hpp"
-#include "Camera.hpp"
 
 #include <iostream>
+
+#include <ogrsf_frmts.h>
+#include <ogr_spatialref.h>
+#include <ogr_srs_api.h>
+
+#include "gdal_priv.h"
+#include "cpl_conv.h"
+
+#include "Engine.hpp"
+#include "Camera.hpp"
+#include "EntityManager.hpp"
 
 using namespace Vancom;
 
 Graphics::Graphics(Engine *engine) : engine(engine){
+
+    // initialize light angle for direction lights
+    lightAngle = 0.0f;
 
 	camera = new Camera(engine);
 }
@@ -49,6 +61,10 @@ void Graphics::init(){
         exit(1);
     }
 
+    // setup gdal
+    GDALAllRegister();
+    OGRRegisterAll();
+
     // set clear color and culling
     glClearColor(0.0, 0.0, 0.0, 1);
     glEnable(GL_DEPTH_TEST);
@@ -56,9 +72,6 @@ void Graphics::init(){
 
     updateView();
     windowResized();
-
-    // initialize 
-   	cube = new Cube();
 }
 
 void Graphics::tick(float dt){
@@ -72,8 +85,8 @@ void Graphics::render(){
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// tick all graphical entities
-	cube->render(projection, view);
+    for(Entity *entity : engine->entityManager->entities)
+        entity->render(projection, view);
 
 	SDL_GL_SwapWindow(window);
 }
@@ -112,4 +125,32 @@ void Graphics::getWindowSize(int &w, int &h) const{
 void Graphics::setClearColor(glm::vec3 color){
 
 	glClearColor(color.x, color.y, color.z, 1);
+}
+
+void Graphics::increaseLightAngle(){
+
+
+    lightAngle -= 0.01;
+
+    float y = -cos(lightAngle + 1.57);
+    float x = -sin(lightAngle + 1.57);
+
+    lightDir[1] = y;
+    lightDir[0] = x;
+    
+}
+
+void Graphics::decreaseLightAngle(){
+
+    lightAngle += 0.01;
+
+    float y = -cos(lightAngle + 1.57);
+    float x = -sin(lightAngle + 1.57);
+
+    lightDir[1] = y;
+    lightDir[0] = x;
+    
+}
+glm::vec3 Graphics::getLightDirection() const{
+    return lightDir;
 }

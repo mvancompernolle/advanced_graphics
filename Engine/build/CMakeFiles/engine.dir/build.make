@@ -187,9 +187,32 @@ CMakeFiles/engine.dir/src/DefualtProgram.cpp.o.provides: CMakeFiles/engine.dir/s
 
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/DefualtProgram.cpp.o
 
+CMakeFiles/engine.dir/src/Terrain.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../src/Terrain.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Terrain.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Terrain.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp
+
+CMakeFiles/engine.dir/src/Terrain.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/Terrain.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp > CMakeFiles/engine.dir/src/Terrain.cpp.i
+
+CMakeFiles/engine.dir/src/Terrain.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/Terrain.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp -o CMakeFiles/engine.dir/src/Terrain.cpp.s
+
+CMakeFiles/engine.dir/src/Terrain.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/Terrain.cpp.o.requires
+
+CMakeFiles/engine.dir/src/Terrain.cpp.o.provides: CMakeFiles/engine.dir/src/Terrain.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Terrain.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/Terrain.cpp.o.provides
+
+CMakeFiles/engine.dir/src/Terrain.cpp.o.provides.build: CMakeFiles/engine.dir/src/Terrain.cpp.o
+
 CMakeFiles/engine.dir/src/Input.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Input.cpp.o: ../src/Input.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Input.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Input.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Input.cpp
 
@@ -212,7 +235,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o.provides.build: CMakeFiles/engine.dir/src/
 
 CMakeFiles/engine.dir/src/Entity.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Entity.cpp.o: ../src/Entity.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Entity.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Entity.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Entity.cpp
 
@@ -233,9 +256,55 @@ CMakeFiles/engine.dir/src/Entity.cpp.o.provides: CMakeFiles/engine.dir/src/Entit
 
 CMakeFiles/engine.dir/src/Entity.cpp.o.provides.build: CMakeFiles/engine.dir/src/Entity.cpp.o
 
+CMakeFiles/engine.dir/src/Texture.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/Texture.cpp.o: ../src/Texture.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Texture.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Texture.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Texture.cpp
+
+CMakeFiles/engine.dir/src/Texture.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/Texture.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/Texture.cpp > CMakeFiles/engine.dir/src/Texture.cpp.i
+
+CMakeFiles/engine.dir/src/Texture.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/Texture.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/Texture.cpp -o CMakeFiles/engine.dir/src/Texture.cpp.s
+
+CMakeFiles/engine.dir/src/Texture.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/Texture.cpp.o.requires
+
+CMakeFiles/engine.dir/src/Texture.cpp.o.provides: CMakeFiles/engine.dir/src/Texture.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Texture.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/Texture.cpp.o.provides
+
+CMakeFiles/engine.dir/src/Texture.cpp.o.provides.build: CMakeFiles/engine.dir/src/Texture.cpp.o
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.o: ../src/TerrainProgram.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/TerrainProgram.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/TerrainProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/TerrainProgram.cpp
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/TerrainProgram.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/TerrainProgram.cpp > CMakeFiles/engine.dir/src/TerrainProgram.cpp.i
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/TerrainProgram.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/TerrainProgram.cpp -o CMakeFiles/engine.dir/src/TerrainProgram.cpp.s
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.requires
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.provides: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.provides
+
+CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o
+
 CMakeFiles/engine.dir/src/Graphics.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../src/Graphics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Graphics.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Graphics.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Graphics.cpp
 
@@ -256,9 +325,32 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o.provides: CMakeFiles/engine.dir/src/Gra
 
 CMakeFiles/engine.dir/src/Graphics.cpp.o.provides.build: CMakeFiles/engine.dir/src/Graphics.cpp.o
 
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../src/EntityManager.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/EntityManager.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/EntityManager.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.cpp
+
+CMakeFiles/engine.dir/src/EntityManager.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/EntityManager.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.cpp > CMakeFiles/engine.dir/src/EntityManager.cpp.i
+
+CMakeFiles/engine.dir/src/EntityManager.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/EntityManager.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.cpp -o CMakeFiles/engine.dir/src/EntityManager.cpp.s
+
+CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
+
+CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides: CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides
+
+CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides.build: CMakeFiles/engine.dir/src/EntityManager.cpp.o
+
 CMakeFiles/engine.dir/src/Clock.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Clock.cpp.o: ../src/Clock.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Clock.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Clock.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Clock.cpp
 
@@ -287,9 +379,13 @@ engine_OBJECTS = \
 "CMakeFiles/engine.dir/src/ShaderProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/main.cpp.o" \
 "CMakeFiles/engine.dir/src/DefualtProgram.cpp.o" \
+"CMakeFiles/engine.dir/src/Terrain.cpp.o" \
 "CMakeFiles/engine.dir/src/Input.cpp.o" \
 "CMakeFiles/engine.dir/src/Entity.cpp.o" \
+"CMakeFiles/engine.dir/src/Texture.cpp.o" \
+"CMakeFiles/engine.dir/src/TerrainProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/Graphics.cpp.o" \
+"CMakeFiles/engine.dir/src/EntityManager.cpp.o" \
 "CMakeFiles/engine.dir/src/Clock.cpp.o"
 
 # External object files for target engine
@@ -301,12 +397,15 @@ engine: CMakeFiles/engine.dir/src/Cube.cpp.o
 engine: CMakeFiles/engine.dir/src/ShaderProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/main.cpp.o
 engine: CMakeFiles/engine.dir/src/DefualtProgram.cpp.o
+engine: CMakeFiles/engine.dir/src/Terrain.cpp.o
 engine: CMakeFiles/engine.dir/src/Input.cpp.o
 engine: CMakeFiles/engine.dir/src/Entity.cpp.o
+engine: CMakeFiles/engine.dir/src/Texture.cpp.o
+engine: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/Graphics.cpp.o
+engine: CMakeFiles/engine.dir/src/EntityManager.cpp.o
 engine: CMakeFiles/engine.dir/src/Clock.cpp.o
 engine: CMakeFiles/engine.dir/build.make
-engine: /usr/lib/x86_64-linux-gnu/libboost_program_options.so
 engine: CMakeFiles/engine.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable engine"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/engine.dir/link.txt --verbose=$(VERBOSE)
@@ -321,9 +420,13 @@ CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Cube.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/ShaderProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/main.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/DefualtProgram.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Terrain.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Input.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Entity.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Texture.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Graphics.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Clock.cpp.o.requires
 .PHONY : CMakeFiles/engine.dir/requires
 

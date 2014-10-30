@@ -186,4 +186,17 @@ void Input::handleMovementKeys(){
     if(keysPressed[SDLK_f])
         engine->graphics->camera->moveDown();
 
+    if(keysPressed[SDLK_LEFT]){
+
+        // decrement directional light angle in graphics
+        engine->graphics->increaseLightAngle();
+
+    }
+
+    if(keysPressed[SDLK_RIGHT]){
+
+        // increment direction light angle in graphics
+        engine->graphics->decreaseLightAngle();
+    }
+
 }

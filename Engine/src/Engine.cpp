@@ -1,10 +1,12 @@
 #include "Engine.hpp"
-#include "Clock.hpp"
-#include "Graphics.hpp"
-#include "Input.hpp"
 
 #include <SDL.h>
 #include <iostream>
+
+#include "Clock.hpp"
+#include "Graphics.hpp"
+#include "Input.hpp"
+#include "EntityManager.hpp"
 
 using namespace Vancom;
 
@@ -31,6 +33,10 @@ void Engine::init(){
     // create and init input component
     input = new Input(this);
     input->init();
+
+    // create and init entity manager component
+    entityManager = new EntityManager(this);
+    entityManager->init();
 }
 
 int Engine::run(){

@@ -15,16 +15,14 @@ public:
 
 	// public functions
 	Entity();
-	~Entity();
+	virtual ~Entity();
+	virtual bool init() = 0;
 	virtual void tick(float dt) = 0;
 	virtual void render(glm::mat4 projection, glm::mat4 view) = 0;
 	void scale(float scale);
 
 protected:
-
-	// protected functions
-	virtual bool init() = 0;
-
+	
 	// protected variables
 	GLuint vao, vbo;
 	glm::mat4 model;

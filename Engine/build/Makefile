@@ -255,6 +255,30 @@ src/Entity.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Entity.cpp.s
 .PHONY : src/Entity.cpp.s
 
+src/EntityManager.o: src/EntityManager.cpp.o
+.PHONY : src/EntityManager.o
+
+# target to build an object file
+src/EntityManager.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.o
+.PHONY : src/EntityManager.cpp.o
+
+src/EntityManager.i: src/EntityManager.cpp.i
+.PHONY : src/EntityManager.i
+
+# target to preprocess a source file
+src/EntityManager.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.i
+.PHONY : src/EntityManager.cpp.i
+
+src/EntityManager.s: src/EntityManager.cpp.s
+.PHONY : src/EntityManager.s
+
+# target to generate assembly for a file
+src/EntityManager.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
+.PHONY : src/EntityManager.cpp.s
+
 src/Graphics.o: src/Graphics.cpp.o
 .PHONY : src/Graphics.o
 
@@ -327,6 +351,78 @@ src/ShaderProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShaderProgram.cpp.s
 .PHONY : src/ShaderProgram.cpp.s
 
+src/Terrain.o: src/Terrain.cpp.o
+.PHONY : src/Terrain.o
+
+# target to build an object file
+src/Terrain.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Terrain.cpp.o
+.PHONY : src/Terrain.cpp.o
+
+src/Terrain.i: src/Terrain.cpp.i
+.PHONY : src/Terrain.i
+
+# target to preprocess a source file
+src/Terrain.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Terrain.cpp.i
+.PHONY : src/Terrain.cpp.i
+
+src/Terrain.s: src/Terrain.cpp.s
+.PHONY : src/Terrain.s
+
+# target to generate assembly for a file
+src/Terrain.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Terrain.cpp.s
+.PHONY : src/Terrain.cpp.s
+
+src/TerrainProgram.o: src/TerrainProgram.cpp.o
+.PHONY : src/TerrainProgram.o
+
+# target to build an object file
+src/TerrainProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainProgram.cpp.o
+.PHONY : src/TerrainProgram.cpp.o
+
+src/TerrainProgram.i: src/TerrainProgram.cpp.i
+.PHONY : src/TerrainProgram.i
+
+# target to preprocess a source file
+src/TerrainProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainProgram.cpp.i
+.PHONY : src/TerrainProgram.cpp.i
+
+src/TerrainProgram.s: src/TerrainProgram.cpp.s
+.PHONY : src/TerrainProgram.s
+
+# target to generate assembly for a file
+src/TerrainProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainProgram.cpp.s
+.PHONY : src/TerrainProgram.cpp.s
+
+src/Texture.o: src/Texture.cpp.o
+.PHONY : src/Texture.o
+
+# target to build an object file
+src/Texture.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Texture.cpp.o
+.PHONY : src/Texture.cpp.o
+
+src/Texture.i: src/Texture.cpp.i
+.PHONY : src/Texture.i
+
+# target to preprocess a source file
+src/Texture.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Texture.cpp.i
+.PHONY : src/Texture.cpp.i
+
+src/Texture.s: src/Texture.cpp.s
+.PHONY : src/Texture.s
+
+# target to generate assembly for a file
+src/Texture.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Texture.cpp.s
+.PHONY : src/Texture.cpp.s
+
 src/main.o: src/main.cpp.o
 .PHONY : src/main.o
 
@@ -378,6 +474,9 @@ help:
 	@echo "... src/Entity.o"
 	@echo "... src/Entity.i"
 	@echo "... src/Entity.s"
+	@echo "... src/EntityManager.o"
+	@echo "... src/EntityManager.i"
+	@echo "... src/EntityManager.s"
 	@echo "... src/Graphics.o"
 	@echo "... src/Graphics.i"
 	@echo "... src/Graphics.s"
@@ -387,6 +486,15 @@ help:
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"
+	@echo "... src/Terrain.o"
+	@echo "... src/Terrain.i"
+	@echo "... src/Terrain.s"
+	@echo "... src/TerrainProgram.o"
+	@echo "... src/TerrainProgram.i"
+	@echo "... src/TerrainProgram.s"
+	@echo "... src/Texture.o"
+	@echo "... src/Texture.i"
+	@echo "... src/Texture.s"
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"

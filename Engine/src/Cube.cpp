@@ -3,7 +3,6 @@
 using namespace Vancom;
 
 Cube::Cube(){
-	init();
 }
 
 Cube::~Cube(){

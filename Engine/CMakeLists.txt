@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 2.8)
 project(engine)
 
 include_directories("include")
+include_directories("/usr/include/gdal")
 
 aux_source_directory(src Engine_src)
 set(Engine_src ${Engine_src}) #${gui_src})
@@ -25,13 +26,10 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     include(FindPkgConfig)
     pkg_search_module(SDL2 REQUIRED sdl2)
     pkg_search_module(GLEW REQUIRED glew)
-    #pkg_search_module(GDAL REQUIRED gdal)
-    #find_package(Boost REQUIRED COMPONENTS program_options python)
-    find_package(Boost REQUIRED COMPONENTS program_options)
-    #pkg_search_module(PYTHON REQUIRED python2)
-    include_directories(${SDL2_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS} ${Boost_INCLUDE_DIRS})
 
-    set(LIBRARIES_TO_LINK ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${Boost_LIBRARIES} "freeimageplus")
+    include_directories(${SDL2_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
+
+    set(LIBRARIES_TO_LINK ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} "gdal" "freeimageplus")
 
 else()
     message(STATUS "Windows OS Detected")
