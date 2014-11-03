@@ -111,6 +111,54 @@ engine/fast:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/build
 .PHONY : engine/fast
 
+src/BorderRenderProgram.o: src/BorderRenderProgram.cpp.o
+.PHONY : src/BorderRenderProgram.o
+
+# target to build an object file
+src/BorderRenderProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o
+.PHONY : src/BorderRenderProgram.cpp.o
+
+src/BorderRenderProgram.i: src/BorderRenderProgram.cpp.i
+.PHONY : src/BorderRenderProgram.i
+
+# target to preprocess a source file
+src/BorderRenderProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.i
+.PHONY : src/BorderRenderProgram.cpp.i
+
+src/BorderRenderProgram.s: src/BorderRenderProgram.cpp.s
+.PHONY : src/BorderRenderProgram.s
+
+# target to generate assembly for a file
+src/BorderRenderProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.s
+.PHONY : src/BorderRenderProgram.cpp.s
+
+src/BorderUpdateProgram.o: src/BorderUpdateProgram.cpp.o
+.PHONY : src/BorderUpdateProgram.o
+
+# target to build an object file
+src/BorderUpdateProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o
+.PHONY : src/BorderUpdateProgram.cpp.o
+
+src/BorderUpdateProgram.i: src/BorderUpdateProgram.cpp.i
+.PHONY : src/BorderUpdateProgram.i
+
+# target to preprocess a source file
+src/BorderUpdateProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.i
+.PHONY : src/BorderUpdateProgram.cpp.i
+
+src/BorderUpdateProgram.s: src/BorderUpdateProgram.cpp.s
+.PHONY : src/BorderUpdateProgram.s
+
+# target to generate assembly for a file
+src/BorderUpdateProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.s
+.PHONY : src/BorderUpdateProgram.cpp.s
+
 src/Camera.o: src/Camera.cpp.o
 .PHONY : src/Camera.o
 
@@ -279,6 +327,30 @@ src/EntityManager.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
 .PHONY : src/EntityManager.cpp.s
 
+src/Gbuffer.o: src/Gbuffer.cpp.o
+.PHONY : src/Gbuffer.o
+
+# target to build an object file
+src/Gbuffer.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Gbuffer.cpp.o
+.PHONY : src/Gbuffer.cpp.o
+
+src/Gbuffer.i: src/Gbuffer.cpp.i
+.PHONY : src/Gbuffer.i
+
+# target to preprocess a source file
+src/Gbuffer.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Gbuffer.cpp.i
+.PHONY : src/Gbuffer.cpp.i
+
+src/Gbuffer.s: src/Gbuffer.cpp.s
+.PHONY : src/Gbuffer.s
+
+# target to generate assembly for a file
+src/Gbuffer.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Gbuffer.cpp.s
+.PHONY : src/Gbuffer.cpp.s
+
 src/Graphics.o: src/Graphics.cpp.o
 .PHONY : src/Graphics.o
 
@@ -375,6 +447,30 @@ src/Terrain.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Terrain.cpp.s
 .PHONY : src/Terrain.cpp.s
 
+src/TerrainBorder.o: src/TerrainBorder.cpp.o
+.PHONY : src/TerrainBorder.o
+
+# target to build an object file
+src/TerrainBorder.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
+.PHONY : src/TerrainBorder.cpp.o
+
+src/TerrainBorder.i: src/TerrainBorder.cpp.i
+.PHONY : src/TerrainBorder.i
+
+# target to preprocess a source file
+src/TerrainBorder.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainBorder.cpp.i
+.PHONY : src/TerrainBorder.cpp.i
+
+src/TerrainBorder.s: src/TerrainBorder.cpp.s
+.PHONY : src/TerrainBorder.s
+
+# target to generate assembly for a file
+src/TerrainBorder.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/TerrainBorder.cpp.s
+.PHONY : src/TerrainBorder.cpp.s
+
 src/TerrainProgram.o: src/TerrainProgram.cpp.o
 .PHONY : src/TerrainProgram.o
 
@@ -456,6 +552,12 @@ help:
 	@echo "... edit_cache"
 	@echo "... engine"
 	@echo "... rebuild_cache"
+	@echo "... src/BorderRenderProgram.o"
+	@echo "... src/BorderRenderProgram.i"
+	@echo "... src/BorderRenderProgram.s"
+	@echo "... src/BorderUpdateProgram.o"
+	@echo "... src/BorderUpdateProgram.i"
+	@echo "... src/BorderUpdateProgram.s"
 	@echo "... src/Camera.o"
 	@echo "... src/Camera.i"
 	@echo "... src/Camera.s"
@@ -477,6 +579,9 @@ help:
 	@echo "... src/EntityManager.o"
 	@echo "... src/EntityManager.i"
 	@echo "... src/EntityManager.s"
+	@echo "... src/Gbuffer.o"
+	@echo "... src/Gbuffer.i"
+	@echo "... src/Gbuffer.s"
 	@echo "... src/Graphics.o"
 	@echo "... src/Graphics.i"
 	@echo "... src/Graphics.s"
@@ -489,6 +594,9 @@ help:
 	@echo "... src/Terrain.o"
 	@echo "... src/Terrain.i"
 	@echo "... src/Terrain.s"
+	@echo "... src/TerrainBorder.o"
+	@echo "... src/TerrainBorder.i"
+	@echo "... src/TerrainBorder.s"
 	@echo "... src/TerrainProgram.o"
 	@echo "... src/TerrainProgram.i"
 	@echo "... src/TerrainProgram.s"

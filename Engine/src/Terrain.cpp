@@ -4,6 +4,7 @@
 
 #include "Engine.hpp"
 #include "Graphics.hpp"
+#include "Camera.hpp"
 
 using namespace Vancom;
 
@@ -28,7 +29,7 @@ bool Terrain::init(){
 	program.enable();
 
 	// set initial light direct
-	program.setLightDirection(glm::vec3(0, -1, 0));
+	program.setLightDirection(engine->graphics->getLightDirection());
 
 	// get gdal data set from file
 	gdalDataSet = (GDALDataset *) GDALOpen( fileName, GA_ReadOnly );
@@ -205,8 +206,6 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
 	// enable program and bind vao, vbo, and vio
 	program.enable();
 	glBindVertexArray(vao);
-	glBindBuffer(GL_ARRAY_BUFFER, vbo);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
 
 	// enable attributes
 	glEnableVertexAttribArray(program.locPos);
@@ -216,7 +215,9 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
 	// set uniforms
 	glm::mat4 mvp = projection * view * model;
 	program.setMVP(mvp);
+	program.setModelPos(model);
 	program.setLightDirection(engine->graphics->getLightDirection());
+	program.setSpotLightPosition(engine->graphics->camera->getPos());
 
 	// bind ground texture
 	groundTexture->bind(GL_TEXTURE0);
@@ -228,4 +229,10 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
 	glDisableVertexAttribArray(program.locPos);
 	glDisableVertexAttribArray(program.locTex);
 	glDisableVertexAttribArray(program.locNormal);
+}
+
+void Terrain::getDimensions(int& width, int& height) const{
+	
+	width = this->width;
+	height = this->height;
 }

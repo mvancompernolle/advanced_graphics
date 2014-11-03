@@ -1,9 +1,12 @@
 #include "EntityManager.hpp"
 
+#include <iostream>
+
 #include "Engine.hpp"
 #include "Cube.hpp"
 #include "Entity.hpp"
 #include "Terrain.hpp"
+#include "TerrainBorder.hpp"
 
 using namespace Vancom;
 
@@ -26,6 +29,14 @@ void EntityManager::init(){
 	terrain->init();
 	terrain->setTexture(GL_TEXTURE_2D, "../assets/terrain_dirt.jpg");
 	entities.push_back(terrain);
+
+	// add terrain border
+	int width, height;
+	TerrainBorder* border = new TerrainBorder(engine, 0.1f);
+	terrain->getDimensions(width, height);
+	border->init(100, glm::vec2(-width/2, height/2), glm::vec2(width/2, height/2), glm::vec2(-width/2, -height/2), 
+		glm::vec2(width/2, -height/2));
+	entities.push_back(border);
 }
 
 void EntityManager::tick(float dt){
