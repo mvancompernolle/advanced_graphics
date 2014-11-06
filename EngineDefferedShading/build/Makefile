@@ -255,6 +255,30 @@ src/DefualtProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DefualtProgram.cpp.s
 .PHONY : src/DefualtProgram.cpp.s
 
+src/DirectionalLightDSProgram.o: src/DirectionalLightDSProgram.cpp.o
+.PHONY : src/DirectionalLightDSProgram.o
+
+# target to build an object file
+src/DirectionalLightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o
+.PHONY : src/DirectionalLightDSProgram.cpp.o
+
+src/DirectionalLightDSProgram.i: src/DirectionalLightDSProgram.cpp.i
+.PHONY : src/DirectionalLightDSProgram.i
+
+# target to preprocess a source file
+src/DirectionalLightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.i
+.PHONY : src/DirectionalLightDSProgram.cpp.i
+
+src/DirectionalLightDSProgram.s: src/DirectionalLightDSProgram.cpp.s
+.PHONY : src/DirectionalLightDSProgram.s
+
+# target to generate assembly for a file
+src/DirectionalLightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.s
+.PHONY : src/DirectionalLightDSProgram.cpp.s
+
 src/Engine.o: src/Engine.cpp.o
 .PHONY : src/Engine.o
 
@@ -398,6 +422,54 @@ src/Input.s: src/Input.cpp.s
 src/Input.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Input.cpp.s
 .PHONY : src/Input.cpp.s
+
+src/LightDSProgram.o: src/LightDSProgram.cpp.o
+.PHONY : src/LightDSProgram.o
+
+# target to build an object file
+src/LightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
+.PHONY : src/LightDSProgram.cpp.o
+
+src/LightDSProgram.i: src/LightDSProgram.cpp.i
+.PHONY : src/LightDSProgram.i
+
+# target to preprocess a source file
+src/LightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.i
+.PHONY : src/LightDSProgram.cpp.i
+
+src/LightDSProgram.s: src/LightDSProgram.cpp.s
+.PHONY : src/LightDSProgram.s
+
+# target to generate assembly for a file
+src/LightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.s
+.PHONY : src/LightDSProgram.cpp.s
+
+src/Mesh.o: src/Mesh.cpp.o
+.PHONY : src/Mesh.o
+
+# target to build an object file
+src/Mesh.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Mesh.cpp.o
+.PHONY : src/Mesh.cpp.o
+
+src/Mesh.i: src/Mesh.cpp.i
+.PHONY : src/Mesh.i
+
+# target to preprocess a source file
+src/Mesh.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Mesh.cpp.i
+.PHONY : src/Mesh.cpp.i
+
+src/Mesh.s: src/Mesh.cpp.s
+.PHONY : src/Mesh.s
+
+# target to generate assembly for a file
+src/Mesh.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Mesh.cpp.s
+.PHONY : src/Mesh.cpp.s
 
 src/ShaderProgram.o: src/ShaderProgram.cpp.o
 .PHONY : src/ShaderProgram.o
@@ -570,6 +642,9 @@ help:
 	@echo "... src/DefualtProgram.o"
 	@echo "... src/DefualtProgram.i"
 	@echo "... src/DefualtProgram.s"
+	@echo "... src/DirectionalLightDSProgram.o"
+	@echo "... src/DirectionalLightDSProgram.i"
+	@echo "... src/DirectionalLightDSProgram.s"
 	@echo "... src/Engine.o"
 	@echo "... src/Engine.i"
 	@echo "... src/Engine.s"
@@ -588,6 +663,12 @@ help:
 	@echo "... src/Input.o"
 	@echo "... src/Input.i"
 	@echo "... src/Input.s"
+	@echo "... src/LightDSProgram.o"
+	@echo "... src/LightDSProgram.i"
+	@echo "... src/LightDSProgram.s"
+	@echo "... src/Mesh.o"
+	@echo "... src/Mesh.i"
+	@echo "... src/Mesh.s"
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"

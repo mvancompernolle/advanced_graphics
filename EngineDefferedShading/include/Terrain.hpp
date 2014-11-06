@@ -9,10 +9,12 @@
 #include <gdal_priv.h>
 
 #include "TerrainProgram.hpp"
+#include "DirectionalLightDSProgram.hpp"
 #include "Entity.hpp"
 #include "Vertex.hpp"
 #include "Texture.hpp"
 #include "GBuffer.hpp"
+#include "Mesh.hpp"
 
 namespace Vancom{
 
@@ -29,7 +31,8 @@ public:
 	bool init();
 	void tick(float dt);
 	void geometryPass(glm::mat4 projection, glm::mat4 view);
-	void lightingPass(glm::mat4 projection, glm::mat4 view);
+	void beginLightPasses();
+	void directionalLightPass(glm::mat4 projection, glm::mat4 view);
 	void render(glm::mat4 projection, glm::mat4 view);
 
 	bool setTexture(GLenum TextureTarget, const char* fileName);
@@ -47,6 +50,8 @@ private:
 	Engine *engine;
     const char* fileName;
 	TerrainProgram program;
+	DirectionalLightDSProgram dlProgram;
+	Mesh *dirLightRenderQuad;
 	std::vector<VertexTN> geometry;
 	std::vector<unsigned int> indices;
 	GLuint ibo;

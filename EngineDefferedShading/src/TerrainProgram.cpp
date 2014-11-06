@@ -25,7 +25,7 @@ bool TerrainProgram::init(){
     // get uniform and attribute positions in shader
     locMVP = getUniformLocation("mvp");
     locModel = getUniformLocation("model");
-    locSampler = getUniformLocation("gSampler");
+    locSampler = getUniformLocation("gColorMap");
 
     locPos = glGetAttribLocation(program, "vs_pos");
     locTex = glGetAttribLocation(program, "vs_tex");
@@ -47,7 +47,7 @@ void TerrainProgram::setModelPos(const glm::mat4 model) const{
     glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));    
 }
 
-void TerrainProgram::setSampler(const int sampler) const{
+void TerrainProgram::setColorTextureUnit(const int textureUnit) const{
 
-    glUniform1i(locSampler, 0);    
+    glUniform1i(locSampler, textureUnit);    
 }

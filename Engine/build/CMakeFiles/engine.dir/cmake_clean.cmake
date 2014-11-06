@@ -2,6 +2,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/TerrainBorder.cpp.o"
   "CMakeFiles/engine.dir/src/Engine.cpp.o"
   "CMakeFiles/engine.dir/src/Camera.cpp.o"
+  "CMakeFiles/engine.dir/src/Mesh.cpp.o"
   "CMakeFiles/engine.dir/src/Cube.cpp.o"
   "CMakeFiles/engine.dir/src/ShaderProgram.cpp.o"
   "CMakeFiles/engine.dir/src/Gbuffer.cpp.o"

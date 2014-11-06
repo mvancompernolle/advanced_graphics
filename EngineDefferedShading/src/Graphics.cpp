@@ -90,7 +90,7 @@ void Graphics::render(){
     for(Entity *entity : engine->entityManager->entities)
         entity->render(projection, view);
 
-	SDL_GL_SwapWindow(window);
+	//SDL_GL_SwapWindow(window);
 }
 
 void Graphics::stop(){

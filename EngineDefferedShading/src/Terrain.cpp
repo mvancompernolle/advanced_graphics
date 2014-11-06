@@ -29,11 +29,16 @@ bool Terrain::init(){
 		return false;
 	}
 	
-	// initalize program
+	// initalize geometry program
 	if(!program.init())
 		return false;
 
 	program.enable();
+	program.setColorTextureUnit(0);
+
+	// initialize mesh  
+	dirLightRenderQuad = new Mesh(program);
+	dirLightRenderQuad->loadMesh("../assets/models/quad.obj");
 
 	// get gdal data set from file
 	gdalDataSet = (GDALDataset *) GDALOpen( fileName, GA_ReadOnly );
@@ -63,6 +68,17 @@ bool Terrain::init(){
 
     if(!generateMesh())
     	return false;
+
+    // initialize directional light program
+	if(!dlProgram.init())
+		return false;
+
+	dlProgram.enable();   
+	dlProgram.setPositionTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
+	dlProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
+	dlProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
+	dlProgram.setLightDirection(engine->graphics->getLightDirection());
+    dlProgram.setScreenSize(w, h);
 
 	return true;
 }
@@ -208,9 +224,17 @@ void Terrain::tick(float dt){
 void Terrain::geometryPass(glm::mat4 projection, glm::mat4 view){
 
 	program.enable();
+	glBindVertexArray(vao);
+
 	buffer.bindForWriting();
 
+	// only the geometry pass updates the depth buffer
+	glDepthMask(GL_TRUE);
+
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	glEnable(GL_DEPTH_TEST);
+	glDisable(GL_BLEND);
 
 	// enable attributes
 	glEnableVertexAttribArray(program.locPos);
@@ -227,51 +251,44 @@ void Terrain::geometryPass(glm::mat4 projection, glm::mat4 view){
 
 	// draw
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
+
+    glDepthMask(GL_FALSE);
+    glDisable(GL_DEPTH_TEST);
 }
 
-void Terrain::lightingPass(glm::mat4 projection, glm::mat4 view){
+void Terrain::beginLightPasses(){
 
-	glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glEnable(GL_BLEND);
+	glBlendEquation(GL_FUNC_ADD);
+	glBlendFunc(GL_ONE, GL_ONE);
 
 	buffer.bindForReading();
+	glClear(GL_COLOR_BUFFER_BIT);
+}
 
-	int w, h;
-	engine->graphics->getWindowSize(w, h);
-    GLsizei halfWidth = (GLsizei)(w / 2.0f);
-    GLsizei halfHeight = (GLsizei)(h / 2.0f);
+void Terrain::directionalLightPass(glm::mat4 projection, glm::mat4 view){
+	
+	// enable directional light program
+	dlProgram.enable();
 
-	buffer.setReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
-	glBlitFramebuffer(0, 0, w, h,
-                    0, 0, halfWidth, halfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	// set directional light
+	dlProgram.setLightDirection(engine->graphics->getLightDirection());
 
-    buffer.setReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
-    glBlitFramebuffer(0, 0, w, h, 
-                    0, halfHeight, halfWidth, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	// set mvp to identity matrix so the program is in screen space
+	glm::mat4 mvp;
+	dlProgram.setMVP(mvp);
 
-    buffer.setReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
-    glBlitFramebuffer(0, 0, w, h, 
-                    halfWidth, halfHeight, w, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-
-    buffer.setReadBuffer(GBuffer::GBUFFER_TEXTURE_TYPE_TEXCOORD);
-    glBlitFramebuffer(0, 0, w, h, 
-                    halfWidth, 0, w, halfHeight, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+	// render the whole screen
+	dirLightRenderQuad->renderMesh();
 }
 
 void Terrain::render(glm::mat4 projection, glm::mat4 view){
 
-	// enable program and bind vao, vbo, and vio
-	program.enable();
-	glBindVertexArray(vao);
 
 	geometryPass(projection, view);
-	lightingPass(projection, view);
+	beginLightPasses();
+	directionalLightPass(projection, view);
 
-	// disable attributes
-	glDisableVertexAttribArray(program.locPos);
-	glDisableVertexAttribArray(program.locTex);
-	glDisableVertexAttribArray(program.locNormal);
 }
 
 void Terrain::getDimensions(int& width, int& height) const{

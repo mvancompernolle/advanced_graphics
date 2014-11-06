@@ -4,7 +4,8 @@
 #include <vector>
 #include "Vertex.hpp"
 #include "Entity.hpp"
-#include "DefaultProgram.hpp"
+#include "TerrainProgram.hpp"
+#include "Mesh.hpp"
 
 namespace Vancom{
 
@@ -22,8 +23,8 @@ public:
 private:
 
 	// private variables
-	DefaultProgram program;
-	std::vector<VertexC> geometry;
+	TerrainProgram program;
+	Mesh *mesh;
 
 };
 

@@ -13,7 +13,7 @@ out vec3 fs_pos;
 
 void main(void){
 
-	fs_normal = vs_normal;
+	fs_normal = (model * vec4(vs_normal, 0.0)).xyz;
 	fs_tex = vs_tex;
 	fs_pos = (model * vec4(vs_pos, 1.0)).xyz;
 	gl_Position = mvp * vec4(vs_pos, 1.0);

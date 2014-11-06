@@ -29,7 +29,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
     include_directories(${SDL2_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
 
-    set(LIBRARIES_TO_LINK ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} "gdal" "freeimageplus")
+    set(LIBRARIES_TO_LINK ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} "gdal" "freeimageplus" "assimp")
 
 else()
     message(STATUS "Windows OS Detected")

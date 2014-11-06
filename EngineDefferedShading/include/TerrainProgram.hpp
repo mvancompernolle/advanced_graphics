@@ -17,7 +17,7 @@ public:
     bool init();    
     void setMVP(const glm::mat4 MVP) const;
     void setModelPos(const glm::mat4 model) const;
-    void setSampler(const int sampler) const;
+    void setColorTextureUnit(const int textureUnit) const;
 
     // public variables
     GLuint locPos;

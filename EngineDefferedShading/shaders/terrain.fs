@@ -1,6 +1,6 @@
 #version 430
 
-uniform sampler2D gSampler;
+uniform sampler2D gColorMap;
 
 in vec2 fs_tex;
 in vec3 fs_normal;
@@ -14,7 +14,7 @@ layout (location = 3) out vec3 texture;
 void main(void){
 
     pos = fs_pos;
-    diff = texture2D(gSampler, fs_tex).xyz;
+    diff = texture2D(gColorMap, fs_tex).xyz;
     normal = normalize(fs_normal);
     texture = vec3(fs_tex, 0.0);
 }

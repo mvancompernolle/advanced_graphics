@@ -19,11 +19,6 @@ EntityManager::~EntityManager(){
 
 void EntityManager::init(){
 
-	// add a cube
-	Cube* cube = new Cube();
-	cube->init();
-	entities.push_back(cube);
-
 	// add the terrain
 	Terrain* terrain = new Terrain(engine, "../assets/DCEWsqrExtent.tif");
 	terrain->init();
@@ -37,6 +32,12 @@ void EntityManager::init(){
 	border->init(100, glm::vec2(-width/2, height/2), glm::vec2(width/2, height/2), glm::vec2(-width/2, -height/2), 
 		glm::vec2(width/2, -height/2));
 	entities.push_back(border);
+
+	// add a cube
+	Cube* cube = new Cube();
+	cube->init();
+	entities.push_back(cube);
+
 }
 
 void EntityManager::tick(float dt){

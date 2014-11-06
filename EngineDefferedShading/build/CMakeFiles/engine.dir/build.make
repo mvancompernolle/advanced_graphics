@@ -72,9 +72,32 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o.provides: CMakeFiles/engine.dir/sr
 
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o.provides.build: CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
 
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o: ../src/DirectionalLightDSProgram.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/DirectionalLightDSProgram.cpp
+
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/DirectionalLightDSProgram.cpp > CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.i
+
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/DirectionalLightDSProgram.cpp -o CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.s
+
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.requires
+
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.provides: CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.provides
+
+CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o
+
 CMakeFiles/engine.dir/src/Engine.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../src/Engine.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_2)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_3)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Engine.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Engine.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Engine.cpp
 
@@ -97,7 +120,7 @@ CMakeFiles/engine.dir/src/Engine.cpp.o.provides.build: CMakeFiles/engine.dir/src
 
 CMakeFiles/engine.dir/src/Camera.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Camera.cpp.o: ../src/Camera.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_3)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_4)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Camera.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Camera.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Camera.cpp
 
@@ -118,9 +141,32 @@ CMakeFiles/engine.dir/src/Camera.cpp.o.provides: CMakeFiles/engine.dir/src/Camer
 
 CMakeFiles/engine.dir/src/Camera.cpp.o.provides.build: CMakeFiles/engine.dir/src/Camera.cpp.o
 
+CMakeFiles/engine.dir/src/Mesh.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Mesh.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Mesh.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Mesh.cpp
+
+CMakeFiles/engine.dir/src/Mesh.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/Mesh.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Mesh.cpp > CMakeFiles/engine.dir/src/Mesh.cpp.i
+
+CMakeFiles/engine.dir/src/Mesh.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/Mesh.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Mesh.cpp -o CMakeFiles/engine.dir/src/Mesh.cpp.s
+
+CMakeFiles/engine.dir/src/Mesh.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/Mesh.cpp.o.requires
+
+CMakeFiles/engine.dir/src/Mesh.cpp.o.provides: CMakeFiles/engine.dir/src/Mesh.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Mesh.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/Mesh.cpp.o.provides
+
+CMakeFiles/engine.dir/src/Mesh.cpp.o.provides.build: CMakeFiles/engine.dir/src/Mesh.cpp.o
+
 CMakeFiles/engine.dir/src/Cube.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Cube.cpp.o: ../src/Cube.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_4)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_6)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Cube.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Cube.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Cube.cpp
 
@@ -143,7 +189,7 @@ CMakeFiles/engine.dir/src/Cube.cpp.o.provides.build: CMakeFiles/engine.dir/src/C
 
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_5)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_7)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/ShaderProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/ShaderProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/ShaderProgram.cpp
 
@@ -166,7 +212,7 @@ CMakeFiles/engine.dir/src/ShaderProgram.cpp.o.provides.build: CMakeFiles/engine.
 
 CMakeFiles/engine.dir/src/Gbuffer.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Gbuffer.cpp.o: ../src/Gbuffer.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_6)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_8)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Gbuffer.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Gbuffer.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Gbuffer.cpp
 
@@ -189,7 +235,7 @@ CMakeFiles/engine.dir/src/Gbuffer.cpp.o.provides.build: CMakeFiles/engine.dir/sr
 
 CMakeFiles/engine.dir/src/main.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/main.cpp.o: ../src/main.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_7)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_9)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/main.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/main.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/main.cpp
 
@@ -212,7 +258,7 @@ CMakeFiles/engine.dir/src/main.cpp.o.provides.build: CMakeFiles/engine.dir/src/m
 
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../src/DefualtProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_8)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_10)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/DefualtProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/DefualtProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/DefualtProgram.cpp
 
@@ -235,7 +281,7 @@ CMakeFiles/engine.dir/src/DefualtProgram.cpp.o.provides.build: CMakeFiles/engine
 
 CMakeFiles/engine.dir/src/Terrain.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../src/Terrain.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_9)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_11)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Terrain.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Terrain.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Terrain.cpp
 
@@ -258,7 +304,7 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o.provides.build: CMakeFiles/engine.dir/sr
 
 CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o: ../src/BorderUpdateProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_10)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_12)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/BorderUpdateProgram.cpp
 
@@ -281,7 +327,7 @@ CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o.provides.build: CMakeFiles/e
 
 CMakeFiles/engine.dir/src/Input.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Input.cpp.o: ../src/Input.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_11)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_13)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Input.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Input.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Input.cpp
 
@@ -304,7 +350,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o.provides.build: CMakeFiles/engine.dir/src/
 
 CMakeFiles/engine.dir/src/Entity.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Entity.cpp.o: ../src/Entity.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_12)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_14)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Entity.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Entity.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Entity.cpp
 
@@ -327,7 +373,7 @@ CMakeFiles/engine.dir/src/Entity.cpp.o.provides.build: CMakeFiles/engine.dir/src
 
 CMakeFiles/engine.dir/src/Texture.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Texture.cpp.o: ../src/Texture.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_13)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_15)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Texture.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Texture.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Texture.cpp
 
@@ -350,7 +396,7 @@ CMakeFiles/engine.dir/src/Texture.cpp.o.provides.build: CMakeFiles/engine.dir/sr
 
 CMakeFiles/engine.dir/src/TerrainProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/TerrainProgram.cpp.o: ../src/TerrainProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_14)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_16)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/TerrainProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/TerrainProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/TerrainProgram.cpp
 
@@ -373,7 +419,7 @@ CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.provides.build: CMakeFiles/engine
 
 CMakeFiles/engine.dir/src/Graphics.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../src/Graphics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_15)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_17)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Graphics.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Graphics.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Graphics.cpp
 
@@ -396,7 +442,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o.provides.build: CMakeFiles/engine.dir/s
 
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../src/EntityManager.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_16)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_18)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/EntityManager.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/EntityManager.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/EntityManager.cpp
 
@@ -419,7 +465,7 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides.build: CMakeFiles/engine.
 
 CMakeFiles/engine.dir/src/Clock.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Clock.cpp.o: ../src/Clock.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_17)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_19)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Clock.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Clock.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Clock.cpp
 
@@ -440,9 +486,32 @@ CMakeFiles/engine.dir/src/Clock.cpp.o.provides: CMakeFiles/engine.dir/src/Clock.
 
 CMakeFiles/engine.dir/src/Clock.cpp.o.provides.build: CMakeFiles/engine.dir/src/Clock.cpp.o
 
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.o: ../src/LightDSProgram.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_20)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/LightDSProgram.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/LightDSProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/LightDSProgram.cpp
+
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/LightDSProgram.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/LightDSProgram.cpp > CMakeFiles/engine.dir/src/LightDSProgram.cpp.i
+
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/LightDSProgram.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/LightDSProgram.cpp -o CMakeFiles/engine.dir/src/LightDSProgram.cpp.s
+
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.requires
+
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides
+
+CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
+
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: ../src/BorderRenderProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_18)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/EngineDefferedShading/build/CMakeFiles $(CMAKE_PROGRESS_21)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/BorderRenderProgram.cpp
 
@@ -466,8 +535,10 @@ CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o.provides.build: CMakeFiles/e
 # Object files for target engine
 engine_OBJECTS = \
 "CMakeFiles/engine.dir/src/TerrainBorder.cpp.o" \
+"CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/Engine.cpp.o" \
 "CMakeFiles/engine.dir/src/Camera.cpp.o" \
+"CMakeFiles/engine.dir/src/Mesh.cpp.o" \
 "CMakeFiles/engine.dir/src/Cube.cpp.o" \
 "CMakeFiles/engine.dir/src/ShaderProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/Gbuffer.cpp.o" \
@@ -482,14 +553,17 @@ engine_OBJECTS = \
 "CMakeFiles/engine.dir/src/Graphics.cpp.o" \
 "CMakeFiles/engine.dir/src/EntityManager.cpp.o" \
 "CMakeFiles/engine.dir/src/Clock.cpp.o" \
+"CMakeFiles/engine.dir/src/LightDSProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
 
 # External object files for target engine
 engine_EXTERNAL_OBJECTS =
 
 engine: CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
+engine: CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/Engine.cpp.o
 engine: CMakeFiles/engine.dir/src/Camera.cpp.o
+engine: CMakeFiles/engine.dir/src/Mesh.cpp.o
 engine: CMakeFiles/engine.dir/src/Cube.cpp.o
 engine: CMakeFiles/engine.dir/src/ShaderProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/Gbuffer.cpp.o
@@ -504,6 +578,7 @@ engine: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/Graphics.cpp.o
 engine: CMakeFiles/engine.dir/src/EntityManager.cpp.o
 engine: CMakeFiles/engine.dir/src/Clock.cpp.o
+engine: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o
 engine: CMakeFiles/engine.dir/build.make
 engine: CMakeFiles/engine.dir/link.txt
@@ -515,8 +590,10 @@ CMakeFiles/engine.dir/build: engine
 .PHONY : CMakeFiles/engine.dir/build
 
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/TerrainBorder.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Engine.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Camera.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Mesh.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Cube.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/ShaderProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Gbuffer.cpp.o.requires
@@ -531,6 +608,7 @@ CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.r
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Graphics.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Clock.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o.requires
 .PHONY : CMakeFiles/engine.dir/requires
 

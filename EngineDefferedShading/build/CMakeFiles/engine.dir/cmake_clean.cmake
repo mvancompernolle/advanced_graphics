@@ -1,7 +1,9 @@
 FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/TerrainBorder.cpp.o"
+  "CMakeFiles/engine.dir/src/DirectionalLightDSProgram.cpp.o"
   "CMakeFiles/engine.dir/src/Engine.cpp.o"
   "CMakeFiles/engine.dir/src/Camera.cpp.o"
+  "CMakeFiles/engine.dir/src/Mesh.cpp.o"
   "CMakeFiles/engine.dir/src/Cube.cpp.o"
   "CMakeFiles/engine.dir/src/ShaderProgram.cpp.o"
   "CMakeFiles/engine.dir/src/Gbuffer.cpp.o"
@@ -16,6 +18,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/Graphics.cpp.o"
   "CMakeFiles/engine.dir/src/EntityManager.cpp.o"
   "CMakeFiles/engine.dir/src/Clock.cpp.o"
+  "CMakeFiles/engine.dir/src/LightDSProgram.cpp.o"
   "CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
   "engine.pdb"
   "engine"

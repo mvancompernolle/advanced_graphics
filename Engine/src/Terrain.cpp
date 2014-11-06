@@ -198,7 +198,6 @@ bool Terrain::setTexture(GLenum TextureTarget, const char* fileName){
 
 void Terrain::tick(float dt){
 
-
 }
 
 void Terrain::render(glm::mat4 projection, glm::mat4 view){
