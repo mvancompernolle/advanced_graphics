@@ -25,7 +25,6 @@ private:
 
 	// private variables
 	Mesh *mesh;
-
 };
 
 }

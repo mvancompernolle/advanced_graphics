@@ -168,7 +168,6 @@ void TerrainBorder::initParticles(Particle* particles){
 	}
 
 	particleCount += count;
-	std::cout << particleCount << std::endl;
 }
 
 void TerrainBorder::tick(float dt){
@@ -299,5 +298,5 @@ void TerrainBorder::render(glm::mat4 projection, glm::mat4 view){
 }
 
 void TerrainBorder::render(){
-	
+
 }

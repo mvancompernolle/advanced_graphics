@@ -495,6 +495,30 @@ src/ShaderProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShaderProgram.cpp.s
 .PHONY : src/ShaderProgram.cpp.s
 
+src/SilhouetteProgram.o: src/SilhouetteProgram.cpp.o
+.PHONY : src/SilhouetteProgram.o
+
+# target to build an object file
+src/SilhouetteProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o
+.PHONY : src/SilhouetteProgram.cpp.o
+
+src/SilhouetteProgram.i: src/SilhouetteProgram.cpp.i
+.PHONY : src/SilhouetteProgram.i
+
+# target to preprocess a source file
+src/SilhouetteProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.i
+.PHONY : src/SilhouetteProgram.cpp.i
+
+src/SilhouetteProgram.s: src/SilhouetteProgram.cpp.s
+.PHONY : src/SilhouetteProgram.s
+
+# target to generate assembly for a file
+src/SilhouetteProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.s
+.PHONY : src/SilhouetteProgram.cpp.s
+
 src/Terrain.o: src/Terrain.cpp.o
 .PHONY : src/Terrain.o
 
@@ -672,6 +696,9 @@ help:
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"
+	@echo "... src/SilhouetteProgram.o"
+	@echo "... src/SilhouetteProgram.i"
+	@echo "... src/SilhouetteProgram.s"
 	@echo "... src/Terrain.o"
 	@echo "... src/Terrain.i"
 	@echo "... src/Terrain.s"

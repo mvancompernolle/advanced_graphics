@@ -3,6 +3,7 @@
 using namespace Vancom;
 
 Entity::Entity(){
+	id = 0;
 }
 
 Entity::~Entity(){

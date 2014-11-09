@@ -52,14 +52,12 @@ bool Terrain::init(){
 	min = adfMinMax[0];
 	max = adfMinMax[1];
 	range = max - min;
-	std::cout << range << std::endl;
 
 	// get the geotransform values for the terrain
 	gdalDataSet->GetGeoTransform(geotransform);
 
 	// calculate heightscale so that it is accurate
 	heightScale = range / geotransform[1];
-	std::cout << heightScale << " " << range << " " << geotransform[1] << std::endl;
 
     if(!generateMesh())
     	return false;
@@ -92,8 +90,8 @@ bool Terrain::generateMesh(){
 			vert.pos.x = x;
 			vert.pos.y = heightScale * ((data[z][x]-min)/range);
 			vert.pos.z = z;
-			vert.tex.x = vert.pos.x/200;
-			vert.tex.y = vert.pos.z/200;
+			vert.tex.x = vert.pos.x/100;
+			vert.tex.y = vert.pos.z/100;
 
 			// calculate the normal for the vertex
 			calculateNormal(data, z, x, vert);

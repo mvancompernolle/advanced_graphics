@@ -32,6 +32,7 @@ CMakeFiles/engine.dir/src/Engine.cpp.o
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -130,6 +131,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -210,6 +212,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -283,6 +286,10 @@ CMakeFiles/engine.dir/src/SelectionTexture.cpp.o
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o
  ../include/ShaderProgram.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/ShaderProgram.cpp
+CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o
+ ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/SilhouetteProgram.cpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o
  ../include/Camera.hpp
  ../include/Engine.hpp
@@ -293,6 +300,7 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
  ../include/Terrain.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -369,6 +377,7 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/SilhouetteProgram.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp

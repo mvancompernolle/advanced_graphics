@@ -19,7 +19,7 @@ using namespace Vancom;
 Graphics::Graphics(Engine *engine) : engine(engine){
 
     // initialize light angle for direction lights
-    lightAngle = -0.5f;
+    lightAngle = -0.3f;
     isRaining = true;
     
     // call to create the light vector
@@ -73,7 +73,8 @@ void Graphics::init(){
     // set clear color and culling
     glClearColor(0.0, 0.0, 0.5, 1);
     glEnable(GL_DEPTH_TEST);
-    glDepthFunc(GL_LESS);
+    glDepthFunc(GL_LEQUAL);
+    glLineWidth(10.0f);
 
     updateView();
     windowResized();
@@ -85,6 +86,9 @@ void Graphics::init(){
     if(!selectionProgram.init())
         std::cout << "selectionProgram failed to init" << std::endl;
     selectionTexture.init(1800, 1000);
+
+    if(!silhouetteProgram.init())
+        std::cout << "silhouetteProgram failed to init" << std::endl;
 }
 
 void Graphics::tick(float dt){
@@ -115,8 +119,8 @@ void Graphics::render(){
 
     // check to see if object is in middle of screen
     SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
-    if((unsigned int) pixel.objectId != 0)
-        std::cout << (unsigned int) pixel.objectId << std::endl;
+    /*if((unsigned int) pixel.objectId != 0)
+        std::cout << (unsigned int) pixel.objectId << std::endl;*/
 
     // render entities using default
     defaultProgram.enable();
@@ -132,6 +136,19 @@ void Graphics::render(){
         defaultProgram.setSpecularPower(entity->specularPower);
         entity->render();
     }
+
+    // render border of selected
+    silhouetteProgram.enable();
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        if(entity->id == (unsigned int)pixel.objectId){
+            silhouetteProgram.setMVP(projection * view * entity->getModel());
+            silhouetteProgram.setModelPos(entity->getModel());    
+            silhouetteProgram.setCameraPosition(camera->getPos());
+            entity->render();
+            break;
+        }
+    }
+
 
     // render terrain border
     engine->entityManager->border->render(projection, view);

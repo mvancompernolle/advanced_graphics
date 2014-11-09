@@ -18,11 +18,11 @@ bool SelectionProgram::init()
     if (!addShader(GL_VERTEX_SHADER, "../shaders/selection.vs")) {
         return false;
     }
-	    std::cout << "here1" << std::endl;
+
     if (!addShader(GL_FRAGMENT_SHADER, "../shaders/selection.fs")) {
         return false;
     }
-    	    std::cout << "here2" << std::endl;
+
     if (!finalize()) {
         return false;
     }

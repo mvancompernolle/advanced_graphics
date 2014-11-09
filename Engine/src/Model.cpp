@@ -23,7 +23,7 @@ bool Model::init(const char* fileName){
 
 	// load Model model from assimp
 	mesh = new Mesh();
-	mesh->loadMesh(fileName);
+	mesh->loadMesh(fileName, true);
 
 	return true;
 }
