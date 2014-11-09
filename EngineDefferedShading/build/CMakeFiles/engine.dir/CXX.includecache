@@ -22,6 +22,14 @@ TerrainProgram.hpp
 Mesh.hpp
 ../include/Mesh.hpp
 
+../include/DirectionalLightDSProgram.hpp
+glm/glm.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+LightDSProgram.hpp
+../include/LightDSProgram.hpp
+
 ../include/Engine.hpp
 
 ../include/Entity.hpp
@@ -34,8 +42,8 @@ glm/gtx/rotate_vector.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
 
-../include/EntityManager.hpp
-vector
+../include/GBuffer.hpp
+GL/glew.h
 -
 
 ../include/Graphics.hpp
@@ -55,6 +63,14 @@ glm/gtx/rotate_vector.hpp
 -
 Cube.hpp
 ../include/Cube.hpp
+
+../include/LightDSProgram.hpp
+glm/glm.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+ShaderProgram.hpp
+../include/ShaderProgram.hpp
 
 ../include/Mesh.hpp
 vector
@@ -82,6 +98,32 @@ list
 GL/glew.h
 -
 
+../include/Terrain.hpp
+GL/glew.h
+-
+vector
+-
+ogr_spatialref.h
+-
+ogr_srs_api.h
+-
+gdal_priv.h
+-
+TerrainProgram.hpp
+../include/TerrainProgram.hpp
+DirectionalLightDSProgram.hpp
+../include/DirectionalLightDSProgram.hpp
+Entity.hpp
+../include/Entity.hpp
+Vertex.hpp
+../include/Vertex.hpp
+Texture.hpp
+../include/Texture.hpp
+GBuffer.hpp
+../include/GBuffer.hpp
+Mesh.hpp
+../include/Mesh.hpp
+
 ../include/TerrainProgram.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
@@ -102,27 +144,17 @@ FreeImagePlus.h
 glm/glm.hpp
 -
 
-/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Graphics.cpp
-Graphics.hpp
-/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Graphics.hpp
+/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Terrain.cpp
+Terrain.hpp
+/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Terrain.hpp
 iostream
 -
-ogrsf_frmts.h
--
-ogr_spatialref.h
--
-ogr_srs_api.h
--
-gdal_priv.h
-/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/gdal_priv.h
-cpl_conv.h
-/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/cpl_conv.h
 Engine.hpp
 /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Engine.hpp
+Graphics.hpp
+/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Graphics.hpp
 Camera.hpp
 /home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/Camera.hpp
-EntityManager.hpp
-/home/matthew/Desktop/adv_graphics/EngineDefferedShading/src/EntityManager.hpp
 
 /usr/include/SDL2/SDL.h
 SDL_main.h
@@ -668,10 +700,6 @@ close_code.h
 
 /usr/include/SDL2/close_code.h
 
-/usr/include/gdal/cpl_atomic_ops.h
-cpl_port.h
-/usr/include/gdal/cpl_port.h
-
 /usr/include/gdal/cpl_config.h
 cpl_config_extras.h
 /usr/include/gdal/cpl_config_extras.h
@@ -796,28 +824,6 @@ cpl_port.h
 gdal_version.h
 /usr/include/gdal/gdal_version.h
 
-/usr/include/gdal/ogr_feature.h
-ogr_geometry.h
-/usr/include/gdal/ogr_geometry.h
-ogr_featurestyle.h
-/usr/include/gdal/ogr_featurestyle.h
-cpl_atomic_ops.h
-/usr/include/gdal/cpl_atomic_ops.h
-
-/usr/include/gdal/ogr_featurestyle.h
-cpl_conv.h
-/usr/include/gdal/cpl_conv.h
-cpl_string.h
-/usr/include/gdal/cpl_string.h
-ogr_core.h
-/usr/include/gdal/ogr_core.h
-
-/usr/include/gdal/ogr_geometry.h
-ogr_core.h
-/usr/include/gdal/ogr_core.h
-ogr_spatialref.h
-/usr/include/gdal/ogr_spatialref.h
-
 /usr/include/gdal/ogr_spatialref.h
 ogr_srs_api.h
 /usr/include/gdal/ogr_srs_api.h
@@ -825,12 +831,4 @@ ogr_srs_api.h
 /usr/include/gdal/ogr_srs_api.h
 ogr_core.h
 /usr/include/gdal/ogr_core.h
-
-/usr/include/gdal/ogrsf_frmts.h
-cpl_progress.h
-/usr/include/gdal/cpl_progress.h
-ogr_feature.h
-/usr/include/gdal/ogr_feature.h
-ogr_featurestyle.h
-/usr/include/gdal/ogr_featurestyle.h
 

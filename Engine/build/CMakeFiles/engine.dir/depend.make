@@ -16,27 +16,20 @@ CMakeFiles/engine.dir/src/Camera.cpp.o: ../src/Camera.cpp
 CMakeFiles/engine.dir/src/Clock.cpp.o: ../include/Clock.hpp
 CMakeFiles/engine.dir/src/Clock.cpp.o: ../src/Clock.cpp
 
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/Cube.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/Entity.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/Mesh.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/ShaderProgram.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/TerrainProgram.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/Texture.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../include/Vertex.hpp
-CMakeFiles/engine.dir/src/Cube.cpp.o: ../src/Cube.cpp
-
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../include/DefaultProgram.hpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../src/DefualtProgram.cpp
 
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Clock.hpp
-CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/EntityManager.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Graphics.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Input.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Texture.hpp
@@ -92,11 +85,11 @@ CMakeFiles/engine.dir/src/Entity.cpp.o: ../src/Entity.cpp
 
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/BorderRenderProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/BorderUpdateProgram.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/EntityManager.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Model.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Terrain.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/TerrainBorder.hpp
@@ -124,14 +117,19 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_srs_api.h
 CMakeFiles/engine.dir/src/Gbuffer.cpp.o: ../include/GBuffer.hpp
 CMakeFiles/engine.dir/src/Gbuffer.cpp.o: ../src/Gbuffer.cpp
 
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/BorderRenderProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/BorderUpdateProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Camera.hpp
-CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/EntityManager.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Graphics.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/TerrainBorder.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Vertex.hpp
@@ -202,12 +200,14 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: /usr/include/gdal/ogr_srs_api.h
 CMakeFiles/engine.dir/src/Graphics.cpp.o: /usr/include/gdal/ogrsf_frmts.h
 
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Camera.hpp
-CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Graphics.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Input.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Texture.hpp
@@ -264,15 +264,33 @@ CMakeFiles/engine.dir/src/Mesh.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/Mesh.cpp.o: ../include/Vertex.hpp
 CMakeFiles/engine.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
 
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/TerrainProgram.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Texture.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Vertex.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../src/Model.cpp
+
+CMakeFiles/engine.dir/src/SelectionProgram.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/SelectionProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/SelectionProgram.cpp.o: ../src/SelectionProgram.cpp
+
+CMakeFiles/engine.dir/src/SelectionTexture.cpp.o: ../include/SelectionTexture.hpp
+CMakeFiles/engine.dir/src/SelectionTexture.cpp.o: ../src/SelectionTexture.cpp
+
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
 
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Camera.hpp
-CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Graphics.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Terrain.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/TerrainProgram.hpp
@@ -342,11 +360,13 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o: /usr/include/gdal/ogr_srs_api.h
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/BorderRenderProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/BorderUpdateProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Camera.hpp
-CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Cube.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Graphics.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SelectionProgram.hpp
+CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/TerrainBorder.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/TerrainProgram.hpp

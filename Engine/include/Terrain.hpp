@@ -27,7 +27,7 @@ public:
 
 	bool init();
 	void tick(float dt);
-	void render(glm::mat4 projection, glm::mat4 view);
+	void render();
 
 	bool setTexture(GLenum TextureTarget, const char* fileName);
 
@@ -43,7 +43,6 @@ private:
 	// private variables
 	Engine *engine;
     const char* fileName;
-	TerrainProgram program;
 	std::vector<VertexTN> geometry;
 	std::vector<unsigned int> indices;
 	GLuint ibo;
@@ -53,6 +52,7 @@ private:
 	int heightScale;
 
 	GDALDataset* gdalDataSet;
+	double* geotransform;
 };
 
 } // end Vancom namepsace

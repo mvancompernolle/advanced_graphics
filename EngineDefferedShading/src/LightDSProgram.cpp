@@ -29,21 +29,21 @@ void LightDSProgram::setMVP(const glm::mat4 MVP) const{
 }
 
 void LightDSProgram::setPositionTextureUnit(unsigned int textureUnit){
-
+std::cout << locPosTexture << " " << textureUnit << std::endl;
     glUniform1i(locPosTexture, textureUnit);
 }
 
 void LightDSProgram::setColorTextureUnit(unsigned int textureUnit){
-
+    std::cout << locColorTexture << " " << textureUnit << std::endl;
     glUniform1i(locColorTexture, textureUnit);
 }
 
 void LightDSProgram::setNormalTextureUnit(unsigned int textureUnit){
-
+std::cout << locNormalTexture << " " << textureUnit << std::endl;
     glUniform1i(locNormalTexture, textureUnit);
 }
 
 void LightDSProgram::setScreenSize(unsigned int width, unsigned int height){
-
+std::cout << locScreenSize << " " << width << " " << height << std::endl;
     glUniform2f(locScreenSize, (float) width, (float) height);
 }

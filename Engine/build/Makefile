@@ -207,30 +207,6 @@ src/Clock.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Clock.cpp.s
 .PHONY : src/Clock.cpp.s
 
-src/Cube.o: src/Cube.cpp.o
-.PHONY : src/Cube.o
-
-# target to build an object file
-src/Cube.cpp.o:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Cube.cpp.o
-.PHONY : src/Cube.cpp.o
-
-src/Cube.i: src/Cube.cpp.i
-.PHONY : src/Cube.i
-
-# target to preprocess a source file
-src/Cube.cpp.i:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Cube.cpp.i
-.PHONY : src/Cube.cpp.i
-
-src/Cube.s: src/Cube.cpp.s
-.PHONY : src/Cube.s
-
-# target to generate assembly for a file
-src/Cube.cpp.s:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Cube.cpp.s
-.PHONY : src/Cube.cpp.s
-
 src/DefualtProgram.o: src/DefualtProgram.cpp.o
 .PHONY : src/DefualtProgram.o
 
@@ -423,6 +399,78 @@ src/Mesh.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Mesh.cpp.s
 .PHONY : src/Mesh.cpp.s
 
+src/Model.o: src/Model.cpp.o
+.PHONY : src/Model.o
+
+# target to build an object file
+src/Model.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Model.cpp.o
+.PHONY : src/Model.cpp.o
+
+src/Model.i: src/Model.cpp.i
+.PHONY : src/Model.i
+
+# target to preprocess a source file
+src/Model.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Model.cpp.i
+.PHONY : src/Model.cpp.i
+
+src/Model.s: src/Model.cpp.s
+.PHONY : src/Model.s
+
+# target to generate assembly for a file
+src/Model.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Model.cpp.s
+.PHONY : src/Model.cpp.s
+
+src/SelectionProgram.o: src/SelectionProgram.cpp.o
+.PHONY : src/SelectionProgram.o
+
+# target to build an object file
+src/SelectionProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionProgram.cpp.o
+.PHONY : src/SelectionProgram.cpp.o
+
+src/SelectionProgram.i: src/SelectionProgram.cpp.i
+.PHONY : src/SelectionProgram.i
+
+# target to preprocess a source file
+src/SelectionProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionProgram.cpp.i
+.PHONY : src/SelectionProgram.cpp.i
+
+src/SelectionProgram.s: src/SelectionProgram.cpp.s
+.PHONY : src/SelectionProgram.s
+
+# target to generate assembly for a file
+src/SelectionProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionProgram.cpp.s
+.PHONY : src/SelectionProgram.cpp.s
+
+src/SelectionTexture.o: src/SelectionTexture.cpp.o
+.PHONY : src/SelectionTexture.o
+
+# target to build an object file
+src/SelectionTexture.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionTexture.cpp.o
+.PHONY : src/SelectionTexture.cpp.o
+
+src/SelectionTexture.i: src/SelectionTexture.cpp.i
+.PHONY : src/SelectionTexture.i
+
+# target to preprocess a source file
+src/SelectionTexture.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionTexture.cpp.i
+.PHONY : src/SelectionTexture.cpp.i
+
+src/SelectionTexture.s: src/SelectionTexture.cpp.s
+.PHONY : src/SelectionTexture.s
+
+# target to generate assembly for a file
+src/SelectionTexture.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SelectionTexture.cpp.s
+.PHONY : src/SelectionTexture.cpp.s
+
 src/ShaderProgram.o: src/ShaderProgram.cpp.o
 .PHONY : src/ShaderProgram.o
 
@@ -588,9 +636,6 @@ help:
 	@echo "... src/Clock.o"
 	@echo "... src/Clock.i"
 	@echo "... src/Clock.s"
-	@echo "... src/Cube.o"
-	@echo "... src/Cube.i"
-	@echo "... src/Cube.s"
 	@echo "... src/DefualtProgram.o"
 	@echo "... src/DefualtProgram.i"
 	@echo "... src/DefualtProgram.s"
@@ -615,6 +660,15 @@ help:
 	@echo "... src/Mesh.o"
 	@echo "... src/Mesh.i"
 	@echo "... src/Mesh.s"
+	@echo "... src/Model.o"
+	@echo "... src/Model.i"
+	@echo "... src/Model.s"
+	@echo "... src/SelectionProgram.o"
+	@echo "... src/SelectionProgram.i"
+	@echo "... src/SelectionProgram.s"
+	@echo "... src/SelectionTexture.o"
+	@echo "... src/SelectionTexture.i"
+	@echo "... src/SelectionTexture.s"
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"

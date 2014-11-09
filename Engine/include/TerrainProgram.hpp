@@ -21,6 +21,10 @@ public:
     void setLightDirection(const glm::vec3 direction) const;
     void setSpotLightDirection(const glm::vec3 direction) const;
     void setSpotLightPosition(const glm::vec3 pos) const;
+    void setSpecularPower(const float power) const;
+    void setSpecularIntensity(const float intensity) const;
+    void setCameraPosition(const glm::vec3 pos) const;
+    void setSpecularFlag(const bool isOn) const;
 
     // public variables
     GLuint locMVP;
@@ -28,7 +32,11 @@ public:
     GLuint locLightDir;
     GLuint locSpotLightPos;
     GLuint locSpotLightDir;
+    GLuint locCameraPos;
     GLuint locSampler;
+    GLuint locSpecularPower;
+    GLuint locSpecularIntensity;
+    GLuint locSpecularOn;
     GLuint locPos;
     GLuint locTex;
     GLuint locNormal;

@@ -68,6 +68,14 @@ void Input::tick(float dt){
                         keysPressed[SDLK_f] = true;
                     break;
 
+                    case SDLK_i:
+                        keysPressed[SDLK_i] = true;
+                    break;
+
+                    case SDLK_u:
+                        keysPressed[SDLK_u] = true;
+                    break;
+
                     case SDLK_LEFT:
                         keysPressed[SDLK_LEFT] = true;
                     break;
@@ -107,6 +115,14 @@ void Input::tick(float dt){
 
                     case SDLK_f:
                         keysPressed[SDLK_f] = false;
+                    break;
+
+                    case SDLK_i:
+                        keysPressed[SDLK_i] = false;
+                    break;
+
+                    case SDLK_u:
+                        keysPressed[SDLK_u] = false;
                     break;
 
                     case SDLK_LEFT:
@@ -185,6 +201,12 @@ void Input::handleMovementKeys(){
 
     if(keysPressed[SDLK_f])
         engine->graphics->camera->moveDown();
+
+    if(keysPressed[SDLK_i])
+        engine->graphics->isRaining = true;
+
+    if(keysPressed[SDLK_u])
+        engine->graphics->isRaining = false;
 
     if(keysPressed[SDLK_LEFT]){
 

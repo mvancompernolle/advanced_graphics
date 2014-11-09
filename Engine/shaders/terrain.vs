@@ -3,9 +3,9 @@
 uniform mat4 mvp;
 uniform mat4 model;
 
-in vec3 vs_pos;
-in vec2 vs_tex;
-in vec3 vs_normal;
+layout (location = 0) in vec3 vs_pos;
+layout (location = 1) in vec2 vs_tex;
+layout (location = 2) in vec3 vs_normal;
 
 out vec2 fs_tex;
 out vec3 fs_normal;

@@ -30,6 +30,7 @@ public:
 
     glm::mat4 getView() const;
     glm::vec3 getPos() const;
+    glm::vec3 getCameraDirection() const;
 
 private:
 

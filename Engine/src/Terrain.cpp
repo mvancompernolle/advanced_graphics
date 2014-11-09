@@ -9,11 +9,16 @@
 using namespace Vancom;
 
 Terrain::Terrain(Engine *engine, const char* fileName) : engine(engine), fileName(fileName){
+	specularIntensity = 0.5;
+	specularPower = 32;
 	heightScale = 100;
+	geotransform = new double[6];
 }
 
 Terrain::~Terrain(){
 
+	// delete geotransform 
+	delete geotransform;
 }
 
 bool Terrain::init(){
@@ -21,15 +26,6 @@ bool Terrain::init(){
 	int bGotMin, bGotMax;
     double adfMinMax[2];
 	GDALRasterBand* poBand;
-	
-	// initalize program
-	if(!program.init())
-		return false;
-
-	program.enable();
-
-	// set initial light direct
-	program.setLightDirection(engine->graphics->getLightDirection());
 
 	// get gdal data set from file
 	gdalDataSet = (GDALDataset *) GDALOpen( fileName, GA_ReadOnly );
@@ -56,6 +52,14 @@ bool Terrain::init(){
 	min = adfMinMax[0];
 	max = adfMinMax[1];
 	range = max - min;
+	std::cout << range << std::endl;
+
+	// get the geotransform values for the terrain
+	gdalDataSet->GetGeoTransform(geotransform);
+
+	// calculate heightscale so that it is accurate
+	heightScale = range / geotransform[1];
+	std::cout << heightScale << " " << range << " " << geotransform[1] << std::endl;
 
     if(!generateMesh())
     	return false;
@@ -130,9 +134,9 @@ bool Terrain::generateMesh(){
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
 	// setup attributes
-	glVertexAttribPointer(program.locPos, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), 0);
-	glVertexAttribPointer(program.locTex, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 12);
-	glVertexAttribPointer(program.locNormal, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 20);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), 0); // pos
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 12); // tex
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 20); // normal
 
 	// delete pixel data
 	for(int i=0; i<height; i++)
@@ -200,23 +204,15 @@ void Terrain::tick(float dt){
 
 }
 
-void Terrain::render(glm::mat4 projection, glm::mat4 view){
+void Terrain::render(){
 
-	// enable program and bind vao, vbo, and vio
-	program.enable();
+	// bind vao
 	glBindVertexArray(vao);
 
 	// enable attributes
-	glEnableVertexAttribArray(program.locPos);
-	glEnableVertexAttribArray(program.locTex);
-	glEnableVertexAttribArray(program.locNormal);
-
-	// set uniforms
-	glm::mat4 mvp = projection * view * model;
-	program.setMVP(mvp);
-	program.setModelPos(model);
-	program.setLightDirection(engine->graphics->getLightDirection());
-	program.setSpotLightPosition(engine->graphics->camera->getPos());
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
 
 	// bind ground texture
 	groundTexture->bind(GL_TEXTURE0);
@@ -225,9 +221,9 @@ void Terrain::render(glm::mat4 projection, glm::mat4 view){
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);
 
 	// disable attributes
-	glDisableVertexAttribArray(program.locPos);
-	glDisableVertexAttribArray(program.locTex);
-	glDisableVertexAttribArray(program.locNormal);
+	glDisableVertexAttribArray(0);
+	glDisableVertexAttribArray(1);
+	glDisableVertexAttribArray(2);
 }
 
 void Terrain::getDimensions(int& width, int& height) const{

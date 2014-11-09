@@ -33,6 +33,10 @@ uniform sampler2D gSampler;
 uniform vec3 lightDir;
 uniform vec3 spotLightPos;
 uniform vec3 spotLightDir;
+uniform vec3 cameraPos;
+uniform float specularIntensity;
+uniform float specularPower;
+uniform int isSpecularOn;
 
 in vec2 fs_tex;
 in vec3 fs_normal;
@@ -57,17 +61,17 @@ vec4 calcLightInternal(BaseLight l, vec3 lightDirection, vec3 normal)
     if (diffuseFactor > 0) {                                                                
         diffuseColor = vec4(l.color, 1.0f) * l.diffuseIntensity * diffuseFactor;    
                                                                                             
-        /*vec3 VertexToEye = normalize(gEyeWorldPos - WorldPos0);                             
-        vec3 LightReflect = normalize(reflect(LightDirection, Normal));                     
-        float SpecularFactor = dot(VertexToEye, LightReflect);                              
-        SpecularFactor = pow(SpecularFactor, gSpecularPower);                               
-        if (SpecularFactor > 0) {                                                           
-            SpecularColor = vec4(Light.Color, 1.0f) *                                       
-                            gMatSpecularIntensity * SpecularFactor;                         
-        }     */                                                                              
+        vec3 vertexToEye = normalize(cameraPos - fs_pos);                             
+        vec3 lightReflect = normalize(reflect(lightDir, normal));                     
+        float specularFactor = dot(vertexToEye, lightReflect);                              
+        specularFactor = pow(specularFactor, specularPower);                               
+        if (specularFactor > 0) {                                                           
+            specularColor = vec4(l.color, 1.0f) *                                       
+                            specularIntensity * specularFactor;                         
+        }                                                                                  
     }                                                                                       
                                                                                             
-    return (ambientColor + diffuseColor);                                   
+    return (ambientColor + diffuseColor + (specularColor * isSpecularOn));                                   
 }  
 
 vec4 calcDirectionLight(vec3 normal){
@@ -107,8 +111,8 @@ void main(void){
 
 	// create a base ambient light for the scene
     light.color = vec3(1.0, 1.0, 1.0);
-    light.ambientIntensity = 0;
-    light.diffuseIntensity = 0.9;
+    light.ambientIntensity = 0.05;
+    light.diffuseIntensity = 0.8;
 
     // create a direction light
     d_light.base = light;
@@ -120,7 +124,7 @@ void main(void){
     atten.linear = 0;
     atten.ex = 0.01;
     p_light.base = light;
-    p_light.pos = vec3(0, 60.0, 0);
+    p_light.pos = vec3(30, 60.0, 0);
     p_light.atten = atten;
 
     // create a spot light
@@ -133,16 +137,16 @@ void main(void){
     p.pos = spotLightPos;
     p.atten = atten2;
     s_light.base = p;
-    s_light.direction = vec3(0, -1, 0);
-    s_light.cutoff = .90f;
+    s_light.direction = spotLightDir;
+    s_light.cutoff = .99f;
 
     // calulate the total light afftecting the pixel
     vec4 totalLight = vec4(0,0,0,0);
     totalLight += calcDirectionLight(fs_normal);
 
-    totalLight += calcPointLight(p_light, fs_normal);
+    //totalLight += calcPointLight(p_light, fs_normal);
 
     totalLight += calcSpotLight(s_light, fs_normal);
 
-	color = texture(gSampler, fs_tex.xy) * totalLight;
+	color = texture(gSampler, fs_tex.xy) * totalLight * (1 - (isSpecularOn * .2));
 }

@@ -86,3 +86,8 @@ glm::vec3 Camera::getPos() const{
 
 	return pos;
 }
+
+glm::vec3 Camera::getCameraDirection() const{
+
+  return glm::normalize(orientation);
+}

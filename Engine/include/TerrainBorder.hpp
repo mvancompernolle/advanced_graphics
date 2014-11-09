@@ -33,6 +33,7 @@ public:
 	void tick(float dt);
 	void updateParticles();
 	void renderParticles(glm::mat4 proj, glm::mat4 view);
+	void render();
 	void render(glm::mat4 projection, glm::mat4 view);
 
 private:

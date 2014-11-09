@@ -12,13 +12,16 @@
 #include "Engine.hpp"
 #include "Camera.hpp"
 #include "EntityManager.hpp"
+#include "TerrainBorder.hpp"
 
 using namespace Vancom;
 
 Graphics::Graphics(Engine *engine) : engine(engine){
 
     // initialize light angle for direction lights
-    lightAngle = -1.0f;
+    lightAngle = -0.5f;
+    isRaining = true;
+    
     // call to create the light vector
     increaseLightAngle();
 
@@ -74,6 +77,14 @@ void Graphics::init(){
 
     updateView();
     windowResized();
+
+    // initialize programs
+    if(!defaultProgram.init())
+        std::cout << "defaultProgram failed to init" << std::endl;
+
+    if(!selectionProgram.init())
+        std::cout << "selectionProgram failed to init" << std::endl;
+    selectionTexture.init(1800, 1000);
 }
 
 void Graphics::tick(float dt){
@@ -85,10 +96,45 @@ void Graphics::render(){
 	updateCamera();
 	updateView();
 
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // render selectable entities
+    selectionTexture.enableWriting();
 
-    for(Entity *entity : engine->entityManager->entities)
-        entity->render(projection, view);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    selectionProgram.enable();
+
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        selectionProgram.setObjectIndex(entity->id);
+        selectionProgram.setMVP(projection * view * entity->getModel());
+        entity->render();
+    }
+
+    selectionTexture.disableWriting();
+
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    // check to see if object is in middle of screen
+    SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
+    if((unsigned int) pixel.objectId != 0)
+        std::cout << (unsigned int) pixel.objectId << std::endl;
+
+    // render entities using default
+    defaultProgram.enable();
+    defaultProgram.setLightDirection(getLightDirection());
+    defaultProgram.setSpotLightPosition(camera->getPos());
+    defaultProgram.setSpotLightDirection(camera->getCameraDirection());
+    defaultProgram.setCameraPosition(camera->getPos());
+    defaultProgram.setSpecularFlag(isRaining);
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        defaultProgram.setMVP(projection * view * entity->getModel());
+        defaultProgram.setModelPos(entity->getModel());
+        defaultProgram.setSpecularIntensity(entity->specularIntensity);
+        defaultProgram.setSpecularPower(entity->specularPower);
+        entity->render();
+    }
+
+    // render terrain border
+    engine->entityManager->border->render(projection, view);
 
 	SDL_GL_SwapWindow(window);
 }

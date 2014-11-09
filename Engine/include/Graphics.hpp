@@ -11,7 +11,10 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtx/rotate_vector.hpp>
 
-#include "Cube.hpp"
+#include "Model.hpp"
+#include "SelectionProgram.hpp"
+#include "SelectionTexture.hpp"
+#include "TerrainProgram.hpp"
 
 namespace Vancom{
 
@@ -43,9 +46,11 @@ public:
 	void decreaseLightAngle();
 	glm::vec3 getLightDirection() const;
 
+
 	// public variables
 	glm::mat4 view, projection;
 	Camera *camera;
+	bool isRaining;
 
 private:
 
@@ -55,6 +60,13 @@ private:
 	SDL_GLContext gl_context;
 	float lightAngle;
 	glm::vec3 lightDir;
+
+	// selection program
+	SelectionProgram selectionProgram;
+	SelectionTexture selectionTexture;
+
+	// default program
+	TerrainProgram defaultProgram;
 };
 
 } // end Vancom namespace

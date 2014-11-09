@@ -29,13 +29,17 @@ bool TerrainProgram::init(){
     locLightDir = getUniformLocation("lightDir");
     locSpotLightDir = getUniformLocation("spotLightDir");
     locSpotLightPos = getUniformLocation("spotLightPos");
+    locSpecularPower = getUniformLocation("specularPower");
+    locSpecularIntensity = getUniformLocation("specularIntensity");
+    locCameraPos = getUniformLocation("cameraPos");
+    locSpecularOn = getUniformLocation("isSpecularOn");
 
     locPos = glGetAttribLocation(program, "vs_pos");
     locTex = glGetAttribLocation(program, "vs_tex");
     locNormal = glGetAttribLocation(program, "vs_normal");
 
     if(locMVP == -1 || locPos == -1 || locLightDir == -1 || locTex == -1 || locNormal == -1)
-        std::cerr << "Unable to find location in TerrainProgram" << std::endl;
+        std::cout << "Unable to find location in TerrainProgram" << std::endl;
 
     return true;
 }
@@ -68,4 +72,26 @@ void TerrainProgram::setSpotLightDirection(const glm::vec3 direction) const{
 void TerrainProgram::setSpotLightPosition(const glm::vec3 pos) const{
 
     glUniform3fv(locSpotLightPos, 1, glm::value_ptr(pos));
+}
+
+void TerrainProgram::setSpecularPower(const float power) const{
+
+    glUniform1f(locSpecularPower, power);
+}
+
+void TerrainProgram::setSpecularIntensity(const float intensity) const{
+
+    glUniform1f(locSpecularIntensity, intensity);
+}
+
+void TerrainProgram::setCameraPosition(const glm::vec3 pos) const{
+
+    glUniform3fv(locCameraPos, 1, glm::value_ptr(pos));
+}
+
+void TerrainProgram::setSpecularFlag(const bool isOn) const{
+
+    int val = 0;
+    if(isOn) { val = 1; }
+    glUniform1i(locSpecularOn, val);
 }

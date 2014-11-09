@@ -27,7 +27,7 @@ class Mesh{
 public:
 
 	// public functions
-	Mesh(TerrainProgram program);
+	Mesh();
 	bool loadMesh(const char* fileName);
 	void renderMesh();
 
@@ -55,7 +55,6 @@ private:
 	GLuint buffers[4];
 	std::vector<MeshUnit> meshes;
 	std::vector<Texture*> textures;
-	TerrainProgram program;
 };
 
 }	// end namespace Vancom

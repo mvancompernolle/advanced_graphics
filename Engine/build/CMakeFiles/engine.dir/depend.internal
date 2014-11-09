@@ -16,28 +16,21 @@ CMakeFiles/engine.dir/src/Camera.cpp.o
 CMakeFiles/engine.dir/src/Clock.cpp.o
  ../include/Clock.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/Clock.cpp
-CMakeFiles/engine.dir/src/Cube.cpp.o
- ../include/Cube.hpp
- ../include/Entity.hpp
- ../include/Mesh.hpp
- ../include/ShaderProgram.hpp
- ../include/TerrainProgram.hpp
- ../include/Texture.hpp
- ../include/Vertex.hpp
- /home/matthew/Desktop/adv_graphics/Engine/src/Cube.cpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o
  ../include/DefaultProgram.hpp
  ../include/ShaderProgram.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/DefualtProgram.cpp
 CMakeFiles/engine.dir/src/Engine.cpp.o
  ../include/Clock.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
  ../include/Graphics.hpp
  ../include/Input.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/SelectionProgram.hpp
+ ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -93,11 +86,11 @@ CMakeFiles/engine.dir/src/Entity.cpp.o
 CMakeFiles/engine.dir/src/EntityManager.cpp.o
  ../include/BorderRenderProgram.hpp
  ../include/BorderUpdateProgram.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
  ../include/ShaderProgram.hpp
  ../include/Terrain.hpp
  ../include/TerrainBorder.hpp
@@ -125,14 +118,19 @@ CMakeFiles/engine.dir/src/Gbuffer.cpp.o
  ../include/GBuffer.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/Gbuffer.cpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o
+ ../include/BorderRenderProgram.hpp
+ ../include/BorderUpdateProgram.hpp
  ../include/Camera.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
  ../include/Graphics.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/SelectionProgram.hpp
+ ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
+ ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -203,12 +201,14 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  /usr/include/gdal/ogrsf_frmts.h
 CMakeFiles/engine.dir/src/Input.cpp.o
  ../include/Camera.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/Graphics.hpp
  ../include/Input.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/SelectionProgram.hpp
+ ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -264,16 +264,34 @@ CMakeFiles/engine.dir/src/Mesh.cpp.o
  ../include/Texture.hpp
  ../include/Vertex.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/Mesh.cpp
+CMakeFiles/engine.dir/src/Model.cpp.o
+ ../include/Entity.hpp
+ ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/ShaderProgram.hpp
+ ../include/TerrainProgram.hpp
+ ../include/Texture.hpp
+ ../include/Vertex.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/Model.cpp
+CMakeFiles/engine.dir/src/SelectionProgram.cpp.o
+ ../include/SelectionProgram.hpp
+ ../include/ShaderProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/SelectionProgram.cpp
+CMakeFiles/engine.dir/src/SelectionTexture.cpp.o
+ ../include/SelectionTexture.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/SelectionTexture.cpp
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o
  ../include/ShaderProgram.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/ShaderProgram.cpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o
  ../include/Camera.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/Graphics.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/SelectionProgram.hpp
+ ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/Terrain.hpp
  ../include/TerrainProgram.hpp
@@ -343,11 +361,13 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
  ../include/BorderRenderProgram.hpp
  ../include/BorderUpdateProgram.hpp
  ../include/Camera.hpp
- ../include/Cube.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/Graphics.hpp
  ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/SelectionProgram.hpp
+ ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp

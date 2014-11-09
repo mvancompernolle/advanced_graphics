@@ -6,21 +6,23 @@
 
 #IncludeRegexTransform: 
 
+../include/BorderRenderProgram.hpp
+glm/gtc/matrix_transform.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+glm/gtx/string_cast.hpp
+-
+ShaderProgram.hpp
+../include/ShaderProgram.hpp
+
+../include/BorderUpdateProgram.hpp
+ShaderProgram.hpp
+../include/ShaderProgram.hpp
+
 ../include/Camera.hpp
 glm/glm.hpp
 -
-
-../include/Cube.hpp
-vector
--
-Vertex.hpp
-../include/Vertex.hpp
-Entity.hpp
-../include/Entity.hpp
-TerrainProgram.hpp
-../include/TerrainProgram.hpp
-Mesh.hpp
-../include/Mesh.hpp
 
 ../include/Engine.hpp
 
@@ -33,6 +35,10 @@ glm/gtx/rotate_vector.hpp
 -
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
+
+../include/EntityManager.hpp
+vector
+-
 
 ../include/Graphics.hpp
 GL/glew.h
@@ -49,8 +55,14 @@ glm/gtc/matrix_transform.hpp
 -
 glm/gtx/rotate_vector.hpp
 -
-Cube.hpp
-../include/Cube.hpp
+Model.hpp
+../include/Model.hpp
+SelectionProgram.hpp
+../include/SelectionProgram.hpp
+SelectionTexture.hpp
+../include/SelectionTexture.hpp
+TerrainProgram.hpp
+../include/TerrainProgram.hpp
 
 ../include/Mesh.hpp
 vector
@@ -72,31 +84,51 @@ Vertex.hpp
 TerrainProgram.hpp
 ../include/TerrainProgram.hpp
 
+../include/Model.hpp
+vector
+-
+Vertex.hpp
+../include/Vertex.hpp
+Entity.hpp
+../include/Entity.hpp
+TerrainProgram.hpp
+../include/TerrainProgram.hpp
+Mesh.hpp
+../include/Mesh.hpp
+
+../include/SelectionProgram.hpp
+glm/gtc/matrix_transform.hpp
+-
+glm/gtc/type_ptr.hpp
+-
+glm/gtx/string_cast.hpp
+-
+ShaderProgram.hpp
+../include/ShaderProgram.hpp
+
+../include/SelectionTexture.hpp
+GL/glew.h
+-
+
 ../include/ShaderProgram.hpp
 list
 -
 GL/glew.h
 -
 
-../include/Terrain.hpp
-GL/glew.h
+../include/TerrainBorder.hpp
+glm/glm.hpp
 -
-vector
+glm/gtc/matrix_transform.hpp
 -
-ogr_spatialref.h
+glm/gtx/rotate_vector.hpp
 -
-ogr_srs_api.h
--
-gdal_priv.h
--
-TerrainProgram.hpp
-../include/TerrainProgram.hpp
 Entity.hpp
 ../include/Entity.hpp
-Vertex.hpp
-../include/Vertex.hpp
-Texture.hpp
-../include/Texture.hpp
+BorderUpdateProgram.hpp
+../include/BorderUpdateProgram.hpp
+BorderRenderProgram.hpp
+../include/BorderRenderProgram.hpp
 
 ../include/TerrainProgram.hpp
 ShaderProgram.hpp
@@ -118,17 +150,29 @@ FreeImagePlus.h
 glm/glm.hpp
 -
 
-/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp
-Terrain.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.hpp
-iostream
--
-Engine.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Engine.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Graphics.cpp
 Graphics.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/Graphics.hpp
+iostream
+-
+ogrsf_frmts.h
+-
+ogr_spatialref.h
+-
+ogr_srs_api.h
+-
+gdal_priv.h
+/home/matthew/Desktop/adv_graphics/Engine/src/gdal_priv.h
+cpl_conv.h
+/home/matthew/Desktop/adv_graphics/Engine/src/cpl_conv.h
+Engine.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Engine.hpp
 Camera.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/Camera.hpp
+EntityManager.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.hpp
+TerrainBorder.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/TerrainBorder.hpp
 
 /usr/include/SDL2/SDL.h
 SDL_main.h
@@ -674,6 +718,10 @@ close_code.h
 
 /usr/include/SDL2/close_code.h
 
+/usr/include/gdal/cpl_atomic_ops.h
+cpl_port.h
+/usr/include/gdal/cpl_port.h
+
 /usr/include/gdal/cpl_config.h
 cpl_config_extras.h
 /usr/include/gdal/cpl_config_extras.h
@@ -798,6 +846,28 @@ cpl_port.h
 gdal_version.h
 /usr/include/gdal/gdal_version.h
 
+/usr/include/gdal/ogr_feature.h
+ogr_geometry.h
+/usr/include/gdal/ogr_geometry.h
+ogr_featurestyle.h
+/usr/include/gdal/ogr_featurestyle.h
+cpl_atomic_ops.h
+/usr/include/gdal/cpl_atomic_ops.h
+
+/usr/include/gdal/ogr_featurestyle.h
+cpl_conv.h
+/usr/include/gdal/cpl_conv.h
+cpl_string.h
+/usr/include/gdal/cpl_string.h
+ogr_core.h
+/usr/include/gdal/ogr_core.h
+
+/usr/include/gdal/ogr_geometry.h
+ogr_core.h
+/usr/include/gdal/ogr_core.h
+ogr_spatialref.h
+/usr/include/gdal/ogr_spatialref.h
+
 /usr/include/gdal/ogr_spatialref.h
 ogr_srs_api.h
 /usr/include/gdal/ogr_srs_api.h
@@ -805,4 +875,12 @@ ogr_srs_api.h
 /usr/include/gdal/ogr_srs_api.h
 ogr_core.h
 /usr/include/gdal/ogr_core.h
+
+/usr/include/gdal/ogrsf_frmts.h
+cpl_progress.h
+/usr/include/gdal/cpl_progress.h
+ogr_feature.h
+/usr/include/gdal/ogr_feature.h
+ogr_featurestyle.h
+/usr/include/gdal/ogr_featurestyle.h
 

@@ -7,6 +7,7 @@ namespace Vancom{
 
 class Entity;
 class Engine;
+class TerrainBorder;
 
 class EntityManager {
 
@@ -19,14 +20,18 @@ public:
 	void init();
 	void tick(float dt);
 	void stop();
+	unsigned int assignId();
 
 	// public variables
 	std::vector<Entity*> entities;
+	std::vector<Entity*> defaultEntities;
+	TerrainBorder *border;
 
 private:
 
 	// private variables
 	Engine *engine;
+	unsigned int nextId;
 
 };
 

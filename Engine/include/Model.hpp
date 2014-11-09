@@ -1,5 +1,5 @@
-#ifndef CUBE_HPP
-#define CUBE_HPP
+#ifndef MODEL_HPP
+#define MODEL_HPP
 
 #include <vector>
 #include "Vertex.hpp"
@@ -11,23 +11,23 @@ namespace Vancom{
 
 class DefaultProgram;
 
-class Cube : public Entity{
+class Model : public Entity{
 
 public:
-	Cube();
-	~Cube();
-	bool init();
+	Model();
+	Model(glm::vec3 pos, float scale);
+	~Model();
+	bool init(const char* fileName);
 	void tick(float dt);
-	void render(glm::mat4 projection, glm::mat4 view);
+	void render();
 
 private:
 
 	// private variables
-	TerrainProgram program;
 	Mesh *mesh;
 
 };
 
 }
 
-#endif // END CUBE_HPP
+#endif // END Model_HPP

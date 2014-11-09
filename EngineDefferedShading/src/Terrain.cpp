@@ -36,10 +36,6 @@ bool Terrain::init(){
 	program.enable();
 	program.setColorTextureUnit(0);
 
-	// initialize mesh  
-	dirLightRenderQuad = new Mesh(program);
-	dirLightRenderQuad->loadMesh("../assets/models/quad.obj");
-
 	// get gdal data set from file
 	gdalDataSet = (GDALDataset *) GDALOpen( fileName, GA_ReadOnly );
     if( gdalDataSet == NULL )
@@ -79,6 +75,10 @@ bool Terrain::init(){
 	dlProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
 	dlProgram.setLightDirection(engine->graphics->getLightDirection());
     dlProgram.setScreenSize(w, h);
+
+	// initialize mesh  
+	dirLightRenderQuad = new Mesh(program);
+	dirLightRenderQuad->loadMesh("../assets/models/quad.obj");
 
 	return true;
 }
@@ -149,10 +149,15 @@ bool Terrain::generateMesh(){
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(unsigned int) * indices.size(), indices.data(), GL_STATIC_DRAW);
 
+	// enable attributes
+	glEnableVertexAttribArray(0);
+	glEnableVertexAttribArray(1);
+	glEnableVertexAttribArray(2);
+
 	// setup attributes
-	glVertexAttribPointer(program.locPos, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), 0);
-	glVertexAttribPointer(program.locTex, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 12);
-	glVertexAttribPointer(program.locNormal, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 20);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), 0);
+	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 12);
+	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 20);
 
 	// delete pixel data
 	for(int i=0; i<height; i++)
@@ -235,11 +240,6 @@ void Terrain::geometryPass(glm::mat4 projection, glm::mat4 view){
 
 	glEnable(GL_DEPTH_TEST);
 	glDisable(GL_BLEND);
-
-	// enable attributes
-	glEnableVertexAttribArray(program.locPos);
-	glEnableVertexAttribArray(program.locTex);
-	glEnableVertexAttribArray(program.locNormal);
 
 	// set uniforms
 	glm::mat4 mvp = projection * view * model;

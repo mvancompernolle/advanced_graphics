@@ -16,7 +16,7 @@ Mesh::MeshUnit::MeshUnit(){
 	materialIndex = 0;
 }
 
-Mesh::Mesh(TerrainProgram program) : program(program){
+Mesh::Mesh(){
 
 	vao = 0;
 }
@@ -97,18 +97,18 @@ bool Mesh::loadMeshesFromScene(const aiScene* scene, const char* fileName){
 	// generate and populate the buffers with vertex attributes and the indices
   	glBindBuffer(GL_ARRAY_BUFFER, buffers[POS_VB]);
     glBufferData(GL_ARRAY_BUFFER, sizeof(positions[0]) * positions.size(), &positions[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(program.locPos);
-    glVertexAttribPointer(program.locPos, 3, GL_FLOAT, GL_FALSE, 0, 0);    
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);    
 
     glBindBuffer(GL_ARRAY_BUFFER, buffers[TEXCOORD_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(texCoords[0]) * texCoords.size(), &texCoords[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(program.locTex);
-    glVertexAttribPointer(program.locTex, 2, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, 0, 0);
 
    	glBindBuffer(GL_ARRAY_BUFFER, buffers[NORMAL_VB]);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(normals[0]) * normals.size(), &normals[0], GL_STATIC_DRAW);
-    glEnableVertexAttribArray(program.locNormal);
-    glVertexAttribPointer(program.locNormal, 3, GL_FLOAT, GL_FALSE, 0, 0);
+    glEnableVertexAttribArray(2);
+    glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, 0, 0);
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[INDEX_BUFFER]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_STATIC_DRAW);

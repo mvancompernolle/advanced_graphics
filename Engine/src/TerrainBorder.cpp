@@ -297,3 +297,7 @@ void TerrainBorder::render(glm::mat4 projection, glm::mat4 view){
 		TBOIndex = (TBOIndex + 1) & 0x1;
 	}
 }
+
+void TerrainBorder::render(){
+	
+}

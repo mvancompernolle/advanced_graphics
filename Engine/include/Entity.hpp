@@ -17,8 +17,14 @@ public:
 	Entity();
 	virtual ~Entity();
 	virtual void tick(float dt) = 0;
-	virtual void render(glm::mat4 projection, glm::mat4 view) = 0;
+	virtual void render() = 0;
 	void scale(float scale);
+
+	glm::mat4 getModel() const;
+
+	// public variables
+	unsigned int id;
+	float specularIntensity, specularPower;
 
 protected:
 	

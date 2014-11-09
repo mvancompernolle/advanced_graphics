@@ -11,24 +11,6 @@ struct DirectionalLight {
     vec3 direction;
 };
 
-struct Attenuation {
-    float constant;
-    float linear;
-    float ex;
-};
-
-struct PointLight {
-    BaseLight base;
-    vec3 pos;
-    Attenuation atten;
-};
-
-struct SpotLight{
-    PointLight base;
-    vec3 direction;
-    float cutoff;
-};
-
 uniform sampler2D gPositionMap;
 uniform sampler2D gColorMap;
 uniform sampler2D gNormalMap;
@@ -51,7 +33,9 @@ vec4 calcLightInternal(BaseLight l, vec3 lightDirection, vec3 pos, vec3 normal)
                                                                                             
     if (diffuseFactor > 0) {                                                                
         diffuseColor = vec4(l.color, 1.0f) * l.diffuseIntensity * diffuseFactor;    
-                                                                                            
+                         
+
+        specularColor = vec4((pos.xyz), 1.0).xyzw * .00001;                                                                   
         /*vec3 VertexToEye = normalize(gEyeWorldPos - WorldPos0);                             
         vec3 LightReflect = normalize(reflect(LightDirection, Normal));                     
         float SpecularFactor = dot(VertexToEye, LightReflect);                              
@@ -59,10 +43,10 @@ vec4 calcLightInternal(BaseLight l, vec3 lightDirection, vec3 pos, vec3 normal)
         if (SpecularFactor > 0) {                                                           
             SpecularColor = vec4(Light.Color, 1.0f) *                                       
                             gMatSpecularIntensity * SpecularFactor;                         
-        }     */                                                                              
+        }*/                                                                                  
     }                                                                                       
                                                                                             
-    return (ambientColor + diffuseColor);                                   
+    return (ambientColor + diffuseColor + specularColor);                                   
 }  
 
 vec4 calcDirectionLight(vec3 pos, vec3 normal){
@@ -76,6 +60,7 @@ vec2 calcTexCoord(){
 }
 
 void main(void){
+
     // hard code directional light for now
 	// create a base ambient light for the scene
     light.color = vec3(1.0, 1.0, 1.0);
@@ -92,4 +77,5 @@ void main(void){
     vec3 normal = texture(gNormalMap, texCoord).xyz;
 
 	fragColor = vec4(color, 1.0) * calcDirectionLight(pos, normal);
+    //fragColor = vec4(texCoord, 0.0, 1.0);
 }
