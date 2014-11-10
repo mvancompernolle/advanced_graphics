@@ -16,6 +16,7 @@
 #include "SelectionTexture.hpp"
 #include "TerrainProgram.hpp"
 #include "SilhouetteProgram.hpp"
+#include "GUIProgram.hpp"
 
 namespace Vancom{
 
@@ -71,6 +72,10 @@ private:
 
 	// silhouette program
 	SilhouetteProgram silhouetteProgram;
+
+	// gui program
+	GUIProgram guiProgram;
+	
 };
 
 } // end Vancom namespace

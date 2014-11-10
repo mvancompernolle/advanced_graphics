@@ -19,7 +19,7 @@ using namespace Vancom;
 Graphics::Graphics(Engine *engine) : engine(engine){
 
     // initialize light angle for direction lights
-    lightAngle = -0.3f;
+    lightAngle = -0.75f;
     isRaining = true;
     
     // call to create the light vector
@@ -74,7 +74,7 @@ void Graphics::init(){
     glClearColor(0.0, 0.0, 0.5, 1);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
-    glLineWidth(10.0f);
+    glLineWidth(5.0f);
 
     updateView();
     windowResized();
@@ -89,6 +89,9 @@ void Graphics::init(){
 
     if(!silhouetteProgram.init())
         std::cout << "silhouetteProgram failed to init" << std::endl;
+
+    if(!guiProgram.init())
+        std::cout << "guiProgram failed to init" << std::endl;
 }
 
 void Graphics::tick(float dt){
@@ -149,9 +152,15 @@ void Graphics::render(){
         }
     }
 
-
     // render terrain border
     engine->entityManager->border->render(projection, view);
+
+    // render gui elements
+    guiProgram.enable();
+    guiProgram.setSampler(0);
+    for(Entity* entity : engine->entityManager->guiEntities){
+        entity->render();
+    }
 
 	SDL_GL_SwapWindow(window);
 }

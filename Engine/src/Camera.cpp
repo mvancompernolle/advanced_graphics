@@ -8,8 +8,8 @@ using namespace Vancom;
 
 Camera::Camera(Engine *engine)
     : engine(engine),
-      pos(0.0f, 80.0f, 200.0f),
-      orientation(0.0f, -50.0f, -200.0f),
+      pos(-200.0f, 150.0f, 50.0f),
+      orientation(200.0f, -50.0f, -50.0f),
       up(0.0f,1.0f,0.0f){
 
     rotateX = rotateY = 0.0f;

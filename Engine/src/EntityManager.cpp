@@ -7,6 +7,8 @@
 #include "Entity.hpp"
 #include "Terrain.hpp"
 #include "TerrainBorder.hpp"
+#include "CrossHair.hpp"
+#include "Graphics.hpp"
 
 using namespace Vancom;
 
@@ -70,6 +72,15 @@ void EntityManager::init(){
 	border->init(100, glm::vec2(-width/2, height/2), glm::vec2(width/2, height/2), glm::vec2(-width/2, -height/2), 
 		glm::vec2(width/2, -height/2));
 	entities.push_back(border);
+
+	// add a crosshair
+	engine->graphics->getWindowSize(width, height);
+	float ratio = (float) width/height;
+	std::cout << ratio << std::endl;
+	CrossHair *crossHair = new CrossHair(glm::vec3(0, 0, 0));
+	crossHair->init("../assets/models/crosshair.png", .03 / ratio, .03);
+	guiEntities.push_back(crossHair);
+	entities.push_back(crossHair);
 }
 
 void EntityManager::tick(float dt){

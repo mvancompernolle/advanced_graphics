@@ -25,6 +25,7 @@ public:
 	// public variables
 	std::vector<Entity*> entities;
 	std::vector<Entity*> defaultEntities;
+	std::vector<Entity*> guiEntities;
 	TerrainBorder *border;
 
 private:

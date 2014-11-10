@@ -207,6 +207,30 @@ src/Clock.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Clock.cpp.s
 .PHONY : src/Clock.cpp.s
 
+src/CrossHair.o: src/CrossHair.cpp.o
+.PHONY : src/CrossHair.o
+
+# target to build an object file
+src/CrossHair.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CrossHair.cpp.o
+.PHONY : src/CrossHair.cpp.o
+
+src/CrossHair.i: src/CrossHair.cpp.i
+.PHONY : src/CrossHair.i
+
+# target to preprocess a source file
+src/CrossHair.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CrossHair.cpp.i
+.PHONY : src/CrossHair.cpp.i
+
+src/CrossHair.s: src/CrossHair.cpp.s
+.PHONY : src/CrossHair.s
+
+# target to generate assembly for a file
+src/CrossHair.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CrossHair.cpp.s
+.PHONY : src/CrossHair.cpp.s
+
 src/DefualtProgram.o: src/DefualtProgram.cpp.o
 .PHONY : src/DefualtProgram.o
 
@@ -302,6 +326,30 @@ src/EntityManager.s: src/EntityManager.cpp.s
 src/EntityManager.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
 .PHONY : src/EntityManager.cpp.s
+
+src/GUIProgram.o: src/GUIProgram.cpp.o
+.PHONY : src/GUIProgram.o
+
+# target to build an object file
+src/GUIProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GUIProgram.cpp.o
+.PHONY : src/GUIProgram.cpp.o
+
+src/GUIProgram.i: src/GUIProgram.cpp.i
+.PHONY : src/GUIProgram.i
+
+# target to preprocess a source file
+src/GUIProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GUIProgram.cpp.i
+.PHONY : src/GUIProgram.cpp.i
+
+src/GUIProgram.s: src/GUIProgram.cpp.s
+.PHONY : src/GUIProgram.s
+
+# target to generate assembly for a file
+src/GUIProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GUIProgram.cpp.s
+.PHONY : src/GUIProgram.cpp.s
 
 src/Gbuffer.o: src/Gbuffer.cpp.o
 .PHONY : src/Gbuffer.o
@@ -660,6 +708,9 @@ help:
 	@echo "... src/Clock.o"
 	@echo "... src/Clock.i"
 	@echo "... src/Clock.s"
+	@echo "... src/CrossHair.o"
+	@echo "... src/CrossHair.i"
+	@echo "... src/CrossHair.s"
 	@echo "... src/DefualtProgram.o"
 	@echo "... src/DefualtProgram.i"
 	@echo "... src/DefualtProgram.s"
@@ -672,6 +723,9 @@ help:
 	@echo "... src/EntityManager.o"
 	@echo "... src/EntityManager.i"
 	@echo "... src/EntityManager.s"
+	@echo "... src/GUIProgram.o"
+	@echo "... src/GUIProgram.i"
+	@echo "... src/GUIProgram.s"
 	@echo "... src/Gbuffer.o"
 	@echo "... src/Gbuffer.i"
 	@echo "... src/Gbuffer.s"
