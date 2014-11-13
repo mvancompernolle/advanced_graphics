@@ -1,16 +1,16 @@
-#ifndef EXPLOSION_UPDATE_PROGRAM_HPP
-#define	EXPLOSION_UPDATE_PROGRAM_HPP
+#ifndef FIREWORKS_UPDATE_PROGRAM_HPP
+#define	FIREWORKS_UPDATE_PROGRAM_HPP
 
 #include "ShaderProgram.hpp"
 
 namespace Vancom{
 
-class ExplosionUpdateProgram : public ShaderProgram{
+class FireworksUpdateProgram : public ShaderProgram{
 
 public:
 
     // public functions
-    ExplosionUpdateProgram();
+    FireworksUpdateProgram();
     virtual bool init();    
     void setDt(unsigned int dt);
     void setTime(int time);
@@ -33,4 +33,4 @@ public:
 }
 
 
-#endif	/* EXPLOSION_UPDATE_PROGRAM_HPP */
+#endif	/* FIREWORKS_UPDATE_PROGRAM_HPP */

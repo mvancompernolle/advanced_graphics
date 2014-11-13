@@ -1,4 +1,4 @@
-#include "Explosion.hpp"
+#include "Fireworks.hpp"
 #include <iostream>
 
 #define MAX_PARTICLES 20000
@@ -9,7 +9,7 @@
 
 using namespace Vancom;
 
-Explosion::Explosion(){
+Fireworks::Fireworks(){
 	// initialize variables
 	firstTime = true;
 	VBOIndex = 0;
@@ -18,7 +18,7 @@ Explosion::Explosion(){
 	texture = NULL;
 }
 
-Explosion::~Explosion(){
+Fireworks::~Fireworks(){
 	delete texture;
 
 	if(transformFeedback[0] != 0)
@@ -28,7 +28,7 @@ Explosion::~Explosion(){
 		glDeleteBuffers(2, particleBuffer);
 }
 
-bool Explosion::init(const glm::vec3& pos){
+bool Fireworks::init(const glm::vec3& pos){
 	Particle particles[MAX_PARTICLES];
 
 	// create the particle launcher
@@ -76,14 +76,14 @@ bool Explosion::init(const glm::vec3& pos){
 
 	texture = new Texture(GL_TEXTURE_2D, "../assets/models/fireworks_red.jpg");
 	if(!texture->create()){
-		std::cout << "Failed to load explosion texture" << std::endl;
+		std::cout << "Failed to load Fireworks texture" << std::endl;
 		return false;
 	}
 
 	return true;
 }
 
-void Explosion::tick(float dt){
+void Fireworks::tick(float dt){
 	// save dt
 	this->dt = dt * 1000;
 
@@ -91,7 +91,7 @@ void Explosion::tick(float dt){
 	timeElapsed += this->dt;
 }
 
-void Explosion::updateParticles(){
+void Fireworks::updateParticles(){
 	updateProgram.enable();
 	updateProgram.setTime(timeElapsed);
 	updateProgram.setDt(dt);
@@ -131,7 +131,7 @@ void Explosion::updateParticles(){
     glDisableVertexAttribArray(3);
 }
 
-void Explosion::renderParticles(glm::mat4 proj, glm::mat4 view, glm::vec3 camPos){
+void Fireworks::renderParticles(glm::mat4 proj, glm::mat4 view, glm::vec3 camPos){
 	renderProgram.enable();
 	renderProgram.setMVP(proj * view * model);
 	renderProgram.setCameraPos(camPos);
@@ -151,7 +151,7 @@ void Explosion::renderParticles(glm::mat4 proj, glm::mat4 view, glm::vec3 camPos
     glDisableVertexAttribArray(0);
 }
 
-void Explosion::render(glm::mat4 projection, glm::mat4 view, glm::vec3 camPos){
+void Fireworks::render(glm::mat4 projection, glm::mat4 view, glm::vec3 camPos){
 
 	// bind vao
 	glBindVertexArray(vao);
@@ -167,6 +167,6 @@ void Explosion::render(glm::mat4 projection, glm::mat4 view, glm::vec3 camPos){
 	TBOIndex = (TBOIndex + 1) & 0x1;
 }
 
-void Explosion::render(){
+void Fireworks::render(){
 
 }

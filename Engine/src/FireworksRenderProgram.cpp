@@ -1,23 +1,23 @@
-#include "ExplosionRenderProgram.hpp"
+#include "FireworksRenderProgram.hpp"
 
 using namespace Vancom;
 
-ExplosionRenderProgram::ExplosionRenderProgram(){
+FireworksRenderProgram::FireworksRenderProgram(){
 
 }
 
-bool ExplosionRenderProgram::init(){
+bool FireworksRenderProgram::init(){
     
     if (!ShaderProgram::init())
         return false;
 
-    if (!addShader(GL_VERTEX_SHADER, "../shaders/explosionRender.vs"))
+    if (!addShader(GL_VERTEX_SHADER, "../shaders/fireworksRender.vs"))
         return false;
 
-    if (!addShader(GL_GEOMETRY_SHADER, "../shaders/explosionRender.gs"))
+    if (!addShader(GL_GEOMETRY_SHADER, "../shaders/fireworksRender.gs"))
         return false;
 
-	if (!addShader(GL_FRAGMENT_SHADER, "../shaders/explosionRender.fs"))
+	if (!addShader(GL_FRAGMENT_SHADER, "../shaders/fireworksRender.fs"))
 		return false;
 
 	if (!finalize())
@@ -31,18 +31,18 @@ bool ExplosionRenderProgram::init(){
     return true;
 }
 
-void ExplosionRenderProgram::setMVP(const glm::mat4 MVP){
+void FireworksRenderProgram::setMVP(const glm::mat4 MVP){
     glUniformMatrix4fv(locMVP, 1, GL_FALSE, glm::value_ptr(MVP));    
 }
 
-void ExplosionRenderProgram::setCameraPos(const glm::vec3& pos){
+void FireworksRenderProgram::setCameraPos(const glm::vec3& pos){
     glUniform3f(locCameraPos, pos.x, pos.y, pos.z);
 }
 
-void ExplosionRenderProgram::setColorTextureUnit(unsigned int textureUnit){
+void FireworksRenderProgram::setColorTextureUnit(unsigned int textureUnit){
     glUniform1i(locColorMap, textureUnit);
 }
 
-void ExplosionRenderProgram::setBillboardSize(float billboardSize){
+void FireworksRenderProgram::setBillboardSize(float billboardSize){
     glUniform1f(locSize, billboardSize);
 }

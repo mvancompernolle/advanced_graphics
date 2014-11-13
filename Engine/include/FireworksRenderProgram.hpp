@@ -1,5 +1,5 @@
-#ifndef EXPLOSION_RENDER_PROGRAM_HPP
-#define	EXPLOSION_RENDER_PROGRAM_HPP
+#ifndef FIREWORKS_RENDER_PROGRAM_HPP
+#define	FIREWORKS_RENDER_PROGRAM_HPP
 
 #include "ShaderProgram.hpp"
 #include <glm/gtc/matrix_transform.hpp>
@@ -8,12 +8,12 @@
 
 namespace Vancom{
 
-class ExplosionRenderProgram : public ShaderProgram{
+class FireworksRenderProgram : public ShaderProgram{
 
 public:
 
     // public functions
-    ExplosionRenderProgram();
+    FireworksRenderProgram();
     virtual bool init();    
     void setMVP(const glm::mat4 MVP);
     void setCameraPos(const glm::vec3& Pos);
@@ -32,4 +32,4 @@ public:
 
 }
 
-#endif	/* EXPLOSION_RENDER_PROGRAM_HPP */
+#endif	/* FIREWORKS_RENDER_PROGRAM_HPP */

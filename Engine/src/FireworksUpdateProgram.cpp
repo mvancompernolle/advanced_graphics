@@ -1,20 +1,20 @@
-#include "ExplosionUpdateProgram.hpp"
+#include "FireworksUpdateProgram.hpp"
 
 using namespace Vancom;
 
-ExplosionUpdateProgram::ExplosionUpdateProgram(){
+FireworksUpdateProgram::FireworksUpdateProgram(){
 
 }
 
-bool ExplosionUpdateProgram::init(){
+bool FireworksUpdateProgram::init(){
 
     if (!ShaderProgram::init())
         return false;
 
-    if (!addShader(GL_VERTEX_SHADER, "../shaders/explosionUpdate.vs"))
+    if (!addShader(GL_VERTEX_SHADER, "../shaders/fireworksUpdate.vs"))
         return false;
 
-    if (!addShader(GL_GEOMETRY_SHADER, "../shaders/explosionUpdate.gs"))
+    if (!addShader(GL_GEOMETRY_SHADER, "../shaders/fireworksUpdate.gs"))
         return false;
 
 	if (!finalize())
@@ -42,26 +42,26 @@ bool ExplosionUpdateProgram::init(){
     return true;
 }
 
-void ExplosionUpdateProgram::setDt(unsigned int dt){
+void FireworksUpdateProgram::setDt(unsigned int dt){
     glUniform1f(locDt, (float)dt);
 }
 
-void ExplosionUpdateProgram::setTime(int time){
+void FireworksUpdateProgram::setTime(int time){
     glUniform1f(locTime, (float)time);
 }
 
-void ExplosionUpdateProgram::setRandomTextureUnit(unsigned int textureUnit){
+void FireworksUpdateProgram::setRandomTextureUnit(unsigned int textureUnit){
     glUniform1i(locRandomTexture, textureUnit);
 }
 
-void ExplosionUpdateProgram::setLauncherLifetime(float lifetime){
+void FireworksUpdateProgram::setLauncherLifetime(float lifetime){
     glUniform1f(locLauncherLifeTime, lifetime);
 }
 
-void ExplosionUpdateProgram::setShellLifetime(float lifetime){
+void FireworksUpdateProgram::setShellLifetime(float lifetime){
     glUniform1f(locShellLifeTime, lifetime);
 }
 
-void ExplosionUpdateProgram::setSecondaryShellLifetime(float lifetime){
+void FireworksUpdateProgram::setSecondaryShellLifetime(float lifetime){
     glUniform1f(locSecShellLifeTime, lifetime);
 }

@@ -351,77 +351,77 @@ src/EntityManager.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
 .PHONY : src/EntityManager.cpp.s
 
-src/Explosion.o: src/Explosion.cpp.o
-.PHONY : src/Explosion.o
+src/Fireworks.o: src/Fireworks.cpp.o
+.PHONY : src/Fireworks.o
 
 # target to build an object file
-src/Explosion.cpp.o:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.o
-.PHONY : src/Explosion.cpp.o
+src/Fireworks.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Fireworks.cpp.o
+.PHONY : src/Fireworks.cpp.o
 
-src/Explosion.i: src/Explosion.cpp.i
-.PHONY : src/Explosion.i
+src/Fireworks.i: src/Fireworks.cpp.i
+.PHONY : src/Fireworks.i
 
 # target to preprocess a source file
-src/Explosion.cpp.i:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.i
-.PHONY : src/Explosion.cpp.i
+src/Fireworks.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Fireworks.cpp.i
+.PHONY : src/Fireworks.cpp.i
 
-src/Explosion.s: src/Explosion.cpp.s
-.PHONY : src/Explosion.s
+src/Fireworks.s: src/Fireworks.cpp.s
+.PHONY : src/Fireworks.s
 
 # target to generate assembly for a file
-src/Explosion.cpp.s:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.s
-.PHONY : src/Explosion.cpp.s
+src/Fireworks.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Fireworks.cpp.s
+.PHONY : src/Fireworks.cpp.s
 
-src/ExplosionRenderProgram.o: src/ExplosionRenderProgram.cpp.o
-.PHONY : src/ExplosionRenderProgram.o
+src/FireworksRenderProgram.o: src/FireworksRenderProgram.cpp.o
+.PHONY : src/FireworksRenderProgram.o
 
 # target to build an object file
-src/ExplosionRenderProgram.cpp.o:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o
-.PHONY : src/ExplosionRenderProgram.cpp.o
+src/FireworksRenderProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.o
+.PHONY : src/FireworksRenderProgram.cpp.o
 
-src/ExplosionRenderProgram.i: src/ExplosionRenderProgram.cpp.i
-.PHONY : src/ExplosionRenderProgram.i
+src/FireworksRenderProgram.i: src/FireworksRenderProgram.cpp.i
+.PHONY : src/FireworksRenderProgram.i
 
 # target to preprocess a source file
-src/ExplosionRenderProgram.cpp.i:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.i
-.PHONY : src/ExplosionRenderProgram.cpp.i
+src/FireworksRenderProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.i
+.PHONY : src/FireworksRenderProgram.cpp.i
 
-src/ExplosionRenderProgram.s: src/ExplosionRenderProgram.cpp.s
-.PHONY : src/ExplosionRenderProgram.s
+src/FireworksRenderProgram.s: src/FireworksRenderProgram.cpp.s
+.PHONY : src/FireworksRenderProgram.s
 
 # target to generate assembly for a file
-src/ExplosionRenderProgram.cpp.s:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.s
-.PHONY : src/ExplosionRenderProgram.cpp.s
+src/FireworksRenderProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.s
+.PHONY : src/FireworksRenderProgram.cpp.s
 
-src/ExplosionUpdateProgram.o: src/ExplosionUpdateProgram.cpp.o
-.PHONY : src/ExplosionUpdateProgram.o
+src/FireworksUpdateProgram.o: src/FireworksUpdateProgram.cpp.o
+.PHONY : src/FireworksUpdateProgram.o
 
 # target to build an object file
-src/ExplosionUpdateProgram.cpp.o:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o
-.PHONY : src/ExplosionUpdateProgram.cpp.o
+src/FireworksUpdateProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o
+.PHONY : src/FireworksUpdateProgram.cpp.o
 
-src/ExplosionUpdateProgram.i: src/ExplosionUpdateProgram.cpp.i
-.PHONY : src/ExplosionUpdateProgram.i
+src/FireworksUpdateProgram.i: src/FireworksUpdateProgram.cpp.i
+.PHONY : src/FireworksUpdateProgram.i
 
 # target to preprocess a source file
-src/ExplosionUpdateProgram.cpp.i:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.i
-.PHONY : src/ExplosionUpdateProgram.cpp.i
+src/FireworksUpdateProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.i
+.PHONY : src/FireworksUpdateProgram.cpp.i
 
-src/ExplosionUpdateProgram.s: src/ExplosionUpdateProgram.cpp.s
-.PHONY : src/ExplosionUpdateProgram.s
+src/FireworksUpdateProgram.s: src/FireworksUpdateProgram.cpp.s
+.PHONY : src/FireworksUpdateProgram.s
 
 # target to generate assembly for a file
-src/ExplosionUpdateProgram.cpp.s:
-	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.s
-.PHONY : src/ExplosionUpdateProgram.cpp.s
+src/FireworksUpdateProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.s
+.PHONY : src/FireworksUpdateProgram.cpp.s
 
 src/GUIProgram.o: src/GUIProgram.cpp.o
 .PHONY : src/GUIProgram.o
@@ -966,15 +966,15 @@ help:
 	@echo "... src/EntityManager.o"
 	@echo "... src/EntityManager.i"
 	@echo "... src/EntityManager.s"
-	@echo "... src/Explosion.o"
-	@echo "... src/Explosion.i"
-	@echo "... src/Explosion.s"
-	@echo "... src/ExplosionRenderProgram.o"
-	@echo "... src/ExplosionRenderProgram.i"
-	@echo "... src/ExplosionRenderProgram.s"
-	@echo "... src/ExplosionUpdateProgram.o"
-	@echo "... src/ExplosionUpdateProgram.i"
-	@echo "... src/ExplosionUpdateProgram.s"
+	@echo "... src/Fireworks.o"
+	@echo "... src/Fireworks.i"
+	@echo "... src/Fireworks.s"
+	@echo "... src/FireworksRenderProgram.o"
+	@echo "... src/FireworksRenderProgram.i"
+	@echo "... src/FireworksRenderProgram.s"
+	@echo "... src/FireworksUpdateProgram.o"
+	@echo "... src/FireworksUpdateProgram.i"
+	@echo "... src/FireworksUpdateProgram.s"
 	@echo "... src/GUIProgram.o"
 	@echo "... src/GUIProgram.i"
 	@echo "... src/GUIProgram.s"

@@ -14,7 +14,7 @@
 #include "Camera.hpp"
 #include "EntityManager.hpp"
 #include "TerrainBorder.hpp"
-#include "Explosion.hpp"
+#include "Fireworks.hpp"
 #include "LightingManager.hpp"
 
 using namespace Vancom;
@@ -125,20 +125,22 @@ void Graphics::init(){
     spotLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
     spotLightProgram.setScreenSize(w, h);
 
-    // initialize gbuffer and dirLight quad  
+    // initialize gbuffer, dirLight quad, and point light sphere  
     buffer.init(w, h);
     dirLightRenderQuad = new Model();
     dirLightRenderQuad->init("../assets/models/quad.obj");
+    pointLightRenderSphere = new Model();
+    pointLightRenderSphere->init("../assets/models/sphere.obj");
 }
 
 void Graphics::tick(float dt){
+
+    // update the camera and view
+    updateCamera();
+    updateView();
 }
 
 void Graphics::render(){
-
-	// update the camera and view
-	updateCamera();
-	updateView();
 
     /// render selectable entities
     selectionTexture.enableWriting();
@@ -196,8 +198,8 @@ void Graphics::render(){
     }
 
     // render explosions
-    for(Explosion *explosion : engine->entityManager->explosions){
-        explosion->render(projection, view, camera->getPos());
+    for(Fireworks *fireworks : engine->entityManager->explosions){
+        fireworks->render(projection, view, camera->getPos());
     }
 
     // render terrain border
@@ -217,30 +219,33 @@ void Graphics::render(){
     buffer.bindForReading();
     glClear(GL_COLOR_BUFFER_BIT);
 
-    // directional light
-    dirLightProgram.enable();
-    dirLightProgram.setDirLight(engine->lightingManager->dirLight);
-    dirLightProgram.setCameraPosition(camera->getPos());
-    dirLightProgram.setMVP(dirLightRenderQuad->getModel());
-    dirLightRenderQuad->render();
-
     // point lights
     pointLightProgram.enable();
     for(PointLight pLight : engine->lightingManager->pointLights){
         pointLightProgram.setPointLight(pLight);
-        dirLightProgram.setCameraPosition(camera->getPos());
-        pointLightProgram.setMVP(dirLightRenderQuad->getModel());
-        dirLightRenderQuad->render();    
+        pointLightProgram.setCameraPosition(camera->getPos());
+        float scale = calcPointLightSphere(pLight);
+        //std::cout << scale << std::endl;
+        glm::mat4 matrix = glm::translate(pointLightRenderSphere->getModel(), pLight.pos);
+        pointLightProgram.setMVP(projection * view * glm::scale(matrix, glm::vec3(scale, scale, scale)));
+        pointLightRenderSphere->render();    
     }
 
     // spot lights
     spotLightProgram.enable();
     for(SpotLight spotLight : engine->lightingManager->spotLights){
         spotLightProgram.setSpotLight(spotLight);
-        dirLightProgram.setCameraPosition(camera->getPos());
+        spotLightProgram.setCameraPosition(camera->getPos());
         spotLightProgram.setMVP(dirLightRenderQuad->getModel());
         dirLightRenderQuad->render();
     }
+
+    // directional light
+    dirLightProgram.enable();
+    dirLightProgram.setDirLight(engine->lightingManager->dirLight);
+    dirLightProgram.setCameraPosition(camera->getPos());
+    dirLightProgram.setMVP(dirLightRenderQuad->getModel());
+    dirLightRenderQuad->render();
 
     // bind default fbo for other rendering
     glDisable(GL_BLEND);
@@ -284,4 +289,14 @@ void Graphics::getWindowSize(int &w, int &h) const{
 void Graphics::setClearColor(glm::vec3 color){
 
 	glClearColor(color.x, color.y, color.z, 1);
+}
+
+float Graphics::calcPointLightSphere(const PointLight& light) const{
+
+    float maxColor = fmax(fmax(light.color.x, light.color.y), light.color.z);
+
+    float returnVal = (-light.atten.linear + sqrtf(light.atten.linear * light.atten.linear - 4 * light.atten.exp 
+        * (light.atten.exp - 256 * maxColor * light.diffuseIntensity))) / 2 * light.atten.exp;   
+    //std::cout << maxColor << std::endl;
+    return 1/returnVal;
 }

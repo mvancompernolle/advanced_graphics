@@ -113,9 +113,9 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/EntityManager.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Explosion.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ExplosionRenderProgram.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ExplosionUpdateProgram.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Fireworks.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/FireworksRenderProgram.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/FireworksUpdateProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GBuffer.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GUIProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GeometryProgram.hpp
@@ -199,23 +199,23 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_core.h
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_spatialref.h
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_srs_api.h
 
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Entity.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Explosion.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/ExplosionRenderProgram.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/ExplosionUpdateProgram.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Particle.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/RandomTexture.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/ShaderProgram.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Texture.hpp
-CMakeFiles/engine.dir/src/Explosion.cpp.o: ../src/Explosion.cpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Fireworks.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/FireworksRenderProgram.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/FireworksUpdateProgram.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Particle.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/RandomTexture.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Texture.hpp
+CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../src/Fireworks.cpp
 
-CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o: ../include/ExplosionRenderProgram.hpp
-CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o: ../include/ShaderProgram.hpp
-CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o: ../src/ExplosionRenderProgram.cpp
+CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.o: ../include/FireworksRenderProgram.hpp
+CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.o: ../src/FireworksRenderProgram.cpp
 
-CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../include/ExplosionUpdateProgram.hpp
-CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../include/ShaderProgram.hpp
-CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../src/ExplosionUpdateProgram.cpp
+CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o: ../include/FireworksUpdateProgram.hpp
+CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o: ../src/FireworksUpdateProgram.cpp
 
 CMakeFiles/engine.dir/src/GUIProgram.cpp.o: ../include/GUIProgram.hpp
 CMakeFiles/engine.dir/src/GUIProgram.cpp.o: ../include/ShaderProgram.hpp
@@ -235,9 +235,9 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/EntityManager.hpp
-CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Explosion.hpp
-CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ExplosionRenderProgram.hpp
-CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ExplosionUpdateProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Fireworks.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/FireworksRenderProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/FireworksUpdateProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/GBuffer.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/GUIProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/GeometryProgram.hpp

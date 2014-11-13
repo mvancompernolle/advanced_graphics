@@ -1,13 +1,13 @@
-#ifndef EXPLOSION_HPP
-#define	EXPLOSION_HPP
+#ifndef FIREWORKS_HPP
+#define	FIREWORKS_HPP
 
 #include <vector>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp> //Makes passing matrices to shaders easier
 #include "Texture.hpp"
-#include "ExplosionUpdateProgram.hpp"
-#include "ExplosionRenderProgram.hpp"
+#include "FireworksUpdateProgram.hpp"
+#include "FireworksRenderProgram.hpp"
 #include "RandomTexture.hpp"
 #include "Particle.hpp"
 #include "Entity.hpp"
@@ -16,13 +16,13 @@
 
 namespace Vancom{
 
-class Explosion : public Entity{
+class Fireworks : public Entity{
 
 public:
 
 	// public functions
-	Explosion();
-	~Explosion();
+	Fireworks();
+	~Fireworks();
 	bool init(const glm::vec3& pos);
 	void tick(float dt);
 	void updateParticles();
@@ -37,8 +37,8 @@ private:
 	GLuint VBOIndex, TBOIndex;
 	GLuint particleBuffer[2], transformFeedback[2];
 	std::vector<float> vertices;
-	ExplosionUpdateProgram updateProgram;
-	ExplosionRenderProgram renderProgram;
+	FireworksUpdateProgram updateProgram;
+	FireworksRenderProgram renderProgram;
 	RandomTexture randomTexture;
 	Texture* texture;
 	long timeElapsed;
@@ -49,4 +49,4 @@ private:
 
 } // end namespace Vancom
 
-#endif	/* EXPLOSION_HPP */
+#endif	/* FIREWORKS_HPP */

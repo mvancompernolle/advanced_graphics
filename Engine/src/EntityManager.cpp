@@ -10,7 +10,7 @@
 #include "TerrainBorder.hpp"
 #include "CrossHair.hpp"
 #include "Graphics.hpp"
-#include "Explosion.hpp"
+#include "Fireworks.hpp"
 
 using namespace Vancom;
 
@@ -87,10 +87,10 @@ void EntityManager::init(){
 	entities.push_back(crossHair);
 
 	// add an explosion
-	Explosion* explosion = new Explosion();
-	explosion->init(glm::vec3(0, 100, 0));
-	entities.push_back(explosion);
-	explosions.push_back(explosion);
+	Fireworks* fireworks = new Fireworks();
+	fireworks->init(glm::vec3(0, 100, 0));
+	entities.push_back(fireworks);
+	explosions.push_back(fireworks);
 }
 
 void EntityManager::tick(float dt){

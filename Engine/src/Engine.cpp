@@ -56,10 +56,10 @@ int Engine::run(){
 		dt = clock.tick();
 
 		// call tick on components
+		input->tick(dt);
 		graphics->tick(dt);
 		entityManager->tick(dt);
 		lightingManager->tick(dt);
-		input->tick(dt);
 		graphics->render();
 	}
 

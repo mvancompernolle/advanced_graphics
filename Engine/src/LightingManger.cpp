@@ -47,6 +47,7 @@ void LightingManager::init(){
 	pLight.diffuseIntensity = 1.0f;
 	pLight.atten.constant = 1;
 	pLight.atten.linear = .05;
+	pLight.atten.exp = .01;
 	pLight.pos = glm::vec3(200, 100, 200);
 	pointLights.push_back(pLight);
 

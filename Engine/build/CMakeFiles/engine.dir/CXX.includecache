@@ -54,7 +54,7 @@ ShaderProgram.hpp
 vector
 -
 
-../include/Explosion.hpp
+../include/Fireworks.hpp
 vector
 -
 glm/glm.hpp
@@ -65,10 +65,10 @@ glm/gtc/type_ptr.hpp
 -
 Texture.hpp
 ../include/Texture.hpp
-ExplosionUpdateProgram.hpp
-../include/ExplosionUpdateProgram.hpp
-ExplosionRenderProgram.hpp
-../include/ExplosionRenderProgram.hpp
+FireworksUpdateProgram.hpp
+../include/FireworksUpdateProgram.hpp
+FireworksRenderProgram.hpp
+../include/FireworksRenderProgram.hpp
 RandomTexture.hpp
 ../include/RandomTexture.hpp
 Particle.hpp
@@ -76,7 +76,7 @@ Particle.hpp
 Entity.hpp
 ../include/Entity.hpp
 
-../include/ExplosionRenderProgram.hpp
+../include/FireworksRenderProgram.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
 glm/gtc/matrix_transform.hpp
@@ -86,7 +86,7 @@ glm/gtc/type_ptr.hpp
 glm/gtx/string_cast.hpp
 -
 
-../include/ExplosionUpdateProgram.hpp
+../include/FireworksUpdateProgram.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
 
@@ -151,6 +151,8 @@ SpotLightDSProgram.hpp
 ../include/SpotLightDSProgram.hpp
 PointLightDSProgram.hpp
 ../include/PointLightDSProgram.hpp
+Lights.hpp
+../include/Lights.hpp
 
 ../include/Input.hpp
 map
@@ -347,8 +349,8 @@ CrossHair.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/CrossHair.hpp
 Graphics.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/Graphics.hpp
-Explosion.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Explosion.hpp
+Fireworks.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Fireworks.hpp
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

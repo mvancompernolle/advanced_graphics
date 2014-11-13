@@ -22,6 +22,7 @@
 #include "DirLightDSProgram.hpp"
 #include "SpotLightDSProgram.hpp"
 #include "PointLightDSProgram.hpp"
+#include "Lights.hpp"
 
 namespace Vancom{
 
@@ -57,6 +58,9 @@ public:
 
 private:
 
+	// private functions
+	float calcPointLightSphere(const PointLight& light) const;
+
 	// private variables
 	Engine* engine;
 	SDL_Window *window;
@@ -82,6 +86,7 @@ private:
 	SpotLightDSProgram spotLightProgram;
 	PointLightDSProgram pointLightProgram;
 	Model *dirLightRenderQuad;
+	Model *pointLightRenderSphere;
 	GBuffer buffer;
 	
 };

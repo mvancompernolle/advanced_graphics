@@ -114,9 +114,9 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
- ../include/Explosion.hpp
- ../include/ExplosionRenderProgram.hpp
- ../include/ExplosionUpdateProgram.hpp
+ ../include/Fireworks.hpp
+ ../include/FireworksRenderProgram.hpp
+ ../include/FireworksUpdateProgram.hpp
  ../include/GBuffer.hpp
  ../include/GUIProgram.hpp
  ../include/GeometryProgram.hpp
@@ -199,24 +199,24 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  /usr/include/gdal/ogr_core.h
  /usr/include/gdal/ogr_spatialref.h
  /usr/include/gdal/ogr_srs_api.h
-CMakeFiles/engine.dir/src/Explosion.cpp.o
+CMakeFiles/engine.dir/src/Fireworks.cpp.o
  ../include/Entity.hpp
- ../include/Explosion.hpp
- ../include/ExplosionRenderProgram.hpp
- ../include/ExplosionUpdateProgram.hpp
+ ../include/Fireworks.hpp
+ ../include/FireworksRenderProgram.hpp
+ ../include/FireworksUpdateProgram.hpp
  ../include/Particle.hpp
  ../include/RandomTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/Texture.hpp
- /home/matthew/Desktop/adv_graphics/Engine/src/Explosion.cpp
-CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o
- ../include/ExplosionRenderProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/Fireworks.cpp
+CMakeFiles/engine.dir/src/FireworksRenderProgram.cpp.o
+ ../include/FireworksRenderProgram.hpp
  ../include/ShaderProgram.hpp
- /home/matthew/Desktop/adv_graphics/Engine/src/ExplosionRenderProgram.cpp
-CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o
- ../include/ExplosionUpdateProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/FireworksRenderProgram.cpp
+CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o
+ ../include/FireworksUpdateProgram.hpp
  ../include/ShaderProgram.hpp
- /home/matthew/Desktop/adv_graphics/Engine/src/ExplosionUpdateProgram.cpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/FireworksUpdateProgram.cpp
 CMakeFiles/engine.dir/src/GUIProgram.cpp.o
  ../include/GUIProgram.hpp
  ../include/ShaderProgram.hpp
@@ -236,9 +236,9 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
- ../include/Explosion.hpp
- ../include/ExplosionRenderProgram.hpp
- ../include/ExplosionUpdateProgram.hpp
+ ../include/Fireworks.hpp
+ ../include/FireworksRenderProgram.hpp
+ ../include/FireworksUpdateProgram.hpp
  ../include/GBuffer.hpp
  ../include/GUIProgram.hpp
  ../include/GeometryProgram.hpp
