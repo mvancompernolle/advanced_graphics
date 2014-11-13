@@ -10,20 +10,19 @@
 #include "cpl_conv.h"
 
 #include "Engine.hpp"
+#include "Input.hpp"
 #include "Camera.hpp"
 #include "EntityManager.hpp"
 #include "TerrainBorder.hpp"
+#include "Explosion.hpp"
+#include "LightingManager.hpp"
 
 using namespace Vancom;
 
 Graphics::Graphics(Engine *engine) : engine(engine){
 
     // initialize light angle for direction lights
-    lightAngle = -0.75f;
     isRaining = true;
-    
-    // call to create the light vector
-    increaseLightAngle();
 
 	camera = new Camera(engine);
 }
@@ -71,7 +70,7 @@ void Graphics::init(){
     OGRRegisterAll();
 
     // set clear color and culling
-    glClearColor(0.0, 0.0, 0.5, 1);
+    glClearColor(0.0, 0.0, 0.0, 1);
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LEQUAL);
     glLineWidth(5.0f);
@@ -92,6 +91,44 @@ void Graphics::init(){
 
     if(!guiProgram.init())
         std::cout << "guiProgram failed to init" << std::endl;
+
+    if(!geometryProgram.init())
+        std::cout << "geometryProgram failed to init" << std::endl;
+    geometryProgram.enable();
+    geometryProgram.setColorTextureUnit(0);
+
+    // deffered rendering components
+    if(!dirLightProgram.init())
+        std::cout << "dirLightProgram failed to init" << std::endl;
+    dirLightProgram.enable();
+    dirLightProgram.setPositionTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
+    dirLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
+    dirLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
+    dirLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
+    dirLightProgram.setScreenSize(w, h);
+
+    if(!pointLightProgram.init())
+        std::cout << "pointLightProgram failed to init" << std::endl;
+    pointLightProgram.enable();
+    pointLightProgram.setPositionTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
+    pointLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
+    pointLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
+    pointLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
+    pointLightProgram.setScreenSize(w, h);
+
+    if(!spotLightProgram.init())
+        std::cout << "spotLightProgram failed to init" << std::endl;
+    spotLightProgram.enable();
+    spotLightProgram.setPositionTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_POSITION);
+    spotLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
+    spotLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
+    spotLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
+    spotLightProgram.setScreenSize(w, h);
+
+    // initialize gbuffer and dirLight quad  
+    buffer.init(w, h);
+    dirLightRenderQuad = new Model();
+    dirLightRenderQuad->init("../assets/models/quad.obj");
 }
 
 void Graphics::tick(float dt){
@@ -103,7 +140,7 @@ void Graphics::render(){
 	updateCamera();
 	updateView();
 
-    // render selectable entities
+    /// render selectable entities
     selectionTexture.enableWriting();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -122,21 +159,20 @@ void Graphics::render(){
 
     // check to see if object is in middle of screen
     SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
-    /*if((unsigned int) pixel.objectId != 0)
-        std::cout << (unsigned int) pixel.objectId << std::endl;*/
 
-    // render entities using default
-    defaultProgram.enable();
-    defaultProgram.setLightDirection(getLightDirection());
-    defaultProgram.setSpotLightPosition(camera->getPos());
-    defaultProgram.setSpotLightDirection(camera->getCameraDirection());
-    defaultProgram.setCameraPosition(camera->getPos());
-    defaultProgram.setSpecularFlag(isRaining);
+    // render entities using defferred shading
+    // geometry pass
+    geometryProgram.enable();
+    buffer.bindForWriting();
+    glDepthMask(GL_TRUE);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_BLEND);
     for(Entity* entity : engine->entityManager->defaultEntities){
-        defaultProgram.setMVP(projection * view * entity->getModel());
-        defaultProgram.setModelPos(entity->getModel());
-        defaultProgram.setSpecularIntensity(entity->specularIntensity);
-        defaultProgram.setSpecularPower(entity->specularPower);
+        geometryProgram.setMVP(projection * view * entity->getModel());
+        geometryProgram.setModelPos(entity->getModel());
+        geometryProgram.setSpecularPower(entity->specularPower);
+        geometryProgram.setSpecularIntensity(entity->specularIntensity);
         entity->render();
     }
 
@@ -152,6 +188,18 @@ void Graphics::render(){
         }
     }
 
+    for(Entity* entity : engine->input->selected){
+        silhouetteProgram.setMVP(projection * view * entity->getModel());
+        silhouetteProgram.setModelPos(entity->getModel());    
+        silhouetteProgram.setCameraPosition(camera->getPos());
+        entity->render();        
+    }
+
+    // render explosions
+    for(Explosion *explosion : engine->entityManager->explosions){
+        explosion->render(projection, view, camera->getPos());
+    }
+
     // render terrain border
     engine->entityManager->border->render(projection, view);
 
@@ -161,6 +209,43 @@ void Graphics::render(){
     for(Entity* entity : engine->entityManager->guiEntities){
         entity->render();
     }
+    
+    // light passes
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_ONE, GL_ONE);
+    buffer.bindForReading();
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // directional light
+    dirLightProgram.enable();
+    dirLightProgram.setDirLight(engine->lightingManager->dirLight);
+    dirLightProgram.setCameraPosition(camera->getPos());
+    dirLightProgram.setMVP(dirLightRenderQuad->getModel());
+    dirLightRenderQuad->render();
+
+    // point lights
+    pointLightProgram.enable();
+    for(PointLight pLight : engine->lightingManager->pointLights){
+        pointLightProgram.setPointLight(pLight);
+        dirLightProgram.setCameraPosition(camera->getPos());
+        pointLightProgram.setMVP(dirLightRenderQuad->getModel());
+        dirLightRenderQuad->render();    
+    }
+
+    // spot lights
+    spotLightProgram.enable();
+    for(SpotLight spotLight : engine->lightingManager->spotLights){
+        spotLightProgram.setSpotLight(spotLight);
+        dirLightProgram.setCameraPosition(camera->getPos());
+        spotLightProgram.setMVP(dirLightRenderQuad->getModel());
+        dirLightRenderQuad->render();
+    }
+
+    // bind default fbo for other rendering
+    glDisable(GL_BLEND);
+    glDepthMask(GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
 
 	SDL_GL_SwapWindow(window);
 }
@@ -199,32 +284,4 @@ void Graphics::getWindowSize(int &w, int &h) const{
 void Graphics::setClearColor(glm::vec3 color){
 
 	glClearColor(color.x, color.y, color.z, 1);
-}
-
-void Graphics::increaseLightAngle(){
-
-
-    lightAngle -= 0.01;
-
-    float y = -cos(lightAngle + 1.57);
-    float x = -sin(lightAngle + 1.57);
-
-    lightDir[1] = y;
-    lightDir[0] = x;
-    
-}
-
-void Graphics::decreaseLightAngle(){
-
-    lightAngle += 0.01;
-
-    float y = -cos(lightAngle + 1.57);
-    float x = -sin(lightAngle + 1.57);
-
-    lightDir[1] = y;
-    lightDir[0] = x;
-    
-}
-glm::vec3 Graphics::getLightDirection() const{
-    return lightDir;
 }

@@ -15,7 +15,7 @@ class Model : public Entity{
 
 public:
 	Model();
-	Model(glm::vec3 pos, float scale);
+	Model(glm::vec3 pos, float scale, float power, float intensity);
 	~Model();
 	bool init(const char* fileName);
 	void tick(float dt);

@@ -8,6 +8,7 @@ namespace Vancom{
 class Entity;
 class Engine;
 class TerrainBorder;
+class Explosion;
 
 class EntityManager {
 
@@ -26,6 +27,7 @@ public:
 	std::vector<Entity*> entities;
 	std::vector<Entity*> defaultEntities;
 	std::vector<Entity*> guiEntities;
+	std::vector<Explosion*> explosions;
 	TerrainBorder *border;
 
 private:

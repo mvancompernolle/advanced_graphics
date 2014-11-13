@@ -255,6 +255,30 @@ src/DefualtProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DefualtProgram.cpp.s
 .PHONY : src/DefualtProgram.cpp.s
 
+src/DirLightDSProgram.o: src/DirLightDSProgram.cpp.o
+.PHONY : src/DirLightDSProgram.o
+
+# target to build an object file
+src/DirLightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirLightDSProgram.cpp.o
+.PHONY : src/DirLightDSProgram.cpp.o
+
+src/DirLightDSProgram.i: src/DirLightDSProgram.cpp.i
+.PHONY : src/DirLightDSProgram.i
+
+# target to preprocess a source file
+src/DirLightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirLightDSProgram.cpp.i
+.PHONY : src/DirLightDSProgram.cpp.i
+
+src/DirLightDSProgram.s: src/DirLightDSProgram.cpp.s
+.PHONY : src/DirLightDSProgram.s
+
+# target to generate assembly for a file
+src/DirLightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/DirLightDSProgram.cpp.s
+.PHONY : src/DirLightDSProgram.cpp.s
+
 src/Engine.o: src/Engine.cpp.o
 .PHONY : src/Engine.o
 
@@ -327,6 +351,78 @@ src/EntityManager.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
 .PHONY : src/EntityManager.cpp.s
 
+src/Explosion.o: src/Explosion.cpp.o
+.PHONY : src/Explosion.o
+
+# target to build an object file
+src/Explosion.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.o
+.PHONY : src/Explosion.cpp.o
+
+src/Explosion.i: src/Explosion.cpp.i
+.PHONY : src/Explosion.i
+
+# target to preprocess a source file
+src/Explosion.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.i
+.PHONY : src/Explosion.cpp.i
+
+src/Explosion.s: src/Explosion.cpp.s
+.PHONY : src/Explosion.s
+
+# target to generate assembly for a file
+src/Explosion.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.s
+.PHONY : src/Explosion.cpp.s
+
+src/ExplosionRenderProgram.o: src/ExplosionRenderProgram.cpp.o
+.PHONY : src/ExplosionRenderProgram.o
+
+# target to build an object file
+src/ExplosionRenderProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.o
+.PHONY : src/ExplosionRenderProgram.cpp.o
+
+src/ExplosionRenderProgram.i: src/ExplosionRenderProgram.cpp.i
+.PHONY : src/ExplosionRenderProgram.i
+
+# target to preprocess a source file
+src/ExplosionRenderProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.i
+.PHONY : src/ExplosionRenderProgram.cpp.i
+
+src/ExplosionRenderProgram.s: src/ExplosionRenderProgram.cpp.s
+.PHONY : src/ExplosionRenderProgram.s
+
+# target to generate assembly for a file
+src/ExplosionRenderProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionRenderProgram.cpp.s
+.PHONY : src/ExplosionRenderProgram.cpp.s
+
+src/ExplosionUpdateProgram.o: src/ExplosionUpdateProgram.cpp.o
+.PHONY : src/ExplosionUpdateProgram.o
+
+# target to build an object file
+src/ExplosionUpdateProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o
+.PHONY : src/ExplosionUpdateProgram.cpp.o
+
+src/ExplosionUpdateProgram.i: src/ExplosionUpdateProgram.cpp.i
+.PHONY : src/ExplosionUpdateProgram.i
+
+# target to preprocess a source file
+src/ExplosionUpdateProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.i
+.PHONY : src/ExplosionUpdateProgram.cpp.i
+
+src/ExplosionUpdateProgram.s: src/ExplosionUpdateProgram.cpp.s
+.PHONY : src/ExplosionUpdateProgram.s
+
+# target to generate assembly for a file
+src/ExplosionUpdateProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.s
+.PHONY : src/ExplosionUpdateProgram.cpp.s
+
 src/GUIProgram.o: src/GUIProgram.cpp.o
 .PHONY : src/GUIProgram.o
 
@@ -374,6 +470,30 @@ src/Gbuffer.s: src/Gbuffer.cpp.s
 src/Gbuffer.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Gbuffer.cpp.s
 .PHONY : src/Gbuffer.cpp.s
+
+src/GeometryProgram.o: src/GeometryProgram.cpp.o
+.PHONY : src/GeometryProgram.o
+
+# target to build an object file
+src/GeometryProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GeometryProgram.cpp.o
+.PHONY : src/GeometryProgram.cpp.o
+
+src/GeometryProgram.i: src/GeometryProgram.cpp.i
+.PHONY : src/GeometryProgram.i
+
+# target to preprocess a source file
+src/GeometryProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GeometryProgram.cpp.i
+.PHONY : src/GeometryProgram.cpp.i
+
+src/GeometryProgram.s: src/GeometryProgram.cpp.s
+.PHONY : src/GeometryProgram.s
+
+# target to generate assembly for a file
+src/GeometryProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/GeometryProgram.cpp.s
+.PHONY : src/GeometryProgram.cpp.s
 
 src/Graphics.o: src/Graphics.cpp.o
 .PHONY : src/Graphics.o
@@ -423,6 +543,54 @@ src/Input.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Input.cpp.s
 .PHONY : src/Input.cpp.s
 
+src/LightDSProgram.o: src/LightDSProgram.cpp.o
+.PHONY : src/LightDSProgram.o
+
+# target to build an object file
+src/LightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
+.PHONY : src/LightDSProgram.cpp.o
+
+src/LightDSProgram.i: src/LightDSProgram.cpp.i
+.PHONY : src/LightDSProgram.i
+
+# target to preprocess a source file
+src/LightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.i
+.PHONY : src/LightDSProgram.cpp.i
+
+src/LightDSProgram.s: src/LightDSProgram.cpp.s
+.PHONY : src/LightDSProgram.s
+
+# target to generate assembly for a file
+src/LightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightDSProgram.cpp.s
+.PHONY : src/LightDSProgram.cpp.s
+
+src/LightingManger.o: src/LightingManger.cpp.o
+.PHONY : src/LightingManger.o
+
+# target to build an object file
+src/LightingManger.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightingManger.cpp.o
+.PHONY : src/LightingManger.cpp.o
+
+src/LightingManger.i: src/LightingManger.cpp.i
+.PHONY : src/LightingManger.i
+
+# target to preprocess a source file
+src/LightingManger.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightingManger.cpp.i
+.PHONY : src/LightingManger.cpp.i
+
+src/LightingManger.s: src/LightingManger.cpp.s
+.PHONY : src/LightingManger.s
+
+# target to generate assembly for a file
+src/LightingManger.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/LightingManger.cpp.s
+.PHONY : src/LightingManger.cpp.s
+
 src/Mesh.o: src/Mesh.cpp.o
 .PHONY : src/Mesh.o
 
@@ -470,6 +638,54 @@ src/Model.s: src/Model.cpp.s
 src/Model.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Model.cpp.s
 .PHONY : src/Model.cpp.s
+
+src/PointLightDSProgram.o: src/PointLightDSProgram.cpp.o
+.PHONY : src/PointLightDSProgram.o
+
+# target to build an object file
+src/PointLightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/PointLightDSProgram.cpp.o
+.PHONY : src/PointLightDSProgram.cpp.o
+
+src/PointLightDSProgram.i: src/PointLightDSProgram.cpp.i
+.PHONY : src/PointLightDSProgram.i
+
+# target to preprocess a source file
+src/PointLightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/PointLightDSProgram.cpp.i
+.PHONY : src/PointLightDSProgram.cpp.i
+
+src/PointLightDSProgram.s: src/PointLightDSProgram.cpp.s
+.PHONY : src/PointLightDSProgram.s
+
+# target to generate assembly for a file
+src/PointLightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/PointLightDSProgram.cpp.s
+.PHONY : src/PointLightDSProgram.cpp.s
+
+src/RandomTexture.o: src/RandomTexture.cpp.o
+.PHONY : src/RandomTexture.o
+
+# target to build an object file
+src/RandomTexture.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/RandomTexture.cpp.o
+.PHONY : src/RandomTexture.cpp.o
+
+src/RandomTexture.i: src/RandomTexture.cpp.i
+.PHONY : src/RandomTexture.i
+
+# target to preprocess a source file
+src/RandomTexture.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/RandomTexture.cpp.i
+.PHONY : src/RandomTexture.cpp.i
+
+src/RandomTexture.s: src/RandomTexture.cpp.s
+.PHONY : src/RandomTexture.s
+
+# target to generate assembly for a file
+src/RandomTexture.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/RandomTexture.cpp.s
+.PHONY : src/RandomTexture.cpp.s
 
 src/SelectionProgram.o: src/SelectionProgram.cpp.o
 .PHONY : src/SelectionProgram.o
@@ -566,6 +782,30 @@ src/SilhouetteProgram.s: src/SilhouetteProgram.cpp.s
 src/SilhouetteProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.s
 .PHONY : src/SilhouetteProgram.cpp.s
+
+src/SpotLightDSProgram.o: src/SpotLightDSProgram.cpp.o
+.PHONY : src/SpotLightDSProgram.o
+
+# target to build an object file
+src/SpotLightDSProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o
+.PHONY : src/SpotLightDSProgram.cpp.o
+
+src/SpotLightDSProgram.i: src/SpotLightDSProgram.cpp.i
+.PHONY : src/SpotLightDSProgram.i
+
+# target to preprocess a source file
+src/SpotLightDSProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.i
+.PHONY : src/SpotLightDSProgram.cpp.i
+
+src/SpotLightDSProgram.s: src/SpotLightDSProgram.cpp.s
+.PHONY : src/SpotLightDSProgram.s
+
+# target to generate assembly for a file
+src/SpotLightDSProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.s
+.PHONY : src/SpotLightDSProgram.cpp.s
 
 src/Terrain.o: src/Terrain.cpp.o
 .PHONY : src/Terrain.o
@@ -714,6 +954,9 @@ help:
 	@echo "... src/DefualtProgram.o"
 	@echo "... src/DefualtProgram.i"
 	@echo "... src/DefualtProgram.s"
+	@echo "... src/DirLightDSProgram.o"
+	@echo "... src/DirLightDSProgram.i"
+	@echo "... src/DirLightDSProgram.s"
 	@echo "... src/Engine.o"
 	@echo "... src/Engine.i"
 	@echo "... src/Engine.s"
@@ -723,24 +966,48 @@ help:
 	@echo "... src/EntityManager.o"
 	@echo "... src/EntityManager.i"
 	@echo "... src/EntityManager.s"
+	@echo "... src/Explosion.o"
+	@echo "... src/Explosion.i"
+	@echo "... src/Explosion.s"
+	@echo "... src/ExplosionRenderProgram.o"
+	@echo "... src/ExplosionRenderProgram.i"
+	@echo "... src/ExplosionRenderProgram.s"
+	@echo "... src/ExplosionUpdateProgram.o"
+	@echo "... src/ExplosionUpdateProgram.i"
+	@echo "... src/ExplosionUpdateProgram.s"
 	@echo "... src/GUIProgram.o"
 	@echo "... src/GUIProgram.i"
 	@echo "... src/GUIProgram.s"
 	@echo "... src/Gbuffer.o"
 	@echo "... src/Gbuffer.i"
 	@echo "... src/Gbuffer.s"
+	@echo "... src/GeometryProgram.o"
+	@echo "... src/GeometryProgram.i"
+	@echo "... src/GeometryProgram.s"
 	@echo "... src/Graphics.o"
 	@echo "... src/Graphics.i"
 	@echo "... src/Graphics.s"
 	@echo "... src/Input.o"
 	@echo "... src/Input.i"
 	@echo "... src/Input.s"
+	@echo "... src/LightDSProgram.o"
+	@echo "... src/LightDSProgram.i"
+	@echo "... src/LightDSProgram.s"
+	@echo "... src/LightingManger.o"
+	@echo "... src/LightingManger.i"
+	@echo "... src/LightingManger.s"
 	@echo "... src/Mesh.o"
 	@echo "... src/Mesh.i"
 	@echo "... src/Mesh.s"
 	@echo "... src/Model.o"
 	@echo "... src/Model.i"
 	@echo "... src/Model.s"
+	@echo "... src/PointLightDSProgram.o"
+	@echo "... src/PointLightDSProgram.i"
+	@echo "... src/PointLightDSProgram.s"
+	@echo "... src/RandomTexture.o"
+	@echo "... src/RandomTexture.i"
+	@echo "... src/RandomTexture.s"
 	@echo "... src/SelectionProgram.o"
 	@echo "... src/SelectionProgram.i"
 	@echo "... src/SelectionProgram.s"
@@ -753,6 +1020,9 @@ help:
 	@echo "... src/SilhouetteProgram.o"
 	@echo "... src/SilhouetteProgram.i"
 	@echo "... src/SilhouetteProgram.s"
+	@echo "... src/SpotLightDSProgram.o"
+	@echo "... src/SpotLightDSProgram.i"
+	@echo "... src/SpotLightDSProgram.s"
 	@echo "... src/Terrain.o"
 	@echo "... src/Terrain.i"
 	@echo "... src/Terrain.s"

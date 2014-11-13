@@ -6,6 +6,7 @@ namespace Vancom{
 class Graphics;
 class Input;
 class EntityManager;
+class LightingManager;
 
 class Engine {
 
@@ -24,6 +25,7 @@ public:
 	Graphics *graphics;
 	Input *input;
 	EntityManager *entityManager;
+	LightingManager *lightingManager;
 
 private:
 

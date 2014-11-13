@@ -7,6 +7,7 @@
 #include "Graphics.hpp"
 #include "Input.hpp"
 #include "EntityManager.hpp"
+#include "LightingManager.hpp"
 
 using namespace Vancom;
 
@@ -37,6 +38,10 @@ void Engine::init(){
     // create and init entity manager component
     entityManager = new EntityManager(this);
     entityManager->init();
+
+    // create and init lighting manager
+    lightingManager = new LightingManager(this);
+    lightingManager->init();
 }
 
 int Engine::run(){
@@ -49,11 +54,12 @@ int Engine::run(){
 	while(true){
 		// get change in time since last tick
 		dt = clock.tick();
-//std::cout << dt * 1000 << std::endl;
+
 		// call tick on components
-		input->tick(dt);
 		graphics->tick(dt);
 		entityManager->tick(dt);
+		lightingManager->tick(dt);
+		input->tick(dt);
 		graphics->render();
 	}
 
@@ -69,6 +75,14 @@ void Engine::stop(int exit_code){
 	// stop input component
 	input->stop();
 	delete input;
+
+	// stop entityManager component
+	entityManager->stop();
+	delete entityManager;
+
+	// stop lightingManager component
+	lightingManager->stop();
+	delete lightingManager;
 
 	SDL_Quit();
 

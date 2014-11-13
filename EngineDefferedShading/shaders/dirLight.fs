@@ -76,6 +76,6 @@ void main(void){
     vec3 color = texture(gColorMap, texCoord).xyz;
     vec3 normal = texture(gNormalMap, texCoord).xyz;
 
-	fragColor = vec4(color, 1.0) * calcDirectionLight(pos, normal);
-    //fragColor = vec4(texCoord, 0.0, 1.0);
+	//fragColor = vec4(color, 1.0) * calcDirectionLight(pos, normal);
+    fragColor = vec4(texCoord, 0.0, 1.0);
 }

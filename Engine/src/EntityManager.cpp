@@ -3,12 +3,14 @@
 #include <iostream>
 
 #include "Engine.hpp"
+#include "Input.hpp"
 #include "Model.hpp"
 #include "Entity.hpp"
 #include "Terrain.hpp"
 #include "TerrainBorder.hpp"
 #include "CrossHair.hpp"
 #include "Graphics.hpp"
+#include "Explosion.hpp"
 
 using namespace Vancom;
 
@@ -31,39 +33,41 @@ void EntityManager::init(){
 	entities.push_back(terrain);
 
 	// add a ball
-	Model* ball = new Model(glm::vec3(0, 100, 0), 10);
+	Model* ball = new Model(glm::vec3(0, 100, 0), 10, 1, 200);
 	ball->init("../assets/models/ballSml.obj");
 	ball->id = assignId();
 	defaultEntities.push_back(ball);
 	entities.push_back(ball);
 
 	// add a ball
-	Model* ball1 = new Model(glm::vec3(40, 100, 0), 15);
+	Model* ball1 = new Model(glm::vec3(40, 100, 0), 15, 1, 100);
 	ball1->init("../assets/models/ballSml.obj");
 	ball1->id = assignId();
 	defaultEntities.push_back(ball1);
 	entities.push_back(ball1);
+	engine->input->selected.push_back(ball);
 
 	// add a ball
-	Model* ball2 = new Model(glm::vec3(-40, 100, 0), 20);
+	Model* ball2 = new Model(glm::vec3(-40, 100, 0), 20, 1, 200);
 	ball2->init("../assets/models/ballSml.obj");
 	ball2->id = assignId();
 	defaultEntities.push_back(ball2);
 	entities.push_back(ball2);
+	engine->input->selected.push_back(ball2);
 
-	// add labyrinth
-	Model* lab = new Model(glm::vec3(-80, 100, 0), 3);
-	lab->init("../assets/models/woodCube.obj");
-	lab->id = assignId();
-	defaultEntities.push_back(lab);
-	entities.push_back(lab);
+	// add cube
+	Model* cube = new Model(glm::vec3(-80, 100, 0), 3, .1, 50);
+	cube->init("../assets/models/woodCube.obj");
+	cube->id = assignId();
+	defaultEntities.push_back(cube);
+	entities.push_back(cube);
 
-	// add a puck
-	Model* puck = new Model(glm::vec3(80, 100, 0), 5);
-	puck->init("../assets/models/buddha.obj");
-	puck->id = assignId();
-	defaultEntities.push_back(puck);
-	entities.push_back(puck);
+	// add a buddha
+	Model* buddha = new Model(glm::vec3(80, 100, 0), 5, 50, 5);
+	buddha->init("../assets/models/buddha.obj");
+	buddha->id = assignId();
+	defaultEntities.push_back(buddha);
+	entities.push_back(buddha);
 
 	// add terrain border
 	int width, height;
@@ -81,6 +85,12 @@ void EntityManager::init(){
 	crossHair->init("../assets/models/crosshair.png", .03 / ratio, .03);
 	guiEntities.push_back(crossHair);
 	entities.push_back(crossHair);
+
+	// add an explosion
+	Explosion* explosion = new Explosion();
+	explosion->init(glm::vec3(0, 100, 0));
+	entities.push_back(explosion);
+	explosions.push_back(explosion);
 }
 
 void EntityManager::tick(float dt){

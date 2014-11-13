@@ -2,10 +2,12 @@
 #define INPUT_HPP
 
 #include <map>
+#include <vector>
 
 namespace Vancom{
 
 class Engine;
+class Entity;
 
 class Input{
 
@@ -18,6 +20,9 @@ public:
 	void init();
 	void tick(float dt);
 	void stop();
+
+	// public variables
+	std::vector<Entity*> selected;
 
 private:
 

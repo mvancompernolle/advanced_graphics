@@ -4,13 +4,15 @@ using namespace Vancom;
 
 Model::Model(){
 
-	specularIntensity = .5;
-	specularPower = 1;
+	specularIntensity = 0;
+	specularPower = 0;
 }
 
-Model::Model(glm::vec3 pos, float scale){
+Model::Model(glm::vec3 pos, float scale, float power, float intensity){
 	
 	Model();
+	specularIntensity = power;
+	specularPower = intensity;	
 	model = glm::translate(model, pos);
 	model = glm::scale(model, glm::vec3(scale, scale, scale));
 }
@@ -34,16 +36,6 @@ void Model::tick(float dt){
 
 void Model::render(){
 
-	// enable attributes
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-
 	// draw
 	mesh->renderMesh();
-
-	// disable attributes
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
 }

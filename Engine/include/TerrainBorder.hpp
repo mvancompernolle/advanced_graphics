@@ -8,16 +8,9 @@
 #include "Entity.hpp"
 #include "BorderUpdateProgram.hpp"
 #include "BorderRenderProgram.hpp"
+#include "Particle.hpp"
 
 namespace Vancom{
-
-// create stuct for border particle
-struct Particle{
-	float type;
-	glm::vec3 pos;
-	glm::vec3 vel;
-	float lifeTimeMS;
-};
 
 class Engine;
 

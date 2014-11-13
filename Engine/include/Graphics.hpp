@@ -17,6 +17,11 @@
 #include "TerrainProgram.hpp"
 #include "SilhouetteProgram.hpp"
 #include "GUIProgram.hpp"
+#include "GeometryProgram.hpp"
+#include "GBuffer.hpp"
+#include "DirLightDSProgram.hpp"
+#include "SpotLightDSProgram.hpp"
+#include "PointLightDSProgram.hpp"
 
 namespace Vancom{
 
@@ -44,10 +49,6 @@ public:
 	void getWindowSize(int &w, int &h) const;
 	void setClearColor(glm::vec3);
 
-	void increaseLightAngle();
-	void decreaseLightAngle();
-	glm::vec3 getLightDirection() const;
-
 
 	// public variables
 	glm::mat4 view, projection;
@@ -60,7 +61,6 @@ private:
 	Engine* engine;
 	SDL_Window *window;
 	SDL_GLContext gl_context;
-	float lightAngle;
 	glm::vec3 lightDir;
 
 	// selection program
@@ -75,6 +75,14 @@ private:
 
 	// gui program
 	GUIProgram guiProgram;
+
+	// defferred rendering
+	GeometryProgram geometryProgram;
+	DirLightDSProgram dirLightProgram;
+	SpotLightDSProgram spotLightProgram;
+	PointLightDSProgram pointLightProgram;
+	Model *dirLightRenderQuad;
+	GBuffer buffer;
 	
 };
 

@@ -284,7 +284,6 @@ void Terrain::directionalLightPass(glm::mat4 projection, glm::mat4 view){
 
 void Terrain::render(glm::mat4 projection, glm::mat4 view){
 
-
 	geometryPass(projection, view);
 	beginLightPasses();
 	directionalLightPass(projection, view);

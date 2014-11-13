@@ -2,6 +2,7 @@
 #include "Engine.hpp"
 #include "Graphics.hpp"
 #include "Camera.hpp"
+#include "LightingManager.hpp"
 
 #include <SDL.h>
 
@@ -211,14 +212,14 @@ void Input::handleMovementKeys(){
     if(keysPressed[SDLK_LEFT]){
 
         // decrement directional light angle in graphics
-        engine->graphics->increaseLightAngle();
+        engine->lightingManager->increaseLightAngle();
 
     }
 
     if(keysPressed[SDLK_RIGHT]){
 
         // increment direction light angle in graphics
-        engine->graphics->decreaseLightAngle();
+        engine->lightingManager->decreaseLightAngle();
     }
 
 }
