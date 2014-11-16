@@ -63,8 +63,7 @@ void main(void){
     vec3 color = texture(colorMap, texCoord).xyz;
     vec3 normal = texture(normalMap, texCoord).xyz;
     vec2 specular = texture(specularMap, texCoord).xy;
+    specular = vec2(10, 10);
 
 	fragColor = vec4(color, 1.0) * calcDirectionLight(pos, normal, specular);
-    //fragColor = vec4(texCoord, 1.0, 1.0);
-    //fragColor = vec4(cameraPos, 1.0);
 }

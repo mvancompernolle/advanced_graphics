@@ -75,6 +75,10 @@ void Graphics::init(){
     glDepthFunc(GL_LEQUAL);
     glLineWidth(5.0f);
 
+    /*glFrontFace(GL_CW);
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_FRONT);*/
+
     updateView();
     windowResized();
 
@@ -96,6 +100,9 @@ void Graphics::init(){
         std::cout << "geometryProgram failed to init" << std::endl;
     geometryProgram.enable();
     geometryProgram.setColorTextureUnit(0);
+
+    if(!stencilProgram.init())
+        std::cout << "stencilProgram failed to init" << std::endl;
 
     // deffered rendering components
     if(!dirLightProgram.init())
@@ -144,6 +151,220 @@ void Graphics::render(){
 
     /// render selectable entities
     selectionTexture.enableWriting();
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    selectionProgram.enable();
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        selectionProgram.setObjectIndex(entity->id);
+        selectionProgram.setMVP(projection * view * entity->getModel());
+        entity->render();
+    }
+
+    selectionTexture.disableWriting();
+    // check to see if object is in middle of screen
+    SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
+
+    // render entities using defferred shading
+    buffer.startFrame();
+    geometryPassDS();
+    glEnable(GL_STENCIL_TEST);
+    pointLightPassDS();
+    glDisable(GL_STENCIL_TEST);
+    spotLightPassDS();
+    directionalLightPassDS();
+    glDisable(GL_BLEND);
+
+    // render border of selected
+    glDepthMask(GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
+    silhouetteProgram.enable();
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        if(entity->id == (unsigned int)pixel.objectId){
+            silhouetteProgram.setMVP(projection * view * entity->getModel());
+            silhouetteProgram.setModelPos(entity->getModel());    
+            silhouetteProgram.setCameraPosition(camera->getPos());
+            entity->render();
+            break;
+        }
+    }
+
+    // render explosions
+    for(Fireworks *fireworks : engine->entityManager->explosions){
+        fireworks->render(projection, view, camera->getPos());
+    }
+
+    // render terrain border
+    engine->entityManager->border->render(projection, view);
+
+    // render gui elements
+    guiProgram.enable();
+    guiProgram.setSampler(0);
+    for(Entity* entity : engine->entityManager->guiEntities){
+        entity->render();
+    }
+
+    buffer.bindForFinalPass();
+    int w, h;
+    getWindowSize(w, h);
+    glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+
+	SDL_GL_SwapWindow(window);
+}
+
+void Graphics::geometryPassDS(){
+
+    // geometry pass
+    geometryProgram.enable();
+    buffer.bindForGeometryPass();
+    glDepthMask(GL_TRUE);
+    glEnable(GL_DEPTH_TEST);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+    for(Entity* entity : engine->entityManager->defaultEntities){
+        geometryProgram.setMVP(projection * view * entity->getModel());
+        geometryProgram.setModelPos(entity->getModel());
+        geometryProgram.setSpecularPower(entity->specularPower);
+        geometryProgram.setSpecularIntensity(entity->specularIntensity);
+        entity->render();
+    }
+
+    glDepthMask(GL_FALSE);
+}
+
+void Graphics::pointLightPassDS(){
+
+    // point lights
+    for(PointLight pLight : engine->lightingManager->pointLights){
+
+        // determine scale of point light
+        float scale = calcPointLightSphere(pLight);
+        glm::mat4 matrix = glm::translate(pointLightRenderSphere->getModel(), pLight.pos);
+
+        // stencil pass
+        stencilProgram.enable();
+        buffer.bindForStencilPass();
+
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
+        glClear(GL_STENCIL_BUFFER_BIT);
+
+        glStencilFunc(GL_ALWAYS, 0, 0);
+        glStencilOpSeparate(GL_BACK, GL_KEEP, GL_INCR_WRAP, GL_KEEP);
+        glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
+        stencilProgram.setMVP(projection * view * glm::scale(matrix, glm::vec3(scale, scale, scale)));
+        pointLightRenderSphere->render();
+
+        // point light pass
+        pointLightProgram.enable();
+        buffer.bindForLightPass();
+
+        glStencilFunc(GL_NOTEQUAL, 0, 0xFF);
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendEquation(GL_FUNC_ADD);
+        glBlendFunc(GL_ONE, GL_ONE);
+
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+
+        pointLightProgram.setPointLight(pLight);
+        pointLightProgram.setCameraPosition(camera->getPos());
+        pointLightProgram.setMVP(projection * view * glm::scale(matrix, glm::vec3(scale, scale, scale)));
+        pointLightRenderSphere->render();
+
+        glCullFace(GL_BACK);
+        glDisable(GL_BLEND);    
+    }
+    glDisable(GL_CULL_FACE);
+}
+
+void Graphics::directionalLightPassDS(){
+
+    // directional light
+    dirLightProgram.enable();
+    buffer.bindForLightPass();
+
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_ONE, GL_ONE);
+
+    dirLightProgram.setDirLight(engine->lightingManager->dirLight);
+    dirLightProgram.setCameraPosition(camera->getPos());
+    dirLightProgram.setMVP(dirLightRenderQuad->getModel());
+    dirLightRenderQuad->render();
+}
+
+void Graphics::spotLightPassDS(){
+
+    // spot lights
+    spotLightProgram.enable();
+    buffer.bindForLightPass();
+
+    glDisable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_ONE, GL_ONE);
+
+    for(SpotLight spotLight : engine->lightingManager->spotLights){
+        spotLightProgram.setSpotLight(spotLight);
+        spotLightProgram.setCameraPosition(camera->getPos());
+        spotLightProgram.setMVP(dirLightRenderQuad->getModel());
+        dirLightRenderQuad->render();
+    }
+}
+
+void Graphics::stop(){
+
+	// clean up SDL
+	SDL_GL_DeleteContext(gl_context);
+	SDL_DestroyWindow(window);
+}
+
+void Graphics::updateView(){
+
+	view = camera->getView();
+}
+
+void Graphics::updateCamera(){
+
+	camera->update();
+}
+
+void Graphics::windowResized(){
+
+	// reset window and projection matrix
+	int w, h;
+	getWindowSize(w, h);
+	glViewport(0, 0, w, h);
+	projection = glm::perspective(45.0f, float(w) / float(h), 0.01f, 100000.0f);
+}
+
+void Graphics::getWindowSize(int &w, int &h) const{
+
+	SDL_GetWindowSize(window, &w, &h);
+}
+
+void Graphics::setClearColor(glm::vec3 color){
+
+	glClearColor(color.x, color.y, color.z, 1);
+}
+
+float Graphics::calcPointLightSphere(const PointLight& light) const{
+
+    float maxColor = fmax(fmax(light.color.x, light.color.y), light.color.z);
+
+
+    float returnVal = sqrtf((maxColor * 256 * light.diffuseIntensity / light.atten.exp) + light.atten.constant); // exp and constant
+    //float returnVal = maxColor * (1/light.atten.linear) * 256; // linear
+    /*float returnVal = (-light.atten.linear + sqrtf(light.atten.linear * light.atten.linear - 4 * light.atten.exp 
+        * (light.atten.constant - 256 * maxColor * light.diffuseIntensity))) / 2 * light.atten.exp;   */
+    //std::cout << maxColor << std::endl;
+    return returnVal;
+}
+
+/*
+    /// render selectable entities
+    selectionTexture.enableWriting();
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -156,8 +377,6 @@ void Graphics::render(){
     }
 
     selectionTexture.disableWriting();
-
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
     // check to see if object is in middle of screen
     SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
@@ -252,51 +471,4 @@ void Graphics::render(){
     glDepthMask(GL_TRUE);
     glEnable(GL_DEPTH_TEST);
 
-	SDL_GL_SwapWindow(window);
-}
-
-void Graphics::stop(){
-
-	// clean up SDL
-	SDL_GL_DeleteContext(gl_context);
-	SDL_DestroyWindow(window);
-}
-
-void Graphics::updateView(){
-
-	view = camera->getView();
-}
-
-void Graphics::updateCamera(){
-
-	camera->update();
-}
-
-void Graphics::windowResized(){
-
-	// reset window and projection matrix
-	int w, h;
-	getWindowSize(w, h);
-	glViewport(0, 0, w, h);
-	projection = glm::perspective(45.0f, float(w) / float(h), 0.01f, 100000.0f);
-}
-
-void Graphics::getWindowSize(int &w, int &h) const{
-
-	SDL_GetWindowSize(window, &w, &h);
-}
-
-void Graphics::setClearColor(glm::vec3 color){
-
-	glClearColor(color.x, color.y, color.z, 1);
-}
-
-float Graphics::calcPointLightSphere(const PointLight& light) const{
-
-    float maxColor = fmax(fmax(light.color.x, light.color.y), light.color.z);
-
-    float returnVal = (-light.atten.linear + sqrtf(light.atten.linear * light.atten.linear - 4 * light.atten.exp 
-        * (light.atten.exp - 256 * maxColor * light.diffuseIntensity))) / 2 * light.atten.exp;   
-    //std::cout << maxColor << std::endl;
-    return 1/returnVal;
-}
+*/

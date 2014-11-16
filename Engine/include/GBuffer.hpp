@@ -1,14 +1,9 @@
 #ifndef GBUFFER_HPP
 #define GBUFFER_HPP
 
-// SOURCE : http://ogldev.atspace.co.uk/www/tutorial35/tutorial35.html
+// SOURCE : http://ogldev.atspace.co.uk/www/tutorial37/tutorial37.html
 
 #include <GL/glew.h>
-
-#define GBUFFER_POSITION_TEXTURE_UNIT 0
-#define GBUFFER_DIFFUSE_TEXTURE_UNIT  1
-#define GBUFFER_NORMAL_TEXTURE_UNIT   2
-#define GBUFFER_SPECULAR_TEXTURE_UNIT 3
 
 namespace Vancom{
 
@@ -28,8 +23,11 @@ public:
     GBuffer();
     ~GBuffer();
     bool init(unsigned int windowWidth, unsigned int windowHeight);
-    void bindForWriting();
-    void bindForReading();  
+    void startFrame();
+    void bindForGeometryPass();
+    void bindForStencilPass();
+    void bindForLightPass();
+    void bindForFinalPass();  
 
 private: 
 
@@ -37,6 +35,7 @@ private:
 	GLuint fbo;
 	GLuint textures[GBUFFER_NUM_TEXTURES];
 	GLuint depthTexture;
+    GLuint finalTexture;
 
 };
 

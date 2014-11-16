@@ -32,6 +32,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/EntityManager.cpp.o"
   "CMakeFiles/engine.dir/src/Clock.cpp.o"
   "CMakeFiles/engine.dir/src/LightDSProgram.cpp.o"
+  "CMakeFiles/engine.dir/src/StencilProgram.cpp.o"
   "CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
   "engine.pdb"
   "engine"

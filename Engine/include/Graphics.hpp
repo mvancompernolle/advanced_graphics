@@ -22,6 +22,7 @@
 #include "DirLightDSProgram.hpp"
 #include "SpotLightDSProgram.hpp"
 #include "PointLightDSProgram.hpp"
+#include "StencilProgram.hpp"
 #include "Lights.hpp"
 
 namespace Vancom{
@@ -60,6 +61,10 @@ private:
 
 	// private functions
 	float calcPointLightSphere(const PointLight& light) const;
+	void geometryPassDS();
+	void pointLightPassDS();
+	void directionalLightPassDS();
+	void spotLightPassDS();
 
 	// private variables
 	Engine* engine;
@@ -82,6 +87,7 @@ private:
 
 	// defferred rendering
 	GeometryProgram geometryProgram;
+	StencilProgram stencilProgram;
 	DirLightDSProgram dirLightProgram;
 	SpotLightDSProgram spotLightProgram;
 	PointLightDSProgram pointLightProgram;

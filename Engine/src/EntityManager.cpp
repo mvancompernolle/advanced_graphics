@@ -63,7 +63,7 @@ void EntityManager::init(){
 	entities.push_back(cube);
 
 	// add a buddha
-	Model* buddha = new Model(glm::vec3(80, 100, 0), 5, 50, 5);
+	Model* buddha = new Model(glm::vec3(80, 100, 0), 5, 10, 2);
 	buddha->init("../assets/models/buddha.obj");
 	buddha->id = assignId();
 	defaultEntities.push_back(buddha);

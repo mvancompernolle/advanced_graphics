@@ -54,6 +54,7 @@ CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/Vertex.hpp
@@ -133,6 +134,7 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Terrain.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/TerrainBorder.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/TerrainProgram.hpp
@@ -256,6 +258,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/TerrainBorder.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Texture.hpp
@@ -346,6 +349,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Vertex.hpp
@@ -417,6 +421,7 @@ CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/Vertex.hpp
@@ -510,6 +515,10 @@ CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o: ../src/SpotLightDSProgram.cpp
 
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o: ../include/StencilProgram.hpp
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o: ../src/StencilProgram.cpp
+
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Camera.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Engine.hpp
@@ -528,6 +537,7 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Terrain.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/Texture.hpp
@@ -614,6 +624,7 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SpotLightDSProgram.hpp
+CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/TerrainBorder.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/TerrainProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/Texture.hpp

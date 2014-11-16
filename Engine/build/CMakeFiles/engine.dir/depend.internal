@@ -55,6 +55,7 @@ CMakeFiles/engine.dir/src/Engine.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -134,6 +135,7 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/Terrain.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
@@ -257,6 +259,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -347,6 +350,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -418,6 +422,7 @@ CMakeFiles/engine.dir/src/LightingManger.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
  ../include/Vertex.hpp
@@ -510,6 +515,10 @@ CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SpotLightDSProgram.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/SpotLightDSProgram.cpp
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o
+ ../include/ShaderProgram.hpp
+ ../include/StencilProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o
  ../include/Camera.hpp
  ../include/DirLightDSProgram.hpp
@@ -529,6 +538,7 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/Terrain.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp
@@ -615,6 +625,7 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  ../include/SpotLightDSProgram.hpp
+ ../include/StencilProgram.hpp
  ../include/TerrainBorder.hpp
  ../include/TerrainProgram.hpp
  ../include/Texture.hpp

@@ -807,6 +807,30 @@ src/SpotLightDSProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.s
 .PHONY : src/SpotLightDSProgram.cpp.s
 
+src/StencilProgram.o: src/StencilProgram.cpp.o
+.PHONY : src/StencilProgram.o
+
+# target to build an object file
+src/StencilProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/StencilProgram.cpp.o
+.PHONY : src/StencilProgram.cpp.o
+
+src/StencilProgram.i: src/StencilProgram.cpp.i
+.PHONY : src/StencilProgram.i
+
+# target to preprocess a source file
+src/StencilProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/StencilProgram.cpp.i
+.PHONY : src/StencilProgram.cpp.i
+
+src/StencilProgram.s: src/StencilProgram.cpp.s
+.PHONY : src/StencilProgram.s
+
+# target to generate assembly for a file
+src/StencilProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/StencilProgram.cpp.s
+.PHONY : src/StencilProgram.cpp.s
+
 src/Terrain.o: src/Terrain.cpp.o
 .PHONY : src/Terrain.o
 
@@ -1023,6 +1047,9 @@ help:
 	@echo "... src/SpotLightDSProgram.o"
 	@echo "... src/SpotLightDSProgram.i"
 	@echo "... src/SpotLightDSProgram.s"
+	@echo "... src/StencilProgram.o"
+	@echo "... src/StencilProgram.i"
+	@echo "... src/StencilProgram.s"
 	@echo "... src/Terrain.o"
 	@echo "... src/Terrain.i"
 	@echo "... src/Terrain.s"

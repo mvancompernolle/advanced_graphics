@@ -808,9 +808,32 @@ CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides: CMakeFiles/engine.dir/s
 
 CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
 
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o: ../src/StencilProgram.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_34)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/StencilProgram.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/StencilProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp
+
+CMakeFiles/engine.dir/src/StencilProgram.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/StencilProgram.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp > CMakeFiles/engine.dir/src/StencilProgram.cpp.i
+
+CMakeFiles/engine.dir/src/StencilProgram.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/StencilProgram.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp -o CMakeFiles/engine.dir/src/StencilProgram.cpp.s
+
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/StencilProgram.cpp.o.requires
+
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o.provides: CMakeFiles/engine.dir/src/StencilProgram.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/StencilProgram.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/StencilProgram.cpp.o.provides
+
+CMakeFiles/engine.dir/src/StencilProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/StencilProgram.cpp.o
+
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: ../src/BorderRenderProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_34)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_35)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/BorderRenderProgram.cpp
 
@@ -866,6 +889,7 @@ engine_OBJECTS = \
 "CMakeFiles/engine.dir/src/EntityManager.cpp.o" \
 "CMakeFiles/engine.dir/src/Clock.cpp.o" \
 "CMakeFiles/engine.dir/src/LightDSProgram.cpp.o" \
+"CMakeFiles/engine.dir/src/StencilProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
 
 # External object files for target engine
@@ -904,6 +928,7 @@ engine: CMakeFiles/engine.dir/src/Graphics.cpp.o
 engine: CMakeFiles/engine.dir/src/EntityManager.cpp.o
 engine: CMakeFiles/engine.dir/src/Clock.cpp.o
 engine: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o
+engine: CMakeFiles/engine.dir/src/StencilProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o
 engine: CMakeFiles/engine.dir/build.make
 engine: CMakeFiles/engine.dir/link.txt
@@ -947,6 +972,7 @@ CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Graphics.cpp.o.require
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Clock.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/StencilProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o.requires
 .PHONY : CMakeFiles/engine.dir/requires
 

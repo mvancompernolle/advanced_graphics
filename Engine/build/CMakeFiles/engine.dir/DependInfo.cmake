@@ -33,6 +33,7 @@ SET(CMAKE_DEPENDS_CHECK_CXX
   "/home/matthew/Desktop/adv_graphics/Engine/src/ShaderProgram.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/ShaderProgram.cpp.o"
   "/home/matthew/Desktop/adv_graphics/Engine/src/SilhouetteProgram.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o"
   "/home/matthew/Desktop/adv_graphics/Engine/src/SpotLightDSProgram.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o"
+  "/home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/StencilProgram.cpp.o"
   "/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/Terrain.cpp.o"
   "/home/matthew/Desktop/adv_graphics/Engine/src/TerrainBorder.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/TerrainBorder.cpp.o"
   "/home/matthew/Desktop/adv_graphics/Engine/src/TerrainProgram.cpp" "/home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles/engine.dir/src/TerrainProgram.cpp.o"

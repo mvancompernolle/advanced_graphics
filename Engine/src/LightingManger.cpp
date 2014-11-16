@@ -36,25 +36,25 @@ void LightingManager::init(){
 	cameraLight.cutoff = .99;
 	spotLights.push_back(cameraLight);
 
-	// create a second spot light
+	/*// create a second spot light
 	SpotLight spotLight2 = cameraLight;
 	spotLight2.pos = glm::vec3(0, 400, 0);
 	spotLight2.direction = glm::vec3(0, -1, 0);
-	spotLights.push_back(spotLight2);
+	spotLights.push_back(spotLight2);*/
 
 	// create a point light
 	PointLight pLight;
 	pLight.diffuseIntensity = 1.0f;
-	pLight.atten.constant = 1;
-	pLight.atten.linear = .05;
-	pLight.atten.exp = .01;
+	pLight.atten.constant = 1.0f;
+	pLight.atten.linear = 0;
+	pLight.atten.exp = 0.01f;
 	pLight.pos = glm::vec3(200, 100, 200);
 	pointLights.push_back(pLight);
 
-	// create a point light
+	/*// create a point light
 	PointLight pLight2 = pLight;
 	pLight2.pos = glm::vec3(200, 100, 0);
-
+	pointLights.push_back(pLight2);*/
 }
 
 void LightingManager::tick(float dt){
@@ -85,7 +85,6 @@ void LightingManager::addPointLight(PointLight pointLight){
 }
 
 void LightingManager::increaseLightAngle(){
-
 
     dirLightAngle -= 0.01;
 
