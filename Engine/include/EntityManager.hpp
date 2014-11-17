@@ -30,6 +30,8 @@ public:
 	std::vector<Fireworks*> explosions;
 	TerrainBorder *border;
 
+	float minX, maxX, minZ, maxZ;
+
 private:
 
 	// private variables

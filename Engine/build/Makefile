@@ -759,6 +759,30 @@ src/ShaderProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShaderProgram.cpp.s
 .PHONY : src/ShaderProgram.cpp.s
 
+src/ShadowVolumeProgram.o: src/ShadowVolumeProgram.cpp.o
+.PHONY : src/ShadowVolumeProgram.o
+
+# target to build an object file
+src/ShadowVolumeProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o
+.PHONY : src/ShadowVolumeProgram.cpp.o
+
+src/ShadowVolumeProgram.i: src/ShadowVolumeProgram.cpp.i
+.PHONY : src/ShadowVolumeProgram.i
+
+# target to preprocess a source file
+src/ShadowVolumeProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.i
+.PHONY : src/ShadowVolumeProgram.cpp.i
+
+src/ShadowVolumeProgram.s: src/ShadowVolumeProgram.cpp.s
+.PHONY : src/ShadowVolumeProgram.s
+
+# target to generate assembly for a file
+src/ShadowVolumeProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.s
+.PHONY : src/ShadowVolumeProgram.cpp.s
+
 src/SilhouetteProgram.o: src/SilhouetteProgram.cpp.o
 .PHONY : src/SilhouetteProgram.o
 
@@ -1041,6 +1065,9 @@ help:
 	@echo "... src/ShaderProgram.o"
 	@echo "... src/ShaderProgram.i"
 	@echo "... src/ShaderProgram.s"
+	@echo "... src/ShadowVolumeProgram.o"
+	@echo "... src/ShadowVolumeProgram.i"
+	@echo "... src/ShadowVolumeProgram.s"
 	@echo "... src/SilhouetteProgram.o"
 	@echo "... src/SilhouetteProgram.i"
 	@echo "... src/SilhouetteProgram.s"

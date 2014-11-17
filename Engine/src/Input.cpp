@@ -147,6 +147,12 @@ void Input::tick(float dt){
                 engine->graphics->camera->rotate(x,y);
             break;
 
+            case SDL_MOUSEBUTTONDOWN:
+                if(event.button.button == SDL_BUTTON_LEFT){
+                    engine->input->selected.clear();
+                }
+            break;
+
             case SDL_WINDOWEVENT:
                 if(event.window.event == SDL_WINDOWEVENT_RESIZED) {
                     engine->graphics->windowResized();

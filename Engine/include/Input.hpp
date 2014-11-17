@@ -2,7 +2,7 @@
 #define INPUT_HPP
 
 #include <map>
-#include <vector>
+#include <list>
 
 namespace Vancom{
 
@@ -22,7 +22,7 @@ public:
 	void stop();
 
 	// public variables
-	std::vector<Entity*> selected;
+	std::list<Entity*> selected;
 
 private:
 

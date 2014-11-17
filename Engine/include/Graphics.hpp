@@ -23,6 +23,7 @@
 #include "SpotLightDSProgram.hpp"
 #include "PointLightDSProgram.hpp"
 #include "StencilProgram.hpp"
+#include "ShadowVolumeProgram.hpp"
 #include "Lights.hpp"
 
 namespace Vancom{
@@ -65,6 +66,8 @@ private:
 	void pointLightPassDS();
 	void directionalLightPassDS();
 	void spotLightPassDS();
+	void depthPass();
+	void shadowVolumePass();
 
 	// private variables
 	Engine* engine;
@@ -94,6 +97,9 @@ private:
 	Model *dirLightRenderQuad;
 	Model *pointLightRenderSphere;
 	GBuffer buffer;
+
+	// stencil shadow volumes
+	ShadowVolumeProgram shadowProgram;
 	
 };
 

@@ -106,13 +106,13 @@ bool Terrain::generateMesh(){
 		for(int x = 0; x < width-1; x++){
 			// first triangle
 			indices.push_back((z * width) + x);
-			indices.push_back((z * width) + x + 1);
 			indices.push_back(((z+1) * width) + x);
+			indices.push_back((z * width) + x + 1);
 
 			// second triangle
 			indices.push_back((z * width) + x+1);
-			indices.push_back(((z+1) * width) + x+1);
 			indices.push_back(((z+1) * width) + x);
+			indices.push_back(((z+1) * width) + x+1);
 		}
 
 	}

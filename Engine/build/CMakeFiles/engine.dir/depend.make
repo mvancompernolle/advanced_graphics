@@ -52,6 +52,7 @@ CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/PointLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Engine.cpp.o: ../include/StencilProgram.hpp
@@ -132,6 +133,7 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/RandomTexture.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/StencilProgram.hpp
@@ -256,6 +258,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/RandomTexture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/StencilProgram.hpp
@@ -347,6 +350,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o: ../include/PointLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/StencilProgram.hpp
@@ -419,6 +423,7 @@ CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/PointLightDSProgram.h
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/LightingManger.cpp.o: ../include/StencilProgram.hpp
@@ -478,6 +483,7 @@ CMakeFiles/engine.dir/src/Mesh.cpp.o: ../include/Vertex.hpp
 CMakeFiles/engine.dir/src/Mesh.cpp.o: ../src/Mesh.cpp
 
 CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/Model.cpp.o: ../include/EntityManager.hpp
 CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Mesh.hpp
 CMakeFiles/engine.dir/src/Model.cpp.o: ../include/Model.hpp
 CMakeFiles/engine.dir/src/Model.cpp.o: ../include/ShaderProgram.hpp
@@ -504,6 +510,10 @@ CMakeFiles/engine.dir/src/SelectionTexture.cpp.o: ../src/SelectionTexture.cpp
 
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/ShaderProgram.cpp.o: ../src/ShaderProgram.cpp
+
+CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o: ../include/ShadowVolumeProgram.hpp
+CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o: ../src/ShadowVolumeProgram.cpp
 
 CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o: ../include/SilhouetteProgram.hpp
@@ -535,6 +545,7 @@ CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/PointLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Terrain.cpp.o: ../include/StencilProgram.hpp
@@ -622,6 +633,7 @@ CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/PointLightDSProgram.hp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/TerrainBorder.cpp.o: ../include/StencilProgram.hpp

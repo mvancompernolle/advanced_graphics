@@ -21,6 +21,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/BorderUpdateProgram.cpp.o"
   "CMakeFiles/engine.dir/src/Input.cpp.o"
   "CMakeFiles/engine.dir/src/Model.cpp.o"
+  "CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o"
   "CMakeFiles/engine.dir/src/LightingManger.cpp.o"
   "CMakeFiles/engine.dir/src/Fireworks.cpp.o"
   "CMakeFiles/engine.dir/src/Entity.cpp.o"

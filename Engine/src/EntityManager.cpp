@@ -1,6 +1,7 @@
 #include "EntityManager.hpp"
 
 #include <iostream>
+#include <random>
 
 #include "Engine.hpp"
 #include "Input.hpp"
@@ -31,48 +32,32 @@ void EntityManager::init(){
 	terrain->setTexture(GL_TEXTURE_2D, "../assets/terrain_dirt.jpg");
 	defaultEntities.push_back(terrain);
 	entities.push_back(terrain);
+	int width, height;
+	terrain->getDimensions(width, height);
 
-	// add a ball
-	Model* ball = new Model(glm::vec3(0, 100, 0), 10, 1, 200);
-	ball->init("../assets/models/ballSml.obj");
-	ball->id = assignId();
-	defaultEntities.push_back(ball);
-	entities.push_back(ball);
+	// set minimum and maximum values 
+	minX = -width/2;
+	maxX = width/2;
+	minZ = -height/2;
+	maxZ = height/2;
 
-	// add a ball
-	Model* ball1 = new Model(glm::vec3(40, 100, 0), 15, 1, 100);
-	ball1->init("../assets/models/ballSml.obj");
-	ball1->id = assignId();
-	defaultEntities.push_back(ball1);
-	entities.push_back(ball1);
-	engine->input->selected.push_back(ball);
-
-	// add a ball
-	Model* ball2 = new Model(glm::vec3(-40, 100, 0), 20, 1, 200);
-	ball2->init("../assets/models/ballSml.obj");
-	ball2->id = assignId();
-	defaultEntities.push_back(ball2);
-	entities.push_back(ball2);
-	engine->input->selected.push_back(ball2);
-
-	// add cube
-	Model* cube = new Model(glm::vec3(-80, 100, 0), 3, .1, 50);
-	cube->init("../assets/models/woodCube.obj");
-	cube->id = assignId();
-	defaultEntities.push_back(cube);
-	entities.push_back(cube);
-
-	// add a buddha
-	Model* buddha = new Model(glm::vec3(80, 100, 0), 5, 10, 2);
-	buddha->init("../assets/models/buddha.obj");
-	buddha->id = assignId();
-	defaultEntities.push_back(buddha);
-	entities.push_back(buddha);
+	// randomly generate 10 balls
+    std::random_device rd;
+    std::default_random_engine gen(rd());
+    std::uniform_real_distribution<float> distX(minX, maxX);
+    std::uniform_real_distribution<float> distZ(minZ, maxZ);
+    std::uniform_real_distribution<float> distSize(10, 50);
+	for(int i=0; i<10; i++){
+		// add a ball
+		Model* ball = new Model(this, glm::vec3(distX(gen), i*30 + 180, distZ(gen)), distSize(gen), 1, 200);
+		ball->init("../assets/models/ballSml.obj");
+		ball->id = assignId();
+		defaultEntities.push_back(ball);
+		entities.push_back(ball);		
+	}
 
 	// add terrain border
-	int width, height;
 	border = new TerrainBorder(engine, 0.1f);
-	terrain->getDimensions(width, height);
 	border->init(100, glm::vec2(-width/2, height/2), glm::vec2(width/2, height/2), glm::vec2(-width/2, -height/2), 
 		glm::vec2(width/2, -height/2));
 	entities.push_back(border);
