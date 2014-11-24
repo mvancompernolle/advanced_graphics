@@ -16,7 +16,9 @@
 #include "EntityManager.hpp"
 #include "TerrainBorder.hpp"
 #include "Fireworks.hpp"
+#include "Explosion.hpp"
 #include "LightingManager.hpp"
+#include "SkyBox.hpp"
 
 using namespace Vancom;
 
@@ -222,8 +224,8 @@ void Graphics::render(){
     }
 
     // render explosions
-    for(Fireworks *fireworks : engine->entityManager->explosions){
-        fireworks->render(projection, view, camera->getPos());
+    for(Explosion *explosion : engine->entityManager->explosions){
+        explosion->render(projection, view, camera->getPos());
     }
 
     // render terrain border
@@ -235,6 +237,9 @@ void Graphics::render(){
     for(Entity* entity : engine->entityManager->guiEntities){
         entity->render();
     }
+
+    // render sky box
+    engine->entityManager->skyBox->render(projection, view);
 
     buffer.bindForFinalPass();
     int w, h;

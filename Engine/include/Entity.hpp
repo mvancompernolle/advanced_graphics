@@ -21,10 +21,12 @@ public:
 	void scale(float scale);
 
 	glm::mat4 getModel() const;
+	glm::vec3 getPos() const;
 
 	// public variables
 	unsigned int id;
 	float specularIntensity, specularPower;
+	bool updating;
 
 protected:
 	

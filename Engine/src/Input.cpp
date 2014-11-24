@@ -1,6 +1,7 @@
 #include "Input.hpp"
 #include "Engine.hpp"
 #include "Graphics.hpp"
+#include "EntityManager.hpp"
 #include "Camera.hpp"
 #include "LightingManager.hpp"
 
@@ -149,6 +150,14 @@ void Input::tick(float dt){
 
             case SDL_MOUSEBUTTONDOWN:
                 if(event.button.button == SDL_BUTTON_LEFT){
+
+                    // create an explosion at each entity
+                    for(Entity *entity : engine->input->selected){
+                        engine->entityManager->createExplosion(entity->getPos());
+                        entity->updating = false;
+                    }
+
+                    // clear the selected entities
                     engine->input->selected.clear();
                 }
             break;

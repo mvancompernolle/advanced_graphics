@@ -9,7 +9,7 @@
 using namespace Vancom;
 
 Terrain::Terrain(Engine *engine, const char* fileName) : engine(engine), fileName(fileName){
-	specularIntensity = 0.5;
+	specularIntensity = .5;
 	specularPower = 32;
 	heightScale = 100;
 	geotransform = new double[6];
@@ -90,8 +90,8 @@ bool Terrain::generateMesh(){
 			vert.pos.x = x;
 			vert.pos.y = heightScale * ((data[z][x]-min)/range);
 			vert.pos.z = z;
-			vert.tex.x = vert.pos.x/100;
-			vert.tex.y = vert.pos.z/100;
+			vert.tex.x = vert.pos.x/300;
+			vert.tex.y = vert.pos.z/300;
 
 			// calculate the normal for the vertex
 			calculateNormal(data, z, x, vert);

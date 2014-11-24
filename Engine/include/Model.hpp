@@ -25,12 +25,14 @@ public:
 	void tick(float dt);
 	void render();
 
+	// public variables
+	bool moving;
+
 private:
 
 	// private variables
 	EntityManager *mgr;
 	Mesh *mesh;
-	bool moving;
 	float timeElapsed;
 	float decisionTime;
 	float speed;

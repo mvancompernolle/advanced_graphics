@@ -23,6 +23,9 @@ CMakeFiles/engine.dir/src/CrossHair.cpp.o: ../include/Texture.hpp
 CMakeFiles/engine.dir/src/CrossHair.cpp.o: ../include/Vertex.hpp
 CMakeFiles/engine.dir/src/CrossHair.cpp.o: ../src/CrossHair.cpp
 
+CMakeFiles/engine.dir/src/CubeMapTexture.cpp.o: ../include/CubeMapTexture.hpp
+CMakeFiles/engine.dir/src/CubeMapTexture.cpp.o: ../src/CubeMapTexture.cpp
+
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../include/DefaultProgram.hpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o: ../src/DefualtProgram.cpp
@@ -115,9 +118,9 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/EntityManager.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Fireworks.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Explosion.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ExplosionUpdateProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/FireworksRenderProgram.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/FireworksUpdateProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GBuffer.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GUIProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/GeometryProgram.hpp
@@ -129,12 +132,12 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Mesh.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Model.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Particle.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/PointLightDSProgram.hpp
-CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/RandomTexture.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SelectionProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SilhouetteProgram.hpp
+CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SkyBox.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../include/Terrain.hpp
@@ -203,6 +206,20 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_core.h
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_spatialref.h
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: /usr/include/gdal/ogr_srs_api.h
 
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/EntityManager.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Explosion.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/ExplosionUpdateProgram.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/FireworksRenderProgram.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Particle.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../include/Texture.hpp
+CMakeFiles/engine.dir/src/Explosion.cpp.o: ../src/Explosion.cpp
+
+CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../include/ExplosionUpdateProgram.hpp
+CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o: ../src/ExplosionUpdateProgram.cpp
+
 CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/Fireworks.hpp
 CMakeFiles/engine.dir/src/Fireworks.cpp.o: ../include/FireworksRenderProgram.hpp
@@ -239,6 +256,8 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Entity.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/EntityManager.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Explosion.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ExplosionUpdateProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/Fireworks.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/FireworksRenderProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/FireworksUpdateProgram.hpp
@@ -260,6 +279,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SelectionTexture.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/ShadowVolumeProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SilhouetteProgram.hpp
+CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SkyBox.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/SpotLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/StencilProgram.hpp
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../include/TerrainBorder.hpp
@@ -336,6 +356,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Camera.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/DirLightDSProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Engine.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/Input.cpp.o: ../include/EntityManager.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/GBuffer.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/GUIProgram.hpp
 CMakeFiles/engine.dir/src/Input.cpp.o: ../include/GeometryProgram.hpp
@@ -518,6 +539,23 @@ CMakeFiles/engine.dir/src/ShadowVolumeProgram.cpp.o: ../src/ShadowVolumeProgram.
 CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o: ../include/ShaderProgram.hpp
 CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o: ../include/SilhouetteProgram.hpp
 CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o: ../src/SilhouetteProgram.cpp
+
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Camera.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/CubeMapTexture.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Entity.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Mesh.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Model.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/SkyBox.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/SkyBoxProgram.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/TerrainProgram.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Texture.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../include/Vertex.hpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o: ../src/SkyBox.cpp
+
+CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o: ../include/ShaderProgram.hpp
+CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o: ../include/SkyBoxProgram.hpp
+CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o: ../src/SkyBoxProgram.cpp
 
 CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o: ../include/LightDSProgram.hpp
 CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o: ../include/Lights.hpp

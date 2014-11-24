@@ -17,11 +17,12 @@ Model::Model(){
 
 Model::Model(EntityManager *mgr, glm::vec3 pos, float scale, float power, float intensity): mgr(mgr){
 	Model();
+	moving = true;
 	speed = 5;
 	timeElapsed = 3;
 	decisionTime = 3;
-	specularIntensity = power;
-	specularPower = intensity;	
+	specularIntensity = intensity;
+	specularPower = power;	
 	target = pos;
 	model = glm::translate(model, pos);
 	model = glm::scale(model, glm::vec3(scale, scale, scale));
@@ -62,7 +63,8 @@ void Model::tick(float dt){
 	    	//std::cout << target.x << " " << target.y << " " << target.z << std::endl;
 	}
 
-	model = glm::translate(model, glm::normalize(target - pos) * dt * speed);
+	//if(updating)
+		//model = glm::translate(model, glm::normalize(target - pos) * dt * speed);
 
 }
 

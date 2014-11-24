@@ -6,27 +6,9 @@
 
 #IncludeRegexTransform: 
 
-../include/BorderRenderProgram.hpp
-glm/gtc/matrix_transform.hpp
+../include/Camera.hpp
+glm/glm.hpp
 -
-glm/gtc/type_ptr.hpp
--
-glm/gtx/string_cast.hpp
--
-ShaderProgram.hpp
-../include/ShaderProgram.hpp
-
-../include/BorderUpdateProgram.hpp
-ShaderProgram.hpp
-../include/ShaderProgram.hpp
-
-../include/CrossHair.hpp
-vector
--
-Vertex.hpp
-../include/Vertex.hpp
-Entity.hpp
-../include/Entity.hpp
 
 ../include/DirLightDSProgram.hpp
 glm/glm.hpp
@@ -47,46 +29,6 @@ glm/gtc/matrix_transform.hpp
 -
 glm/gtx/rotate_vector.hpp
 -
-ShaderProgram.hpp
-../include/ShaderProgram.hpp
-
-../include/EntityManager.hpp
-vector
--
-
-../include/Fireworks.hpp
-vector
--
-glm/glm.hpp
--
-glm/gtc/matrix_transform.hpp
--
-glm/gtc/type_ptr.hpp
--
-Texture.hpp
-../include/Texture.hpp
-FireworksUpdateProgram.hpp
-../include/FireworksUpdateProgram.hpp
-FireworksRenderProgram.hpp
-../include/FireworksRenderProgram.hpp
-RandomTexture.hpp
-../include/RandomTexture.hpp
-Particle.hpp
-../include/Particle.hpp
-Entity.hpp
-../include/Entity.hpp
-
-../include/FireworksRenderProgram.hpp
-ShaderProgram.hpp
-../include/ShaderProgram.hpp
-glm/gtc/matrix_transform.hpp
--
-glm/gtc/type_ptr.hpp
--
-glm/gtx/string_cast.hpp
--
-
-../include/FireworksUpdateProgram.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
 
@@ -158,12 +100,6 @@ ShadowVolumeProgram.hpp
 Lights.hpp
 ../include/Lights.hpp
 
-../include/Input.hpp
-map
--
-list
--
-
 ../include/LightDSProgram.hpp
 glm/glm.hpp
 -
@@ -216,8 +152,6 @@ TerrainProgram.hpp
 Mesh.hpp
 ../include/Mesh.hpp
 
-../include/Particle.hpp
-
 ../include/PointLightDSProgram.hpp
 glm/glm.hpp
 -
@@ -231,16 +165,6 @@ LightDSProgram.hpp
 ../include/LightDSProgram.hpp
 Lights.hpp
 ../include/Lights.hpp
-
-../include/RandomTexture.hpp
-GL/glew.h
--
-glm/glm.hpp
--
-glm/gtc/matrix_transform.hpp
--
-glm/gtc/type_ptr.hpp
--
 
 ../include/SelectionProgram.hpp
 glm/gtc/matrix_transform.hpp
@@ -322,22 +246,6 @@ Vertex.hpp
 Texture.hpp
 ../include/Texture.hpp
 
-../include/TerrainBorder.hpp
-glm/glm.hpp
--
-glm/gtc/matrix_transform.hpp
--
-glm/gtx/rotate_vector.hpp
--
-Entity.hpp
-../include/Entity.hpp
-BorderUpdateProgram.hpp
-../include/BorderUpdateProgram.hpp
-BorderRenderProgram.hpp
-../include/BorderRenderProgram.hpp
-Particle.hpp
-../include/Particle.hpp
-
 ../include/TerrainProgram.hpp
 ShaderProgram.hpp
 ../include/ShaderProgram.hpp
@@ -358,31 +266,17 @@ FreeImagePlus.h
 glm/glm.hpp
 -
 
-/home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.cpp
-EntityManager.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.cpp
+Terrain.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.hpp
 iostream
--
-random
 -
 Engine.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/Engine.hpp
-Input.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Input.hpp
-Model.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Model.hpp
-Entity.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Entity.hpp
-Terrain.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Terrain.hpp
-TerrainBorder.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/TerrainBorder.hpp
-CrossHair.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/CrossHair.hpp
 Graphics.hpp
 /home/matthew/Desktop/adv_graphics/Engine/src/Graphics.hpp
-Fireworks.hpp
-/home/matthew/Desktop/adv_graphics/Engine/src/Fireworks.hpp
+Camera.hpp
+/home/matthew/Desktop/adv_graphics/Engine/src/Camera.hpp
 
 /usr/include/SDL2/SDL.h
 SDL_main.h

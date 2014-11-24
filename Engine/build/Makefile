@@ -231,6 +231,30 @@ src/CrossHair.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CrossHair.cpp.s
 .PHONY : src/CrossHair.cpp.s
 
+src/CubeMapTexture.o: src/CubeMapTexture.cpp.o
+.PHONY : src/CubeMapTexture.o
+
+# target to build an object file
+src/CubeMapTexture.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CubeMapTexture.cpp.o
+.PHONY : src/CubeMapTexture.cpp.o
+
+src/CubeMapTexture.i: src/CubeMapTexture.cpp.i
+.PHONY : src/CubeMapTexture.i
+
+# target to preprocess a source file
+src/CubeMapTexture.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CubeMapTexture.cpp.i
+.PHONY : src/CubeMapTexture.cpp.i
+
+src/CubeMapTexture.s: src/CubeMapTexture.cpp.s
+.PHONY : src/CubeMapTexture.s
+
+# target to generate assembly for a file
+src/CubeMapTexture.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/CubeMapTexture.cpp.s
+.PHONY : src/CubeMapTexture.cpp.s
+
 src/DefualtProgram.o: src/DefualtProgram.cpp.o
 .PHONY : src/DefualtProgram.o
 
@@ -350,6 +374,54 @@ src/EntityManager.s: src/EntityManager.cpp.s
 src/EntityManager.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/EntityManager.cpp.s
 .PHONY : src/EntityManager.cpp.s
+
+src/Explosion.o: src/Explosion.cpp.o
+.PHONY : src/Explosion.o
+
+# target to build an object file
+src/Explosion.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.o
+.PHONY : src/Explosion.cpp.o
+
+src/Explosion.i: src/Explosion.cpp.i
+.PHONY : src/Explosion.i
+
+# target to preprocess a source file
+src/Explosion.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.i
+.PHONY : src/Explosion.cpp.i
+
+src/Explosion.s: src/Explosion.cpp.s
+.PHONY : src/Explosion.s
+
+# target to generate assembly for a file
+src/Explosion.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Explosion.cpp.s
+.PHONY : src/Explosion.cpp.s
+
+src/ExplosionUpdateProgram.o: src/ExplosionUpdateProgram.cpp.o
+.PHONY : src/ExplosionUpdateProgram.o
+
+# target to build an object file
+src/ExplosionUpdateProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o
+.PHONY : src/ExplosionUpdateProgram.cpp.o
+
+src/ExplosionUpdateProgram.i: src/ExplosionUpdateProgram.cpp.i
+.PHONY : src/ExplosionUpdateProgram.i
+
+# target to preprocess a source file
+src/ExplosionUpdateProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.i
+.PHONY : src/ExplosionUpdateProgram.cpp.i
+
+src/ExplosionUpdateProgram.s: src/ExplosionUpdateProgram.cpp.s
+.PHONY : src/ExplosionUpdateProgram.s
+
+# target to generate assembly for a file
+src/ExplosionUpdateProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.s
+.PHONY : src/ExplosionUpdateProgram.cpp.s
 
 src/Fireworks.o: src/Fireworks.cpp.o
 .PHONY : src/Fireworks.o
@@ -807,6 +879,54 @@ src/SilhouetteProgram.cpp.s:
 	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.s
 .PHONY : src/SilhouetteProgram.cpp.s
 
+src/SkyBox.o: src/SkyBox.cpp.o
+.PHONY : src/SkyBox.o
+
+# target to build an object file
+src/SkyBox.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBox.cpp.o
+.PHONY : src/SkyBox.cpp.o
+
+src/SkyBox.i: src/SkyBox.cpp.i
+.PHONY : src/SkyBox.i
+
+# target to preprocess a source file
+src/SkyBox.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBox.cpp.i
+.PHONY : src/SkyBox.cpp.i
+
+src/SkyBox.s: src/SkyBox.cpp.s
+.PHONY : src/SkyBox.s
+
+# target to generate assembly for a file
+src/SkyBox.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBox.cpp.s
+.PHONY : src/SkyBox.cpp.s
+
+src/SkyBoxProgram.o: src/SkyBoxProgram.cpp.o
+.PHONY : src/SkyBoxProgram.o
+
+# target to build an object file
+src/SkyBoxProgram.cpp.o:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o
+.PHONY : src/SkyBoxProgram.cpp.o
+
+src/SkyBoxProgram.i: src/SkyBoxProgram.cpp.i
+.PHONY : src/SkyBoxProgram.i
+
+# target to preprocess a source file
+src/SkyBoxProgram.cpp.i:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.i
+.PHONY : src/SkyBoxProgram.cpp.i
+
+src/SkyBoxProgram.s: src/SkyBoxProgram.cpp.s
+.PHONY : src/SkyBoxProgram.s
+
+# target to generate assembly for a file
+src/SkyBoxProgram.cpp.s:
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.s
+.PHONY : src/SkyBoxProgram.cpp.s
+
 src/SpotLightDSProgram.o: src/SpotLightDSProgram.cpp.o
 .PHONY : src/SpotLightDSProgram.o
 
@@ -999,6 +1119,9 @@ help:
 	@echo "... src/CrossHair.o"
 	@echo "... src/CrossHair.i"
 	@echo "... src/CrossHair.s"
+	@echo "... src/CubeMapTexture.o"
+	@echo "... src/CubeMapTexture.i"
+	@echo "... src/CubeMapTexture.s"
 	@echo "... src/DefualtProgram.o"
 	@echo "... src/DefualtProgram.i"
 	@echo "... src/DefualtProgram.s"
@@ -1014,6 +1137,12 @@ help:
 	@echo "... src/EntityManager.o"
 	@echo "... src/EntityManager.i"
 	@echo "... src/EntityManager.s"
+	@echo "... src/Explosion.o"
+	@echo "... src/Explosion.i"
+	@echo "... src/Explosion.s"
+	@echo "... src/ExplosionUpdateProgram.o"
+	@echo "... src/ExplosionUpdateProgram.i"
+	@echo "... src/ExplosionUpdateProgram.s"
 	@echo "... src/Fireworks.o"
 	@echo "... src/Fireworks.i"
 	@echo "... src/Fireworks.s"
@@ -1071,6 +1200,12 @@ help:
 	@echo "... src/SilhouetteProgram.o"
 	@echo "... src/SilhouetteProgram.i"
 	@echo "... src/SilhouetteProgram.s"
+	@echo "... src/SkyBox.o"
+	@echo "... src/SkyBox.i"
+	@echo "... src/SkyBox.s"
+	@echo "... src/SkyBoxProgram.o"
+	@echo "... src/SkyBoxProgram.i"
+	@echo "... src/SkyBoxProgram.s"
 	@echo "... src/SpotLightDSProgram.o"
 	@echo "... src/SpotLightDSProgram.i"
 	@echo "... src/SpotLightDSProgram.s"

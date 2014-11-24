@@ -23,6 +23,9 @@ CMakeFiles/engine.dir/src/CrossHair.cpp.o
  ../include/Texture.hpp
  ../include/Vertex.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/CrossHair.cpp
+CMakeFiles/engine.dir/src/CubeMapTexture.cpp.o
+ ../include/CubeMapTexture.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/CubeMapTexture.cpp
 CMakeFiles/engine.dir/src/DefualtProgram.cpp.o
  ../include/DefaultProgram.hpp
  ../include/ShaderProgram.hpp
@@ -116,9 +119,9 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
- ../include/Fireworks.hpp
+ ../include/Explosion.hpp
+ ../include/ExplosionUpdateProgram.hpp
  ../include/FireworksRenderProgram.hpp
- ../include/FireworksUpdateProgram.hpp
  ../include/GBuffer.hpp
  ../include/GUIProgram.hpp
  ../include/GeometryProgram.hpp
@@ -130,12 +133,12 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  ../include/Model.hpp
  ../include/Particle.hpp
  ../include/PointLightDSProgram.hpp
- ../include/RandomTexture.hpp
  ../include/SelectionProgram.hpp
  ../include/SelectionTexture.hpp
  ../include/ShaderProgram.hpp
  ../include/ShadowVolumeProgram.hpp
  ../include/SilhouetteProgram.hpp
+ ../include/SkyBox.hpp
  ../include/SpotLightDSProgram.hpp
  ../include/StencilProgram.hpp
  ../include/Terrain.hpp
@@ -203,6 +206,20 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o
  /usr/include/gdal/ogr_core.h
  /usr/include/gdal/ogr_spatialref.h
  /usr/include/gdal/ogr_srs_api.h
+CMakeFiles/engine.dir/src/Explosion.cpp.o
+ ../include/Entity.hpp
+ ../include/EntityManager.hpp
+ ../include/Explosion.hpp
+ ../include/ExplosionUpdateProgram.hpp
+ ../include/FireworksRenderProgram.hpp
+ ../include/Particle.hpp
+ ../include/ShaderProgram.hpp
+ ../include/Texture.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/Explosion.cpp
+CMakeFiles/engine.dir/src/ExplosionUpdateProgram.cpp.o
+ ../include/ExplosionUpdateProgram.hpp
+ ../include/ShaderProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/ExplosionUpdateProgram.cpp
 CMakeFiles/engine.dir/src/Fireworks.cpp.o
  ../include/Entity.hpp
  ../include/Fireworks.hpp
@@ -240,6 +257,8 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  ../include/Engine.hpp
  ../include/Entity.hpp
  ../include/EntityManager.hpp
+ ../include/Explosion.hpp
+ ../include/ExplosionUpdateProgram.hpp
  ../include/Fireworks.hpp
  ../include/FireworksRenderProgram.hpp
  ../include/FireworksUpdateProgram.hpp
@@ -261,6 +280,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o
  ../include/ShaderProgram.hpp
  ../include/ShadowVolumeProgram.hpp
  ../include/SilhouetteProgram.hpp
+ ../include/SkyBox.hpp
  ../include/SpotLightDSProgram.hpp
  ../include/StencilProgram.hpp
  ../include/TerrainBorder.hpp
@@ -337,6 +357,7 @@ CMakeFiles/engine.dir/src/Input.cpp.o
  ../include/DirLightDSProgram.hpp
  ../include/Engine.hpp
  ../include/Entity.hpp
+ ../include/EntityManager.hpp
  ../include/GBuffer.hpp
  ../include/GUIProgram.hpp
  ../include/GeometryProgram.hpp
@@ -519,6 +540,23 @@ CMakeFiles/engine.dir/src/SilhouetteProgram.cpp.o
  ../include/ShaderProgram.hpp
  ../include/SilhouetteProgram.hpp
  /home/matthew/Desktop/adv_graphics/Engine/src/SilhouetteProgram.cpp
+CMakeFiles/engine.dir/src/SkyBox.cpp.o
+ ../include/Camera.hpp
+ ../include/CubeMapTexture.hpp
+ ../include/Entity.hpp
+ ../include/Mesh.hpp
+ ../include/Model.hpp
+ ../include/ShaderProgram.hpp
+ ../include/SkyBox.hpp
+ ../include/SkyBoxProgram.hpp
+ ../include/TerrainProgram.hpp
+ ../include/Texture.hpp
+ ../include/Vertex.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/SkyBox.cpp
+CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o
+ ../include/ShaderProgram.hpp
+ ../include/SkyBoxProgram.hpp
+ /home/matthew/Desktop/adv_graphics/Engine/src/SkyBoxProgram.cpp
 CMakeFiles/engine.dir/src/SpotLightDSProgram.cpp.o
  ../include/LightDSProgram.hpp
  ../include/Lights.hpp

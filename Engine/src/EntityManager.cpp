@@ -11,7 +11,8 @@
 #include "TerrainBorder.hpp"
 #include "CrossHair.hpp"
 #include "Graphics.hpp"
-#include "Fireworks.hpp"
+#include "Explosion.hpp"
+#include "SkyBox.hpp"
 
 using namespace Vancom;
 
@@ -29,7 +30,7 @@ void EntityManager::init(){
 	// add the terrain
 	Terrain* terrain = new Terrain(engine, "../assets/DCEWsqrExtent.tif");
 	terrain->init();
-	terrain->setTexture(GL_TEXTURE_2D, "../assets/terrain_dirt.jpg");
+	terrain->setTexture(GL_TEXTURE_2D, "../assets/models/grass.jpg");
 	defaultEntities.push_back(terrain);
 	entities.push_back(terrain);
 	int width, height;
@@ -49,7 +50,7 @@ void EntityManager::init(){
     std::uniform_real_distribution<float> distSize(10, 50);
 	for(int i=0; i<10; i++){
 		// add a ball
-		Model* ball = new Model(this, glm::vec3(distX(gen), i*30 + 180, distZ(gen)), distSize(gen), 1, 200);
+		Model* ball = new Model(this, glm::vec3(distX(gen), i*30 + 180, distZ(gen)), distSize(gen), 32, 1);
 		ball->init("../assets/models/ballSml.obj");
 		ball->id = assignId();
 		defaultEntities.push_back(ball);
@@ -72,10 +73,21 @@ void EntityManager::init(){
 	entities.push_back(crossHair);
 
 	// add an explosion
-	Fireworks* fireworks = new Fireworks();
-	fireworks->init(glm::vec3(0, 100, 0));
-	entities.push_back(fireworks);
-	explosions.push_back(fireworks);
+	Explosion* explosion = new Explosion(engine->entityManager);
+	explosion->init(glm::vec3(0, 100, 0));
+	explosions.push_back(explosion);
+
+	// add skybox
+	skyBox = new SkyBox(engine->graphics->camera);
+	if(!skyBox->init("../assets/models",
+			"calm_right.jpg",
+			"calm_left.jpg",
+			"calm_top.jpg",
+			"calm_top.jpg",
+			"calm_front.jpg",
+			"calm_back.jpg")){
+		std::cout << "failed to init skybox" << std::endl;
+	}
 }
 
 void EntityManager::tick(float dt){
@@ -83,6 +95,10 @@ void EntityManager::tick(float dt){
 	// tick all of the entities in the world
 	for(Entity *entity : entities)
 		entity->tick(dt);
+
+	// tick explosions
+	for(Explosion *explosion : explosions)
+		explosion->tick(dt);
 }
 
 void EntityManager::stop(){
@@ -95,4 +111,11 @@ void EntityManager::stop(){
 unsigned int EntityManager::assignId(){
 
 	return nextId++;
+}
+
+void EntityManager::createExplosion(glm::vec3 pos){
+	std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+    Explosion* explosion = new Explosion(this);
+    explosion->init(pos);
+    explosions.push_back(explosion);
 }
