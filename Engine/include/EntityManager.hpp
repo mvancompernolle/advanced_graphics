@@ -13,6 +13,7 @@ class Engine;
 class TerrainBorder;
 class Explosion;
 class SkyBox;
+class Grass;
 
 class EntityManager {
 
@@ -34,6 +35,7 @@ public:
 	std::vector<Explosion*> explosions;
 	TerrainBorder *border;
 	SkyBox* skyBox;
+	Grass* grass;
 
 	float minX, maxX, minZ, maxZ;
 

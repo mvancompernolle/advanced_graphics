@@ -13,7 +13,7 @@
 
 namespace Vancom{
 
-class Camera;
+class Engine;
 class CubeMapTexture;
 class Model;
 class SkyBoxProgram;
@@ -22,7 +22,7 @@ class SkyBox{
 
 public:
 
-    SkyBox(const Camera* camera);
+    SkyBox(const Engine* camera);
     ~SkyBox();
     bool init(const std::string& directory,
               const std::string& posXFilename,
@@ -37,7 +37,7 @@ private:
 
     // private variables
     SkyBoxProgram* program;
-    const Camera* camera;
+    const Engine* engine;
     CubeMapTexture* texture;
     Model* box;
 

@@ -12,6 +12,7 @@
 #include "CrossHair.hpp"
 #include "Graphics.hpp"
 #include "Explosion.hpp"
+#include "Grass.hpp"
 #include "SkyBox.hpp"
 
 using namespace Vancom;
@@ -30,11 +31,16 @@ void EntityManager::init(){
 	// add the terrain
 	Terrain* terrain = new Terrain(engine, "../assets/DCEWsqrExtent.tif");
 	terrain->init();
-	terrain->setTexture(GL_TEXTURE_2D, "../assets/models/grass.jpg");
+	terrain->setTexture(GL_TEXTURE_2D, "../assets/terrain_dirt.jpg");
 	defaultEntities.push_back(terrain);
 	entities.push_back(terrain);
 	int width, height;
 	terrain->getDimensions(width, height);
+
+	// add grass on the terrain
+	grass = new Grass(engine, terrain->getModel());
+	grass->init();
+	grass->generateBlades(terrain->getGeometry());
 
 	// set minimum and maximum values 
 	minX = -width/2;
@@ -64,8 +70,7 @@ void EntityManager::init(){
 	entities.push_back(border);
 
 	// add a crosshair
-	engine->graphics->getWindowSize(width, height);
-	float ratio = (float) width/height;
+	float ratio = (float) engine->graphics->width/engine->graphics->height;
 	std::cout << ratio << std::endl;
 	CrossHair *crossHair = new CrossHair(glm::vec3(0, 0, 0));
 	crossHair->init("../assets/models/crosshair.png", .03 / ratio, .03);
@@ -78,7 +83,7 @@ void EntityManager::init(){
 	explosions.push_back(explosion);
 
 	// add skybox
-	skyBox = new SkyBox(engine->graphics->camera);
+	skyBox = new SkyBox(engine);
 	if(!skyBox->init("../assets/models",
 			"calm_right.jpg",
 			"calm_left.jpg",

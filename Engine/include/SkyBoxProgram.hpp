@@ -20,12 +20,14 @@ public:
     virtual bool init();
     void setMVP(const glm::mat4 mvp) const;
     void setTextureUnit(unsigned int textureUnit) const;
+	void setLightDir(const glm::vec3& dir) const;
     
 private:
 
     // private variables
     GLuint locMVP;
     GLuint locTexture;
+    GLuint locLightDir;
 
 };
 

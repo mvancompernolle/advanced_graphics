@@ -31,6 +31,7 @@ bool SkyBoxProgram::init()
 
     locMVP = getUniformLocation("mvp");
     locTexture = getUniformLocation("textureUnit");
+    locLightDir = getUniformLocation("lightDir");
 
     return true;
 }
@@ -43,4 +44,9 @@ void SkyBoxProgram::setMVP(const glm::mat4 mvp) const{
 void SkyBoxProgram::setTextureUnit(unsigned int textureUnit) const{
 
     glUniform1i(locTexture, textureUnit);    
+}
+
+void SkyBoxProgram::setLightDir(const glm::vec3& dir) const{
+
+    glUniform3fv(locLightDir, 1, glm::value_ptr(dir));
 }

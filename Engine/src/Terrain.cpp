@@ -229,3 +229,8 @@ void Terrain::getDimensions(int& width, int& height) const{
 	width = this->width;
 	height = this->height;
 }
+
+std::vector<VertexTN> Terrain::getGeometry() const{
+	
+	return geometry;
+}

@@ -1,0 +1,33 @@
+#ifndef GRASS_PROGRAM_HPP
+#define	GRASS_PROGRAM_HPP
+
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtx/string_cast.hpp>
+
+#include "ShaderProgram.hpp"
+
+namespace Vancom{
+
+class GrassProgram : public ShaderProgram{
+
+public:
+
+    // public functions
+    GrassProgram();
+    bool init();    
+    void setMVP(const glm::mat4 MVP);
+    void setWindDir(const glm::vec3 windDir);
+
+ private:
+
+    // private variables
+    GLint locMVP;
+    GLint locWindDir;
+
+};
+
+} // end namespace Vancom
+
+
+#endif	/* GRASS_PROGRAM_HPP */

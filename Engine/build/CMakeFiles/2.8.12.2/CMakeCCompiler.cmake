@@ -1,7 +1,7 @@
 set(CMAKE_C_COMPILER "/usr/bin/cc")
 set(CMAKE_C_COMPILER_ARG1 "")
 set(CMAKE_C_COMPILER_ID "Clang")
-set(CMAKE_C_COMPILER_VERSION "3.5.0")
+set(CMAKE_C_COMPILER_VERSION "3.4.0")
 set(CMAKE_C_PLATFORM_ID "Linux")
 
 set(CMAKE_AR "/usr/bin/ar")

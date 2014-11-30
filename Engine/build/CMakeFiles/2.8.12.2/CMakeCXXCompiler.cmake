@@ -1,7 +1,7 @@
 set(CMAKE_CXX_COMPILER "/usr/bin/c++")
 set(CMAKE_CXX_COMPILER_ARG1 "")
 set(CMAKE_CXX_COMPILER_ID "Clang")
-set(CMAKE_CXX_COMPILER_VERSION "3.5.0")
+set(CMAKE_CXX_COMPILER_VERSION "3.4.0")
 set(CMAKE_CXX_PLATFORM_ID "Linux")
 
 set(CMAKE_AR "/usr/bin/ar")

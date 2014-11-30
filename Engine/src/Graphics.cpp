@@ -17,6 +17,7 @@
 #include "TerrainBorder.hpp"
 #include "Fireworks.hpp"
 #include "Explosion.hpp"
+#include "Grass.hpp"
 #include "LightingManager.hpp"
 #include "SkyBox.hpp"
 
@@ -38,9 +39,6 @@ Graphics::~Graphics(){
 
 void Graphics::init(){
 
-	// define default window width and height
-	int w = 1800, h = 1000;
-
     SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 4);
     SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 3);
@@ -48,7 +46,7 @@ void Graphics::init(){
 
 	// create SDL window
     window = SDL_CreateWindow("Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED,
-                w, h, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE);
+                1920, 1080, SDL_WINDOW_OPENGL | SDL_WINDOW_SHOWN | SDL_WINDOW_RESIZABLE | SDL_WINDOW_FULLSCREEN_DESKTOP);
 
     if(!window){
     	std::cerr << "Failed to create SDL window" << std::endl;
@@ -92,7 +90,7 @@ void Graphics::init(){
 
     if(!selectionProgram.init())
         std::cout << "selectionProgram failed to init" << std::endl;
-    selectionTexture.init(1800, 1000);
+    selectionTexture.init(width, height);
 
     if(!silhouetteProgram.init())
         std::cout << "silhouetteProgram failed to init" << std::endl;
@@ -116,7 +114,7 @@ void Graphics::init(){
     dirLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     dirLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
     dirLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
-    dirLightProgram.setScreenSize(w, h);
+    dirLightProgram.setScreenSize(width, height);
 
     if(!pointLightProgram.init())
         std::cout << "pointLightProgram failed to init" << std::endl;
@@ -125,7 +123,7 @@ void Graphics::init(){
     pointLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     pointLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
     pointLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
-    pointLightProgram.setScreenSize(w, h);
+    pointLightProgram.setScreenSize(width, height);
 
     if(!spotLightProgram.init())
         std::cout << "spotLightProgram failed to init" << std::endl;
@@ -134,10 +132,10 @@ void Graphics::init(){
     spotLightProgram.setColorTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_DIFFUSE);
     spotLightProgram.setNormalTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_NORMAL);
     spotLightProgram.setSpecularTextureUnit(GBuffer::GBUFFER_TEXTURE_TYPE_SPECULAR);
-    spotLightProgram.setScreenSize(w, h);
+    spotLightProgram.setScreenSize(width, height);
 
     // initialize gbuffer, dirLight quad, and point light sphere  
-    buffer.init(w, h);
+    buffer.init(width, height);
     dirLightRenderQuad = new Model();
     dirLightRenderQuad->init("../assets/models/quad.obj");
     pointLightRenderSphere = new Model();
@@ -153,6 +151,9 @@ void Graphics::tick(float dt){
     // update the camera and view
     updateCamera();
     updateView();
+
+    // update wind direction
+    windDir = glm::vec3(1.0, 0, 0.0);
 }
 
 void Graphics::render(){
@@ -171,7 +172,7 @@ void Graphics::render(){
 
     selectionTexture.disableWriting();
     // check to see if object is in middle of screen
-    SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
+    SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(width/2, height/2);
 
     buffer.startFrame();
     geometryPassDS();
@@ -242,9 +243,7 @@ void Graphics::render(){
     engine->entityManager->skyBox->render(projection, view);
 
     buffer.bindForFinalPass();
-    int w, h;
-    getWindowSize(w, h);
-    glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
+    glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 
 	SDL_GL_SwapWindow(window);
 }
@@ -300,6 +299,9 @@ void Graphics::geometryPassDS(){
         geometryProgram.setSpecularIntensity(entity->specularIntensity);
         entity->render();
     }
+
+    // render grass
+    engine->entityManager->grass->render(projection, view);
 
     glDepthMask(GL_FALSE);
 }
@@ -407,15 +409,9 @@ void Graphics::updateCamera(){
 void Graphics::windowResized(){
 
 	// reset window and projection matrix
-	int w, h;
-	getWindowSize(w, h);
-	glViewport(0, 0, w, h);
-	projection = glm::perspective(45.0f, float(w) / float(h), 0.01f, 100000.0f);
-}
-
-void Graphics::getWindowSize(int &w, int &h) const{
-
-	SDL_GetWindowSize(window, &w, &h);
+    SDL_GetWindowSize(window, &width, &height);
+	glViewport(0, 0, width, height);
+	projection = glm::perspective(45.0f, float(width) / float(height), 0.01f, 100000.0f);
 }
 
 void Graphics::setClearColor(glm::vec3 color){
@@ -435,63 +431,3 @@ float Graphics::calcPointLightSphere(const PointLight& light) const{
     //std::cout << maxColor << std::endl;
     return returnVal;
 }
-
-/*    /// render selectable entities
-    selectionTexture.enableWriting();
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    selectionProgram.enable();
-    for(Entity* entity : engine->entityManager->defaultEntities){
-        selectionProgram.setObjectIndex(entity->id);
-        selectionProgram.setMVP(projection * view * entity->getModel());
-        entity->render();
-    }
-
-    selectionTexture.disableWriting();
-    // check to see if object is in middle of screen
-    SelectionTexture::PixelInfo pixel = selectionTexture.readPixel(900, 500);
-
-    // render entities using defferred shading
-    buffer.startFrame();
-    geometryPassDS();
-    glEnable(GL_STENCIL_TEST);
-    pointLightPassDS();
-    glDisable(GL_STENCIL_TEST);
-    spotLightPassDS();
-    directionalLightPassDS();
-    glDisable(GL_BLEND);
-
-    // render border of selected
-    glDepthMask(GL_TRUE);
-    glEnable(GL_DEPTH_TEST);
-    silhouetteProgram.enable();
-    for(Entity* entity : engine->entityManager->defaultEntities){
-        if(entity->id == (unsigned int)pixel.objectId){
-            silhouetteProgram.setMVP(projection * view * entity->getModel());
-            silhouetteProgram.setModelPos(entity->getModel());    
-            silhouetteProgram.setCameraPosition(camera->getPos());
-            entity->render();
-            break;
-        }
-    }
-
-    // render explosions
-    for(Fireworks *fireworks : engine->entityManager->explosions){
-        fireworks->render(projection, view, camera->getPos());
-    }
-
-    // render terrain border
-    engine->entityManager->border->render(projection, view);
-
-    // render gui elements
-    guiProgram.enable();
-    guiProgram.setSampler(0);
-    for(Entity* entity : engine->entityManager->guiEntities){
-        entity->render();
-    }
-
-    buffer.bindForFinalPass();
-    int w, h;
-    getWindowSize(w, h);
-    glBlitFramebuffer(0, 0, w, h, 0, 0, w, h, GL_COLOR_BUFFER_BIT, GL_LINEAR);
-
-    SDL_GL_SwapWindow(window);*/

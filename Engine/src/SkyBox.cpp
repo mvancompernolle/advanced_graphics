@@ -6,11 +6,14 @@
 #include "Model.hpp"
 #include "SkyBoxProgram.hpp"
 #include "CubeMapTexture.hpp"
+#include "Engine.hpp"
+#include "Graphics.hpp"
+#include "LightingManager.hpp"
 #include "Camera.hpp"
 
 using namespace Vancom;
 
-SkyBox::SkyBox(const Camera* camera) : camera(camera){
+SkyBox::SkyBox(const Engine* engine) : engine(engine){
 
     program = NULL;
     texture = NULL;
@@ -75,7 +78,8 @@ void SkyBox::render(glm::mat4 projection, glm::mat4 view){
     glDepthFunc(GL_LEQUAL);
 
     glm::mat4 temp;
-    glm::mat4 model = glm::translate(temp, camera->getPos());
+    glm::mat4 model = glm::translate(temp, engine->graphics->camera->getPos());
+    program->setLightDir(engine->lightingManager->dirLight.direction);
     program->setMVP(projection * view * model);
     texture->bind(GL_TEXTURE0);
     box->render();

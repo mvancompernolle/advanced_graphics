@@ -48,8 +48,6 @@ public:
 	void updateView();
 	void updateCamera();
 	void windowResized();
-
-	void getWindowSize(int &w, int &h) const;
 	void setClearColor(glm::vec3);
 
 
@@ -57,6 +55,7 @@ public:
 	glm::mat4 view, projection;
 	Camera *camera;
 	bool isRaining;
+	int width, height;
 
 private:
 
@@ -74,7 +73,7 @@ private:
 	SDL_Window *window;
 	SDL_GLContext gl_context;
 	glm::vec3 lightDir;
-
+	glm::vec3 windDir;
 	// selection program
 	SelectionProgram selectionProgram;
 	SelectionTexture selectionTexture;
