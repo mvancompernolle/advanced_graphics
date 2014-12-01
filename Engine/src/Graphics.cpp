@@ -6,6 +6,7 @@
 #include <ogr_spatialref.h>
 #include <ogr_srs_api.h>
 #include <list>
+#include <random>
 
 #include "gdal_priv.h"
 #include "cpl_conv.h"
@@ -29,6 +30,9 @@ Graphics::Graphics(Engine *engine) : engine(engine){
     isRaining = true;
 
 	camera = new Camera(engine);
+    windUpdateTime = 0.1f;
+    windDT = 0.0f;
+    windStrength = 5.0f;
 }
 
 Graphics::~Graphics(){
@@ -153,7 +157,14 @@ void Graphics::tick(float dt){
     updateView();
 
     // update wind direction
-    windDir = glm::vec3(1.0, 0, 0.0);
+    windDT += dt;
+    if(windDT > windUpdateTime){
+        std::random_device rd;
+        std::default_random_engine rand(rd());
+        std::uniform_real_distribution<float> distr(-windStrength, windStrength);
+        windDir = windDir * glm::vec3(.95, .95, .95) + glm::vec3(distr(rand), distr(rand), distr(rand)) * glm::vec3(.05, .05, .05);   
+        windDT = 0;
+    } 
 }
 
 void Graphics::render(){
@@ -215,6 +226,7 @@ void Graphics::render(){
             break;
         }
     }
+
 
     // render outline of selected entities
     for(Entity* entity : engine->input->selected){
@@ -300,7 +312,6 @@ void Graphics::geometryPassDS(){
         entity->render();
     }
 
-    // render grass
     engine->entityManager->grass->render(projection, view);
 
     glDepthMask(GL_FALSE);

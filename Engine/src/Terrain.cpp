@@ -90,8 +90,8 @@ bool Terrain::generateMesh(){
 			vert.pos.x = x;
 			vert.pos.y = heightScale * ((data[z][x]-min)/range);
 			vert.pos.z = z;
-			vert.tex.x = vert.pos.x/300;
-			vert.tex.y = vert.pos.z/300;
+			vert.tex.x = vert.pos.x/100;
+			vert.tex.y = vert.pos.z/100;
 
 			// calculate the normal for the vertex
 			calculateNormal(data, z, x, vert);
@@ -233,4 +233,26 @@ void Terrain::getDimensions(int& width, int& height) const{
 std::vector<VertexTN> Terrain::getGeometry() const{
 	
 	return geometry;
+}
+
+float** Terrain::getHeightMap() const{
+	float** data = new float*[height];
+	GDALRasterBand* poBand;
+
+	// create a 2d array to store pixel values
+	for(int i=0; i<height; i++){
+		data[i] = new float[width];
+	}
+	poBand = gdalDataSet->GetRasterBand( 1 );
+	// load all of the images height values into the data array
+	for(int i=0; i<height; i++){
+		poBand->RasterIO(GF_Read, 0, i, width, 1, data[i], width, 1, GDT_Float32, 0, 0);
+	}
+
+	// normalize all the values
+	for(int i=0; i<height; i++)
+		for(int j=0; j<width; j++)
+			data[i][j] = heightScale * (data[i][j] - min) / range;
+
+	return data;
 }

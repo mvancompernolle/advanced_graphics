@@ -18,12 +18,15 @@ public:
     bool init();    
     void setMVP(const glm::mat4 MVP);
     void setWindDir(const glm::vec3 windDir);
+    void setCameraPos(const glm::vec3 pos);
 
  private:
 
     // private variables
     GLint locMVP;
     GLint locWindDir;
+    GLint locDrawDistance;
+    GLint locCameraPos;
 
 };
 

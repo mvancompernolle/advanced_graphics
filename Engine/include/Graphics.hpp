@@ -56,6 +56,7 @@ public:
 	Camera *camera;
 	bool isRaining;
 	int width, height;
+	glm::vec3 windDir;
 
 private:
 
@@ -73,7 +74,8 @@ private:
 	SDL_Window *window;
 	SDL_GLContext gl_context;
 	glm::vec3 lightDir;
-	glm::vec3 windDir;
+	float windUpdateTime, windDT, windStrength;
+
 	// selection program
 	SelectionProgram selectionProgram;
 	SelectionTexture selectionTexture;

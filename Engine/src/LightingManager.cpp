@@ -28,7 +28,8 @@ void LightingManager::init(){
 	// init spot lights
 	// first spot lights is camera flashlight
 	SpotLight cameraLight;
-	cameraLight.diffuseIntensity = 0.0f;
+	cameraLight.color = glm::vec3(1.0, 0.0, 0.0);
+	cameraLight.diffuseIntensity = 1.0f;
 	cameraLight.ambientIntensity = 1.0f;
 	cameraLight.atten.constant = 1;
 	cameraLight.atten.linear = .005;

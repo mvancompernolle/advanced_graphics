@@ -22,6 +22,17 @@ struct VertexTN : Vertex {
 	glm::vec3 normal;
 };
 
+struct VertexTNT : Vertex {
+    glm::vec2 tex;
+    glm::vec3 normal;
+    glm::vec3 tangent;
+};
+
+struct VertexGrass : Vertex { 
+    glm::vec3 color;
+    float angle;
+};
+
 }
 
 #endif	// VERTEX_HPP

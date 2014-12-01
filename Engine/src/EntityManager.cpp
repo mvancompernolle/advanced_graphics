@@ -31,7 +31,7 @@ void EntityManager::init(){
 	// add the terrain
 	Terrain* terrain = new Terrain(engine, "../assets/DCEWsqrExtent.tif");
 	terrain->init();
-	terrain->setTexture(GL_TEXTURE_2D, "../assets/terrain_dirt.jpg");
+	terrain->setTexture(GL_TEXTURE_2D, "../assets/mud.png");
 	defaultEntities.push_back(terrain);
 	entities.push_back(terrain);
 	int width, height;
@@ -40,7 +40,7 @@ void EntityManager::init(){
 	// add grass on the terrain
 	grass = new Grass(engine, terrain->getModel());
 	grass->init();
-	grass->generateBlades(terrain->getGeometry());
+	grass->generateBlades(terrain->getHeightMap(), width, height);
 
 	// set minimum and maximum values 
 	minX = -width/2;

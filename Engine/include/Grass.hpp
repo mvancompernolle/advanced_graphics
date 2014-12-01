@@ -22,7 +22,7 @@ public:
     // public functions
     Grass(Engine *engine, glm::mat4 model);
     ~Grass();
-    void generateBlades(const std::vector<VertexTN>& verts);
+    void generateBlades(float** terrain, int width, int height);
 
     bool init();
     void tick(float dt);
@@ -35,7 +35,7 @@ private:
     // private variables
     Engine *engine;
     GrassProgram program;
-    std::vector<Vertex> blades;
+    std::vector<VertexGrass> blades;
 };
 
 }

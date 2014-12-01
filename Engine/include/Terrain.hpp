@@ -32,6 +32,7 @@ public:
 	bool setTexture(GLenum TextureTarget, const char* fileName);
 
 	void getDimensions(int& width, int& height) const;
+	float** getHeightMap() const;
 	std::vector<VertexTN> getGeometry() const;
 
 private:
