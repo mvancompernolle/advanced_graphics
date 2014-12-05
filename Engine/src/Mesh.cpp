@@ -4,6 +4,10 @@
 #include <string>
 #include <iostream>
 
+#include "Engine.hpp"
+#include "PhysicsManager.hpp"
+#include <btBulletDynamicsCommon.h>
+
 // REFERENCE: ogldev.atspace.co.uk/www/tutorial22/tutorial22.html
 
 using namespace Vancom;
@@ -15,9 +19,10 @@ Mesh::MeshUnit::MeshUnit(){
 	materialIndex = 0;
 }
 
-Mesh::Mesh(){
+Mesh::Mesh(Engine* engine) : engine(engine){
 	withAdjacencies = false;
 	vao = 0;
+    trimesh = new btTriangleMesh();
 }
 
 bool Mesh::loadMesh(const char* fileName, bool withAdjacencies){
@@ -115,6 +120,9 @@ bool Mesh::loadMeshesFromScene(const aiScene* scene, const char* fileName){
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, buffers[INDEX_BUFFER]);
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices[0]) * indices.size(), &indices[0], GL_STATIC_DRAW);
 
+    // create bullet collision object
+    shape = new btConvexTriangleMeshShape(trimesh);
+
 	return true;
 }
 
@@ -146,6 +154,14 @@ void Mesh::initializeMesh(const aiMesh* mesh, std::vector<glm::vec3>& positions,
 			indices.push_back(face.mIndices[2]);
 		}
 	}
+
+    // create collision shape
+    for(unsigned int i=0; i<positions.size(); i++){
+        trimesh->addTriangle(engine->physics->convertTobtVector(positions[i]), 
+            engine->physics->convertTobtVector(positions[i+2]), 
+            engine->physics->convertTobtVector(positions[i+1]));
+        i+=2;
+    }
 }
 
 void Mesh::findAdjacencies(const aiMesh* mesh, std::vector<unsigned int>& indices){
@@ -272,6 +288,10 @@ void Mesh::renderMesh()
     }
 
     glBindVertexArray(0);
+}
+
+btCollisionShape* Mesh::getCollisionShape(){
+    return shape;
 }
 
 

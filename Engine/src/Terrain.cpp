@@ -5,20 +5,26 @@
 #include "Engine.hpp"
 #include "Graphics.hpp"
 #include "Camera.hpp"
+#include "PhysicsManager.hpp"
 
 using namespace Vancom;
 
 Terrain::Terrain(Engine *engine, const char* fileName) : engine(engine), fileName(fileName){
 	specularIntensity = .5;
 	specularPower = 32;
+	downSample = 50;
 	heightScale = 100;
 	geotransform = new double[6];
+	trimesh = new btTriangleMesh();
 }
 
 Terrain::~Terrain(){
 
 	// delete geotransform 
 	delete geotransform;
+
+	if(trimesh != NULL)
+		delete trimesh;
 }
 
 bool Terrain::init(){
@@ -38,9 +44,6 @@ bool Terrain::init(){
 	// get height and width of mesh
 	width = gdalDataSet->GetRasterXSize();
 	height = gdalDataSet->GetRasterYSize();
-
-	// translate terrain to the middle of the screen
-	model = glm::translate(model, glm::vec3(-width/2.0f, 0.0f, -height/2.0f));
 
 	// git min max and range
     poBand = gdalDataSet->GetRasterBand( 1 );
@@ -68,6 +71,7 @@ bool Terrain::init(){
 bool Terrain::generateMesh(){
 
 	float** data = new float*[height];
+	float* terrain = new float[width*height];
 	GDALRasterBand* poBand;
 	VertexTN vert;
 
@@ -79,6 +83,9 @@ bool Terrain::generateMesh(){
 	// load all of the images height values into the data array
 	for(int i=0; i<height; i++){
 		poBand->RasterIO(GF_Read, 0, i, width, 1, data[i], width, 1, GDT_Float32, 0, 0);
+
+		for(int j=0; j<width; j++)
+			terrain[i*height + j] = data[i][j];
 	}
 
 	// generate terrain geometry
@@ -117,6 +124,8 @@ bool Terrain::generateMesh(){
 
 	}
 
+	model = glm::translate(model, glm::vec3(-width/2, 0, -height/2));
+
 	// create vao
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
@@ -136,10 +145,61 @@ bool Terrain::generateMesh(){
 	glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 12); // tex
 	glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexTN), (const GLvoid*) 20); // normal
 
+	/*// create collision shape
+	for(unsigned int i=0; i<geometry.size(); i++){
+		trimesh->addTriangle(engine->physics->convertTobtVector(geometry[i].pos), 
+			engine->physics->convertTobtVector(geometry[i+1].pos), 
+			engine->physics->convertTobtVector(geometry[i+2].pos));
+		i+=2;
+	}*/
+
+	// create collision geometry
+	btVector3 v1, v2, v3;
+	for(int z = 0; z < height-downSample; z+=downSample){
+
+		for(int x = 0; x < width-downSample; x+=downSample){
+
+			// top triangle
+			v1[0] = x;
+			v1[1] = heightScale * ((data[z][x]-min)/range);
+			v1[2] = z;
+			v2[0] = x;
+			v2[1] = heightScale * ((data[z+downSample][x]-min)/range);
+			v2[2] = z;
+			v3[0] = x;
+			v3[1] = heightScale * ((data[z][x+downSample]-min)/range);
+			v3[2] = z;
+			trimesh->addTriangle(v1, v2, v3);
+
+			// bottom triangle
+			v1[0] = x;
+			v1[1] = heightScale * ((data[z+downSample][x+downSample]-min)/range);
+			v1[2] = z;
+			v2[0] = x;
+			v2[1] = heightScale * ((data[z+downSample][x]-min)/range);
+			v2[2] = z;
+			v3[0] = x;
+			v3[1] = heightScale * ((data[z][x+downSample]-min)/range);
+			v3[2] = z;
+			trimesh->addTriangle(v1, v2, v3);
+		}
+	}
+
+	//shape = new btHeightFieldTerrainShape(width, height, data, max, min, 1, false, false);
+	shape = new btConvexTriangleMeshShape(trimesh);
+	//shape = new btBvhTriangleMeshShape(trimesh, true, true);
+
+	// add terrain physics to the dynamics world
+	rigidBody = engine->physics->addRigidBody(shape, btQuaternion(0,0,0,1), btVector3(-width/2,0,-height/2), 0.0f, 1.0f, btVector3(0,0,0));
+	//rigidBody->setActivationState(DISABLE_DEACTIVATION);
+	//rigidBody->setGravity(btVector3(0.0, 0.0, 0.0));
+
 	// delete pixel data
 	for(int i=0; i<height; i++)
 		delete data[i];
 	delete data;
+
+	delete terrain;
 
 	return true;
 }
@@ -200,6 +260,11 @@ bool Terrain::setTexture(GLenum TextureTarget, const char* fileName){
 
 void Terrain::tick(float dt){
 
+    btTransform trans;
+	btScalar m[16];
+	rigidBody->getMotionState()->getWorldTransform(trans);
+	trans.getOpenGLMatrix(m);
+	model = glm::make_mat4(m);
 }
 
 void Terrain::render(){

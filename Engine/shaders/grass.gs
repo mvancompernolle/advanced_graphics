@@ -28,7 +28,7 @@ void main() {
     mat4 rotMatrix = rotationMatrix(vec3(0, 1, 0), gs_angle[0]);
     vec4 angleVector = rotationMatrix(vec3(0, 1, 0), gs_angle[0]) * vec4(1.0, 0, 0, 0);
     float power = max(0.1, dot(angleVector, vec4(windDir, 0.0)));
-    if(dist > 500)
+    if(cameraPos.y > 200)
         power = 0;
 
     // large grass

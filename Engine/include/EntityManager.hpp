@@ -14,6 +14,7 @@ class TerrainBorder;
 class Explosion;
 class SkyBox;
 class Grass;
+class Water;
 
 class EntityManager {
 
@@ -36,6 +37,7 @@ public:
 	TerrainBorder *border;
 	SkyBox* skyBox;
 	Grass* grass;
+	Water* water;
 
 	float minX, maxX, minZ, maxZ;
 
@@ -43,6 +45,7 @@ private:
 
 	// private functions
 	unsigned int assignId();
+	void addEnemy();
 
 	// private variables
 	Engine *engine;

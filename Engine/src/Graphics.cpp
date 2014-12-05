@@ -19,6 +19,7 @@
 #include "Fireworks.hpp"
 #include "Explosion.hpp"
 #include "Grass.hpp"
+#include "Water.hpp"
 #include "LightingManager.hpp"
 #include "SkyBox.hpp"
 
@@ -140,9 +141,10 @@ void Graphics::init(){
 
     // initialize gbuffer, dirLight quad, and point light sphere  
     buffer.init(width, height);
-    dirLightRenderQuad = new Model();
+
+    dirLightRenderQuad = new Model(engine);
     dirLightRenderQuad->init("../assets/models/quad.obj");
-    pointLightRenderSphere = new Model();
+    pointLightRenderSphere = new Model(engine);
     pointLightRenderSphere->init("../assets/models/sphere.obj");
 
     // initialize shadow program
@@ -210,7 +212,7 @@ void Graphics::render(){
     bool found = false;
     silhouetteProgram.enable();
     for(Entity* entity : engine->entityManager->defaultEntities){
-        if(entity->id == (unsigned int)pixel.objectId){
+        if(entity->id != 0 && entity->id == (unsigned int)pixel.objectId){
             // if entity not already in selected add it
             for(Entity *ent : engine->input->selected){
                 if(ent->id == entity->id){
@@ -240,6 +242,8 @@ void Graphics::render(){
     for(Explosion *explosion : engine->entityManager->explosions){
         explosion->render(projection, view, camera->getPos());
     }
+
+    engine->entityManager->water->render(projection, view);
 
     // render terrain border
     engine->entityManager->border->render(projection, view);

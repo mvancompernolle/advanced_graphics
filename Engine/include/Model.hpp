@@ -13,17 +13,18 @@
 
 namespace Vancom{
 
-class EntityManager;
+class Engine;
 
 class Model : public Entity{
 
 public:
-	Model();
-	Model(EntityManager *mgr, glm::vec3 pos, float scale, float power, float intensity);
+	Model(Engine *engine);
+	Model(Engine *engine, glm::vec3 pos, float scale, float power, float intensity);
 	~Model();
 	bool init(const char* fileName);
 	void tick(float dt);
 	void render();
+    btRigidBody* getRigidBody();
 
 	// public variables
 	bool moving;
@@ -31,12 +32,13 @@ public:
 private:
 
 	// private variables
-	EntityManager *mgr;
+	Engine *engine;
 	Mesh *mesh;
 	float timeElapsed;
 	float decisionTime;
-	float speed;
-	glm::vec3 target;
+	float speed, scale;
+	glm::vec3 target, startingPos;
+	btRigidBody* rigidBody;
 };
 
 }

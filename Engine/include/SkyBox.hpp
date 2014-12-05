@@ -22,7 +22,7 @@ class SkyBox{
 
 public:
 
-    SkyBox(const Engine* camera);
+    SkyBox(Engine* engine);
     ~SkyBox();
     bool init(const std::string& directory,
               const std::string& posXFilename,
@@ -37,7 +37,7 @@ private:
 
     // private variables
     SkyBoxProgram* program;
-    const Engine* engine;
+    Engine* engine;
     CubeMapTexture* texture;
     Model* box;
 

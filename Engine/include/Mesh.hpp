@@ -7,6 +7,7 @@
 #include <assimp/Importer.hpp>     
 #include <assimp/scene.h>          
 #include <assimp/postprocess.h>
+#include <btBulletDynamicsCommon.h>
 #include "Texture.hpp"
 #include <iostream>
 #include "Vertex.hpp"
@@ -134,6 +135,8 @@ struct Face{
     }
 };
 
+class Engine;
+
 class Mesh{
 
 #define INVALID_MATERIAL 0xFFFFFFFF
@@ -146,9 +149,10 @@ class Mesh{
 public:
 
 	// public functions
-	Mesh();
+	Mesh(Engine* engine);
 	bool loadMesh(const char* fileName, bool withAdjacencies);
 	void renderMesh();
+    btCollisionShape* getCollisionShape();
 
 private:
 
@@ -171,6 +175,7 @@ private:
 	};
 
 	// private variables
+    Engine* engine;
 	GLuint vao;
 	GLuint buffers[4];
 	bool withAdjacencies;
@@ -179,6 +184,10 @@ private:
     std::map<Edge, Neighbors, CompareEdges> indexMap;
 	std::map<aiVector3D, unsigned int, CompareVectors> posMap;
     std::vector<Face> uniqueFaces;
+
+    // bullet variables
+    btTriangleMesh* trimesh;
+    btCollisionShape* shape;
 };
 
 }	// end namespace Vancom

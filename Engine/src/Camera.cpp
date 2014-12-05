@@ -14,7 +14,7 @@ Camera::Camera(Engine *engine)
 
     rotateX = rotateY = 0.0f;
     boost = 1.0f;
-    speed = 2.0f;
+    speed = 10.0f;
     sensitivity = 0.1f;
 }
 

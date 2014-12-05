@@ -52,7 +52,7 @@ void Grass::generateBlades(float** terrain, int width, int height){
     std::uniform_real_distribution<float> distr2(0, 1.57);
     
     // generate blades of grass
-    for(int i=0; i<5000000; i++){
+    for(int i=0; i<1000000; i++){
         /*// generate position
         vert.pos.x = (int) xDistr(rand);
         vert.pos.z = (int) zDistr(rand);
@@ -145,6 +145,7 @@ void Grass::render(glm::mat4 projection, glm::mat4 view){
     //program.setCameraPos(engine->graphics->camera->getPos());
     program.setWindDir(engine->graphics->windDir);
 	program.setMVP(projection * view * model);
+    program.setCameraPos(engine->graphics->camera->getPos());
 	glDrawArrays(GL_POINTS, 0, blades.size());
 
 }

@@ -13,7 +13,7 @@
 
 using namespace Vancom;
 
-SkyBox::SkyBox(const Engine* engine) : engine(engine){
+SkyBox::SkyBox(Engine* engine) : engine(engine){
 
     program = NULL;
     texture = NULL;
@@ -58,7 +58,7 @@ bool SkyBox::init(const std::string& directory,
         return false;
     }
         
-    box = new Model();
+    box = new Model(engine);
     //box->scale(20);
 
     return box->init("../assets/models/sphere.obj"); 

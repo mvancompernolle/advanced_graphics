@@ -7,6 +7,7 @@
 #include <ogr_spatialref.h>
 #include <ogr_srs_api.h>
 #include <gdal_priv.h>
+#include <btBulletDynamicsCommon.h>
 
 #include "TerrainProgram.hpp"
 #include "Entity.hpp"
@@ -47,13 +48,18 @@ private:
 	std::vector<VertexTN> geometry;
 	std::vector<unsigned int> indices;
 	GLuint ibo;
-	int width, height;
+	int width, height, downSample;
 	float min, max, range;
 	Texture* groundTexture;
 	int heightScale;
 
 	GDALDataset* gdalDataSet;
 	double* geotransform;
+
+	// bullet variables
+	btTriangleMesh* trimesh;
+	btCollisionShape* shape;
+	btRigidBody* rigidBody;
 };
 
 } // end Vancom namepsace

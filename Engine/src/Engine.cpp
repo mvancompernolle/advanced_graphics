@@ -8,6 +8,7 @@
 #include "Input.hpp"
 #include "EntityManager.hpp"
 #include "LightingManager.hpp"
+#include "PhysicsManager.hpp"
 
 using namespace Vancom;
 
@@ -27,18 +28,25 @@ void Engine::init(){
         exit(1);
     }
 
+    // create and init physics manager
+    physics = new PhysicsManager(this);
+    physics->init();
+
     // create and init graphics component
     graphics = new Graphics(this);
+    std::cout << "x" << std::endl;
     graphics->init();
+    std::cout << "0" << std::endl;
 
     // create and init input component
     input = new Input(this);
     input->init();
 
     // create and init entity manager component
+    std::cout << "1" << std::endl;
     entityManager = new EntityManager(this);
     entityManager->init();
-
+    std::cout << "2" << std::endl;
     // create and init lighting manager
     lightingManager = new LightingManager(this);
     lightingManager->init();
@@ -57,6 +65,7 @@ int Engine::run(){
 
 		// call tick on components
 		input->tick(dt);
+        physics->tick(dt);
 		graphics->tick(dt);
 		entityManager->tick(dt);
 		lightingManager->tick(dt);
@@ -83,6 +92,10 @@ void Engine::stop(int exit_code){
 	// stop lightingManager component
 	lightingManager->stop();
 	delete lightingManager;
+
+    // stop physics component
+    physics->stop();
+    delete physics;
 
 	SDL_Quit();
 
