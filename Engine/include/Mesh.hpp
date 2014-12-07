@@ -152,6 +152,7 @@ public:
 	Mesh(Engine* engine);
 	bool loadMesh(const char* fileName, bool withAdjacencies);
 	void renderMesh();
+    void disableMaterials();
     btCollisionShape* getCollisionShape();
 
 private:
@@ -178,7 +179,7 @@ private:
     Engine* engine;
 	GLuint vao;
 	GLuint buffers[4];
-	bool withAdjacencies;
+	bool withAdjacencies, materialsDisabled;
 	std::vector<MeshUnit> meshes;
 	std::vector<Texture*> textures;
     std::map<Edge, Neighbors, CompareEdges> indexMap;

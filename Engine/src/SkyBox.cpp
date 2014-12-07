@@ -61,7 +61,7 @@ bool SkyBox::init(const std::string& directory,
     box = new Model(engine);
     //box->scale(20);
 
-    return box->init("../assets/models/sphere.obj"); 
+    return box->init("../assets/models/sphere.obj", true); 
 
 }
 

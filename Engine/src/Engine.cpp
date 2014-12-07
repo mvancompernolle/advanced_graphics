@@ -34,19 +34,16 @@ void Engine::init(){
 
     // create and init graphics component
     graphics = new Graphics(this);
-    std::cout << "x" << std::endl;
     graphics->init();
-    std::cout << "0" << std::endl;
 
     // create and init input component
     input = new Input(this);
     input->init();
 
     // create and init entity manager component
-    std::cout << "1" << std::endl;
     entityManager = new EntityManager(this);
     entityManager->init();
-    std::cout << "2" << std::endl;
+
     // create and init lighting manager
     lightingManager = new LightingManager(this);
     lightingManager->init();

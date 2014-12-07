@@ -34,6 +34,7 @@ struct DirectionalLight : public BaseLight{
 struct PointLight : public BaseLight{
 
     glm::vec3 pos;
+    float timeToLive, dt;
 
     struct{
 
@@ -48,6 +49,8 @@ struct PointLight : public BaseLight{
         atten.constant = 0.0f;
         atten.linear = 0.0f;
         atten.exp = 0.0f;
+        dt = 0.0f;
+        timeToLive = -1;
     }
 };
 

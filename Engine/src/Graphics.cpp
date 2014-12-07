@@ -22,6 +22,7 @@
 #include "Water.hpp"
 #include "LightingManager.hpp"
 #include "SkyBox.hpp"
+#include "Enemy.hpp"
 
 using namespace Vancom;
 
@@ -143,9 +144,9 @@ void Graphics::init(){
     buffer.init(width, height);
 
     dirLightRenderQuad = new Model(engine);
-    dirLightRenderQuad->init("../assets/models/quad.obj");
+    dirLightRenderQuad->init("../assets/models/quad.obj", false);
     pointLightRenderSphere = new Model(engine);
-    pointLightRenderSphere->init("../assets/models/sphere.obj");
+    pointLightRenderSphere->init("../assets/models/sphere.obj", false);
 
     // initialize shadow program
     if(!shadowProgram.init())
@@ -177,7 +178,7 @@ void Graphics::render(){
     selectionTexture.enableWriting();
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     selectionProgram.enable();
-    for(Entity* entity : engine->entityManager->defaultEntities){
+    for(Entity* entity : engine->entityManager->enemyEntities){
         selectionProgram.setObjectIndex(entity->id);
         selectionProgram.setMVP(projection * view * entity->getModel());
         entity->render();
@@ -211,8 +212,8 @@ void Graphics::render(){
     glEnable(GL_DEPTH_TEST);
     bool found = false;
     silhouetteProgram.enable();
-    for(Entity* entity : engine->entityManager->defaultEntities){
-        if(entity->id != 0 && entity->id == (unsigned int)pixel.objectId){
+    for(Enemy* entity : engine->entityManager->enemyEntities){
+        if(entity->id != 0 && entity->id == (unsigned int)pixel.objectId && entity->updating){
             // if entity not already in selected add it
             for(Entity *ent : engine->input->selected){
                 if(ent->id == entity->id){
@@ -287,8 +288,8 @@ void Graphics::shadowVolumePass(){
     glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP); 
 
     // render an object
-    for(int i=1; i<engine->entityManager->defaultEntities.size(); i++){
-        Entity* entity = engine->entityManager->defaultEntities[i];
+    for(int i=1; i<engine->entityManager->enemyEntities.size(); i++){
+        Entity* entity = engine->entityManager->enemyEntities[i];
         shadowProgram.enable();
         shadowProgram.setLightPosition(engine->lightingManager->dirLight.direction * glm::vec3(-100000, -100000, -100000));
         shadowProgram.setVP(projection * view);
@@ -308,7 +309,18 @@ void Graphics::geometryPassDS(){
     glEnable(GL_DEPTH_TEST);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
 
-    for(Entity* entity : engine->entityManager->defaultEntities){
+    // render terrain
+    for(Entity* entity : engine->entityManager->terrainEntities){
+        geometryProgram.setMVP(projection * view * entity->getModel());
+        geometryProgram.setModelPos(entity->getModel());
+        geometryProgram.setSpecularPower(entity->specularPower);
+        geometryProgram.setSpecularIntensity(entity->specularIntensity);
+        entity->render();
+    }
+
+    // render enemies
+    engine->entityManager->enemyTexture->bind(GL_TEXTURE0);
+    for(Entity* entity : engine->entityManager->enemyEntities){
         geometryProgram.setMVP(projection * view * entity->getModel());
         geometryProgram.setModelPos(entity->getModel());
         geometryProgram.setSpecularPower(entity->specularPower);

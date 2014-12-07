@@ -15,6 +15,8 @@ class Explosion;
 class SkyBox;
 class Grass;
 class Water;
+class Texture;
+class Enemy;
 
 class EntityManager {
 
@@ -31,9 +33,11 @@ public:
 
 	// public variables
 	std::vector<Entity*> entities;
-	std::vector<Entity*> defaultEntities;
+	std::vector<Entity*> terrainEntities;
+	std::vector<Enemy*> enemyEntities;
 	std::vector<Entity*> guiEntities;
 	std::vector<Explosion*> explosions;
+	Texture* enemyTexture;
 	TerrainBorder *border;
 	SkyBox* skyBox;
 	Grass* grass;

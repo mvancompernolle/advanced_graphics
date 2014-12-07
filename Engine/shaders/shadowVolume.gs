@@ -8,7 +8,7 @@ in vec3 fs_pos[];
 uniform vec3 lightPos;
 uniform mat4 vp;
 
-float EPSILON = 30.0;
+float EPSILON = 20.0;
 
 void emitQuad(int startIndex, vec3 startVertex, int endIndex, vec3 endVertex){
 

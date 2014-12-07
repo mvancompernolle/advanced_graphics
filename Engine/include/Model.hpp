@@ -21,23 +21,18 @@ public:
 	Model(Engine *engine);
 	Model(Engine *engine, glm::vec3 pos, float scale, float power, float intensity);
 	~Model();
-	bool init(const char* fileName);
+	bool init(const char* fileName, bool loadMaterials);
 	void tick(float dt);
 	void render();
     btRigidBody* getRigidBody();
-
-	// public variables
-	bool moving;
 
 private:
 
 	// private variables
 	Engine *engine;
 	Mesh *mesh;
-	float timeElapsed;
-	float decisionTime;
-	float speed, scale;
-	glm::vec3 target, startingPos;
+	float scale;
+	glm::vec3 startingPos;
 	btRigidBody* rigidBody;
 };
 

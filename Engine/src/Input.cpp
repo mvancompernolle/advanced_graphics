@@ -155,6 +155,7 @@ void Input::tick(float dt){
                     for(Entity *entity : engine->input->selected){
                         engine->entityManager->createExplosion(entity->getPos());
                         entity->updating = false;
+                        engine->lightingManager->addTempPointLight(entity->getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
                     }
 
                     // clear the selected entities

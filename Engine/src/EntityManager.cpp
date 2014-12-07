@@ -15,6 +15,7 @@
 #include "Grass.hpp"
 #include "SkyBox.hpp"
 #include "Water.hpp"
+#include "Enemy.hpp"
 
 using namespace Vancom;
 
@@ -33,7 +34,7 @@ void EntityManager::init(){
 	Terrain* terrain = new Terrain(engine, "../assets/DCEWsqrExtent.tif");
 	terrain->init();
 	terrain->setTexture(GL_TEXTURE_2D, "../assets/mud.png");
-	defaultEntities.push_back(terrain);
+	terrainEntities.push_back(terrain);
 	entities.push_back(terrain);
 	int width, height;
 	terrain->getDimensions(width, height);
@@ -65,14 +66,9 @@ void EntityManager::init(){
 	float ratio = (float) engine->graphics->width/engine->graphics->height;
 	std::cout << ratio << std::endl;
 	CrossHair *crossHair = new CrossHair(glm::vec3(0, 0, 0));
-	crossHair->init("../assets/models/crosshair.png", .03 / ratio, .03);
+	crossHair->init("../assets/models/crosshair.png", .05 / ratio, .05);
 	guiEntities.push_back(crossHair);
 	entities.push_back(crossHair);
-
-	// add an explosion
-	Explosion* explosion = new Explosion(engine->entityManager);
-	explosion->init(glm::vec3(0, 100, 0));
-	explosions.push_back(explosion);
 
 	// add skybox
 	skyBox = new SkyBox(engine);
@@ -90,6 +86,13 @@ void EntityManager::init(){
 	water = new Water(engine, height * 50, height * 50);
 	water->init();
 	water->setTexture(GL_TEXTURE_2D, "../assets/reflection.jpg");
+
+	// load enemy texture
+	enemyTexture = new Texture(GL_TEXTURE_2D, "../assets/models/silver.jpg");
+
+	if(!enemyTexture->create()){
+		std::cerr << "There was an error creating the enemy texture" << std::endl;
+	}
 }
 
 void EntityManager::tick(float dt){
@@ -103,8 +106,7 @@ void EntityManager::tick(float dt){
 		explosion->tick(dt);
 
 	// loop through entities and delete any that have fallen into the water
-	Entity* entity;
-	int destroyHeight = -50;
+	int destroyHeight = -100;
 	std::vector<Entity*>::iterator it;
 	for(it = entities.begin(); it != entities.end();){
 		if((*it)->getModel()[3][1] < destroyHeight){
@@ -114,12 +116,13 @@ void EntityManager::tick(float dt){
 			it++;
 		}
 	}		
-	for(it = defaultEntities.begin(); it != defaultEntities.end();){
-		if((*it)->getModel()[3][1] < destroyHeight){
-			defaultEntities.erase(it);
+	std::vector<Enemy*>::iterator itEnemy;
+	for(itEnemy = enemyEntities.begin(); itEnemy != enemyEntities.end();){
+		if((*itEnemy)->getModel()[3][1] < destroyHeight){
+			enemyEntities.erase(itEnemy);
 		}
 		else{
-			it++;
+			itEnemy++;
 		}
 	}	
 	std::list<Entity*>::iterator it2;
@@ -134,7 +137,7 @@ void EntityManager::tick(float dt){
 	}	
 
 	// add another enemy if less than 20
-	if(defaultEntities.size() < 21){
+	if(enemyEntities.size() < 20){
 		addEnemy();
 	}
 
@@ -155,7 +158,7 @@ unsigned int EntityManager::assignId(){
 }
 
 void EntityManager::createExplosion(glm::vec3 pos){
-	std::cout << pos.x << " " << pos.y << " " << pos.z << std::endl;
+	
     Explosion* explosion = new Explosion(this);
     explosion->init(pos);
     explosions.push_back(explosion);
@@ -170,9 +173,9 @@ void EntityManager::addEnemy(){
     std::uniform_real_distribution<float> distY(150, 500);
     std::uniform_real_distribution<float> distSize(10, 50);
 	// add a ball
-	Model* ball = new Model(engine, glm::vec3(distX(gen), distY(gen), distZ(gen)), distSize(gen), 32, 1);
+	Enemy* ball = new Enemy(engine, glm::vec3(distX(gen), distY(gen), distZ(gen)), distSize(gen), 32, 1);
 	ball->init("../assets/models/ballSml.obj");
 	ball->id = assignId();
-	defaultEntities.push_back(ball);
+	enemyEntities.push_back(ball);
 	entities.push_back(ball);		
 }

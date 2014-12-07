@@ -38,6 +38,7 @@ FILE(REMOVE_RECURSE
   "CMakeFiles/engine.dir/src/TerrainProgram.cpp.o"
   "CMakeFiles/engine.dir/src/WaterProgram.cpp.o"
   "CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o"
+  "CMakeFiles/engine.dir/src/Enemy.cpp.o"
   "CMakeFiles/engine.dir/src/Graphics.cpp.o"
   "CMakeFiles/engine.dir/src/EntityManager.cpp.o"
   "CMakeFiles/engine.dir/src/Clock.cpp.o"

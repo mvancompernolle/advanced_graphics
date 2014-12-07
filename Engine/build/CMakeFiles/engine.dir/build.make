@@ -946,9 +946,32 @@ CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o.provides: CMakeFiles/engi
 
 CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o.provides.build: CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o
 
+CMakeFiles/engine.dir/src/Enemy.cpp.o: CMakeFiles/engine.dir/flags.make
+CMakeFiles/engine.dir/src/Enemy.cpp.o: ../src/Enemy.cpp
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_40)
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Enemy.cpp.o"
+	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Enemy.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Enemy.cpp
+
+CMakeFiles/engine.dir/src/Enemy.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/engine.dir/src/Enemy.cpp.i"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -E /home/matthew/Desktop/adv_graphics/Engine/src/Enemy.cpp > CMakeFiles/engine.dir/src/Enemy.cpp.i
+
+CMakeFiles/engine.dir/src/Enemy.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/engine.dir/src/Enemy.cpp.s"
+	/usr/bin/c++  $(CXX_DEFINES) $(CXX_FLAGS) -S /home/matthew/Desktop/adv_graphics/Engine/src/Enemy.cpp -o CMakeFiles/engine.dir/src/Enemy.cpp.s
+
+CMakeFiles/engine.dir/src/Enemy.cpp.o.requires:
+.PHONY : CMakeFiles/engine.dir/src/Enemy.cpp.o.requires
+
+CMakeFiles/engine.dir/src/Enemy.cpp.o.provides: CMakeFiles/engine.dir/src/Enemy.cpp.o.requires
+	$(MAKE) -f CMakeFiles/engine.dir/build.make CMakeFiles/engine.dir/src/Enemy.cpp.o.provides.build
+.PHONY : CMakeFiles/engine.dir/src/Enemy.cpp.o.provides
+
+CMakeFiles/engine.dir/src/Enemy.cpp.o.provides.build: CMakeFiles/engine.dir/src/Enemy.cpp.o
+
 CMakeFiles/engine.dir/src/Graphics.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Graphics.cpp.o: ../src/Graphics.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_40)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_41)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Graphics.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Graphics.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Graphics.cpp
 
@@ -971,7 +994,7 @@ CMakeFiles/engine.dir/src/Graphics.cpp.o.provides.build: CMakeFiles/engine.dir/s
 
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/EntityManager.cpp.o: ../src/EntityManager.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_41)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_42)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/EntityManager.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/EntityManager.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/EntityManager.cpp
 
@@ -994,7 +1017,7 @@ CMakeFiles/engine.dir/src/EntityManager.cpp.o.provides.build: CMakeFiles/engine.
 
 CMakeFiles/engine.dir/src/Clock.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/Clock.cpp.o: ../src/Clock.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_42)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_43)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/Clock.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/Clock.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/Clock.cpp
 
@@ -1017,7 +1040,7 @@ CMakeFiles/engine.dir/src/Clock.cpp.o.provides.build: CMakeFiles/engine.dir/src/
 
 CMakeFiles/engine.dir/src/LightDSProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/LightDSProgram.cpp.o: ../src/LightDSProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_43)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_44)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/LightDSProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/LightDSProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/LightDSProgram.cpp
 
@@ -1040,7 +1063,7 @@ CMakeFiles/engine.dir/src/LightDSProgram.cpp.o.provides.build: CMakeFiles/engine
 
 CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o: ../src/SkyBoxProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_44)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_45)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/SkyBoxProgram.cpp
 
@@ -1063,7 +1086,7 @@ CMakeFiles/engine.dir/src/SkyBoxProgram.cpp.o.provides.build: CMakeFiles/engine.
 
 CMakeFiles/engine.dir/src/StencilProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/StencilProgram.cpp.o: ../src/StencilProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_45)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_46)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/StencilProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/StencilProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/StencilProgram.cpp
 
@@ -1086,7 +1109,7 @@ CMakeFiles/engine.dir/src/StencilProgram.cpp.o.provides.build: CMakeFiles/engine
 
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: CMakeFiles/engine.dir/flags.make
 CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o: ../src/BorderRenderProgram.cpp
-	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_46)
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/matthew/Desktop/adv_graphics/Engine/build/CMakeFiles $(CMAKE_PROGRESS_47)
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Building CXX object CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o"
 	/usr/bin/c++   $(CXX_DEFINES) $(CXX_FLAGS) -o CMakeFiles/engine.dir/src/BorderRenderProgram.cpp.o -c /home/matthew/Desktop/adv_graphics/Engine/src/BorderRenderProgram.cpp
 
@@ -1148,6 +1171,7 @@ engine_OBJECTS = \
 "CMakeFiles/engine.dir/src/TerrainProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/WaterProgram.cpp.o" \
 "CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o" \
+"CMakeFiles/engine.dir/src/Enemy.cpp.o" \
 "CMakeFiles/engine.dir/src/Graphics.cpp.o" \
 "CMakeFiles/engine.dir/src/EntityManager.cpp.o" \
 "CMakeFiles/engine.dir/src/Clock.cpp.o" \
@@ -1198,6 +1222,7 @@ engine: CMakeFiles/engine.dir/src/LightingManager.cpp.o
 engine: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/WaterProgram.cpp.o
 engine: CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o
+engine: CMakeFiles/engine.dir/src/Enemy.cpp.o
 engine: CMakeFiles/engine.dir/src/Graphics.cpp.o
 engine: CMakeFiles/engine.dir/src/EntityManager.cpp.o
 engine: CMakeFiles/engine.dir/src/Clock.cpp.o
@@ -1253,6 +1278,7 @@ CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/LightingManager.cpp.o.
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/TerrainProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/WaterProgram.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/FireworksUpdateProgram.cpp.o.requires
+CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Enemy.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Graphics.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/EntityManager.cpp.o.requires
 CMakeFiles/engine.dir/requires: CMakeFiles/engine.dir/src/Clock.cpp.o.requires

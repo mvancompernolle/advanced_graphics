@@ -20,9 +20,14 @@ Mesh::MeshUnit::MeshUnit(){
 }
 
 Mesh::Mesh(Engine* engine) : engine(engine){
+    materialsDisabled = false;
 	withAdjacencies = false;
 	vao = 0;
     trimesh = new btTriangleMesh();
+}
+
+void Mesh::disableMaterials(){
+    materialsDisabled = true;
 }
 
 bool Mesh::loadMesh(const char* fileName, bool withAdjacencies){
@@ -97,9 +102,11 @@ bool Mesh::loadMeshesFromScene(const aiScene* scene, const char* fileName){
 	}
 
 	// get the textures for the meshes
-	if(!initializeMaterials(scene, fileName)){
-		return false;
-	}
+    if(!materialsDisabled){
+        if(!initializeMaterials(scene, fileName)){
+            return false;
+        }        
+    }
 
 	// generate and populate the buffers with vertex attributes and the indices
   	glBindBuffer(GL_ARRAY_BUFFER, buffers[POS_VB]);

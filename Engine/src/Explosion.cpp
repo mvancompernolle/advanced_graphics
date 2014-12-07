@@ -96,8 +96,17 @@ void Explosion::tick(float dt){
 	timeElapsed += this->dt;
 
 	if(timeElapsed >= 3100){
-		mgr->explosions.clear();
-		delete this;
+        std::vector<Explosion*>::iterator it;
+        for(it = mgr->explosions.begin(); it != mgr->explosions.end();){
+
+            if((*it) == this){
+                mgr->explosions.erase(it);
+            }
+            else
+                it++;
+        }
+
+        delete this;
 	}
 }
 

@@ -28,7 +28,7 @@ void LightingManager::init(){
 	// init spot lights
 	// first spot lights is camera flashlight
 	SpotLight cameraLight;
-	cameraLight.color = glm::vec3(1.0, 0.0, 0.0);
+	cameraLight.color = glm::vec3(1.0, 1.0, 1.0);
 	cameraLight.diffuseIntensity = 1.0f;
 	cameraLight.ambientIntensity = 1.0f;
 	cameraLight.atten.constant = 1;
@@ -45,18 +45,15 @@ void LightingManager::init(){
 	spotLights.push_back(spotLight2);*/
 
 	// create a point light
-	PointLight pLight;
+	/*PointLight pLight;
 	pLight.ambientIntensity = 0.5f;
 	pLight.diffuseIntensity = 1.0f;
+	pLight.color = glm::vec3(1.0, 1.0, 1.0);
 	pLight.atten.constant = 1.0f;
-	pLight.atten.linear = 0;
-	pLight.atten.exp = 0.005f;
-	pLight.pos = glm::vec3(0, 200, 0);
-	pointLights.push_back(pLight);
-
-	/*for(int i=0; i<20; i++){
-		pointLights.push_back(pLight);
-	}*/
+	pLight.atten.linear = 0.00f;
+	pLight.atten.exp = 0.001f;
+	pLight.pos = glm::vec3(0, 100, 0);
+	pointLights.push_back(pLight);*/
 
 	/*// create a point light
 	PointLight pLight2 = pLight;
@@ -70,6 +67,31 @@ void LightingManager::tick(float dt){
 	// tick the cameraLight
 	spotLights[0].pos = engine->graphics->camera->getPos();
 	spotLights[0].direction = engine->graphics->camera->getCameraDirection();
+
+	int counter = 0;
+	std::vector<PointLight>::iterator it;
+	for(it = pointLights.begin(); it != pointLights.end();){
+		if(it->timeToLive > 0){
+			it->dt += dt;
+
+			// set intensity fo the light
+			if(it->dt < it->timeToLive/2)
+				it->diffuseIntensity = 1.0f;
+			else
+				//std::cout << (it->timeToLive - it->dt)/(it->timeToLive/2 << " " << it->timeToLive << " " << it->dt << std::endl;
+				it->diffuseIntensity = (it->timeToLive - it->dt)/(it->timeToLive/2);
+
+			if(it->dt > it->timeToLive)
+				pointLights.erase(it);
+			else
+				it++;
+
+		}
+		else
+			it++;
+		
+		counter++;
+	}		
 }
 
 void LightingManager::stop(){
@@ -107,4 +129,17 @@ void LightingManager::decreaseLightAngle(){
     float y = -cos(dirLightAngle + 1.57);
     float x = -sin(dirLightAngle + 1.57);
     dirLight.direction = glm::normalize(glm::vec3(x, y, 0));
+}
+
+void LightingManager::addTempPointLight(glm::vec3 pos, glm::vec3 color, float lifeTime){
+
+	PointLight pLight;
+	pLight.diffuseIntensity = 1.0f;
+	pLight.color = color;
+	pLight.atten.constant = 1.0f;
+	pLight.atten.linear = 0.00f;
+	pLight.atten.exp = 0.00001f;
+	pLight.timeToLive = lifeTime;
+	pLight.pos = pos;
+	pointLights.push_back(pLight);	
 }

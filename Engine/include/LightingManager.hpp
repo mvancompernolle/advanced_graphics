@@ -2,6 +2,7 @@
 #define LIGHTING_MANAGER_HPP
 
 #include <vector>
+#include <glm/glm.hpp>
 #include "Lights.hpp"
 
 namespace Vancom{
@@ -25,6 +26,7 @@ public:
 	void addPointLight(PointLight pointLight);
 	void increaseLightAngle();
 	void decreaseLightAngle();
+	void addTempPointLight(glm::vec3 pos, glm::vec3 color, float lifeTime);
 
 	// public variables
 	DirectionalLight dirLight;
