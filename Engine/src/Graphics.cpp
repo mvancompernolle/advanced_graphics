@@ -244,8 +244,6 @@ void Graphics::render(){
         explosion->render(projection, view, camera->getPos());
     }
 
-    engine->entityManager->water->render(projection, view);
-
     // render terrain border
     engine->entityManager->border->render(projection, view);
 
@@ -329,6 +327,7 @@ void Graphics::geometryPassDS(){
     }
 
     engine->entityManager->grass->render(projection, view);
+    engine->entityManager->water->render(projection, view);
 
     glDepthMask(GL_FALSE);
 }

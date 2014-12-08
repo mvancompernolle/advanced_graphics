@@ -40,7 +40,7 @@ bool Enemy::init(const char* fileName){
     mesh->disableMaterials();
     mesh->loadMesh(fileName, true);
 
-    mesh->getCollisionShape()->setLocalScaling(btVector3(scale, scale, scale));
+    mesh->getCollisionShape()->setLocalScaling(btVector3(scale/10, scale/10, scale/10));
     rigidBody = engine->physics->addRigidBody(mesh->getCollisionShape(), btQuaternion(0,0,0,1), 
         btVector3(startingPos.x,startingPos.y,startingPos.z), 1.0f, 1.0f, btVector3(0,0,0));
     rigidBody->forceActivationState(DISABLE_DEACTIVATION);

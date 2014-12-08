@@ -31,6 +31,10 @@ public:
 	void render();
 	void render(glm::mat4 proj, glm::mat4 view, glm::vec3 camPos);
 
+	// public variables
+	long timeElapsed;
+	float dt;
+	
 private:
 
 	// private variables
@@ -42,8 +46,6 @@ private:
 	ExplosionUpdateProgram updateProgram;
 	FireworksRenderProgram renderProgram;
 	Texture* texture;
-	long timeElapsed;
-	float dt;
 
 };
 

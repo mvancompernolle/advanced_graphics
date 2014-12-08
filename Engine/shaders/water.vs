@@ -95,19 +95,10 @@ void main() {
     vec4 pos = vec4(vs_position, 1.0);
     pos.y = waveHeight(pos.x, pos.z);
 
-    fs_pos = (mvp * pos).xyz;
-    fs_normal = (model * vec4(waveNormal(pos.x, pos.z), 0.0)).xyz;//(model * vec4(vs_normal, 0.0)).xyz;
+    fs_pos = (model * pos).xyz;
+    fs_normal = (model * vec4(waveNormal(pos.x, pos.z), 0.0)).xyz;//(model * vec4(0.0, 1.0, 0.0, 0.0)).xyz;
     fs_texture = vs_texture;
 
     gl_Position = (mvp * pos);
 
 }
-
-/*float dist = distance((model * vec4(vs_position.xyz, 1.0)).xyz, vec3(0,0,0));
-vec3 newPos = vs_position;
-vec3 direction = normalize((model * vec4(vs_position.xyz, 1.0)).xyz - vec3(0,0,0));*/
-
-    /*if(dist < speed * time){
-        fs_normal = normalize(vec3(-direction.x, 1.0, -direction.z));
-        newPos.y = amp * sin(frequency * time);
-    }*/

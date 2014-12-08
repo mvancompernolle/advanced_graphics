@@ -152,10 +152,16 @@ void Input::tick(float dt){
                 if(event.button.button == SDL_BUTTON_LEFT){
 
                     // create an explosion at each entity
+                    int count = 0;
                     for(Entity *entity : engine->input->selected){
                         engine->entityManager->createExplosion(entity->getPos());
                         entity->updating = false;
-                        engine->lightingManager->addTempPointLight(entity->getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
+
+                        // create a max of 5 pointlights to avoid lag
+                        if(count < 5)
+                            engine->lightingManager->addTempPointLight(entity->getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
+
+                        count++;
                     }
 
                     // clear the selected entities

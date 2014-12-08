@@ -14,7 +14,6 @@ layout (location = 2) out vec3 normal;
 layout (location = 3) out vec2 specular;
 
 void main(void){
-
     pos = fs_pos;
     diff = texture2D(colorMap, fs_tex).xyz;
     normal = normalize(fs_normal);

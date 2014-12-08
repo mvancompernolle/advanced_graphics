@@ -138,7 +138,7 @@ void LightingManager::addTempPointLight(glm::vec3 pos, glm::vec3 color, float li
 	pLight.color = color;
 	pLight.atten.constant = 1.0f;
 	pLight.atten.linear = 0.00f;
-	pLight.atten.exp = 0.00001f;
+	pLight.atten.exp = 0.000001f;
 	pLight.timeToLive = lifeTime;
 	pLight.pos = pos;
 	pointLights.push_back(pLight);	

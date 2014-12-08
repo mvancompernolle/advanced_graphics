@@ -97,14 +97,6 @@ void EntityManager::init(){
 
 void EntityManager::tick(float dt){
 
-	// tick all of the entities in the world
-	for(Entity *entity : entities)
-		entity->tick(dt);
-
-	// tick explosions
-	for(Explosion *explosion : explosions)
-		explosion->tick(dt);
-
 	// loop through entities and delete any that have fallen into the water
 	int destroyHeight = -100;
 	std::vector<Entity*>::iterator it;
@@ -128,13 +120,33 @@ void EntityManager::tick(float dt){
 	std::list<Entity*>::iterator it2;
 	for(it2 = engine->input->selected.begin(); it2 != engine->input->selected.end();){
 		if((*it2)->getModel()[3][1] < destroyHeight){
-			engine->input->selected.erase(it2);
 			delete (*it2);
+			engine->input->selected.erase(it2);
 		}
 		else{
 			it2++;
 		}
 	}	
+
+	// remove expired explosions
+	std::vector<Explosion*>::iterator explosionIt;
+	for(explosionIt = explosions.begin(); explosionIt != explosions.end();){
+		if((*explosionIt)->timeElapsed > 3100){
+			delete *explosionIt;
+			explosions.erase(explosionIt);
+		}
+		else{
+			explosionIt++;
+		}
+	}		
+
+	// tick all of the entities in the world
+	for(Entity *entity : entities)
+		entity->tick(dt);
+
+	// tick explosions
+	for(Explosion *explosion : explosions)
+		explosion->tick(dt);
 
 	// add another enemy if less than 20
 	if(enemyEntities.size() < 20){

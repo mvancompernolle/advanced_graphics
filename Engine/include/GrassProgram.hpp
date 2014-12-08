@@ -17,6 +17,7 @@ public:
     GrassProgram();
     bool init();    
     void setMVP(const glm::mat4 MVP);
+    void setModel(const glm::mat4 model) const;
     void setWindDir(const glm::vec3 windDir);
     void setCameraPos(const glm::vec3 pos);
 
@@ -24,6 +25,7 @@ public:
 
     // private variables
     GLint locMVP;
+    GLint locModel;
     GLint locWindDir;
     GLint locDrawDistance;
     GLint locCameraPos;

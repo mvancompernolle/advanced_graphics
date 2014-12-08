@@ -27,6 +27,7 @@ bool GrassProgram::init(){
 
 	// get uniform locations
     locMVP = getUniformLocation("mvp");
+    locModel = getUniformLocation("model");
     locWindDir = getUniformLocation("windDir");
     locCameraPos = getUniformLocation("cameraPos");
     locDrawDistance = getUniformLocation("windDir");
@@ -37,6 +38,11 @@ bool GrassProgram::init(){
 void GrassProgram::setMVP(const glm::mat4 MVP){
 
     glUniformMatrix4fv(locMVP, 1, GL_FALSE, glm::value_ptr(MVP));    
+}
+
+void GrassProgram::setModel(const glm::mat4 model) const{ 
+
+    glUniformMatrix4fv(locModel, 1, GL_FALSE, glm::value_ptr(model));    
 }
 
 void GrassProgram::setWindDir(const glm::vec3 windDir){

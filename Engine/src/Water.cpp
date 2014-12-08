@@ -122,8 +122,6 @@ void Water::render(glm::mat4 projection, glm::mat4 view){
     program.setModel(model);
     program.setTime(time);
     program.setTextureUnit(0);
-    program.setDirLight(engine->lightingManager->dirLight);
-    program.setCameraPosition(engine->graphics->camera->getPos());
 
     // draw
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, (void*)0);

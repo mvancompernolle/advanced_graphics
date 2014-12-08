@@ -19,10 +19,8 @@ public:
     bool init();    
     void setMVP(const glm::mat4 MVP) const;
     void setModel(const glm::mat4 model) const;
-    void setCameraPosition(const glm::vec3 pos) const;
     void setTextureUnit(unsigned int textureUnit) const;
     void setTime(float time) const;
-    void setDirLight(const DirectionalLight& light) const;
 
  private:
 

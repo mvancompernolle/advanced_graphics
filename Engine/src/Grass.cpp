@@ -145,6 +145,7 @@ void Grass::render(glm::mat4 projection, glm::mat4 view){
     //program.setCameraPos(engine->graphics->camera->getPos());
     program.setWindDir(engine->graphics->windDir);
 	program.setMVP(projection * view * model);
+    program.setModel(model);
     program.setCameraPos(engine->graphics->camera->getPos());
 	glDrawArrays(GL_POINTS, 0, blades.size());
 
