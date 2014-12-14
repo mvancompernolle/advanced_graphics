@@ -34,7 +34,7 @@ vec4 calcLightInternal(BaseLight l, vec3 lightDirection, vec3 pos, vec3 normal, 
         diffuseColor = vec4(l.color, 1.0f) * l.diffuseIntensity * diffuseFactor;    
                                                                                           
         vec3 vertexToEye = normalize(cameraPos - pos);                             
-        vec3 lightReflect = normalize(reflect(lightDir, normal));                     
+        vec3 lightReflect = normalize(reflect(lightDirection, normal));                     
         float specularFactor = dot(vertexToEye, lightReflect);                              
         specularFactor = pow(specularFactor, specular.x);                               
         if (specularFactor > 0) {                                                           
@@ -48,7 +48,7 @@ vec4 calcLightInternal(BaseLight l, vec3 lightDirection, vec3 pos, vec3 normal, 
 
 vec4 calcDirectionLight(vec3 pos, vec3 normal, vec2 specular){
 
-    return calcLightInternal(dirLight.base, dirLight.direction, pos, normal, specular);
+    return calcLightInternal(dirLight.base, normalize(dirLight.direction), pos, normal, specular);
 } 
 
 vec2 calcTexCoord(){

@@ -17,6 +17,7 @@ class Grass;
 class Water;
 class Texture;
 class Enemy;
+class LightningBullet;
 
 class EntityManager {
 
@@ -30,6 +31,7 @@ public:
 	void tick(float dt);
 	void stop();
 	void createExplosion(glm::vec3 pos);
+	void createBullet(glm::vec3 pos, glm::vec3 dir);
 
 	// public variables
 	std::vector<Entity*> entities;
@@ -37,7 +39,8 @@ public:
 	std::vector<Enemy*> enemyEntities;
 	std::vector<Entity*> guiEntities;
 	std::vector<Explosion*> explosions;
-	Texture* enemyTexture;
+	std::vector<LightningBullet*> bullets;
+	Texture* enemyTexture, *bulletTexture;
 	TerrainBorder *border;
 	SkyBox* skyBox;
 	Grass* grass;

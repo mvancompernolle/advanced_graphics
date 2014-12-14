@@ -23,6 +23,7 @@
 #include "LightingManager.hpp"
 #include "SkyBox.hpp"
 #include "Enemy.hpp"
+#include "LightningBullet.hpp"
 
 using namespace Vancom;
 
@@ -75,6 +76,8 @@ void Graphics::init(){
     // setup gdal
     GDALAllRegister();
     OGRRegisterAll();
+
+    text.init();
 
     // set clear color and culling
     glClearColor(0.0, 0.0, 0.0, 1);
@@ -205,6 +208,8 @@ void Graphics::render(){
 
     pointLightPassDS();
     spotLightPassDS();
+    ambientLightPassDS();
+
     glDisable(GL_BLEND);
 
     // render border of selected
@@ -257,6 +262,11 @@ void Graphics::render(){
     // render sky box
     engine->entityManager->skyBox->render(projection, view);
 
+    // render text
+    float sx = 2.0/width;
+    float sy = 2.0/height;
+    //text.render("Hi its me hahahhaha", 0 + 8 * sx, 0 + 8 * sy, sx, sy);
+
     buffer.bindForFinalPass();
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 
@@ -295,6 +305,34 @@ void Graphics::shadowVolumePass(){
         entity->render();
     }
 
+    /*for(PointLight pLight : engine->lightingManager->pointLights){
+        for(int i=1; i<engine->entityManager->enemyEntities.size(); i++){
+            Entity* entity = engine->entityManager->enemyEntities[i];
+            shadowProgram.enable();
+            shadowProgram.setLightPosition(pLight.pos);
+            shadowProgram.setVP(projection * view);
+            shadowProgram.setModel(entity->getModel());
+            entity->render();
+        }
+        for(int i=1; i<engine->entityManager->terrainEntities.size(); i++){
+            Entity* entity = engine->entityManager->enemyEntities[i];
+            shadowProgram.enable();
+            shadowProgram.setLightPosition(pLight.pos);
+            shadowProgram.setVP(projection * view);
+            shadowProgram.setModel(entity->getModel());
+            entity->render();
+        }
+    }
+
+    for(int i=1; i<engine->entityManager->enemyEntities.size(); i++){
+        Entity* entity = engine->entityManager->enemyEntities[i];
+        shadowProgram.enable();
+        shadowProgram.setLightPosition(engine->lightingManager->spotLights[0].pos);
+        shadowProgram.setVP(projection * view);
+        shadowProgram.setModel(entity->getModel());
+        entity->render();
+    }*/
+
     glDisable(GL_DEPTH_CLAMP);
 }
 
@@ -326,7 +364,17 @@ void Graphics::geometryPassDS(){
         entity->render();
     }
 
-    engine->entityManager->grass->render(projection, view);
+    // render bullets
+    engine->entityManager->bulletTexture->bind(GL_TEXTURE0);
+    for(Entity* entity : engine->entityManager->bullets){
+        geometryProgram.setMVP(projection * view * entity->getModel());
+        geometryProgram.setModelPos(entity->getModel());
+        geometryProgram.setSpecularPower(entity->specularPower);
+        geometryProgram.setSpecularIntensity(entity->specularIntensity);
+        entity->render();
+    }
+
+    //engine->entityManager->grass->render(projection, view);
     engine->entityManager->water->render(projection, view);
 
     glDepthMask(GL_FALSE);
@@ -376,6 +424,51 @@ void Graphics::pointLightPassDS(){
         glCullFace(GL_BACK);
         glDisable(GL_BLEND);    
     }
+
+    for(LightningBullet* bullet : engine->entityManager->bullets){
+
+        engine->lightingManager->bulletLight.pos = bullet->getPos();
+
+        // determine scale of point light
+        float scale = calcPointLightSphere(engine->lightingManager->bulletLight);
+        //std::cout << scale << std::endl;
+        glm::mat4 matrix = glm::translate(pointLightRenderSphere->getModel(), bullet->getPos());
+
+        // stencil pass
+        stencilProgram.enable();
+        buffer.bindForStencilPass();
+
+        glEnable(GL_DEPTH_TEST);
+        glDisable(GL_CULL_FACE);
+        glClear(GL_STENCIL_BUFFER_BIT);
+
+        glStencilFunc(GL_ALWAYS, 0, 0);
+        glStencilOpSeparate(GL_BACK, GL_KEEP, GL_INCR_WRAP, GL_KEEP);
+        glStencilOpSeparate(GL_FRONT, GL_KEEP, GL_DECR_WRAP, GL_KEEP);
+        stencilProgram.setMVP(projection * view * glm::scale(matrix, glm::vec3(scale, scale, scale)));
+        pointLightRenderSphere->render();
+
+        // point light pass
+        pointLightProgram.enable();
+        buffer.bindForLightPass();
+
+        glStencilFunc(GL_NOTEQUAL, 0, 0xFF);
+        glDisable(GL_DEPTH_TEST);
+        glEnable(GL_BLEND);
+        glBlendEquation(GL_FUNC_ADD);
+        glBlendFunc(GL_ONE, GL_ONE);
+
+        glEnable(GL_CULL_FACE);
+        glCullFace(GL_FRONT);
+
+        pointLightProgram.setPointLight(engine->lightingManager->bulletLight);
+        pointLightProgram.setCameraPosition(camera->getPos());
+        pointLightProgram.setMVP(projection * view * glm::scale(matrix, glm::vec3(scale, scale, scale)));
+        pointLightRenderSphere->render();
+
+        glCullFace(GL_BACK);
+        glDisable(GL_BLEND);    
+    }
     glDisable(GL_CULL_FACE);
 }
 
@@ -413,6 +506,17 @@ void Graphics::spotLightPassDS(){
         spotLightProgram.setMVP(dirLightRenderQuad->getModel());
         dirLightRenderQuad->render();
     }
+}
+
+void Graphics::ambientLightPassDS(){
+    glBlendEquation(GL_FUNC_ADD);
+    glBlendFunc(GL_ONE, GL_ONE);
+
+    // use dirlight with no diffuse (could be more efficient)
+    dirLightProgram.enable();
+
+    dirLightProgram.setDirLight(engine->lightingManager->ambientLight);
+    dirLightRenderQuad->render();
 }
 
 void Graphics::stop(){

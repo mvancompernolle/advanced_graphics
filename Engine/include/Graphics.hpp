@@ -25,6 +25,7 @@
 #include "StencilProgram.hpp"
 #include "ShadowVolumeProgram.hpp"
 #include "Lights.hpp"
+#include "TextRenderer.hpp"
 
 namespace Vancom{
 
@@ -66,6 +67,7 @@ private:
 	void pointLightPassDS();
 	void directionalLightPassDS();
 	void spotLightPassDS();
+	void ambientLightPassDS();
 	void depthPass();
 	void shadowVolumePass();
 
@@ -75,6 +77,7 @@ private:
 	SDL_GLContext gl_context;
 	glm::vec3 lightDir;
 	float windUpdateTime, windDT, windStrength;
+	TextRenderer text;
 
 	// selection program
 	SelectionProgram selectionProgram;

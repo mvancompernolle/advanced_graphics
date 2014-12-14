@@ -1,5 +1,5 @@
-#ifndef ENEMY_HPP
-#define ENEMY_HPP
+#ifndef LIGHTNING_BULLET_HPP
+#define LIGHTNING_BULLET_HPP
 
 #include <vector>
 #include <glm/gtc/matrix_transform.hpp>
@@ -14,32 +14,30 @@ namespace Vancom{
 
 class Engine;
 
-class Enemy : public Entity{
+class LightningBullet : public Entity{
 
 public:
-    Enemy(Engine *engine);
-    Enemy(Engine *engine, glm::vec3 pos, float scale, float power, float intensity);
-    ~Enemy();
-    bool init(const char* fileName);
+    
+    // private variables
+    LightningBullet(Engine *engine);
+    ~LightningBullet();
+    bool init(const char* fileName, glm::vec3 pos, glm::vec3 dir, float speed, float scale);
     void tick(float dt);
     void render();
     btRigidBody* getRigidBody();
 
     // public variables
-    bool moving;
+    float timeElapsed;
 
 private:
 
     // private variables
     Engine *engine;
     Mesh *mesh;
-    float timeElapsed;
-    float decisionTime;
     float speed, scale;
-    glm::vec3 target, startingPos;
     btRigidBody* rigidBody;
 };
 
 }
 
-#endif // END ENEMY_HPP
+#endif // END LIGHTNING_BULLET_HPP

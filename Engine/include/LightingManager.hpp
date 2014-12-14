@@ -29,7 +29,8 @@ public:
 	void addTempPointLight(glm::vec3 pos, glm::vec3 color, float lifeTime);
 
 	// public variables
-	DirectionalLight dirLight;
+	DirectionalLight dirLight, ambientLight;
+	PointLight bulletLight;
 	std::vector<SpotLight> spotLights;
 	std::vector<PointLight> pointLights;
 

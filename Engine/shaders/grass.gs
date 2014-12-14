@@ -37,11 +37,11 @@ void main() {
         power = 0;
 
     // calculate normal
-    vec4 v1 = gl_in[0].gl_Position + mvp * rotMatrix * vec4(0.05, 0.0, 0.0, 0.0) - 
-                gl_in[0].gl_Position + mvp * rotMatrix * vec4(-0.05, 0.0, 0.0, 0.0);
-    vec4 v2 = gl_in[0].gl_Position + mvp * rotMatrix * (vec4(-0.05, 1.0, 0.0, 0.0) + vec4(windDir.x, 0.0, windDir.z, 0.0) * power / 2) - 
-                gl_in[0].gl_Position + mvp * rotMatrix * vec4(-0.05, 0.0, 0.0, 0.0);
-    /*fs_normal = (mvp * vec4(cross(v1.xyz, v2.xyz), 0.0)).xyz*/;
+    /*vec4 v1 = gl_in[0].gl_Position + rotMatrix * vec4(0.05, 0.0, 0.0, 0.0) - 
+                gl_in[0].gl_Position + rotMatrix * vec4(-0.05, 0.0, 0.0, 0.0);
+    vec4 v2 = gl_in[0].gl_Position + rotMatrix * (vec4(-0.05, 1.0, 0.0, 0.0) + vec4(windDir.x, 0.0, windDir.z, 0.0) * power / 2) - 
+                gl_in[0].gl_Position + rotMatrix * vec4(-0.05, 0.0, 0.0, 0.0);
+    fs_normal = (model * vec4(cross(v1.xyz, v2.xyz), 0.0)).xyz;*/
     fs_normal = vec3(0, 1, 0);
 
     // large grass

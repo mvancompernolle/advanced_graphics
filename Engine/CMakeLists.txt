@@ -5,6 +5,7 @@ project(engine)
 include_directories("include")
 include_directories("/usr/include/gdal")
 include_directories("/usr/include/bullet")
+include_directories("/usr/include/freetype2")
 
 aux_source_directory(src Engine_src)
 set(Engine_src ${Engine_src}) #${gui_src})
@@ -31,7 +32,7 @@ elseif(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
     include_directories(${SDL2_INCLUDE_DIRS} ${GLEW_INCLUDE_DIRS})
 
     set(LIBRARIES_TO_LINK ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} "gdal" "freeimageplus" "assimp" 
-        "BulletDynamics" "BulletSoftBody" "BulletCollision" "LinearMath")
+        "BulletDynamics" "BulletSoftBody" "BulletCollision" "LinearMath" "freetype")
 
 else()
     message(STATUS "Windows OS Detected")

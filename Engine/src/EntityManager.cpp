@@ -16,6 +16,7 @@
 #include "SkyBox.hpp"
 #include "Water.hpp"
 #include "Enemy.hpp"
+#include "LightningBullet.hpp"
 
 using namespace Vancom;
 
@@ -51,7 +52,7 @@ void EntityManager::init(){
 	maxZ = height/2;
 
 	// randomly generate 10 balls
-	for(int i=0; i<20; i++){
+	for(int i=0; i<10; i++){
 		// add a ball
 		addEnemy();	
 	}
@@ -87,11 +88,15 @@ void EntityManager::init(){
 	water->init();
 	water->setTexture(GL_TEXTURE_2D, "../assets/reflection.jpg");
 
-	// load enemy texture
+	// load enemy and bullet textures
 	enemyTexture = new Texture(GL_TEXTURE_2D, "../assets/models/silver.jpg");
+	bulletTexture = new Texture(GL_TEXTURE_2D, "../assets/energy_ball.jpg");
 
 	if(!enemyTexture->create()){
 		std::cerr << "There was an error creating the enemy texture" << std::endl;
+	}
+	if(!bulletTexture->create()){
+		std::cerr << "There was an error creating the bullet texture" << std::endl;
 	}
 }
 
@@ -138,7 +143,19 @@ void EntityManager::tick(float dt){
 		else{
 			explosionIt++;
 		}
-	}		
+	}
+
+	// remove expired bullets		
+	std::vector<LightningBullet*>::iterator bulletIt;
+	for(bulletIt = bullets.begin(); bulletIt != bullets.end();){
+		if((*bulletIt)->timeElapsed > 5){
+			delete *bulletIt;
+			bullets.erase(bulletIt);
+		}
+		else{
+			bulletIt++;
+		}
+	}
 
 	// tick all of the entities in the world
 	for(Entity *entity : entities)
@@ -148,8 +165,12 @@ void EntityManager::tick(float dt){
 	for(Explosion *explosion : explosions)
 		explosion->tick(dt);
 
+	// tick bullets
+	for(LightningBullet *bullet : bullets)
+		bullet->tick(dt);
+
 	// add another enemy if less than 20
-	if(enemyEntities.size() < 20){
+	if(enemyEntities.size() < 10){
 		addEnemy();
 	}
 
@@ -174,6 +195,13 @@ void EntityManager::createExplosion(glm::vec3 pos){
     Explosion* explosion = new Explosion(this);
     explosion->init(pos);
     explosions.push_back(explosion);
+}
+
+void EntityManager::createBullet(glm::vec3 pos, glm::vec3 dir){
+	// add a bullet
+	LightningBullet* bullet = new LightningBullet(engine);
+	bullet->init("../assets/models/ballSml.obj", pos, dir, 1000, 10);
+	bullets.push_back(bullet);
 }
 
 void EntityManager::addEnemy(){

@@ -10,8 +10,8 @@
 using namespace Vancom;
 
 Terrain::Terrain(Engine *engine, const char* fileName) : engine(engine), fileName(fileName){
-	specularIntensity = .5;
-	specularPower = 32;
+	specularIntensity = 1;
+	specularPower = 20;
 	downSample = 50;
 	heightScale = 100;
 	geotransform = new double[6];

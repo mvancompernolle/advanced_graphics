@@ -150,7 +150,9 @@ void Input::tick(float dt){
 
             case SDL_MOUSEBUTTONDOWN:
                 if(event.button.button == SDL_BUTTON_LEFT){
-
+                    engine->entityManager->createBullet(engine->graphics->camera->getPos(), engine->graphics->camera->getCameraDirection());
+                }
+                else if(event.button.button == SDL_BUTTON_RIGHT){
                     // create an explosion at each entity
                     int count = 0;
                     for(Entity *entity : engine->input->selected){

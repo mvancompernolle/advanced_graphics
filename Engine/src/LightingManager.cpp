@@ -23,6 +23,10 @@ void LightingManager::init(){
 	// init directional light
 	dirLight.diffuseIntensity = 1.0f;
 
+	// init ambient light
+	ambientLight.diffuseIntensity = 0.0f;
+	ambientLight.ambientIntensity = 0.1f;
+
 	// init spot lights
 
 	// init spot lights
@@ -37,6 +41,12 @@ void LightingManager::init(){
 	cameraLight.direction = engine->graphics->camera->getCameraDirection();
 	cameraLight.cutoff = .97;
 	spotLights.push_back(cameraLight);
+
+	bulletLight.diffuseIntensity = 20.0f;
+	bulletLight.color = glm::vec3(1, 1, 0);
+	bulletLight.atten.constant = 1.0f;
+	bulletLight.atten.linear = 0.00f;
+	bulletLight.atten.exp = 0.0001f;
 
 	/*// create a second spot light
 	SpotLight spotLight2 = cameraLight;

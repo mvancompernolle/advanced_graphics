@@ -69,26 +69,26 @@ void main() {
     numWaves = 4;
 
     // wave 1
-    wavelength[0] = 800 * pi;
-    speed[0] = 1000.0f;
+    wavelength[0] = 280 * pi;
+    speed[0] = 100.0f;
     amplitude[0] = 10f;
     direction[0] = vec2(0.0, 1.0); 
 
     // wave 2
-    wavelength[1] = 500 * pi;
-    speed[1] = 37.0f;
+    wavelength[1] = 250 * pi;
+    speed[1] = 370.0f;
     amplitude[1] = 13.0f;
     direction[1] = vec2(1.0, 0.5); 
 
     // wave 3
-    wavelength[2] = 223 * pi;
-    speed[2] = 9.5f;
+    wavelength[2] = 220 * pi;
+    speed[2] = 90.0f;
     amplitude[2] = 10.0f;
     direction[2] = vec2(-0.4, 0.6); 
 
     // wave 3
-    wavelength[3] = 500 * pi;
-    speed[3] = 30.0f;
+    wavelength[3] = 250 * pi;
+    speed[3] = 300.0f;
     amplitude[3] = 10.0f;
     direction[3] = vec2(-0.4, -0.6);
 

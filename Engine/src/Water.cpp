@@ -40,8 +40,8 @@ bool Water::init(){
             vert.pos[0] = x;
             vert.pos[1] = 0 /*dist(gen)*/;
             vert.pos[2] = z;
-            vert.tex[0] = x/width;
-            vert.tex[1] = z/height;
+            vert.tex[0] = x/1000;
+            vert.tex[1] = z/1000;
             geometry.push_back(vert);
         }
     }

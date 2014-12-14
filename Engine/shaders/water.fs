@@ -15,5 +15,5 @@ void main() {
     pos = fs_pos;
     diff = texture(textureUnit, fs_texture).xyz;
     normal = normalize(fs_normal);
-    specular = vec2(32, 1);
+    specular = vec2(100, .5);
 }
