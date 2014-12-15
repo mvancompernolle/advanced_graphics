@@ -10,7 +10,7 @@ CrossHair::CrossHair(glm::vec3 pos){
 }
 
 CrossHair::~CrossHair(){
-
+	delete texture;
 }
 
 bool CrossHair::init(const char* fileName, float width, float height){

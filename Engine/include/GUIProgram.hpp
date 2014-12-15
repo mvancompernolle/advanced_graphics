@@ -16,11 +16,15 @@ public:
     GUIProgram();
     bool init();    
     void setSampler(const int sampler) const;
+    void setDropEnabled(const int val) const;
+    void setDropColor(const glm::vec3 color) const;
     
 private:
 
     // private variables
     GLuint locSampler;
+    GLuint locDropColor;
+    GLuint locDropEnabled;
 
 };
 

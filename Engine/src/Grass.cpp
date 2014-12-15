@@ -52,7 +52,7 @@ void Grass::generateBlades(float** terrain, int width, int height){
     std::uniform_real_distribution<float> distr2(0, 1.57);
     
     // generate blades of grass
-    for(int i=0; i<1000000; i++){
+    for(int i=0; i<2000000; i++){
         /*// generate position
         vert.pos.x = (int) xDistr(rand);
         vert.pos.z = (int) zDistr(rand);

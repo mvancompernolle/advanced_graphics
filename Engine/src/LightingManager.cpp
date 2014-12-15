@@ -25,7 +25,7 @@ void LightingManager::init(){
 
 	// init ambient light
 	ambientLight.diffuseIntensity = 0.0f;
-	ambientLight.ambientIntensity = 0.1f;
+	ambientLight.ambientIntensity = 0.2f;
 
 	// init spot lights
 
@@ -48,27 +48,19 @@ void LightingManager::init(){
 	bulletLight.atten.linear = 0.00f;
 	bulletLight.atten.exp = 0.0001f;
 
-	/*// create a second spot light
-	SpotLight spotLight2 = cameraLight;
-	spotLight2.pos = glm::vec3(0, 400, 0);
-	spotLight2.direction = glm::vec3(0, -1, 0);
-	spotLights.push_back(spotLight2);*/
-
-	// create a point light
-	/*PointLight pLight;
-	pLight.ambientIntensity = 0.5f;
-	pLight.diffuseIntensity = 1.0f;
-	pLight.color = glm::vec3(1.0, 1.0, 1.0);
+	// create firework lights
+	PointLight pLight;
+	pLight.diffuseIntensity = 10.0f;
+	pLight.color = glm::vec3(1,0,0);
 	pLight.atten.constant = 1.0f;
 	pLight.atten.linear = 0.00f;
-	pLight.atten.exp = 0.001f;
-	pLight.pos = glm::vec3(0, 100, 0);
-	pointLights.push_back(pLight);*/
-
-	/*// create a point light
-	PointLight pLight2 = pLight;
-	pLight2.pos = glm::vec3(200, 100, 0);
-	pointLights.push_back(pLight2);*/
+	pLight.atten.exp = 0.00001f;
+	pLight.pos = glm::vec3(-10000, 100, -10000);
+	pointLights.push_back(pLight);
+	pLight.pos = glm::vec3(-9500, 100, -10000);
+	pointLights.push_back(pLight);
+	pLight.pos = glm::vec3(-10000, 100, -9500);
+	pointLights.push_back(pLight);
 }
 
 void LightingManager::tick(float dt){
@@ -142,14 +134,15 @@ void LightingManager::decreaseLightAngle(){
 }
 
 void LightingManager::addTempPointLight(glm::vec3 pos, glm::vec3 color, float lifeTime){
-
-	PointLight pLight;
-	pLight.diffuseIntensity = 1.0f;
-	pLight.color = color;
-	pLight.atten.constant = 1.0f;
-	pLight.atten.linear = 0.00f;
-	pLight.atten.exp = 0.000001f;
-	pLight.timeToLive = lifeTime;
-	pLight.pos = pos;
-	pointLights.push_back(pLight);	
+	if(pointLights.size() < 8){
+		PointLight pLight;
+		pLight.diffuseIntensity = 1.0f;
+		pLight.color = color;
+		pLight.atten.constant = 1.0f;
+		pLight.atten.linear = 0.00f;
+		pLight.atten.exp = 0.000001f;
+		pLight.timeToLive = lifeTime;
+		pLight.pos = pos;
+		pointLights.push_back(pLight);			
+	}
 }

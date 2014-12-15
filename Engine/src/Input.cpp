@@ -4,6 +4,8 @@
 #include "EntityManager.hpp"
 #include "Camera.hpp"
 #include "LightingManager.hpp"
+#include "Enemy.hpp"
+#include "SplashScreen.hpp"
 
 #include <SDL.h>
 
@@ -85,6 +87,10 @@ void Input::tick(float dt){
                     case SDLK_RIGHT:
                         keysPressed[SDLK_RIGHT] = true;
                     break;
+
+                    case SDLK_SPACE:
+                        keysPressed[SDLK_SPACE] = true;
+                    break;
                 }
 
             break;
@@ -134,6 +140,10 @@ void Input::tick(float dt){
                     case SDLK_RIGHT:
                         keysPressed[SDLK_RIGHT] = false;
                     break;
+
+                    case SDLK_SPACE:
+                        keysPressed[SDLK_SPACE] = false;
+                    break;
                 }
             break;
 
@@ -154,20 +164,11 @@ void Input::tick(float dt){
                 }
                 else if(event.button.button == SDL_BUTTON_RIGHT){
                     // create an explosion at each entity
-                    int count = 0;
-                    for(Entity *entity : engine->input->selected){
-                        engine->entityManager->createExplosion(entity->getPos());
-                        entity->updating = false;
-
-                        // create a max of 5 pointlights to avoid lag
-                        if(count < 5)
-                            engine->lightingManager->addTempPointLight(entity->getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
-
-                        count++;
+                    for(Enemy *entity : engine->entityManager->enemyEntities){
+                        if(entity->selected){
+                            entity->health -= 100;
+                        }
                     }
-
-                    // clear the selected entities
-                    engine->input->selected.clear();
                 }
             break;
 
@@ -228,10 +229,10 @@ void Input::handleMovementKeys(){
         engine->graphics->camera->moveDown();
 
     if(keysPressed[SDLK_i])
-        engine->graphics->isRaining = true;
+        engine->graphics->grassEnabled = true;
 
     if(keysPressed[SDLK_u])
-        engine->graphics->isRaining = false;
+        engine->graphics->grassEnabled = false;
 
     if(keysPressed[SDLK_LEFT]){
 
@@ -244,6 +245,12 @@ void Input::handleMovementKeys(){
 
         // increment direction light angle in graphics
         engine->lightingManager->decreaseLightAngle();
+    }
+
+    if(keysPressed[SDLK_SPACE]){
+
+        // increment direction light angle in graphics
+        engine->entityManager->splashScreens[engine->entityManager->splashScreens.size()-1]->transitionOff();
     }
 
 }

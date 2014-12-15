@@ -23,7 +23,7 @@ class Terrain : public Entity{
 public:
 
 	// public functions
-	Terrain(Engine *engine, const char* fileName);
+	Terrain(Engine *engine, const char* fileName, float heightScale, float widthScale);
 	~Terrain();
 
 	bool init();
@@ -51,7 +51,7 @@ private:
 	int width, height, downSample;
 	float min, max, range;
 	Texture* groundTexture;
-	int heightScale;
+	float heightScale, widthScale;
 
 	GDALDataset* gdalDataSet;
 	double* geotransform;

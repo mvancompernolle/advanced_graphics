@@ -26,6 +26,8 @@
 #include "ShadowVolumeProgram.hpp"
 #include "Lights.hpp"
 #include "TextRenderer.hpp"
+#include "LightningProgram.hpp"
+#include "RandomTexture.hpp"
 
 namespace Vancom{
 
@@ -55,7 +57,7 @@ public:
 	// public variables
 	glm::mat4 view, projection;
 	Camera *camera;
-	bool isRaining;
+	bool grassEnabled;
 	int width, height;
 	glm::vec3 windDir;
 
@@ -104,6 +106,12 @@ private:
 
 	// stencil shadow volumes
 	ShadowVolumeProgram shadowProgram;
+
+	// lightning program
+	LightningProgram lightningProgram;
+	GLuint lightningVao, lightningVbo;
+	RandomTexture randomTexture;
+	float timeElapsed = 0;
 	
 };
 

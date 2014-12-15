@@ -24,18 +24,17 @@
 #include "SkyBox.hpp"
 #include "Enemy.hpp"
 #include "LightningBullet.hpp"
+#include "SplashScreen.hpp"
 
 using namespace Vancom;
 
 Graphics::Graphics(Engine *engine) : engine(engine){
 
-    // initialize light angle for direction lights
-    isRaining = true;
-
 	camera = new Camera(engine);
     windUpdateTime = 0.1f;
     windDT = 0.0f;
     windStrength = 5.0f;
+    grassEnabled = false;
 }
 
 Graphics::~Graphics(){
@@ -154,9 +153,30 @@ void Graphics::init(){
     // initialize shadow program
     if(!shadowProgram.init())
         std::cout << "shadowProgram failed to init" << std::endl;
+
+    // init lightning program
+    if(!lightningProgram.init()){
+        std::cout << "Lightning program failed to init" << std::endl;
+    }
+    lightningProgram.enable();
+    lightningProgram.setRandomTextureUnit(3);
+    lightningProgram.setColor(glm::vec3(1,1,0));
+    randomTexture.initRandomTexture(1000);
+    randomTexture.bind(GL_TEXTURE3);
+    // create lightning vao
+    glGenVertexArrays(1, &lightningVao);
+    glBindVertexArray(lightningVao);
+    // create lightning vbo
+    glGenBuffers(1, &lightningVbo);
+    glBindBuffer(GL_ARRAY_BUFFER, lightningVbo);
+    // setup lightning attributes
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0); // pos
 }
 
 void Graphics::tick(float dt){
+
+    timeElapsed += dt;
 
     // update the camera and view
     updateCamera();
@@ -218,30 +238,21 @@ void Graphics::render(){
     bool found = false;
     silhouetteProgram.enable();
     for(Enemy* entity : engine->entityManager->enemyEntities){
-        if(entity->id != 0 && entity->id == (unsigned int)pixel.objectId && entity->updating){
-            // if entity not already in selected add it
-            for(Entity *ent : engine->input->selected){
-                if(ent->id == entity->id){
-                    found = true;
-                    break;
-                }
-            }
-            if(!found){
-                engine->input->selected.push_back(entity);
-                //std::cout << engine->input->selected.size() << std::endl;
-            }
-
+        if(entity->id != 0 && entity->id == (unsigned int)pixel.objectId && entity->health > 0 && !entity->selected){
+            entity->selected = true;
             break;
         }
     }
 
 
     // render outline of selected entities
-    for(Entity* entity : engine->input->selected){
-        silhouetteProgram.setMVP(projection * view * entity->getModel());
-        silhouetteProgram.setModelPos(entity->getModel());    
-        silhouetteProgram.setCameraPosition(camera->getPos());
-        entity->render();        
+    for(Enemy* entity : engine->entityManager->enemyEntities){
+        if(entity->selected){
+            silhouetteProgram.setMVP(projection * view * entity->getModel());
+            silhouetteProgram.setModelPos(entity->getModel());    
+            silhouetteProgram.setCameraPosition(camera->getPos());
+            entity->render(); 
+        }       
     }
 
     // render explosions
@@ -249,13 +260,44 @@ void Graphics::render(){
         explosion->render(projection, view, camera->getPos());
     }
 
+    // render explosions
+    for(Fireworks *firework : engine->entityManager->fireworks){
+        firework->render(projection, view, camera->getPos());
+    }
+
+    // render lightning from bullets
+    glLineWidth(1.0f);
+    lightningProgram.enable();
+    lightningProgram.setMVP(projection * view);
+    std::vector<glm::vec3> positions, bulletPos;
+    for(Enemy* enemy: engine->entityManager->enemyEntities){
+        positions.push_back(enemy->getPos());
+    }
+    for(LightningBullet* bullet: engine->entityManager->bullets){
+        bulletPos.push_back(bullet->getPos());
+    }
+    lightningProgram.setPositions(positions);
+    lightningProgram.setTime(timeElapsed);
+    glBindVertexArray(lightningVao);
+    glBindBuffer(GL_ARRAY_BUFFER, lightningVbo);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * bulletPos.size(),
+    bulletPos.data(), GL_DYNAMIC_DRAW);
+    glDrawArrays(GL_POINTS, 0, bulletPos.size());
+    glLineWidth(5.0f);
+
     // render terrain border
     engine->entityManager->border->render(projection, view);
 
     // render gui elements
     guiProgram.enable();
     guiProgram.setSampler(0);
+    guiProgram.setDropEnabled(1);
+    guiProgram.setDropColor(glm::vec3(1,1,1));
     for(Entity* entity : engine->entityManager->guiEntities){
+        entity->render();
+    }
+    guiProgram.setDropEnabled(-1);
+    for(Entity* entity : engine->entityManager->splashScreens){
         entity->render();
     }
 
@@ -374,7 +416,8 @@ void Graphics::geometryPassDS(){
         entity->render();
     }
 
-    //engine->entityManager->grass->render(projection, view);
+    if(grassEnabled)
+        engine->entityManager->grass->render(projection, view);
     engine->entityManager->water->render(projection, view);
 
     glDepthMask(GL_FALSE);

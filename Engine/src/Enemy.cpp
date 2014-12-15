@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include "PhysicsManager.hpp"
 #include "EntityManager.hpp"
+#include "LightingManager.hpp"
 
 using namespace Vancom;
 
@@ -19,7 +20,9 @@ Enemy::Enemy(Engine *engine) : engine(engine){
 
 Enemy::Enemy(Engine *engine, glm::vec3 pos, float scale, float power, float intensity): engine(engine){
 
+    health = 100;
     moving = true;
+    selected = false;
     speed = 5;
     timeElapsed = 3;
     decisionTime = 3;
@@ -60,7 +63,7 @@ void Enemy::tick(float dt){
     model = glm::scale(model, glm::vec3(scale, scale, scale));
     //model = glm::translate(model, glm::vec3(0, -10, 0));
 
-    if(updating){
+    if(health > 0){
         // get current model position
         glm::vec3 pos = glm::vec3(model[3][0], model[3][1], model[3][2]);
 
@@ -83,6 +86,15 @@ void Enemy::tick(float dt){
 
         glm::vec3 dir = glm::normalize(target - pos) * speed;
         rigidBody->setLinearVelocity(btVector3(dir.x, dir.y, dir.z));
+    }
+    else{
+        selected = false;
+        if(moving){
+            moving = false;
+            // spawn explosion
+            engine->entityManager->createExplosion(getPos());
+            engine->lightingManager->addTempPointLight(getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
+        }
     }
 
 }

@@ -18,6 +18,8 @@ class Water;
 class Texture;
 class Enemy;
 class LightningBullet;
+class Fireworks;
+class SplashScreen;
 
 class EntityManager {
 
@@ -34,12 +36,13 @@ public:
 	void createBullet(glm::vec3 pos, glm::vec3 dir);
 
 	// public variables
-	std::vector<Entity*> entities;
 	std::vector<Entity*> terrainEntities;
 	std::vector<Enemy*> enemyEntities;
 	std::vector<Entity*> guiEntities;
+	std::vector<SplashScreen*> splashScreens;
 	std::vector<Explosion*> explosions;
 	std::vector<LightningBullet*> bullets;
+	std::vector<Fireworks*> fireworks;
 	Texture* enemyTexture, *bulletTexture;
 	TerrainBorder *border;
 	SkyBox* skyBox;

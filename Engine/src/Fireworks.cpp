@@ -60,9 +60,9 @@ bool Fireworks::init(const glm::vec3& pos){
 
 	updateProgram.enable();
 	updateProgram.setRandomTextureUnit(3);
-	updateProgram.setLauncherLifetime(250.0f);
-	updateProgram.setShellLifetime(1500.0f);
-	updateProgram.setSecondaryShellLifetime(2000.0f);
+	updateProgram.setLauncherLifetime(1500.0f);
+	updateProgram.setShellLifetime(10000.0f);
+	updateProgram.setSecondaryShellLifetime(5000.0f);
 	randomTexture.initRandomTexture(1000);
 	randomTexture.bind(GL_TEXTURE3);
 
@@ -72,7 +72,7 @@ bool Fireworks::init(const glm::vec3& pos){
 
 	renderProgram.enable();
 	renderProgram.setColorTextureUnit(0);
-	renderProgram.setBillboardSize(2.0f);
+	renderProgram.setBillboardSize(50.0f);
 
 	texture = new Texture(GL_TEXTURE_2D, "../assets/models/fireworks_red.jpg");
 	if(!texture->create()){

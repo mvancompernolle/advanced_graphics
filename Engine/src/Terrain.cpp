@@ -9,11 +9,12 @@
 
 using namespace Vancom;
 
-Terrain::Terrain(Engine *engine, const char* fileName) : engine(engine), fileName(fileName){
+Terrain::Terrain(Engine *engine, const char* fileName, float heightScale, float widthScale) : engine(engine), fileName(fileName){
 	specularIntensity = 1;
 	specularPower = 20;
-	downSample = 50;
-	heightScale = 100;
+	downSample = 20;
+	this->heightScale = heightScale;
+	this->widthScale = widthScale;
 	geotransform = new double[6];
 	trimesh = new btTriangleMesh();
 }
@@ -60,7 +61,7 @@ bool Terrain::init(){
 	gdalDataSet->GetGeoTransform(geotransform);
 
 	// calculate heightscale so that it is accurate
-	heightScale = range / geotransform[1];
+	//heightScale = range / geotransform[1];
 
     if(!generateMesh())
     	return false;
@@ -124,7 +125,8 @@ bool Terrain::generateMesh(){
 
 	}
 
-	model = glm::translate(model, glm::vec3(-width/2, 0, -height/2));
+	model = glm::translate(model, glm::vec3(-(width*widthScale)/2, -25, -height/2));
+	model = glm::scale(model, glm::vec3(widthScale, 1.0, widthScale));
 
 	// create vao
 	glGenVertexArrays(1, &vao);
@@ -161,25 +163,25 @@ bool Terrain::generateMesh(){
 
 			// top triangle
 			v1[0] = x;
-			v1[1] = heightScale * ((data[z][x]-min)/range);
+			v1[1] = heightScale * ((data[z][x]-min)/range) - 20;
 			v1[2] = z;
 			v2[0] = x;
-			v2[1] = heightScale * ((data[z+downSample][x]-min)/range);
+			v2[1] = heightScale * ((data[z+downSample][x]-min)/range) - 20;
 			v2[2] = z;
 			v3[0] = x;
-			v3[1] = heightScale * ((data[z][x+downSample]-min)/range);
+			v3[1] = heightScale * ((data[z][x+downSample]-min)/range) - 20;
 			v3[2] = z;
 			trimesh->addTriangle(v1, v2, v3);
 
 			// bottom triangle
 			v1[0] = x;
-			v1[1] = heightScale * ((data[z+downSample][x+downSample]-min)/range);
+			v1[1] = heightScale * ((data[z+downSample][x+downSample]-min)/range) - 20;
 			v1[2] = z;
 			v2[0] = x;
-			v2[1] = heightScale * ((data[z+downSample][x]-min)/range);
+			v2[1] = heightScale * ((data[z+downSample][x]-min)/range) - 20;
 			v2[2] = z;
 			v3[0] = x;
-			v3[1] = heightScale * ((data[z][x+downSample]-min)/range);
+			v3[1] = heightScale * ((data[z][x+downSample]-min)/range) - 20;
 			v3[2] = z;
 			trimesh->addTriangle(v1, v2, v3);
 		}

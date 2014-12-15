@@ -8,6 +8,7 @@ namespace Vancom{
 
 class Engine;
 class Entity;
+class Enemy;
 
 class Input{
 
@@ -20,9 +21,6 @@ public:
 	void init();
 	void tick(float dt);
 	void stop();
-
-	// public variables
-	std::list<Entity*> selected;
 
 private:
 

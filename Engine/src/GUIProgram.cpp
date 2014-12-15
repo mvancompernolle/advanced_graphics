@@ -24,6 +24,8 @@ bool GUIProgram::init(){
 
     // get uniform and attribute positions in shader
     locSampler = getUniformLocation("textureSampler");
+    locDropColor = getUniformLocation("dropColor");
+    locDropEnabled = getUniformLocation("dropEnabled");
 
     return true;
 }
@@ -31,4 +33,14 @@ bool GUIProgram::init(){
 void GUIProgram::setSampler(const int sampler) const{
 
     glUniform1i(locSampler, 0);    
+}
+
+void GUIProgram::setDropEnabled(const int val) const{
+
+    glUniform1i(locDropEnabled, val); 
+}
+
+void GUIProgram::setDropColor(const glm::vec3 color) const{
+
+    glUniform3fv(locDropColor, 1, glm::value_ptr(color));
 }

@@ -17,6 +17,7 @@ public:
     virtual bool init();    
     void setMVP(const glm::mat4 MVP);
     void setCameraPos(const glm::vec3& Pos);
+    void setColor(const glm::vec3& color);
     void setColorTextureUnit(unsigned int textureUnit);
     void setBillboardSize(float billboardSize);
     
@@ -27,6 +28,7 @@ public:
     GLuint locCameraPos;
     GLuint locColorMap;
     GLuint locSize;
+    GLuint locColor;
     
 };
 

@@ -26,7 +26,8 @@ public:
     btRigidBody* getRigidBody();
 
     // public variables
-    bool moving;
+    bool moving, selected;
+    float health;
 
 private:
 

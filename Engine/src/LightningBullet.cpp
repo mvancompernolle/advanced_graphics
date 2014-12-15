@@ -16,7 +16,7 @@ LightningBullet::LightningBullet(Engine *engine): engine(engine){
 }
 
 LightningBullet::~LightningBullet(){
-    //delete mesh;
+    delete mesh;
     //delete rigidBody;
 }
 
