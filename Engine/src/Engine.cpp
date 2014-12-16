@@ -9,6 +9,7 @@
 #include "EntityManager.hpp"
 #include "LightingManager.hpp"
 #include "PhysicsManager.hpp"
+#include "GameManager.hpp"
 
 using namespace Vancom;
 
@@ -27,6 +28,10 @@ void Engine::init(){
         std::cerr << "Unable to initilize SDL" << std::endl;
         exit(1);
     }
+
+    // create and init lighting manager
+    gameManager = new GameManager(this);
+    gameManager->init();
 
     // create and init physics manager
     physics = new PhysicsManager(this);
@@ -62,6 +67,7 @@ int Engine::run(){
 
 		// call tick on components
 		input->tick(dt);
+        gameManager->tick(dt);
         physics->tick(dt);
 		graphics->tick(dt);
 		entityManager->tick(dt);
@@ -93,6 +99,10 @@ void Engine::stop(int exit_code){
     // stop physics component
     physics->stop();
     delete physics;
+
+    // stop game manager component
+    gameManager->stop();
+    delete gameManager;
 
 	SDL_Quit();
 

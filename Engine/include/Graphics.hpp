@@ -17,6 +17,7 @@
 #include "TerrainProgram.hpp"
 #include "SilhouetteProgram.hpp"
 #include "GUIProgram.hpp"
+#include "GUIProgram2.hpp"
 #include "GeometryProgram.hpp"
 #include "GBuffer.hpp"
 #include "DirLightDSProgram.hpp"
@@ -25,7 +26,6 @@
 #include "StencilProgram.hpp"
 #include "ShadowVolumeProgram.hpp"
 #include "Lights.hpp"
-#include "TextRenderer.hpp"
 #include "LightningProgram.hpp"
 #include "RandomTexture.hpp"
 
@@ -79,7 +79,6 @@ private:
 	SDL_GLContext gl_context;
 	glm::vec3 lightDir;
 	float windUpdateTime, windDT, windStrength;
-	TextRenderer text;
 
 	// selection program
 	SelectionProgram selectionProgram;
@@ -93,6 +92,7 @@ private:
 
 	// gui program
 	GUIProgram guiProgram;
+	GUIProgram2 guiProgram2;
 
 	// defferred rendering
 	GeometryProgram geometryProgram;

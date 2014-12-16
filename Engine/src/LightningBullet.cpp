@@ -5,6 +5,7 @@
 #include "Engine.hpp"
 #include "PhysicsManager.hpp"
 #include "EntityManager.hpp"
+#include "GameManager.hpp"
 
 using namespace Vancom;
 
@@ -20,9 +21,11 @@ LightningBullet::~LightningBullet(){
     //delete rigidBody;
 }
 
-bool LightningBullet::init(const char* fileName, glm::vec3 pos, glm::vec3 dir, float speed, float scale){
+bool LightningBullet::init(const char* fileName, int powerLevel, glm::vec3 pos, glm::vec3 dir, float speed, float scale){
 
     // load Model model from assimp
+    this->powerLevel = powerLevel;
+    vert.color = engine->gameManager->bulletColors[powerLevel];
     this->scale = scale;
     mesh = new Mesh(engine);
     mesh->disableMaterials();
@@ -50,6 +53,7 @@ void LightningBullet::tick(float dt){
     trans.getOpenGLMatrix(m);
     model = glm::make_mat4(m);
     model = glm::scale(model, glm::vec3(scale, scale, scale));
+    vert.pos = getPos();
     //model = glm::translate(model, glm::vec3(0, -10, 0));
 }
 

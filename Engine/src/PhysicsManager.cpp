@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include "Engine.hpp"
+#include "GameManager.hpp"
 
 using namespace Vancom;
 
@@ -32,7 +33,7 @@ void PhysicsManager::init(){
 
 void PhysicsManager::tick(float dt){
     
-    if(dynamicsWorld)//step the simulation
+    if(engine->gameManager->running && dynamicsWorld)//step the simulation
         dynamicsWorld->stepSimulation(dt, 10);
 }
 
@@ -62,6 +63,7 @@ btRigidBody* PhysicsManager::addRigidBody(btCollisionShape* shape,
 }
 
 btVector3 PhysicsManager::convertTobtVector(glm::vec3 arr){
+
     btVector3 vert;
 
     vert[0] = arr.x;

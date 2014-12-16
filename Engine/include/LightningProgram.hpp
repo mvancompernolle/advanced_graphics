@@ -17,7 +17,6 @@ public:
     LightningProgram();
     virtual bool init();    
     void setMVP(const glm::mat4 MVP);
-    void setColor(const glm::vec3 color) const;
     void setPositions(const std::vector<glm::vec3> positions) const;
     void setRandomTextureUnit(unsigned int textureUnit) const;
     void setTime(float time) const;
@@ -26,7 +25,6 @@ public:
 
     // private variables
     GLuint locMVP;
-    GLuint locColor;
     GLuint locTime;
     GLuint locPositions;
     GLuint locRandomTexture;

@@ -8,6 +8,7 @@ class Input;
 class EntityManager;
 class LightingManager;
 class PhysicsManager;
+class GameManager;
 
 class Engine {
 
@@ -28,6 +29,7 @@ public:
 	EntityManager *entityManager;
 	LightingManager *lightingManager;
 	PhysicsManager *physics;
+	GameManager *gameManager;
 
 private:
 

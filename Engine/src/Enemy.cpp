@@ -6,6 +6,7 @@
 #include "PhysicsManager.hpp"
 #include "EntityManager.hpp"
 #include "LightingManager.hpp"
+#include "GameManager.hpp"
 
 using namespace Vancom;
 
@@ -53,50 +54,54 @@ bool Enemy::init(const char* fileName){
 
 void Enemy::tick(float dt){
 
-    // set model based on bt physics
-    btTransform trans;
-    btScalar m[16];
+    if(engine->gameManager->running){
+        // set model based on bt physics
+        btTransform trans;
+        btScalar m[16];
 
-    rigidBody->getMotionState()->getWorldTransform(trans);
-    trans.getOpenGLMatrix(m);
-    model = glm::make_mat4(m);
-    model = glm::scale(model, glm::vec3(scale, scale, scale));
-    //model = glm::translate(model, glm::vec3(0, -10, 0));
+        rigidBody->getMotionState()->getWorldTransform(trans);
+        trans.getOpenGLMatrix(m);
+        model = glm::make_mat4(m);
+        model = glm::scale(model, glm::vec3(scale, scale, scale));
+        //model = glm::translate(model, glm::vec3(0, -10, 0));
 
-    if(health > 0){
-        // get current model position
-        glm::vec3 pos = glm::vec3(model[3][0], model[3][1], model[3][2]);
+        if(health > 0){
+            // get current model position
+            glm::vec3 pos = glm::vec3(model[3][0], model[3][1], model[3][2]);
 
-        // update target
-        timeElapsed += dt;
-        if(timeElapsed >= decisionTime || glm::distance(pos, target) < 10.0f){
-            timeElapsed = 0;
+            // update target
+            timeElapsed += dt;
+            if(timeElapsed >= decisionTime || glm::distance(pos, target) < 10.0f){
+                timeElapsed = 0;
 
-            // pick a random location to move to 
-            std::random_device rd;
-            std::default_random_engine gen(rd());
-            std::uniform_real_distribution<float> distX(engine->entityManager->minX, engine->entityManager->maxX);
-            std::uniform_real_distribution<float> distZ(engine->entityManager->minZ, engine->entityManager->maxZ);
-            std::uniform_real_distribution<float> distSpeed(150.0f, 300.0f);
+                // pick a random location to move to 
+                std::random_device rd;
+                std::default_random_engine gen(rd());
+                std::uniform_real_distribution<float> distX(engine->entityManager->minX, engine->entityManager->maxX);
+                std::uniform_real_distribution<float> distZ(engine->entityManager->minZ, engine->entityManager->maxZ);
+                std::uniform_real_distribution<float> distSpeed(150.0f, 300.0f);
 
-            target = glm::vec3(distX(gen), pos.y, distZ(gen));
-            speed = distSpeed(gen);
-                //std::cout << target.x << " " << target.y << " " << target.z << std::endl;
+                target = glm::vec3(distX(gen), pos.y, distZ(gen));
+                speed = distSpeed(gen);
+                    //std::cout << target.x << " " << target.y << " " << target.z << std::endl;
+            }
+
+            glm::vec3 dir = glm::normalize(target - pos) * speed;
+            rigidBody->setLinearVelocity(btVector3(dir.x, dir.y, dir.z));
         }
-
-        glm::vec3 dir = glm::normalize(target - pos) * speed;
-        rigidBody->setLinearVelocity(btVector3(dir.x, dir.y, dir.z));
-    }
-    else{
-        selected = false;
-        if(moving){
-            moving = false;
-            // spawn explosion
-            engine->entityManager->createExplosion(getPos());
-            engine->lightingManager->addTempPointLight(getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
+        else{
+            selected = false;
+            if(moving){
+                moving = false;
+                // spawn explosion
+                engine->entityManager->createExplosion(getPos());
+                engine->lightingManager->addTempPointLight(getPos(), glm::vec3(1.0, 0.0, 0.0), 3.1);
+                // increase bullet power level
+                engine->gameManager->bulletPowerLevel += .2;
+                engine->gameManager->score += 10;
+            }
         }
     }
-
 }
 
 void Enemy::render(){

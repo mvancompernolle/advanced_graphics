@@ -23,7 +23,6 @@ bool LightningProgram::init(){
     if (!finalize())
         return false;
 
-    locColor = getUniformLocation("color");
     locMVP = getUniformLocation("mvp");
     locPositions = getUniformLocation("positions");
     locRandomTexture = getUniformLocation("randomTexture");
@@ -35,11 +34,6 @@ bool LightningProgram::init(){
 void LightningProgram::setMVP(const glm::mat4 MVP){
 
     glUniformMatrix4fv(locMVP, 1, GL_FALSE, glm::value_ptr(MVP));    
-}
-
-void LightningProgram::setColor(const glm::vec3 color) const{
-
-    glUniform3fv(locColor, 1, glm::value_ptr(color));    
 }
 
 void LightningProgram::setPositions(const std::vector<glm::vec3> positions) const{

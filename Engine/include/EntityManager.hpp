@@ -20,6 +20,7 @@ class Enemy;
 class LightningBullet;
 class Fireworks;
 class SplashScreen;
+class ColoredGUIRect;
 
 class EntityManager {
 
@@ -39,6 +40,7 @@ public:
 	std::vector<Entity*> terrainEntities;
 	std::vector<Enemy*> enemyEntities;
 	std::vector<Entity*> guiEntities;
+	std::vector<ColoredGUIRect*> guiEntities2;
 	std::vector<SplashScreen*> splashScreens;
 	std::vector<Explosion*> explosions;
 	std::vector<LightningBullet*> bullets;

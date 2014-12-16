@@ -21,13 +21,15 @@ public:
     // private variables
     LightningBullet(Engine *engine);
     ~LightningBullet();
-    bool init(const char* fileName, glm::vec3 pos, glm::vec3 dir, float speed, float scale);
+    bool init(const char* fileName, int powerLevel, glm::vec3 pos, glm::vec3 dir, float speed, float scale);
     void tick(float dt);
     void render();
     btRigidBody* getRigidBody();
 
     // public variables
     float timeElapsed;
+    int powerLevel;
+    VertexC vert;
 
 private:
 

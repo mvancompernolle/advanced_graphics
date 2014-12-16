@@ -6,6 +6,7 @@
 #include "LightingManager.hpp"
 #include "Enemy.hpp"
 #include "SplashScreen.hpp"
+#include "GameManager.hpp"
 
 #include <SDL.h>
 
@@ -163,12 +164,16 @@ void Input::tick(float dt){
                     engine->entityManager->createBullet(engine->graphics->camera->getPos(), engine->graphics->camera->getCameraDirection());
                 }
                 else if(event.button.button == SDL_BUTTON_RIGHT){
+                    int count = 0;
                     // create an explosion at each entity
                     for(Enemy *entity : engine->entityManager->enemyEntities){
                         if(entity->selected){
                             entity->health -= 100;
+                            count++;
                         }
                     }
+                    // increase bullet power level for killing with this method
+                    engine->gameManager->bulletPowerLevel += count * .1;
                 }
             break;
 
@@ -250,7 +255,8 @@ void Input::handleMovementKeys(){
     if(keysPressed[SDLK_SPACE]){
 
         // increment direction light angle in graphics
-        engine->entityManager->splashScreens[engine->entityManager->splashScreens.size()-1]->transitionOff();
+        if(engine->entityManager->splashScreens.size() > 0)
+            engine->entityManager->splashScreens[engine->entityManager->splashScreens.size()-1]->transitionOff();
     }
 
 }

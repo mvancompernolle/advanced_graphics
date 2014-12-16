@@ -12,7 +12,7 @@ class Texture;
 class CrossHair : public Entity{
 
 public:
-	CrossHair(glm::vec3 pos);
+	CrossHair();
 	~CrossHair();
 	bool init(const char* fileName, float width, float height);
 	void tick(float dt);

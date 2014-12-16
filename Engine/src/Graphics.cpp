@@ -11,6 +11,7 @@
 #include "gdal_priv.h"
 #include "cpl_conv.h"
 
+#include "Vertex.hpp"
 #include "Engine.hpp"
 #include "Input.hpp"
 #include "Camera.hpp"
@@ -25,6 +26,8 @@
 #include "Enemy.hpp"
 #include "LightningBullet.hpp"
 #include "SplashScreen.hpp"
+#include "ColoredGUIRect.hpp"
+#include "GameManager.hpp"
 
 using namespace Vancom;
 
@@ -76,8 +79,6 @@ void Graphics::init(){
     GDALAllRegister();
     OGRRegisterAll();
 
-    text.init();
-
     // set clear color and culling
     glClearColor(0.0, 0.0, 0.0, 1);
     glEnable(GL_DEPTH_TEST);
@@ -105,6 +106,11 @@ void Graphics::init(){
 
     if(!guiProgram.init())
         std::cout << "guiProgram failed to init" << std::endl;
+    guiProgram.enable();
+    guiProgram.setSampler(0);
+
+    if(!guiProgram2.init())
+        std::cout << "guiProgram2 failed to init" << std::endl;
 
     if(!geometryProgram.init())
         std::cout << "geometryProgram failed to init" << std::endl;
@@ -160,7 +166,6 @@ void Graphics::init(){
     }
     lightningProgram.enable();
     lightningProgram.setRandomTextureUnit(3);
-    lightningProgram.setColor(glm::vec3(1,1,0));
     randomTexture.initRandomTexture(1000);
     randomTexture.bind(GL_TEXTURE3);
     // create lightning vao
@@ -171,7 +176,9 @@ void Graphics::init(){
     glBindBuffer(GL_ARRAY_BUFFER, lightningVbo);
     // setup lightning attributes
     glEnableVertexAttribArray(0);
-    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(glm::vec3), 0); // pos
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexC), 0); // pos
+    glEnableVertexAttribArray(1);
+    glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, sizeof(VertexC), (void*) 12); // pos
 }
 
 void Graphics::tick(float dt){
@@ -266,31 +273,48 @@ void Graphics::render(){
     }
 
     // render lightning from bullets
-    glLineWidth(1.0f);
+    glLineWidth(2.0f);
     lightningProgram.enable();
     lightningProgram.setMVP(projection * view);
-    std::vector<glm::vec3> positions, bulletPos;
+    std::vector<glm::vec3> positions;
+    std::vector<VertexC> bulletInfo;
+    VertexC vert;
     for(Enemy* enemy: engine->entityManager->enemyEntities){
         positions.push_back(enemy->getPos());
     }
     for(LightningBullet* bullet: engine->entityManager->bullets){
-        bulletPos.push_back(bullet->getPos());
+        bulletInfo.push_back(bullet->vert);
     }
     lightningProgram.setPositions(positions);
     lightningProgram.setTime(timeElapsed);
     glBindVertexArray(lightningVao);
     glBindBuffer(GL_ARRAY_BUFFER, lightningVbo);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(glm::vec3) * bulletPos.size(),
-    bulletPos.data(), GL_DYNAMIC_DRAW);
-    glDrawArrays(GL_POINTS, 0, bulletPos.size());
+    glBufferData(GL_ARRAY_BUFFER, sizeof(VertexC) * bulletInfo.size(),
+    bulletInfo.data(), GL_DYNAMIC_DRAW);
+    glDrawArrays(GL_POINTS, 0, bulletInfo.size());
     glLineWidth(5.0f);
 
     // render terrain border
     engine->entityManager->border->render(projection, view);
 
     // render gui elements
+    guiProgram2.enable();
+    std::vector<ColoredGUIRect*> gui2 = engine->entityManager->guiEntities2;
+    guiProgram2.setColor(gui2[0]->color);
+    gui2[0]->render();
+    guiProgram2.setColor(gui2[1]->color);
+    gui2[1]->render();
+
+    for(int i=2; i<gui2.size(); i++){
+        if((int) engine->gameManager->bulletPowerLevel == i-2)
+            guiProgram2.setColor(gui2[i]->color);
+        else{
+            glm::vec3 color = gui2[i]->color;
+            guiProgram2.setColor(glm::vec3(color.x * .1, color.y * .1, color.z * .1));
+        }
+        gui2[i]->render();
+    }
     guiProgram.enable();
-    guiProgram.setSampler(0);
     guiProgram.setDropEnabled(1);
     guiProgram.setDropColor(glm::vec3(1,1,1));
     for(Entity* entity : engine->entityManager->guiEntities){
@@ -304,11 +328,6 @@ void Graphics::render(){
     // render sky box
     engine->entityManager->skyBox->render(projection, view);
 
-    // render text
-    float sx = 2.0/width;
-    float sy = 2.0/height;
-    //text.render("Hi its me hahahhaha", 0 + 8 * sx, 0 + 8 * sy, sx, sy);
-
     buffer.bindForFinalPass();
     glBlitFramebuffer(0, 0, width, height, 0, 0, width, height, GL_COLOR_BUFFER_BIT, GL_LINEAR);
 
@@ -319,8 +338,6 @@ void Graphics::depthPass(){
 
     glDrawBuffer(GL_NONE);
     stencilProgram.enable();
-
-
 }
 
 void Graphics::shadowVolumePass(){
@@ -470,7 +487,8 @@ void Graphics::pointLightPassDS(){
 
     for(LightningBullet* bullet : engine->entityManager->bullets){
 
-        engine->lightingManager->bulletLight.pos = bullet->getPos();
+        engine->lightingManager->bulletLight.pos = bullet->vert.pos;
+        engine->lightingManager->bulletLight.color = bullet->vert.color;
 
         // determine scale of point light
         float scale = calcPointLightSphere(engine->lightingManager->bulletLight);

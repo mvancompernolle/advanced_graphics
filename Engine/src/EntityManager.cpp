@@ -19,6 +19,8 @@
 #include "LightningBullet.hpp"
 #include "Fireworks.hpp"
 #include "SplashScreen.hpp"
+#include "GameManager.hpp"
+#include "ColoredGUIRect.hpp"
 
 using namespace Vancom;
 
@@ -66,17 +68,29 @@ void EntityManager::init(){
 	// add a crosshair
 	float ratio = (float) engine->graphics->width/engine->graphics->height;
 	std::cout << ratio << std::endl;
-	CrossHair *crossHair = new CrossHair(glm::vec3(0, 0, 0));
+	CrossHair *crossHair = new CrossHair();
 	crossHair->init("../assets/models/crosshair.png", .05 / ratio, .05);
 	guiEntities.push_back(crossHair);
+
+	// add rectangular gui elements
+	ColoredGUIRect *blackBox = new ColoredGUIRect(this->engine, false);
+	blackBox->init(glm::vec3(0,0,0), glm::vec2(0, 1), glm::vec2(1, .92));
+	guiEntities2.push_back(blackBox);
+	ColoredGUIRect *progressBar = new ColoredGUIRect(this->engine, true);
+	progressBar->init(glm::vec3(0,1,0), glm::vec2(.01, .99), glm::vec2(.6, .93));
+	guiEntities2.push_back(progressBar);
+
+	for(int i=0; i<5; i++){
+		ColoredGUIRect *powerIndicator = new ColoredGUIRect(this->engine, false);
+		powerIndicator->init(engine->gameManager->bulletColors[i], 
+		glm::vec2(.61 + (i*.08), .99), glm::vec2(.68 + (i*.08), .93));
+		guiEntities2.push_back(powerIndicator);
+	}
 
 	// setup splash screens
 	SplashScreen* splashScreen = new SplashScreen();
 	splashScreen->init("../assets/titleScreen.jpg", 1, 1);
 	splashScreens.push_back(splashScreen);
-	SplashScreen* splashScreen2 = new SplashScreen();
-	splashScreen2->init("../assets/mud.png", 1, 1);
-	splashScreens.push_back(splashScreen2);
 
 	// add skybox
 	skyBox = new SkyBox(engine);
@@ -124,7 +138,7 @@ void EntityManager::tick(float dt){
 	for(LightningBullet* bullet: bullets){
 		for(Enemy* enemy: enemyEntities){
 			if(glm::distance(bullet->getPos(), enemy->getPos()) <= 250){
-				enemy->health -= 1;
+				enemy->health -= 0.5f * (int)(engine->gameManager->bulletPowerLevel + 1);
 			}
 		}
 	}
@@ -170,7 +184,7 @@ void EntityManager::tick(float dt){
 	// remove expired bullets		
 	std::vector<LightningBullet*>::iterator bulletIt;
 	for(bulletIt = bullets.begin(); bulletIt != bullets.end();){
-		if((*bulletIt)->timeElapsed > 5){
+		if((*bulletIt)->timeElapsed > 4){
 			delete *bulletIt;
 			bullets.erase(bulletIt);
 		}
@@ -185,6 +199,8 @@ void EntityManager::tick(float dt){
 		if((*splashIt)->transVal > 2){
 			delete *splashIt;
 			splashScreens.erase(splashIt);
+			if(splashScreens.size() == 0)
+				engine->gameManager->running = true;
 		}
 		else{
 			splashIt++;
@@ -209,10 +225,17 @@ void EntityManager::tick(float dt){
 	for(SplashScreen *splash : splashScreens)
 		splash->tick(dt);
 
-	// add another enemy if less than 20
-	if(enemyEntities.size() < 10){
-		addEnemy();
+	// tick status bar
+	guiEntities2[1]->tick(dt);
+
+	// make sure there are always 10 enemies alive
+	int count = 0;
+	for(Enemy *enemy : enemyEntities){
+		if(enemy->health > 0)
+			count++;
 	}
+	for(int i=0; i<10-count && enemyEntities.size() < 20; i++)
+		addEnemy();
 
 	// update border
 	border->tick(dt);
@@ -239,9 +262,11 @@ void EntityManager::createExplosion(glm::vec3 pos){
 
 void EntityManager::createBullet(glm::vec3 pos, glm::vec3 dir){
 	// add a bullet
-	LightningBullet* bullet = new LightningBullet(engine);
-	bullet->init("../assets/models/ballSml.obj", pos, dir, 1000, 10);
-	bullets.push_back(bullet);
+	if(bullets.size() < 8){
+		LightningBullet* bullet = new LightningBullet(engine);
+		bullet->init("../assets/models/ballSml.obj", engine->gameManager->bulletPowerLevel, pos, dir, 1000, 10);
+		bullets.push_back(bullet);		
+	}
 }
 
 void EntityManager::addEnemy(){
@@ -251,7 +276,7 @@ void EntityManager::addEnemy(){
     std::uniform_real_distribution<float> distX(minX, maxX);
     std::uniform_real_distribution<float> distZ(minZ, maxZ);
     std::uniform_real_distribution<float> distY(300, 500);
-    std::uniform_real_distribution<float> distSize(10, 50);
+    std::uniform_real_distribution<float> distSize(30, 50);
 	// add a ball
 	Enemy* ball = new Enemy(engine, glm::vec3(distX(gen), distY(gen), distZ(gen)), distSize(gen), 32, 1);
 	ball->init("../assets/models/ballSml.obj");

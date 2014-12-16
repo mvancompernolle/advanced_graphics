@@ -5,8 +5,8 @@
 
 using namespace Vancom;
 
-CrossHair::CrossHair(glm::vec3 pos){
-	model = glm::translate(model, pos);
+CrossHair::CrossHair(){
+
 }
 
 CrossHair::~CrossHair(){

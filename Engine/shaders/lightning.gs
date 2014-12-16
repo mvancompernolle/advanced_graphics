@@ -9,9 +9,13 @@ uniform sampler1D randomTexture;
 uniform float time;
 
 in vec3 gs_pos[];
+in vec3 gs_color[];
+
+out vec3 fs_color;
 
 void main(void){
     float maxDist = 250;
+    fs_color = gs_color[0];
 
     // loop through each enemy position and create line if close
     for(int i=0; i<10; i++){
